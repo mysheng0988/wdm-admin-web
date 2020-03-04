@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout,getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -6,7 +6,13 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    deptId:"",
+    activePath:"/home",
+    tabs:[{
+      path:"/home",
+      name:"首页",
+    }]
   },
 
   mutations: {
@@ -21,7 +27,26 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
-    }
+    },
+    SET_INFO: (state, info) => {
+      state.info = info
+    },
+    SET_TABS: (state, tabs) => {
+      state.tabs.push(tabs)
+    },
+    SET_ACTIVE: (state, active)=>{
+      state.activePath=active
+    },
+    delete_tabs (state, route) {
+      let index = 0
+      for (let option of state.tabs) {
+        if (option.path.indexOf(route)!=-1) {
+          break
+        }
+        index++
+      }
+      this.state.user.tabs.splice(index, 1)
+    },
   },
 
   actions: {
@@ -29,37 +54,42 @@ const user = {
     Login({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          const data = response.data
-          const tokenStr = data.tokenHead+data.token
-          setToken(tokenStr)
-          commit('SET_TOKEN', tokenStr)
-          resolve()
+        login(username, userInfo.password).then(res => {
+          console.log(res)
+          if(res.code==200){
+            console.log(res)
+            const tokenStr =res.dataList[0];
+            setToken(tokenStr)
+            commit('SET_TOKEN', tokenStr)
+            resolve(res)
+          }else {
+            resolve(res)
+          }
+
         }).catch(error => {
-          reject(error)
+          commit('SET_TOKEN', '')
+          resolve()
         })
       })
     },
-
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
-          } else {
-            reject('getInfo: roles must be a non-null array !')
-          }
-          commit('SET_NAME', data.username)
-          commit('SET_AVATAR', data.icon)
+          const data = response.dataList[0];
+          // if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+          //   commit('SET_ROLES', data.roles)
+          // } else {
+          //   reject('getInfo: roles must be a non-null array !')
+          // }deptId
+          commit('SET_NAME', data.realName)
+          commit('SET_INFO', data)
           resolve(response)
         }).catch(error => {
           reject(error)
         })
       })
     },
-
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {

@@ -1,0 +1,70 @@
+{
+  "code":200,
+  "data":{
+    "id":19,
+    "scaleTitle":"简易自评量表SCL - 90",
+    "type":"1",
+    "explain":"",
+    "problem":[{
+      "questionNum":"1",
+      "label": "",
+      "question":"头痛？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"2",
+      "label": "",
+      "question":"头昏或昏倒？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"3",
+      "label": "",
+      "question":"胸痛？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"4",
+      "label": "",
+      "question":"腰痛？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"5",
+      "label": "",
+      "question":"恶心或胃部不舒服？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"6",
+      "label": "",
+      "question":"肌肉酸痛？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"7",
+      "label": "",
+      "question":"呼吸有困难？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"8",
+      "label": "",
+      "question":"一阵阵发冷或发热？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"9",
+      "label": "",
+      "question":"身体发麻或刺痛？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"10",
+      "label": "",
+      "question":"喉咙有梗塞感？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"11",
+      "label": "",
+      "question":"感到身体的某一部分软弱无力？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    },{
+      "questionNum":"12",
+      "label": "",
+      "question":"感到手或脚发重？",
+       "answer":["A 没有","B 很轻","C 中等","D 偏重","E 严重"], "answers": ""
+    }]
+  }
+}

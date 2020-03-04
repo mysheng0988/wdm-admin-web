@@ -22,13 +22,14 @@ export default {
   watch: {
     $route() {
       this.getBreadcrumb()
+      console.log( this.getBreadcrumb())
     }
   },
   methods: {
     getBreadcrumb() {
       let matched = this.$route.matched.filter(item => item.name)
       const first = matched[0]
-      if (first && first.name !== 'home') {
+      if (first && first.name !== 'home'&&first.name.indexOf('home')>-1 ) {
         matched = [{ path: '/home', meta: { title: '首页' }}].concat(matched)
       }
       this.levelList = matched
@@ -39,7 +40,7 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   .app-breadcrumb.el-breadcrumb {
-    display: inline-block;
+    display: none;
     font-size: 14px;
     line-height: 50px;
     margin-left: 10px;

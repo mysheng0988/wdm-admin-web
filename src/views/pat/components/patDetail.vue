@@ -1,0 +1,557 @@
+<template>
+  <el-card class="form-container" shadow="never">
+    <el-form :model="patObj"
+             :rules="rules"
+             ref="patObjFrom"
+             label-width="120px">
+      <div :class="showBase?'title':'title active'" @click="showBaseText">
+        <i class="el-icon-tickets"></i>
+        <span>基本信息</span>
+        <i class="el-icon-arrow-down"></i>
+      </div>
+      <div v-show="showBase">
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="姓名："  prop="realName"  maxlength="10" show-word-limit>
+              <el-input v-model="patObj.realName"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="性别："   >
+              <el-radio-group v-model="patObj.gender">
+                <el-radio :label="false">男</el-radio>
+                <el-radio :label="true">女</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="民族："  >
+              <el-input v-model="patObj.nation"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="身份证号："  prop="cardNo" >
+              <el-input v-model="patObj.cardNo"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="出生日期："  prop="birthday" >
+              <el-date-picker
+                v-model="patObj.birthday"
+                class="input-width"
+                value-format="yyyy-MM-dd"
+                type="date"
+                placeholder="请选择时间">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="年 龄："   >
+              <el-input v-model="age" readonly></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="宗教/信仰："   >
+              <el-input v-model="patObj.faith"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="文化程度："  prop="education" >
+              <el-select  placeholder="请选择" v-model="patObj.education" clearable class="input-width">
+                <el-option label="小学及以下" value="小学及以下" ></el-option>
+                <el-option label="初中" value="初中"></el-option>
+                <el-option label="高中" value="高中"></el-option>
+                <el-option label="中专" value="中专"></el-option>
+                <el-option label="大专" value="大专"></el-option>
+                <el-option label="学士" value="学士"></el-option>
+                <el-option label="硕士" value="硕士"></el-option>
+                <el-option label="博士及以上" value="博士及以上"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="职  业："  prop="profession" >
+              <el-input v-model="patObj.profession"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="联系方式："  prop="contactDetails" >
+              <el-input v-model="patObj.contactDetails"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="身  高："  prop="height" >
+              <el-input v-model="patObj.height"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="体  重："  prop="weight" >
+              <el-input v-model="patObj.weight"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="左右利手："  prop="dominantHand" >
+              <el-select  placeholder="请选择" v-model="patObj.dominantHand" clearable class="input-width">
+                <el-option  label="左手" :value="true"></el-option>
+                <el-option  label="右手" :value="false"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="title">
+          <i class="el-icon-tickets"></i>
+          <span>家庭状况</span>
+        </div>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="婚姻状况："   >
+              <el-select  placeholder="请选择" v-model="patObj.maritaStatus"  clearable class="input-width">
+                <el-option label="未婚" value="未婚"></el-option>
+                <el-option label="已婚" value="已婚"></el-option>
+                <el-option label="离婚" value="离婚"></el-option>
+                <el-option label="再婚" value="再婚"></el-option>
+                <el-option label="丧偶" value="丧偶"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="排行/兄妹人数：" >
+              <el-input v-model="patObj.familyRanking" class="input2"></el-input>/
+              <el-input v-model="patObj.siblingsNumber" class="input2"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="人群角色："  >
+              <el-select  placeholder="请选择" v-model="patObj.crowdRole" clearable class="input-width">
+                <el-option label="备孕" value="备孕" ></el-option>
+                <el-option label="孕期" value="孕期" ></el-option>
+                <el-option label="哺乳期" value="哺乳期"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="子女人数："   >
+              <el-input v-model="patObj.childrenNumber"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="子女情况："   >
+              <el-input v-model="patObj.childrenSituation" maxlength="10" show-word-limit></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="父母情况："  >
+              <el-input v-model="patObj.parentSituation" maxlength="10" show-word-limit></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="8">
+            <el-form-item label="主要抚养人："   >
+              <el-input v-model="patObj.caregiver"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="title">
+          <i class="el-icon-location-information"></i>
+          <span>地址信息</span>
+        </div>
+        <el-row :gutter="10">
+          <el-col :span="24">
+            <el-form-item label="选择地址："   >
+              <v-distpicker class="address" @selected="onSelected" :province="select.province" :city="select.city" :area="select.area"></v-distpicker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="10">
+          <el-col :span="24">
+            <el-form-item label="详细地址：">
+              <el-input
+                class="textarea"
+                placeholder="请输入内容"
+                type="textarea"
+                v-model="address"
+                :autosize="true"
+                maxlength="100"
+                show-word-limit
+                clearable></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="title">
+        <i class="el-icon-tickets"></i>
+        <span>来源（病例）信息</span>
+      </div>
+      <el-row :gutter="10">
+        <el-col :span="8" v-if="patObj.pid">
+          <el-form-item label="编号：" >
+            <el-input v-model="patObj.pid" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8" v-if="patObj.pid">
+          <el-form-item label="姓名：" >
+            <el-input v-model="patObj.realName" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="患者来源："   >
+            <el-select  placeholder="请选择" v-model="medObj.outpatient" clearable class="input-width">
+              <el-option label="门诊" :value="true" ></el-option>
+              <el-option label="住院" :value="false"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="科 室："  >
+            <el-select  placeholder="请选择" v-model="medObj.fromDeptId" clearable class="input-width">
+              <el-option
+                v-for="item in deptList"
+                :key="item.deptId"
+                :label="item.deptName"
+                :value="item.deptId">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="住院号："   >
+            <el-input v-model="medObj.beHospitalizedNumber"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="床号："   >
+            <el-input v-model="medObj.bedNo"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="医 生：" >
+            <el-select  placeholder="请选择" v-model="medObj.fromUid" clearable class="input-width">
+              <el-option
+                v-for="item in doctorList"
+                :key="item.uid"
+                :label="item.realName"
+                :value="item.uid">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="检测项目："   >
+            <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
+              <el-option
+                v-for="item in examinationList"
+                :key="item.name"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <!--<el-col :span="8">-->
+          <!--<el-form-item label="治疗项目："  >-->
+            <!--<el-select  placeholder="请选择" clearable class="input-width">-->
+              <!--<el-option-->
+                <!--v-for="item in cureList"-->
+                <!--:key="item.id"-->
+                <!--:label="item.name"-->
+                <!--:value="item.id">-->
+              <!--</el-option>-->
+            <!--</el-select>-->
+          <!--</el-form-item>-->
+        <!--</el-col>-->
+      </el-row>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit('patObjFrom')">提交</el-button>
+        <el-button v-if="!isEdit" @click="resetForm('patObjFrom')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
+</template>
+
+<script>
+  import {savePatient,
+    getDeptList,
+    getInfoCard,
+    saveMedicalRecord,
+    queryExamination,
+    getDoctorList,
+    updatePatient} from '@/api/patient';
+
+  import {findShop} from '@/api/shop';
+  import { Message, MessageBox } from 'element-ui'
+  const defaultPatient = {
+    pid:null,
+    birthday: "",
+    contactDetails: "",
+    cardNo: "",
+    caregiver: "",
+    childrenNumber: 0,
+    childrenSituation: "",
+    crowdRole: "",
+    address: "",
+    dominantHand: true,
+    education: "",
+    faith: "",
+    familyRanking: "",
+    gender: true,
+    height: "",
+    maritaStatus: "",
+    nation: 0,
+    parentSituation: "",
+    password: "",
+    profession: "",
+    realName: "",
+    siblingsNumber: "",
+    username: "",
+    weight: ""
+  };
+  let defaultMedical={
+    patientId: "",
+    outpatient: true,
+    bedNo: "",
+    fromDeptId: "",
+    beHospitalizedNumber: "",
+    examinationId: "",
+    fromUid:"",
+    remark: "",
+    sid: 0
+  }
+  export default {
+    name: "patAdd",
+    props: {
+      isEdit: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        patObj: Object.assign({}, defaultPatient),
+        medObj: Object.assign({}, defaultMedical),
+        select: { province: '北京市', city: '北京城区', area: '海淀区' },
+        address:"",
+        doctorList:[],
+        examinationList:[],
+        deptList:[],
+        cureList:[],
+        showBase:true,
+        rules: {
+          realName: [
+            {required: true, message: '请输入分类名称', trigger: 'blur'},
+            {min: 2, max: 140, message: '长度在 2 到 140 个字符', trigger: 'blur'}
+          ],
+          birthday: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          profession: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          contactDetails: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          height: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          weight: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          maritaStatus: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          caregiver: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          cardNo: [
+            {required: true, message: '请输入身份证号码', trigger: 'blur'},
+            { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
+          ],
+          fromDeptId: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          beHospitalizedNumber: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          bedNo: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          fromUid: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          examinationId: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+        },
+      }
+    },
+    computed:{
+        info () {
+          return this.$store.state.user.info
+        },
+      age:function () {
+        if(this.patObj.birthday!=""){
+          let age=this.patObj.birthday.substring(0,4);
+          let year=new Date().getFullYear()
+          return year-age-1;
+        }
+        return "";
+      }
+    },
+
+    created() {
+      //this.select.province+","+this.select.city+","+this.select.area;
+      let cardNo=this.$route.query.id;
+      this.patObj.cardNo=cardNo;
+      this.patObj.birthday=cardNo.substring(6,10)+"-"+cardNo.substring(10,12)+"-"+cardNo.substring(12,14);
+      this.getDept();
+      this.getInfoCardNum();
+      this.getExaminationBtn();
+      this.getDoctor();
+    },
+
+
+    methods: {
+      onSelected(val){
+        this.select.province=val.province.value;
+        this.select.city=val.city.value;
+        this.select.area=val.area.value;
+      },
+      showBaseText(){
+        this.showBase=!this.showBase;
+      },
+      getDoctor(){
+        let param={
+          deptId:this.info.deptId,
+          sid:""
+        }
+        getDoctorList(param).then(res=>{
+          if(res.code==200){
+            this.doctorList=res.dataList;
+          }
+        })
+      },
+      getExaminationBtn(){
+        queryExamination(this.info.deptId).then(res=>{
+          if(res.code==200){
+            console.log(this.examinationList)
+            this.examinationList=res.dataList;
+          }
+        })
+      },
+      getInfoCardNum(){
+        getInfoCard(this.$route.query.id).then(res=>{
+          if(res.code==200){
+            this.showBase=false;
+            this.patObj=res.dataList[0];
+            this.medObj.patientId=this.patObj.pid;
+            let arrStr=this.patObj.address.split(",");
+            if(arrStr.length>2){
+              this.address=arrStr[3]
+              this.select.province=arrStr[0]
+              this.select.city=arrStr[1]
+              this.select.area=arrStr[2]
+            }else{
+              this.address=arrStr[0]
+              this.showBase=true;
+            }
+
+          }
+        })
+      },
+      getDept(){
+
+        getDeptList(this.info.hospitalId).then(res=>{
+          if(res.code==200){
+            this.deptList=res.dataList;
+          }
+        })
+      },
+      onSubmit(formName) {
+        let patient=this.patObj;
+        patient.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
+        console.log(this.$route.path)
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$confirm('是否提交数据', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              if(patient.pid!=null){
+                updatePatient(this.patObj).then(res=>{
+                  console.log(res)
+                })
+              }else{
+              savePatient(patient).then(res=>{
+                if(res.code==200){
+                  this.medObj.patientId=res.dataList[0].pid;
+                  this.patObj=res.dataList[0];
+                  let arrStr=this.patObj.address.split(",");
+                  this.address=arrStr[3]
+                  this.select.province=arrStr[0]
+                  this.select.city=arrStr[1]
+                  this.select.area=arrStr[2]
+                }
+              })
+              }
+            })
+              .then(()=>{
+              saveMedicalRecord(this.medObj).then(res=>{
+                if(res.code==200){
+                  this.$store.commit('delete_tabs', this.$route.path)
+                   this.$router.push("/pat/list")
+                  Message.success("保存成功")
+                }
+              })
+
+           })
+          } else {
+            this.$message({
+              message: '验证失败',
+              type: 'error',
+              duration: 1000
+            });
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+        this.patObj = Object.assign({}, defaultPatient);
+        this.medObj = Object.assign({}, defaultMedical);
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .input2{
+    width: 45%;
+  }
+  .input-width{
+    width: 100%;
+  }
+  .form-container{
+    margin: 0 auto;
+  }
+  .title{
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .active{
+    color: #409EFF;
+    cursor: pointer;
+  }
+</style>

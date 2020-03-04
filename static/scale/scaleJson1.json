@@ -1,0 +1,111 @@
+{
+  "code":200,
+  "data": {
+      "id": 1,
+      "scaleTitle": "营养初次问诊表",
+      "type": "1",
+      "explain": "请根据您自身的实际情况，回答下列问题。",
+      "problem": [
+        {
+          "questionNum": "1",
+          "label": "",
+          "question": "你吃早饭的习惯是？",
+          "answer": [
+            "A 每天吃",
+            "B 偶尔吃",
+            "C 从不吃"
+          ],
+          "answers": 1
+        },
+        {
+          "questionNum": "2",
+           "label": "",
+          "question": "一日三餐进餐的时间是否规律？",
+          "answer": [
+            "A 十分规律",
+            "B 偶尔没规律",
+            "C 经常不规律"
+          ],
+          "answers": 2
+        },
+        {
+          "questionNum": "3",
+           "label": "",
+          "question": "每天所吃食物的搭配情况？",
+          "answer": [
+            "A 肉多蔬菜少",
+            "B 蔬菜多肉少",
+            "C 荤素均衡"
+          ],
+          "answers": 3
+        },
+        {
+          "questionNum": "4",
+           "label": "",
+          "question": "你是否偏食？",
+          "answer": [
+            "A 偏食严重",
+            "B 很少偏食",
+            "C 不偏食"
+          ],
+          "answers": 2
+        },
+        {
+          "questionNum": "5",
+           "label": "",
+          "question": "除一日三餐外的其它摄食情况？",
+          "answer": [
+            "A 除了喝水基本不吃零食",
+            "B 经常吃零食",
+            "C 经常吃烧烤等油炸食物"
+          ],
+          "answers": 2
+        },
+        {
+          "questionNum": "6",
+           "label": "","question": "经常吃鸡蛋或者喝牛奶吗？",
+          "answer": [
+            "A 天天吃",
+            "B 一周3～4次",
+            "C 一周1～2次",
+            "D 基本不怎么吃"
+          ],
+          "answers": 1
+        },
+        {
+          "questionNum": "7",
+           "label": "",
+          "question": "经常吃水果吗？",
+          "answer": [
+            "A 天天吃",
+            "B 一周3～4次",
+            "C 一周1～2次",
+            "D 基本不怎么吃"
+          ],
+          "answers": 2
+        },
+        {
+          "questionNum": "8",
+           "label": "",
+          "question": "你的喝水情况如何？",
+          "answer": [
+            "A 经常喝水",
+            "B 经常喝饮料",
+            "C 不怎么喝水也不喜欢喝饮料"
+          ],
+          "answers": 2
+        },
+        {
+          "questionNum": "9",
+           "label": "",
+          "question": "你经常喝酒吗？",
+          "answer": [
+            "A 经常喝酒",
+            "B 偶尔喝一次酒",
+            "C 不喝酒"
+          ],
+          "answers": ""
+        }
+      ]
+    }
+}

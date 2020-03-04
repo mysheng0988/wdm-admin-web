@@ -5,22 +5,8 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '../views/layout/Layout'
-
-/**
- * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
- *                                if not set alwaysShow, only more than one route under the children
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    title: 'title'               the name show in submenu and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar,
-  }
- **/
 export const constantRouterMap = [
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
-  {path: '/404', component: () => import('@/views/404'), hidden: true},
   {
     path: '',
     component: Layout,
@@ -30,171 +16,165 @@ export const constantRouterMap = [
       name: 'home',
       component: () => import('@/views/home/index'),
       meta: {title: '首页', icon: 'home'}
+    },{
+      path: 'home/addShop',
+      name: 'home/addShop',
+      component: () => import('@/views/home/add'),
+      meta: {title: '添加店铺'},
+      hidden: true
+    },{
+      path: 'home/update',
+      name: 'home/update',
+      component: () => import('@/views/home/update'),
+      meta: {title: '店铺详情'},
+      hidden: true
     }]
-  }
-]
-
-export const asyncRouterMap = [
+  },
   {
-    path: '/pms',
+    path: '/pat',
     component: Layout,
-    redirect: '/pms/product',
-    name: 'pms',
-    meta: {title: '商品', icon: 'product'},
-    children: [{
-      path: 'product',
-      name: 'product',
-      component: () => import('@/views/pms/product/index'),
-      meta: {title: '商品列表', icon: 'product-list'}
-    },
+    redirect: '/pat/list',
+    name: 'pat',
+    meta: {title: '患者管理', icon: 'management'},
+    children: [
       {
-        path: 'addProduct',
-        name: 'addProduct',
-        component: () => import('@/views/pms/product/add'),
-        meta: {title: '添加商品', icon: 'product-add'}
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/pat/index'),
+        meta: {title: '患者列表', icon: 'product-list'},
       },
       {
-        path: 'updateProduct',
-        name: 'updateProduct',
-        component: () => import('@/views/pms/product/update'),
-        meta: {title: '修改商品', icon: 'product-add'},
-        hidden: true
+        path: 'patAdd',
+        name: 'patAdd',
+        component: () => import('@/views/pat/add'),
+        meta: {title: '新增患者', icon: 'product-add'},
+        hidden:true,
       },
       {
-        path: 'productCate',
-        name: 'productCate',
-        component: () => import('@/views/pms/productCate/index'),
-        meta: {title: '商品分类', icon: 'product-cate'}
+        path: 'addRecord',
+        name: 'addRecord',
+        component: () => import('@/views/pat/addRecord'),
+        meta: {title: '新增病历', icon: 'product-add'},
+        hidden:true,
       },
       {
-        path: 'addProductCate',
-        name: 'addProductCate',
-        component: () => import('@/views/pms/productCate/add'),
-        meta: {title: '添加商品分类'},
-        hidden: true
+        path: 'assessRecord',
+        name: 'assessRecord',
+        component: () => import('@/views/pat/assessRecord'),
+        meta: {title: '测评记录', icon: 'product-comment'},
+        hidden:true
       },
       {
-        path: 'updateProductCate',
-        name: 'updateProductCate',
-        component: () => import('@/views/pms/productCate/update'),
-        meta: {title: '修改商品分类'},
-        hidden: true
+        path: 'cureRecord',
+        name: 'cureRecord',
+        component: () => import('@/views/pat/cureRecord'),
+        meta: {title: '治疗记录', icon: 'product-cate'},
+        hidden:true,
       },
       {
-        path: 'productAttr',
-        name: 'productAttr',
-        component: () => import('@/views/pms/productAttr/index'),
-        meta: {title: '商品类型', icon: 'product-attr'}
-      },
-      {
-        path: 'productAttrList',
-        name: 'productAttrList',
-        component: () => import('@/views/pms/productAttr/productAttrList'),
-        meta: {title: '商品属性列表'},
-        hidden: true
-      },
-      {
-        path: 'addProductAttr',
-        name: 'addProductAttr',
-        component: () => import('@/views/pms/productAttr/addProductAttr'),
-        meta: {title: '添加商品属性'},
-        hidden: true
-      },
-      {
-        path: 'updateProductAttr',
-        name: 'updateProductAttr',
-        component: () => import('@/views/pms/productAttr/updateProductAttr'),
-        meta: {title: '修改商品属性'},
-        hidden: true
-      },
-      {
-        path: 'brand',
-        name: 'brand',
-        component: () => import('@/views/pms/brand/index'),
-        meta: {title: '品牌管理', icon: 'product-brand'}
-      },
-      {
-        path: 'addBrand',
-        name: 'addBrand',
-        component: () => import('@/views/pms/brand/add'),
-        meta: {title: '添加品牌'},
-        hidden: true
-      },
-      {
-        path: 'updateBrand',
-        name: 'updateBrand',
-        component: () => import('@/views/pms/brand/update'),
-        meta: {title: '编辑品牌'},
-        hidden: true
+        path: 'readRecord',
+        name: 'readRecord',
+        component: () => import('@/views/pat/readRecord'),
+        meta: {title: '查看记录', icon: 'product-list'},
+        hidden:true,
       }
     ]
   },
   {
-    path: '/oms',
+    path: '/ips',
     component: Layout,
-    redirect: '/oms/order',
-    name: 'oms',
-    meta: {title: '订单', icon: 'order'},
+    redirect: '/ips/index',
+    name: 'ips',
+    meta: {title: '心身检查', icon: 'order'},
     children: [
       {
-        path: 'order',
-        name: 'order',
-        component: () => import('@/views/oms/order/index'),
-        meta: {title: '订单列表', icon: 'product-list'}
+        path: 'index',
+        name: 'index',
+        component: () => import('@/views/ips/index'),
+        meta: {title: '检查列表', icon: 'product-list'}
       },
       {
-        path: 'orderDetail',
-        name: 'orderDetail',
-        component: () => import('@/views/oms/order/orderDetail'),
-        meta: {title: '订单详情'},
-        hidden:true
+        path: 'IPS-A',
+        name: 'IPS-A',
+        component: () => import('@/views/ips/IPS-A'),
+        meta: {title: '专科测评', icon: 'product-list'},
+      },{
+        path: 'IPS-B',
+        name: 'IPS-B',
+        component: () => import('@/views/ips/IPS-B'),
+        meta: {title: '综合测评', icon: 'product-list'},
+      },{
+        path: 'IPS-C',
+        name: 'IPS-C',
+        component: () => import('@/views/ips/IPS-C'),
+        meta: {title: '筛查测评', icon: 'product-list'},
       },
       {
-        path: 'deliverOrderList',
-        name: 'deliverOrderList',
-        component: () => import('@/views/oms/order/deliverOrderList'),
-        meta: {title: '发货列表'},
-        hidden:true
+        path: 'resultHRV',
+        name: 'resultHRV',
+        component: () => import('@/views/ips/resultHRV'),
+        meta: {title: '记录结果-HRV', icon: 'product-list'}
       },
       {
-        path: 'orderSetting',
-        name: 'orderSetting',
-        component: () => import('@/views/oms/order/setting'),
-        meta: {title: '订单设置', icon: 'order-setting'}
-      },
-      {
-        path: 'returnApply',
-        name: 'returnApply',
-        component: () => import('@/views/oms/apply/index'),
-        meta: {title: '退货申请处理', icon: 'order-return'}
-      },
-      {
-        path: 'returnReason',
-        name: 'returnReason',
-        component: () => import('@/views/oms/apply/reason'),
-        meta: {title: '退货原因设置', icon: 'order-return-reason'}
-      },
-      {
-        path: 'returnApplyDetail',
-        name: 'returnApplyDetail',
-        component: () => import('@/views/oms/apply/applyDetail'),
-        meta: {title: '退货原因详情'},
-        hidden:true
+        path: 're-scale',
+        name: 're-scale',
+        component: () => import('@/views/ips/resultScale'),
+        meta: {title: '记录结果-量表', icon: 'product-list'}
       }
     ]
+  },
+  {
+    path: '/report',
+    name: 'report',
+    component: Layout,
+    redirect: '/report/index',
+    meta: {title: '心身报告', icon: 'sms-flash'},
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import('@/views/report/index'),
+        meta: {title: '报告列表', icon: 'product-list'}
+      },{
+        path: 'edit',
+        name: 'edit',
+        component: () => import('@/views/report/edit'),
+        meta: {title: '编辑报告', icon: 'product-attr'}
+      }
+    ],
   },
   {
     path:'/sms',
     component: Layout,
     redirect: '/sms/coupon',
     name: 'sms',
-    meta: {title: '营销', icon: 'sms'},
+    meta: {title: '心身治疗', icon: 'sms'},
     children: [
+      {
+        path: 'advertise',
+        name: 'homeAdvertise',
+        component: () => import('@/views/sms/advertise/index'),
+        meta: {title: '广告列表', icon: 'sms-ad'}
+      },
+      {
+        path: 'addAdvertise',
+        name: 'addHomeAdvertise',
+        component: () => import('@/views/sms/advertise/add'),
+        meta: {title: '添加广告'},
+        hidden:true
+      },
+      {
+        path: 'updateAdvertise',
+        name: 'updateHomeAdvertise',
+        component: () => import('@/views/sms/advertise/update'),
+        meta: {title: '编辑广告'},
+        hidden:true
+      },
       {
         path: 'flash',
         name: 'flash',
         component: () => import('@/views/sms/flash/index'),
-        meta: {title: '秒杀活动列表', icon: 'sms-flash'}
+        meta: {title: '秒杀商品列表', icon: 'sms-flash'}
       },
       {
         path: 'flashSession',
@@ -268,95 +248,81 @@ export const asyncRouterMap = [
         component: () => import('@/views/sms/subject/index'),
         meta: {title: '专题推荐', icon: 'sms-subject'}
       },
-      {
-        path: 'advertise',
-        name: 'homeAdvertise',
-        component: () => import('@/views/sms/advertise/index'),
-        meta: {title: '广告列表', icon: 'sms-ad'}
-      },
-      {
-        path: 'addAdvertise',
-        name: 'addHomeAdvertise',
-        component: () => import('@/views/sms/advertise/add'),
-        meta: {title: '添加广告'},
-        hidden:true
-      },
-      {
-        path: 'updateAdvertise',
-        name: 'updateHomeAdvertise',
-        component: () => import('@/views/sms/advertise/update'),
-        meta: {title: '编辑广告'},
-        hidden:true
-      }
+
     ]
   },
   {
-    path:'/ums',
+    path:'/param',
     component: Layout,
-    redirect: '/ums/admin',
-    name: 'ums',
-    meta: {title: '权限', icon: 'ums'},
+    redirect: '/param/cureItem',
+    name: 'param',
+    meta: {title: '参数配置', icon: 'param'},
     children: [
       {
-        path: 'admin',
-        name: 'admin',
-        component: () => import('@/views/ums/admin/index'),
-        meta: {title: '用户列表', icon: 'ums-admin'}
+        path: 'cureItem',
+        name: 'cureItem',
+        component: () => import('@/views/param/cureItem'),
+        meta: {title: '治疗项目', icon: 'sms-ad'}
+      },
+      {
+        path: 'assess',
+        name: 'assess',
+        component: () => import('@/views/param/assessItem'),
+        meta: {title: '测评项目', icon: 'sms-flash'}
+      },
+      {
+        path: 'scale',
+        name: 'scale',
+        component: () => import('@/views/param/scaleManage'),
+        meta: {title: '量表管理',icon:'sms-new'},
+      },
+
+    ]
+  },
+  {
+    path:'/user',
+    component: Layout,
+    redirect: '/user/account',
+    name: 'user',
+    meta: {title: '用户管理', icon: 'user-manage'},
+    children: [
+      {
+        path: 'account',
+        name: 'account',
+        component: () => import('@/views/user/accountManagement'),
+        meta: {title: '账户管理', icon: 'sms-ad'}
       },
       {
         path: 'role',
         name: 'role',
-        component: () => import('@/views/ums/role/index'),
-        meta: {title: '角色列表', icon: 'ums-role'}
+        component: () => import('@/views/user/roleManagement'),
+        meta: {title: '角色权限',icon:"sms-subject"},
       },
       {
-        path: 'allocMenu',
-        name: 'allocMenu',
-        component: () => import('@/views/ums/role/allocMenu'),
-        meta: {title: '分配菜单'},
-        hidden: true
+        path: 'hos',
+        name: 'hos',
+        component: () => import('@/views/user/hosManagement'),
+        meta: {title: '医院管理',icon:"sms-subject"},
       },
       {
-        path: 'allocResource',
-        name: 'allocResource',
-        component: () => import('@/views/ums/role/allocResource'),
-        meta: {title: '分配资源'},
-        hidden: true
+        path: 'dep',
+        name: 'dep',
+        component: () => import('@/views/user/depManagement'),
+        meta: {title: '科室管理', icon: 'sms-flash'}
       },
-      {
-        path: 'menu',
-        name: 'menu',
-        component: () => import('@/views/ums/menu/index'),
-        meta: {title: '菜单列表', icon: 'ums-menu'}
-      },
-      {
-        path: 'addMenu',
-        name: 'addMenu',
-        component: () => import('@/views/ums/menu/add'),
-        meta: {title: '添加菜单'},
-        hidden: true
-      },
-      {
-        path: 'updateMenu',
-        name: 'updateMenu',
-        component: () => import('@/views/ums/menu/update'),
-        meta: {title: '修改菜单'},
-        hidden: true
-      },
-      {
-        path: 'resource',
-        name: 'resource',
-        component: () => import('@/views/ums/resource/index'),
-        meta: {title: '资源列表', icon: 'ums-resource'}
-      },
-      {
-        path: 'resourceCategory',
-        name: 'resourceCategory',
-        component: () => import('@/views/ums/resource/categoryList'),
-        meta: {title: '资源分类'},
-        hidden: true
-      }
     ]
+  },
+  {path: '',
+    component: Layout,
+    redirect: '/404',
+    hidden: true,
+    children: [{
+      path:'404',
+      name:"404",
+      component: () => import('@/views/404'),
+      meta: {title: '404', icon: 'sms-flash'},
+      hidden: true
+    }]
   },
   {path: '*', redirect: '/404', hidden: true}
 ]

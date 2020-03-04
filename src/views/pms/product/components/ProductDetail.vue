@@ -2,33 +2,25 @@
   <el-card class="form-container" shadow="never">
     <el-steps :active="active" finish-status="success" align-center>
       <el-step title="填写商品信息"></el-step>
-      <el-step title="填写商品促销"></el-step>
       <el-step title="填写商品属性"></el-step>
-      <el-step title="选择商品关联"></el-step>
+      <el-step title="上传商品图片"></el-step>
     </el-steps>
     <product-info-detail
       v-show="showStatus[0]"
-      v-model="productParam"
       :is-edit="isEdit"
+      :goods-id="goodsId"
       @nextStep="nextStep">
     </product-info-detail>
     <product-sale-detail
       v-show="showStatus[1]"
-      v-model="productParam"
       :is-edit="isEdit"
+      :goods-id="goodsId"
       @nextStep="nextStep"
       @prevStep="prevStep">
     </product-sale-detail>
-    <product-attr-detail
-      v-show="showStatus[2]"
-      v-model="productParam"
-      :is-edit="isEdit"
-      @nextStep="nextStep"
-      @prevStep="prevStep">
-    </product-attr-detail>
     <product-relation-detail
-      v-show="showStatus[3]"
-      v-model="productParam"
+      v-show="showStatus[2]"
+      :goods-id="goodsId"
       :is-edit="isEdit"
       @prevStep="prevStep"
       @finishCommit="finishCommit">
@@ -38,11 +30,11 @@
 <script>
   import ProductInfoDetail from './ProductInfoDetail';
   import ProductSaleDetail from './ProductSaleDetail';
-  import ProductAttrDetail from './ProductAttrDetail';
   import ProductRelationDetail from './ProductRelationDetail';
-  import {createProduct,getProduct,updateProduct} from '@/api/product';
+  import {getGoodsAllMsg,saveGoods} from '@/api/goods';
 
   const defaultProductParam = {
+<<<<<<< Updated upstream
     albumPics: '',
     brandId: null,
     brandName: '',
@@ -102,10 +94,15 @@
     usePointLimit: 0,
     verifyStatus: 0,
     weight: 0
+=======
+    goodsMsg:null,
+    goodsNorms:[],
+    goodsImg:[],
+>>>>>>> Stashed changes
   };
   export default {
     name: 'ProductDetail',
-    components: {ProductInfoDetail, ProductSaleDetail, ProductAttrDetail, ProductRelationDetail},
+    components: {ProductInfoDetail, ProductSaleDetail, ProductRelationDetail},
     props: {
       isEdit: {
         type: Boolean,
@@ -115,15 +112,16 @@
     data() {
       return {
         active: 0,
+        flag:false,
+        options:[],
         productParam: Object.assign({}, defaultProductParam),
-        showStatus: [true, false, false, false]
+        showStatus: [true, false, false],
+        goodsId:'',
       }
     },
     created(){
       if(this.isEdit){
-        getProduct(this.$route.query.id).then(response=>{
-          this.productParam=response.data;
-        });
+        this.goodsId=this.$route.query.id;
       }
     },
     methods: {
@@ -139,46 +137,45 @@
           this.showStatus[this.active] = true;
         }
       },
-      nextStep() {
+      nextStep(param) {
+
         if (this.active < this.showStatus.length - 1) {
           this.active++;
           this.hideAll();
           this.showStatus[this.active] = true;
         }
+        if(this.active==1){
+          this.productParam.goodsMsg=param;
+          console.log(this.productParam)
+        }else{
+          this.productParam.goodsNorms=param;
+        }
       },
-      finishCommit(isEdit) {
+      finishCommit(param) {
+        this.productParam.goodsImg=param;
         this.$confirm('是否要提交该产品', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          if(isEdit){
-            updateProduct(this.$route.query.id,this.productParam).then(response=>{
-              this.$message({
-                type: 'success',
-                message: '提交成功',
-                duration:1000
-              });
-              this.$router.back();
+          saveGoods(this.productParam).then((res)=>{
+            this.$message({
+              type: 'success',
+              message: '提交成功',
+              duration:1000
             });
-          }else{
-            createProduct(this.productParam).then(response=>{
-              this.$message({
-                type: 'success',
-                message: '提交成功',
-                duration:1000
-              });
-              location.reload();
-            });
-          }
+            this.$router.back();
+          })
+
         })
       }
     }
   }
 </script>
-<style>
+<style scoped>
   .form-container {
-    width: 800px;
+    width: 900px;
+    margin: 20px auto;
   }
 </style>
 

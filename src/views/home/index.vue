@@ -1,303 +1,140 @@
 <template>
-  <div class="app-container">
-    <div class="address-layout">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <div class="out-border">
-            <div class="layout-title">后台项目</div>
-            <div class="color-main address-content">
-              <a href="https://github.com/macrozheng/mall">mall</a>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="out-border">
-            <div class="layout-title">前端项目</div>
-            <div class="color-main address-content">
-              <a href="https://github.com/macrozheng/mall-admin-web">mall-admin-web</a>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="out-border">
-            <div class="layout-title">学习教程</div>
-            <div class="color-main address-content">
-              <a href="https://github.com/macrozheng/mall-learning">mall-learning</a>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="total-layout">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_order" class="total-icon">
-            <div class="total-title">今日订单总数</div>
-            <div class="total-value">200</div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_today_amount" class="total-icon">
-            <div class="total-title">今日销售总额</div>
-            <div class="total-value">￥5000.00</div>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="total-frame">
-            <img :src="img_home_yesterday_amount" class="total-icon">
-            <div class="total-title">昨日销售总额</div>
-            <div class="total-value">￥5000.00</div>
-          </div>
-        </el-col>
-        <!--<el-col :span="6">-->
-          <!--<div class="total-frame">-->
-            <!--<svg-icon icon-class="total-week" class="total-icon">-->
-            <!--</svg-icon>-->
-            <!--<div class="total-title">近7天销售总额</div>-->
-            <!--<div class="total-value">￥50000.00</div>-->
-          <!--</div>-->
-        <!--</el-col>-->
-      </el-row>
-    </div>
-    <el-card class="mine-layout">
-      <div style="text-align: center">
-        <img width="150px" height="150px" src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg">
+  <div class="app-container home">
+    <el-card class="operate-container" shadow="never">
+      <div class="shop-msg">
+        <el-row :gutter="10">
+          <el-col :xs="24" :sm="8">
+            <svg-icon icon-class="shop" class="color-back"></svg-icon>
+            <span>店铺信息</span>
+          </el-col>
+          <el-col :xs="24" :sm="16" style="text-align: right">
+            <el-button
+              icon="iconfont icon-qr-code"
+              @click="handleQRCode()"
+              type="warning" plain
+              size="mini">
+              店铺二维码
+            </el-button>
+            <el-button
+              icon="el-icon-edit"
+              @click="handleEditShop()"
+              type="success" plain
+              size="mini">
+              编辑
+            </el-button>
+            <el-button
+              icon="el-icon-plus"
+              @click="handleAddShop()"
+              type="primary" plain
+              size="mini">
+              添加
+            </el-button>
+            <el-button
+              v-show="selectData.status==0"
+              icon="iconfont icon-rest"
+              @click="handleStatus()"
+              type="danger" plain
+              size="mini">
+              休息
+            </el-button>
+            <el-button
+              v-show="selectData.status==1"
+              icon="iconfont icon-open"
+              @click="handleStatus()"
+              type="success" plain
+              size="mini">
+              开业
+            </el-button>
+            <el-button
+              v-show="selectData.status==-1||selectData.status==-2"
+              icon="iconfont icon-bill"
+              @click=""
+              type="success" plain
+              size="mini">
+              续费
+            </el-button>
+          </el-col>
+        </el-row>
       </div>
-      <div style="text-align: center">mall全套学习教程连载中！</div>
-      <div style="text-align: center;margin-top: 5px"><span class="color-main">关注公号</span>，第一时间获取。</div>
+      <div class="table-container">
+        <el-table ref="shopTable"
+                  :data="list"
+                  style="width: 100%"
+                  highlight-current-row
+                  :row-style="tableRowClassName"
+                  @current-change="handleCurrentChange"
+                  v-loading="loading"
+                  border>
+          <el-table-column type="index" width="60" align="center"></el-table-column>
+          <el-table-column label="店铺名称" align="center" width="220" :show-overflow-tooltip="true">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.shopName}}</div></template>
+          </el-table-column>
+          <el-table-column label="店铺编码"  align="center" width="220" :show-overflow-tooltip="true">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.shopCode}}</div></template>
+          </el-table-column>
+          <el-table-column label="联系电话"  align="center" width="150">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.telephone}}</div></template>
+          </el-table-column>
+          <el-table-column label="基础运费"  align="center" width="100">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.freight}}元</div></template>
+          </el-table-column>
+          <el-table-column label="配送范围"  align="center" width="100">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.shopScope|formatShopScope}}</div></template>
+          </el-table-column>
+          <el-table-column label="店铺状态"  align="center" width="100">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.status| formatStatus}}</div></template>
+          </el-table-column>
+          <el-table-column label="店铺地址" align="center" :show-overflow-tooltip="true">
+            <template slot-scope="scope"><div class="table-item">{{scope.row.address}}</div></template>
+          </el-table-column>
+        </el-table>
+      </div>
     </el-card>
-    <div class="un-handle-layout">
-      <div class="layout-title">待处理事务</div>
-      <div class="un-handle-content">
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待付款订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">已完成订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待确认收货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">新缺货登记</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待处理退款申请</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">已发货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">待处理退货订单</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="un-handle-item">
-              <span class="font-medium">广告位即将到期</span>
-              <span style="float: right" class="color-danger">(10)</span>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
-    <div class="overview-layout">
-      <el-row :gutter="20">
-        <el-col :span="12">
-          <div class="out-border">
-            <div class="layout-title">商品总览</div>
-            <div style="padding: 40px">
-              <el-row>
-                <el-col :span="6" class="color-danger overview-item-value">100</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">400</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">50</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">500</el-col>
-              </el-row>
-              <el-row class="font-medium">
-                <el-col :span="6" class="overview-item-title">已下架</el-col>
-                <el-col :span="6" class="overview-item-title">已上架</el-col>
-                <el-col :span="6" class="overview-item-title">库存紧张</el-col>
-                <el-col :span="6" class="overview-item-title">全部商品</el-col>
-              </el-row>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="out-border">
-            <div class="layout-title">用户总览</div>
-            <div style="padding: 40px">
-              <el-row>
-                <el-col :span="6" class="color-danger overview-item-value">100</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">200</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">1000</el-col>
-                <el-col :span="6" class="color-danger overview-item-value">5000</el-col>
-              </el-row>
-              <el-row class="font-medium">
-                <el-col :span="6" class="overview-item-title">今日新增</el-col>
-                <el-col :span="6" class="overview-item-title">昨日新增</el-col>
-                <el-col :span="6" class="overview-item-title">本月新增</el-col>
-                <el-col :span="6" class="overview-item-title">会员总数</el-col>
-              </el-row>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="statistics-layout">
-      <div class="layout-title">订单统计</div>
-      <el-row>
-        <el-col :span="4">
-          <div style="padding: 20px">
-            <div>
-              <div style="color: #909399;font-size: 14px">本月订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">10000</div>
-              <div>
-                <span class="color-success" style="font-size: 14px">+10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本周订单总数</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">1000</div>
-              <div>
-                <span class="color-danger" style="font-size: 14px">-10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本月销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">100000</div>
-              <div>
-                <span class="color-success" style="font-size: 14px">+10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-              </div>
-            </div>
-            <div style="margin-top: 20px;">
-              <div style="color: #909399;font-size: 14px">本周销售总额</div>
-              <div style="color: #606266;font-size: 24px;padding: 10px 0">50000</div>
-              <div>
-                <span class="color-danger" style="font-size: 14px">-10%</span>
-                <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-              </div>
-            </div>
-          </div>
-        </el-col>
-        <el-col :span="20">
-          <div style="padding: 10px;border-left:1px solid #DCDFE6">
-            <el-date-picker
-              style="float: right;z-index: 1"
-              size="small"
-              v-model="orderCountDate"
-              type="daterange"
-              align="right"
-              unlink-panels
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-              @change="handleDateChange"
-              :picker-options="pickerOptions">
-            </el-date-picker>
-            <div>
-              <ve-line
-                :data="chartData"
-                :legend-visible="false"
-                :loading="loading"
-                :data-empty="dataEmpty"
-                :settings="chartSettings"></ve-line>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+
+    <sales-volume :shop-id="selectData.id"></sales-volume>
+    <await-handle></await-handle>
+    <user-goods-msg :shop-id="selectData.id"></user-goods-msg>
+    <order-statistics :shop-id="selectData.id"></order-statistics>
+
+    <!--<viewer :images="photo" title="大计算机安检">-->
+      <!--<el-row :gutter="20">-->
+        <!--<el-col :span="8" v-for="(src,index) in photo"  :key="index">-->
+          <!--<div class="viewer">-->
+            <!--<img :src="src" >-->
+          <!--</div>-->
+      <!--</el-col>-->
+
+      <!--</el-row>-->
+    <!--</viewer>-->
+    <el-dialog :visible.sync="qrDialog" width="420px">
+      <qrcode :q-text="qText" :q-size="qSize" :d-name="dName"></qrcode>
+      <vue-barcode v-bind:value="qText"></vue-barcode>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-  import {str2Date} from '@/utils/date';
-  import img_home_order from '@/assets/images/home_order.png';
-  import img_home_today_amount from '@/assets/images/home_today_amount.png';
-  import img_home_yesterday_amount from '@/assets/images/home_yesterday_amount.png';
-  const DATA_FROM_BACKEND = {
-    columns: ['date', 'orderCount','orderAmount'],
-    rows: [
-      {date: '2018-11-01', orderCount: 10, orderAmount: 1093},
-      {date: '2018-11-02', orderCount: 20, orderAmount: 2230},
-      {date: '2018-11-03', orderCount: 33, orderAmount: 3623},
-      {date: '2018-11-04', orderCount: 50, orderAmount: 6423},
-      {date: '2018-11-05', orderCount: 80, orderAmount: 8492},
-      {date: '2018-11-06', orderCount: 60, orderAmount: 6293},
-      {date: '2018-11-07', orderCount: 20, orderAmount: 2293},
-      {date: '2018-11-08', orderCount: 60, orderAmount: 6293},
-      {date: '2018-11-09', orderCount: 50, orderAmount: 5293},
-      {date: '2018-11-10', orderCount: 30, orderAmount: 3293},
-      {date: '2018-11-11', orderCount: 20, orderAmount: 2293},
-      {date: '2018-11-12', orderCount: 80, orderAmount: 8293},
-      {date: '2018-11-13', orderCount: 100, orderAmount: 10293},
-      {date: '2018-11-14', orderCount: 10, orderAmount: 1293},
-      {date: '2018-11-15', orderCount: 40, orderAmount: 4293}
-    ]
-  };
+  import { Message, MessageBox } from 'element-ui'
+  import SalesVolume from './components/SalesVolume'
+  import AwaitHandle from './components/AwaitHandle'
+  import UserGoodsMsg from './components/UserGoodsMsg'
+  import OrderStatistics from './components/OrderStatistics'
+  import qrcode from '@/components/qrcode/qrcode'
+  import {findShop,shopStatus} from '@/api/shop';
+  import VueBarcode from 'vue-barcode';
   export default {
     name: 'home',
+    components: {
+      SalesVolume,
+      AwaitHandle,
+      UserGoodsMsg,
+      OrderStatistics,
+      qrcode,
+      VueBarcode
+    },
     data() {
       return {
-        pickerOptions: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              let start = new Date();
-              start.setFullYear(2018);
-              start.setMonth(10);
-              start.setDate(1);
-              end.setTime(start.getTime() + 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一月',
-            onClick(picker) {
-              const end = new Date();
-              let start = new Date();
-              start.setFullYear(2018);
-              start.setMonth(10);
-              start.setDate(1);
-              end.setTime(start.getTime() + 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
         orderCountDate: '',
         chartSettings: {
           xAxisType: 'time',
@@ -310,135 +147,148 @@
         },
         loading: false,
         dataEmpty: false,
-        img_home_order,
-        img_home_today_amount,
-        img_home_yesterday_amount
+        qText:"",
+        qSize:200,
+        dName:'',
+        photo:[
+          "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
+          "http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg",
+          "http://www.cnr.cn/xjfw/btfw/2011btfw/jkwh/jkwt/20160516/W020160516492035673595.jpg",
+          "http://dingyue.ws.126.net/nOMRYFESVvJGncEMAECJ8dNpega65ALCjTNhtEkntwZP=1557568016050.jpg",
+          'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+          'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg',
+          'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
+          'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+          'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
+          'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
+        ],
+        qrDialog:false,
+        dialogFormVisible: false,
+        selectData: {},
+        list: [],
+        loading:false,
       }
     },
-    created(){
-      this.initOrderCountDate();
-      this.getData();
+    filters:{
+      formatStatus(status){
+        if(status==0){
+          return '正在营业';
+        }else if(status==1){
+          return '休息中';
+        }else if(status==-1){
+          return '已到期';
+        }else if(status==-2){
+          return "请您充值";
+        }
+      },
+      formatShopScope(value){
+        if(value==0){
+          return '用户自提';
+        }else if(value==-1){
+          return '城区内';
+        }else{
+          return value+"km";
+        }
+      },
     },
+    mounted(){
+     // this.handleInitShop();
+    },
+
     methods:{
-      handleDateChange(){
-        this.getData();
+      handleQRCode(){
+          this.qText=this.selectData.shopCode;
+          this.dName=this.selectData.shopName;
+          this.qrDialog=true;
       },
-      initOrderCountDate(){
-        let start = new Date();
-        start.setFullYear(2018);
-        start.setMonth(10);
-        start.setDate(1);
-        const end = new Date();
-        end.setTime(start.getTime() + 1000 * 60 * 60 * 24 * 7);
-        this.orderCountDate=[start,end];
-      },
-      getData(){
-        setTimeout(() => {
-          this.chartData = {
-            columns: ['date', 'orderCount','orderAmount'],
-            rows: []
-          };
-          for(let i=0;i<DATA_FROM_BACKEND.rows.length;i++){
-            let item=DATA_FROM_BACKEND.rows[i];
-            let currDate=str2Date(item.date);
-            let start=this.orderCountDate[0];
-            let end=this.orderCountDate[1];
-            if(currDate.getTime()>=start.getTime()&&currDate.getTime()<=end.getTime()){
-              this.chartData.rows.push(item);
-            }
-          }
-          this.dataEmpty = false;
+      handleInitShop(){
+        this.loading=true;
+        findShop().then((res) => {
+          console.log(res)
+          this.list=res.data;
+          this.loading = false;
+          this.checkedData();
+        }).catch(() => {
           this.loading = false
-        }, 1000)
-      }
+        })
+      },
+      handleStatus(){
+        let id=this.selectData.id;
+        let status=this.selectData.status;
+        shopStatus(id,status).then((res) => {
+          this.loading = false;
+          Message.success(res.msg)
+          this.handleInitShop();
+        }).catch(() => {
+          this.loading = false
+        })
+      },
+      handleEditShop(){
+        this.$router.push({path: 'home/update',query:{id:this.selectData.id}});
+       // this.dialogFormVisible=true
+      },
+      checkedData(){
+        this.$refs.shopTable.setCurrentRow(this.list[0]);
+        this.selectData=this.list[0];
+      },
+      tableRowClassName(row){
+        if(row.row.status==1){
+          return {"background-color":"#FDF6EC"}
+        }else if(row.row.status==-1){
+          return {"background-color":"#FAB6B6"}
+        }else if(row.row.status==-2){
+          return {"background-color":"#F0F9EB"}
+        }
+
+      },
+      handleAddShop(){
+        this.$router.push({path: 'home/addShop'});
+      },
+      handleCurrentChange(currentRow,oldCurrentRow){
+        this.selectData=currentRow;
+        sessionStorage.setItem("shopId",currentRow.id)
+        sessionStorage.setItem("shopName",currentRow.shopName)
+        this.qText=currentRow.shopCode;
+        this.dName=currentRow.shopName;
+      },
+
     }
   }
 </script>
 
 <style scoped>
-  .app-container {
-    margin-top: 40px;
-    margin-left: 120px;
-    margin-right: 120px;
+  .shop-msg{
+    height: 44px;
+    line-height: 44px;
+    margin-bottom: 10px;
   }
-
-  .address-layout {
+  .btn-handle{
+    width: 120px;
+    height: 44px;
   }
-
-  .total-layout {
-    margin-top: 20px;
+  .table-item{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-
-  .total-frame {
-    border: 1px solid #DCDFE6;
-    padding: 20px;
-    height: 100px;
+  .color-back{
+    color: #666666;
   }
-
-  .total-icon {
-    color: #409EFF;
-    width: 60px;
-    height: 60px;
-  }
-
-  .total-title {
+  .viewer{
     position: relative;
-    font-size: 16px;
-    color: #909399;
-    left: 70px;
-    top: -50px;
-  }
-
-  .total-value {
-    position: relative;
-    font-size: 18px;
-    color: #606266;
-    left: 70px;
-    top: -40px;
-  }
-
-  .un-handle-layout {
     margin-top: 20px;
-    border: 1px solid #DCDFE6;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    overflow: hidden;
   }
-
-  .layout-title {
-    color: #606266;
-    padding: 15px 20px;
-    background: #F2F6FC;
-    font-weight: bold;
-  }
-
-  .un-handle-content {
-    padding: 20px 40px;
-  }
-
-  .un-handle-item {
-    border-bottom: 1px solid #EBEEF5;
-    padding: 10px;
-  }
-
-  .overview-layout {
-    margin-top: 20px;
-  }
-
-  .overview-item-value {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .overview-item-title {
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  .out-border {
-    border: 1px solid #DCDFE6;
-  }
-
-  .statistics-layout {
-    margin-top: 20px;
-    border: 1px solid #DCDFE6;
+  viewer img {
+    position:  absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
   .mine-layout {
     position: absolute;

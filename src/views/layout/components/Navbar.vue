@@ -4,8 +4,9 @@
     <breadcrumb></breadcrumb>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar">
+        <el-image class="user-avatar" :src="avatar"/>
         <i class="el-icon-caret-bottom"></i>
+        <p>{{name}}</p>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class="inlineBlock" to="/">
@@ -34,8 +35,12 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'avatar',
+      'name'
     ])
+  },
+  created(){
+
   },
   methods: {
     toggleSideBar() {
@@ -75,6 +80,9 @@ export default {
     .avatar-wrapper {
       cursor: pointer;
       margin-top: 5px;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
       position: relative;
       .user-avatar {
         width: 40px;

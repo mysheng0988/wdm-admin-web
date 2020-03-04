@@ -1,23 +1,23 @@
 <template>
-  <div>
-    <el-card class="login-form-layout">
+  <div class="login-bg">
+    <div class="login-form-layout" >
       <el-form autoComplete="on"
                :model="loginForm"
                :rules="loginRules"
                ref="loginForm"
                label-position="left">
-        <div style="text-align: center">
-          <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
+        <div class="logo-img">
+          <!--<svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>-->
+          <img src="@/views/login/img/logo.png">
         </div>
-        <h2 class="login-title color-main">mall-admin-web</h2>
         <el-form-item prop="username">
-          <el-input name="username"
+          <el-input name="phone"
                     type="text"
                     v-model="loginForm.username"
                     autoComplete="on"
                     placeholder="请输入用户名">
-          <span slot="prefix">
-            <svg-icon icon-class="user" class="color-main"></svg-icon>
+          <span slot="prefix" >
+            <svg-icon icon-class="user" class="color-gray"></svg-icon>
           </span>
           </el-input>
         </el-form-item>
@@ -28,61 +28,46 @@
                     v-model="loginForm.password"
                     autoComplete="on"
                     placeholder="请输入密码">
-          <span slot="prefix">
-            <svg-icon icon-class="password" class="color-main"></svg-icon>
+          <span slot="prefix" class="svg-container">
+            <svg-icon icon-class="password" class="color-gray"></svg-icon>
           </span>
             <span slot="suffix" @click="showPwd">
-            <svg-icon icon-class="eye" class="color-main"></svg-icon>
+            <svg-icon :icon-class="eye" class="color-gray"></svg-icon>
           </span>
           </el-input>
         </el-form-item>
         <el-form-item style="margin-bottom: 60px;text-align: center">
-          <el-button style="width: 45%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
-            登录
-          </el-button>
-          <el-button style="width: 45%" type="primary" @click.native.prevent="handleTry">
-            获取体验账号
+          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
+            用户登录
           </el-button>
         </el-form-item>
       </el-form>
-    </el-card>
-    <img :src="login_center_bg" class="login-center-layout">
-    <el-dialog
-      title="公众号二维码"
-      :visible.sync="dialogVisible"
-      :show-close="false"
-      :center="true"
-      width="30%">
-      <div style="text-align: center">
-        <span class="font-title-large"><span class="color-main font-extra-large">关注公众号</span>回复<span class="color-main font-extra-large">体验</span>获取体验账号</span>
-        <br>
-        <img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg" width="160" height="160" style="margin-top: 10px">
-      </div>
-      <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="dialogConfirm">确定</el-button>
-      </span>
-    </el-dialog>
+    </div>
   </div>
 </template>
 
 <script>
-  import {isvalidUsername} from '@/utils/validate';
-  import {setSupport,getSupport,setCookie,getCookie} from '@/utils/support';
-  import login_center_bg from '@/assets/images/login_center_bg.png'
-
+  import {validatePhone} from '@/utils/validate';
   export default {
     name: 'login',
     data() {
-      const validateUsername = (rule, value, callback) => {
-        if (!isvalidUsername(value)) {
-          callback(new Error('请输入正确的用户名'))
+      const validateUserPhone = (rule, value, callback) => {
+        if (!validatePhone(value)) {
+          callback(new Error('请输入用户名'))
+        } else {
+          callback()
+        }
+      };
+      const validateUserName=(rule, value, callback) => {
+        if (value.length<2) {
+          callback(new Error('用户名称不能小于四位'))
         } else {
           callback()
         }
       };
       const validatePass = (rule, value, callback) => {
-        if (value.length < 3) {
-          callback(new Error('密码不能小于3位'))
+        if (value.length < 4) {
+          callback(new Error('密码不能小于六位'))
         } else {
           callback()
         }
@@ -93,19 +78,15 @@
           password: '',
         },
         loginRules: {
-          username: [{required: true, trigger: 'blur', validator: validateUsername}],
+          username: [{required: true, trigger: 'blur', validator: validateUserName}],
           password: [{required: true, trigger: 'blur', validator: validatePass}]
         },
         loading: false,
         pwdType: 'password',
-        login_center_bg,
-        dialogVisible:false,
-        supportDialogVisible:false
+        eye:'eye',
       }
     },
     created() {
-      this.loginForm.username = getCookie("username");
-      this.loginForm.password = getCookie("password");
       if(this.loginForm.username === undefined||this.loginForm.username==null||this.loginForm.username===''){
         this.loginForm.username = 'admin';
       }
@@ -116,25 +97,27 @@
     methods: {
       showPwd() {
         if (this.pwdType === 'password') {
+          this.eye='eyes'
           this.pwdType = ''
         } else {
+          this.eye='eye'
           this.pwdType = 'password'
         }
       },
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
+
           if (valid) {
-            // let isSupport = getSupport();
-            // if(isSupport===undefined||isSupport==null){
-            //   this.dialogVisible =true;
-            //   return;
-            // }
             this.loading = true;
-            this.$store.dispatch('Login', this.loginForm).then(() => {
+            this.$store.dispatch('Login', this.loginForm).then((res) => {
+                console.log(res)
               this.loading = false;
-              setCookie("username",this.loginForm.username,15);
-              setCookie("password",this.loginForm.password,15);
-              this.$router.push({path: '/'})
+              if(res.code=="200"){
+                this.$router.push({path: '/home'})
+              }else{
+                this.$message.error(res.msg);
+              }
+
             }).catch(() => {
               this.loading = false
             })
@@ -144,41 +127,60 @@
           }
         })
       },
-      handleTry(){
-        this.dialogVisible =true
-      },
-      dialogConfirm(){
-        this.dialogVisible =false;
-        setSupport(true);
-      },
-      dialogCancel(){
-        this.dialogVisible = false;
-        setSupport(false);
-      }
     }
   }
 </script>
+<style lang="scss" >
 
-<style scoped>
+  .login-bg{
+    height: 100vh;
+    width: 100%;
+    background:url("img/bg.png") no-repeat;
+    background-size: cover;
+  }
   .login-form-layout {
+    padding: 30px;
     position: absolute;
-    left: 0;
-    right: 0;
-    width: 360px;
-    margin: 140px auto;
-    border-top: 10px solid #409EFF;
+    right: 10%;
+    top:50%;
+    background:url("img/input_bg.png") no-repeat;
+    background-size: cover;
+    width: 480px;
+    height:540px;
+    margin: -270px 0;
   }
 
-  .login-title {
+  .logo-img{
+    margin: 50px 0;
+    width: 100%;
     text-align: center;
   }
 
-  .login-center-layout {
-    background: #409EFF;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    margin-top: 200px;
+  .login-form-layout .el-form-item .el-input {
+    display: inline-block;
+    input {
+      background-color: transparent;
+      border: 0;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      padding: 12px 5px 12px 35px;
+      color: #fff;
+      caret-color: #fff;
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px #283443 inset !important;
+        -webkit-text-fill-color: #fff !important;
+      }
+    }
+  }
+
+  .login-form-layout .el-form-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: #454545;
+  }
+  .color-gray{
+    color: #eee;
   }
 </style>

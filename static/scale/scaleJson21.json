@@ -1,0 +1,160 @@
+{
+  "code":200,
+  "data":{
+    "id":21,
+    "scaleTitle":"斯坦福急性应激反应问卷（SASRQ）",
+    "type":"1",
+    "explain":"下列题目内容是人们在经历应激性事件的过程中及事件后有时会有的一些体验。请仔细阅读每一条，选出最符合您体验的症状。",
+    "problem":[{
+      "questionNum":"1",
+      "label": "",
+      "question":"我入睡或维持睡眠困难？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"2",
+      "label": "",
+      "question":"我感觉坐立不安？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"3",
+      "label": "",
+      "question":"我有“无时间感的感觉？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"4",
+      "label": "",
+      "question":"我反应迟缓？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"5",
+      "label": "",
+      "question":"我试图回避与事件有关的感受？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"6",
+      "label": "",
+      "question":"我反复做与应激性事件有关的噩梦？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"7",
+      "label": "",
+      "question":"如果暴露于使我想起应激性事件某方面的事件，我感到异常心烦？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"8",
+      "label": "",
+      "question":"对于小事情我也经常出现惊跳反应？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"9",
+      "label": "",
+      "question":"应激性事件使我完成工作或需要做的事情感到困难？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"10",
+      "label": "",
+      "question":"我没有通常存在的我是谁的感觉？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"11",
+      "label": "",
+      "question":"我试图回避使我想起应激性事件的活动？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"12",
+      "label": "",
+      "question":"我感觉高度警惕或者“紧张兮兮？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"13",
+      "label": "",
+      "question":"我感自己好像是个陌生人？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"14",
+      "label": "",
+      "question":"我试图回避交谈应激性事件？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"15",
+      "label": "",
+      "question":"当暴露于与应激事件有关的提示时，我有身体上的反应？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"16",
+      "label": "",
+      "question":"我回忆应激性事件的重要内容有困难？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"17",
+      "label": "",
+      "question":"我试图回避与应激性事件有关的想法？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"18",
+      "label": "",
+      "question":"我见到的事物与它们的实际情况感觉有不同？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"19",
+      "label": "",
+      "question":"我反复出现此事件的不必要的记忆？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"20",
+      "label": "",
+      "question":"我感觉与自己的情感很疏远？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"21",
+      "label": "",
+      "question":"我急躁易怒或者发脾气？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"22",
+      "label": "",
+      "question":"我回避与使我想起应激性事件的人接触？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"23",
+      "label": "",
+      "question":"我经常突然行动或感觉，好像应激性事件又发生了？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"24",
+      "label": "",
+      "question":"我的大脑一片空白？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"25",
+      "label": "",
+      "question":"我忘记了事件的大部分过程？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"26",
+      "label": "",
+      "question":"应激性事件导致我和其他人的关系出现问题？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"27",
+      "label": "",
+      "question":"我集中注意力困难？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"28",
+      "label": "",
+      "question":"我感觉和其他人疏远或分离？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"29",
+      "label": "",
+      "question":"我有感觉事件又重新发生了一次的生动？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    },{
+      "questionNum":"30",
+      "label": "",
+      "question":"我试图远离使我想起事件的地方？",
+      "answer":["A 没有体验","B 极少体验","C 偶尔体验","D 有时体验","E 经常体验","总是体验"], "answers": ""
+    }]
+  }
+}
