@@ -1,50 +1,39 @@
 <template>
   <div style="margin-top: 50px">
-    <el-form  :rules="rules" ref="productInfoForm" label-width="120px" >
+    <el-form  ref="easyQuestion" label-width="120px" >
       <el-form-item  style="text-align: center">
-        <el-input class="ips-input" placeholder="植物神经功能检测--》检测科室：心理科" ></el-input>
-        <el-button type="primary">记录结果</el-button>
-        <el-button type="primary">开始检测</el-button>
+        <div class="ips-input">首访问卷</div>
+        <el-button type="primary">测试记录</el-button>
+        <el-button type="primary" @click="startQuestion">开始问卷</el-button>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}}</el-button>
+        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleNext">下一步，{{nextTitle}}</el-button>
       </el-form-item>
     </el-form>
+    <el-dialog
+      title="量表答题"
+      :visible.sync="dialogVisible"
+      width="700px">
+      <question :scale-id="'1'"></question>
+
+    </el-dialog>
   </div>
 </template>
 
 <script>
-  import {customClassShopId} from '@/api/classify'
-  import {getProduct,classifyList} from '@/api/product';
-  import {saveGoods,getGoodsMsg} from '@/api/goods';
-  import {findShop} from '@/api/shop';
-  const defaultProductParam = {
-    id: null,
-    shopId: '',
-    goodsBrand: '',
-    goodsCode: '',
-    classifyCode:null,
-    goodsName: '',
-    goodsTitle: '',
-    oneCode:0,
-    twoCode:0,
-    threeCode:0,
-    goodsState: 0,
-    examineState: 0,
-    goodsNews: 0,
-    goodsRecommend: 0,
-    goodsNotice: 0,
-    goodsEnsure:"",
-    salesVolume: 0,
-    comments:"",
-  };
+  import question from './question';
   export default {
-    name: "ProductInfoDetail",
+    name: "easyQuestion",
+    components: {question},
     props: {
       isEdit: {
         type: Boolean,
         default: false
+      },
+      medicalRecordId:{
+        type:String,
+        value:""
       },
       prevTitle:{
         type:String,
@@ -57,16 +46,7 @@
     },
     data() {
       return {
-
-        rules: {
-          goodsName: [
-            {required: true, message: '请输入商品名称', trigger: 'blur'},
-            {min: 2, max: 140, message: '长度在 2 到 140 个字符', trigger: 'blur'}
-          ],
-          goodsTitle: [{required: true, message: '请输入商品副标题', trigger: 'blur'}],
-          shopId:[{required: true, message: '请选择店铺', trigger: 'blur'}],
-          oneCode: [{required: true, message: '请选择商品分类', trigger: 'blur'}],
-        }
+        dialogVisible:false,
       };
     },
     created() {
@@ -74,6 +54,9 @@
 
     },
     methods: {
+      startQuestion(){
+        this.dialogVisible=true;
+      },
       handlePrev() {
         this.$emit('prevStep')
       },
@@ -89,5 +72,9 @@
   .ips-input{
     margin: 0 10px;
     width: 400px;
+    display: inline-block;
+    border: 1px solid #eeee;
+    border-radius: 10px;
+    color: #999;
   }
 </style>

@@ -5,4 +5,10 @@ export function getHRV(data) {
     method:'get',
   })
 }
+export function getVerificationCode() {
+  return request({
+    url:'ips/hrv/verificationCode',
+    method:'get',
+  })
+}
 

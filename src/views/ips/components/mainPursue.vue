@@ -205,7 +205,7 @@
       <el-form-item label="应激源:">
         <div class="flex">
           <p class="add-btn" @click="addStress"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox v-model="pursueObj.eventList">暂无应激源</el-checkbox>
+          <el-checkbox v-model="eventList.length==0">暂无应激源</el-checkbox>
         </div>
       </el-form-item>
       <el-form-item style="text-align: center">

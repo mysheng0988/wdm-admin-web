@@ -116,11 +116,9 @@
 <script>
   import {queryPatient,queryExamination} from '@/api/patient'
   import {getScaleJson} from '@/api/getJson'
-   import question from './components/question';
   import { Message, MessageBox } from 'element-ui'
   export default {
     name: "list",
-    components: {question},
     data() {
       return {
         contentState:null,
@@ -134,7 +132,6 @@
         dialogVisible:false,
         total:0,
         active:0,
-        dialogVisible2:false,
         listQuery: {
           cardNo: "",
           createTimeStart: "",
@@ -182,37 +179,7 @@
 
       }
     },
-    computed:{
-      percentage(){
-        let percent=Math.ceil((this.questionNum+1)/this.questionLength*100);
-        if(percent>100){
-          percent=100;
-        }
-        return percent;
-      },
-    },
     methods: {
-      formatPercentage(percentage){
-        return (this.questionNum+1)+"/"+this.questionLength
-      },
-      prevQuestion(){
-        if(this.questionNum<=0){
-          this.$message.warning("当前是第一题")
-        }else{
-          this.questionNum--;
-          this.problemData=this.answerData.problem[this.questionNum];
-        }
-
-      },
-      nextQuestion(){
-        if(this.questionNum<this.questionLength-1){
-          this.questionNum++;
-          this.problemData=this.answerData.problem[this.questionNum];
-        }else{
-          this.$message.warning("最后一题了")
-        }
-
-      },
       addPursue(data){
         this.$router.push({
           path: '/ips/IPS-C',

@@ -6,7 +6,7 @@
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}} {{problemData.answers}}</div>
-      <el-radio-group v-model="problemData.answers">
+      <el-radio-group v-model="problemData.answers" >
         <div class="question" v-for="(item,index) in problemData.answer">
           <el-radio :label="index+1" >{{item}}</el-radio>
         </div>

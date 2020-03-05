@@ -2,9 +2,11 @@
   <div style="margin-top: 50px">
     <el-form  :rules="rules" ref="productInfoForm" label-width="120px" >
         <el-form-item style="text-align: center" >
-          <el-input class="ips-input" placeholder="植物神经功能检测--》检测科室：心理科" ></el-input>
+          <!--<el-input class="ips-input" placeholder="植物神经功能检测&#45;&#45;》检测科室：心理科" ></el-input>-->
+          <div class="ips-input">植物神经功能检测--》检测科室:{{info.deptName}}</div>
           <el-button type="primary">记录结果</el-button>
-          <el-button type="primary">开始检测</el-button>
+          <el-button type="primary" @click="verificationCode" >获取验证码</el-button>
+          <el-button type="primary" ><a href="HRV://">开始检测</a></el-button>
         </el-form-item>
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
@@ -16,13 +18,17 @@
 </template>
 
 <script>
-  import {getHRV} from '@/api/HRV'
+  import {getHRV,getVerificationCode} from '@/api/HRV'
   export default {
     name: "HRV",
     props: {
       isEdit: {
         type: Boolean,
         default: false
+      },
+      medicalRecordId:{
+        type:String,
+        value:""
       },
       prevTitle:{
         type:String,
@@ -44,11 +50,29 @@
         }
       };
     },
+    computed:{
+      info () {
+        return this.$store.state.user.info
+      },
+    },
     created() {
-
+      this.getHRVData();
     },
     methods: {
 
+      getHRVData(){
+        getHRV(this.medicalRecordId).then(res=>{
+            console.log(res)
+        })
+      },
+      verificationCode(){
+        getVerificationCode().then(res=>{
+          if(res.code==200){
+            this.$copyText(res.dataList[0]);
+            this.$message.success("验证码:"+res.dataList[0]+",已复制到剪切板！")
+          }
+        })
+      },
       handlePrev() {
         this.$emit('prevStep')
       },
@@ -63,5 +87,9 @@
   .ips-input{
     margin: 0 10px;
     width: 400px;
+    display: inline-block;
+    border: 1px solid #eeee;
+    border-radius: 10px;
+    color: #999;
   }
 </style>

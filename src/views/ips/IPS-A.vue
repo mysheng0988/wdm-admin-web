@@ -39,11 +39,9 @@
       <el-steps :active="active" finish-status="success" align-center>
         <el-step title="主诉" @click.native="changeTab(0)"></el-step>
         <el-step title="HRV"  @click.native="changeTab(1)"></el-step>
-        <el-step title="EEG"  @click.native="changeTab(2)"></el-step>
         <el-step title="问卷"></el-step>
         <el-step title="量表"></el-step>
         <el-step title="综合分析"></el-step>
-        <el-step title="治疗方案"></el-step>
       </el-steps>
       <main-pursue
         v-if="showStatus[0]"

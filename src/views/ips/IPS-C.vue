@@ -56,7 +56,8 @@
       <hrv
         v-if="showStatus[1]"
         :is-edit="isEdit"
-        :patient-id="patient.pid+''"
+        :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
         @nextStep="nextStep"
         prev-title="主诉"
         next-title="EEG"

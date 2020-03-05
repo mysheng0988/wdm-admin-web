@@ -86,14 +86,6 @@
         eye:'eye',
       }
     },
-    created() {
-      if(this.loginForm.username === undefined||this.loginForm.username==null||this.loginForm.username===''){
-        this.loginForm.username = 'admin';
-      }
-      if(this.loginForm.password === undefined||this.loginForm.password==null){
-        this.loginForm.password = '';
-      }
-    },
     methods: {
       showPwd() {
         if (this.pwdType === 'password') {
@@ -106,7 +98,6 @@
       },
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
-
           if (valid) {
             this.loading = true;
             this.$store.dispatch('Login', this.loginForm).then((res) => {

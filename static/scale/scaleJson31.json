@@ -2,7 +2,7 @@
   "code":200,
   "data":{
     "id":31,
-    "scaleTitle":"问卷",
+    "scaleTitle":"首访问卷",
     "type":"3",
     "explain":"根据过去两周的情况，请您选择下列症状出现的频率。",
     "problem":[{
@@ -22,7 +22,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum": 1
+      "nextNum": 2
     },{
       "label": "一、生物学维度",
       "title": "3、自主神经功能状态",
@@ -31,7 +31,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum": 1
+      "nextNum":3
     },{
       "label": "一、生物学维度",
       "title": "3、自主神经功能状态",
@@ -111,8 +111,8 @@
           "answers": ""
         }],
       "data": [],
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 4
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -120,8 +120,8 @@
       "question":"您易生病吗？（咽痛、牙痛、头痛等)？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 5
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -129,8 +129,8 @@
       "question":"一年内感冒的次数有多少？",
       "answer":["A 次及以下","B 2-3次","C 4-6次","D 7-9次", "E 10次以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 6
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -138,8 +138,8 @@
       "question":"您有痛风或风湿等免疫疾病吗？",
       "answer":["A 没有","B 有一项","C 有两项","D 有三项", "E 有四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 7
     },{
       "label": "一、生物学维度",
       "title": "5、营养状况",
@@ -148,7 +148,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum": 1
+      "nextNum": 8
     },{
       "label": "一、生物学维度",
       "title": "5、营养状况",
@@ -156,8 +156,8 @@
       "question":"您偏食吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 9
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -165,7 +165,7 @@
       "question":"您需要卧床20分钟以上才能入睡吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
+      "hidden":false,
       "nextNum": 1
     },{
       "label": "一、生物学维度",
@@ -174,8 +174,8 @@
       "question":"您睡眠浅，多梦，易醒吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 11
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -183,8 +183,8 @@
       "question":"您经常早醒吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 12
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -192,8 +192,8 @@
       "question":"您醒后感到疲劳或因睡眠带来极大痛苦或影响日间工作生活吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 13
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -202,7 +202,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":true,
-      "nextNum": 1
+      "nextNum": 14
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -210,8 +210,8 @@
       "question":"您有甲状腺功能障碍、糖尿病等内分泌疾病吗？",
       "answer":["A 否","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 15
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -219,8 +219,8 @@
       "question":"您是否有以下症状：女性回答：月经不调、痛经、色斑、体毛、性欲、体重、长痘及皮肤变化等内分泌紊乱症状？男性回答：脸上长痘、皮肤肤质变化、性功能、体重等变化",
       "answer":["A 否","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 16
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -228,8 +228,8 @@
       "question":"您容易过敏或咳喘吗（对药物、食物、气味、花粉或在季节交替、气候变化时？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 17
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -237,8 +237,8 @@
       "question":"您的皮肤容易起荨麻疹（风团、风疹块、风疙瘩）、过敏性紫癜吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 18
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -246,8 +246,8 @@
       "question":"您吃辛辣刺激性食物易出现过敏或痛风类症状吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 19
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -255,8 +255,8 @@
       "question":"您的皮肤一抓就红，并出现抓痕吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 20
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -264,8 +264,8 @@
       "question":"是否有记忆深刻的不良经历（着急、惊吓、生气，重要亲友重病或伤亡，重要亲友矛盾、冷战或分离等对自己造成影响的事件）？",
       "answer":["A 没有","B 一项","C 两项","D 重度", "E 四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 21
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -273,8 +273,8 @@
       "question":"那些不良经历让您寝食难安或心情不好吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 22
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -282,8 +282,8 @@
       "question":"近期是否有重要事件面临选择或转折吗（考试、工作、就业、婚恋等）？",
       "answer":["A 没有","B 一项","C 两项","D 重度", "E 四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 23
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -291,8 +291,8 @@
       "question":"近期这些转折让您感到焦虑吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 24
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -300,8 +300,8 @@
       "question":"您经常感到紧张或心理不踏实吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 25
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -309,8 +309,8 @@
       "question":"您常常因为小事儿感到担忧吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 26
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -318,8 +318,8 @@
       "question":"您经常感到心烦吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 27
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -327,8 +327,8 @@
       "question":"您经常做事提不起兴趣吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 28
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -336,8 +336,8 @@
       "question":"您经常感到情绪低落或闷闷不乐吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 29
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -345,8 +345,8 @@
       "question":"您有多思多虑或反复洗手、关门窗、计数等情况吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 30
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -354,8 +354,8 @@
       "question":"您经常感到身体不舒服吗（头晕、头疼、胸闷气短、心慌、胃部不适、排便困难、四肢乏力等）？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 31
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
@@ -363,8 +363,8 @@
       "question":"您长期处于超负荷状态吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 32
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
@@ -372,8 +372,8 @@
       "question":"您常常因为小事儿感到担忧吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 33
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
@@ -381,8 +381,8 @@
       "question":"您感到压力与自身的抗压能力失衡了吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 34
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -390,8 +390,8 @@
       "question":"您了解自身疾病产生的原因及治疗方法吗？",
       "answer":["A 完全不了解","B 有点不了解","C 不确定","D 有点了解", "E 完全了解"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 35
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -399,8 +399,8 @@
       "question":"您认为只要到了医院，自己的病就一定能好转吗？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 36
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -408,8 +408,8 @@
       "question":"如果您患有常见症状(例如鼻出血、感冒、头痛等)，您害怕它们可能发展成严重的疾病吗？(例如变得惊慌,咨询您的本地医生,要求体检,去医院看急诊,查阅医学书等)？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 37
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -417,8 +417,8 @@
       "question":"每当生病时，您都会觉得非常严重吗？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 38
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -426,8 +426,8 @@
       "question":"当您有情绪变化时通常会做什么？",
       "answer":["A 找人倾诉或其他合理调节方法（运动、听音乐等）","B 默默忍受","C 不理会","D 大吵大叫", "E 摔东西"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 39
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -435,8 +435,8 @@
       "question":"当您有需求或与别人的需求发生冲突时您通常采用什么方式？",
       "answer":["A 与人协调，合理表达自己的诉求","B 压抑不表达","C 因此郁郁寡欢感叹不公平","D 生气、发脾气", "E 发生冲突"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 40
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -444,8 +444,8 @@
       "question":"您有了压力或不良情绪时多长时间可以消化？",
       "answer":["A 很长时间且需要借助外力","B 很长时间","C 相当一部分时间","D 一小会儿", "E 不需要时间消化"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 41
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -453,8 +453,8 @@
       "question":"您能比较敏感的注意到自己的感觉感受吗？",
       "answer":["A 完全不能","B 不能","C 有时能有时不能","D 能", "E 完全可以"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 42
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -462,8 +462,8 @@
       "question":"当您感到压力或情绪波动时易出现身体不适吗？",
       "answer":["A 完全是","B 大部分情况是","C 有时这样有时不这样","D 大部分不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 43
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -471,8 +471,8 @@
       "question":"您的重要家人强势吗（父母、配偶、子女等）？",
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 44
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -480,8 +480,8 @@
       "question":"您自己的想法和建议易受重要家人影响吗？",
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 45
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -489,8 +489,8 @@
       "question":"和重要养育人沟通有压力吗？",
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 46
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -498,8 +498,8 @@
       "question":"您和重要亲人之间有清晰的界限吗？",
       "answer":["A 完全有界限","B 有点界限","C 不确定","D 有点没有界限", "E 完全没有界限"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 47
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -507,8 +507,8 @@
       "question":"家人能带给您安全感和亲密感吗？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 48
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -516,8 +516,8 @@
       "question":"学习/工作/生活/人际关系让您感到消耗吗？",
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 49
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -525,8 +525,8 @@
       "question":"您体能消耗的严重吗？",
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 50
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -534,8 +534,8 @@
       "question":"您智能（脑力）消耗的严重吗？",
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 51
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -543,8 +543,8 @@
       "question":"您情感消耗的严重吗？",
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 52
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -552,8 +552,8 @@
       "question":"您的自我感受如何？",
       "answer":["A 极其好","B 非常好","C 一般","D 非常不好", "E 极其不好"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 53
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -561,8 +561,8 @@
       "question":"您能清晰认识您自己吗？（各项能力、优劣势、发展方向）？",
       "answer":["A 完全清晰","B 很清晰","C 一般","D 很不清晰", "E 完全不清晰"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 54
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -570,8 +570,8 @@
       "question":"对自己成功性事件的感受如何？",
       "answer":["A 极其好","B 非常好","C 一般","D 非常不好", "E 极其不好"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 55
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -579,8 +579,8 @@
       "question":"您有时间紧迫感吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 56
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -588,8 +588,8 @@
       "question":"您易怒吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 57
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -597,8 +597,8 @@
       "question":"您偏好快速的行走、移动、活动、手势表达或平时语速快吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 58
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -606,8 +606,8 @@
       "question":"您比其他人有更强烈的上进心、渴望获得成就、好竞争吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 59
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -615,8 +615,8 @@
       "question":"您生气或恼怒时，会把它藏在内心不表露吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 60
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -624,8 +624,8 @@
       "question":"当不成功时，您就会觉得一切都完了吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 61
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -633,8 +633,8 @@
       "question":"当有人阻挠您的愿望与要求时，您会试图理解他吗？",
       "answer":["A 完全不能","B 不能","C 有时能有时不能","D 能", "E 完全可以"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 62
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -642,8 +642,8 @@
       "question":"即使有足够的理由，您也不会对别人发火吗？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 63
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -651,8 +651,8 @@
       "question":"您性子急吗？",
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 64
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -660,8 +660,8 @@
       "question":"事情达不到自己内心期待您会很不安吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 65
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -669,8 +669,8 @@
       "question":"经常会把事情看的比实际情况严重，甚至灾难化吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 66
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -678,8 +678,8 @@
       "question":"您对自己的躯体生理变化过分敏感吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 67
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -687,8 +687,8 @@
       "question":"通常，您是固定时间休息吗？",
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 68
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -696,8 +696,8 @@
       "question":"通常，您是规律饮食吗？",
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 69
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -705,8 +705,8 @@
       "question":"通常，您会规律运动或定期放松娱乐吗？",
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 70
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -714,8 +714,8 @@
       "question":"您有不利于健康的嗜好吗？（吸烟、饮酒、打牌、服用兴奋性药物等）？",
       "answer":["A 无","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 71
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -723,8 +723,8 @@
       "question":"您生活自理状况如何？",
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 72
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -732,8 +732,8 @@
       "question":"您学习/工作/生活适应状态如何？",
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 73
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -741,7 +741,7 @@
       "question":"您对学习/工作/生活的满意程度及价值感如何？",
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
-      "hidden":true,
+      "hidden":74,
       "nextNum": 1
     },{
       "label": "三、社会学维度",
@@ -750,8 +750,8 @@
       "question":"您在学习/工作/生活中的人际环境如何（包括同事之间、上下级之间，夫妻之间）？",
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 75
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -759,8 +759,8 @@
       "question":"症状发生前1-2个月是否有戒烟酒及对自己影响如何？",
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 76
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -768,8 +768,8 @@
       "question":"症状发生前1-2个月是否有学习/工作/居住环境改变及对自己影响如何？",
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 77
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -777,8 +777,8 @@
       "question":"症状发生前1-2个月是否有兴趣爱好受限制及对自己影响如何？",
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 78
     },{
       "label": "三、社会学维度",
       "title": "21、社会支持",
@@ -786,8 +786,8 @@
       "question":"很多时候您能得到别人的支持或帮助吗？",
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 79
     },{
       "label": "三、社会学维度",
       "title": "21、社会支持",
@@ -795,8 +795,8 @@
       "question":"您愿意接受别人的帮助吗？",
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 80
     },{
       "label": "三、社会学维度",
       "title": "22、周围环境",
@@ -804,8 +804,8 @@
       "question":"居住、工作或学习环境中是否有生化影响或声光污染以及严重程度如何？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 81
     },{
       "label": "三、社会学维度",
       "title": "22、周围环境",
@@ -813,8 +813,8 @@
       "question":"居住、工作或学习环境中是否感到人际氛围紧张以及严重程度如何？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
-      "hidden":true,
-      "nextNum": 1
+      "hidden":false,
+      "nextNum": 82
     }]
   }
 }

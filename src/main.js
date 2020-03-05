@@ -20,6 +20,7 @@ import VDistpicker from 'v-distpicker'
 
 Vue.component('v-distpicker', VDistpicker)
 import Viewer from 'v-viewer'
+import VueClipboard from 'vue-clipboard2'
 Viewer.setDefaults({
   Options: { 'inline': true, 'button': true, 'navbar': true, 'title': true, 'toolbar': true, 'tooltip': true, 'movable': true, 'zoomable': true, 'rotatable': true, 'scalable': true, 'transition': true, 'fullscreen': true, 'keyboard': true, 'url': 'data-source' }
 })
@@ -27,6 +28,7 @@ Viewer.setDefaults({
 Vue.use(ElementUI, { locale })
 Vue.use(VCharts)
 Vue.config.productionTip = false
+Vue.use(VueClipboard)
 Vue.use(VueAMap);
 Vue.use(Viewer);
 
