@@ -7,7 +7,7 @@
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}} {{problemData.answers}}</div>
       <el-radio-group v-model="problemData.answers" >
-        <div class="question" v-for="(item,index) in problemData.answer">
+        <div class="question" v-for="(item,index) in problemData.answer" :key="index">
           <el-radio :label="index+1" >{{item}}</el-radio>
         </div>
       </el-radio-group>
@@ -46,14 +46,14 @@
         </el-checkbox-group>
         <div class="symptom" v-for="(item,index) in problemData.data" :key="index">
          ({{index+1}})、{{item.label}}
-          <el-radio-group v-model="item.answers">
+          <el-radio-group v-model="item.answers" @change="handleChange">
               <el-radio v-for="(itemData,indexData) in item.answer" :label="indexData+1" :key="indexData">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
       </div>
      <div v-else>
        <el-radio-group v-model="problemData.answers">
-         <div class="question" v-for="(item,index) in problemData.answer">
+         <div class="question" v-for="(item,index) in problemData.answer" :key="index">
            <el-radio :label="index+1" >{{item}}</el-radio>
          </div>
        </el-radio-group>
@@ -62,7 +62,8 @@
     </div>
     <div class="btn-box">
       <el-button type="primary" plain @click="prevQuestion">上一题</el-button>
-      <el-button type="primary" plain @click="nextQuestion">下一题</el-button>
+      <el-button type="primary" plain @click="nextQuestion" v-if="questionLength!=questionNum+1">下一题</el-button>
+      <el-button type="primary" plain @click="nextQuestion" v-else>提交</el-button>
     </div>
   </div>
 
@@ -90,7 +91,11 @@
         let num=Math.floor(Math.random()*31)
         getScaleJson(31).then(res=>{
           this.answerData=res.data;
-          this.problemData=res.data.problem[0];
+          this.problemData=res.data.problem[this.questionNum];
+          if(this.problemData.hidden){
+              this.checkAddShow(res.data);
+          }
+
           this.questionLength=res.data.problem.length;
         })
       },
@@ -105,8 +110,31 @@
 
       },
       methods:{
-        handleCheckedChange(){
+        checkAddShow(arr){
+          if(this.problemData.hidden){
+            this.questionNum++
+            this.problemData=arr.problem[this.questionNum];
+            this.checkAddShow(arr);
+          }
+        },
+         checkReduceShow(arr){
+          if(this.problemData.hidden){
+            this.questionNum--
+            this.problemData=arr.problem[this.questionNum];
+            this.checkReduceShow(arr);
+          }
+        },
+        handleChange(){
+          if(this.problemData.answers=="1"){
 
+          }
+        },
+        checkNone(arr){
+          if(this.problemData.hidden){
+            this.questionNum++
+            this.problemData=arr.problem[this.questionNum];
+            this.checkAddShow(arr);
+          }
         },
         formatPercentage(){
           return (this.questionNum+1)+"/"+this.questionLength
@@ -117,17 +145,23 @@
           }else{
             this.questionNum--;
             this.problemData=this.answerData.problem[this.questionNum];
+             this.checkReduceShow(this.answerData)
           }
 
         },
         nextQuestion(){
           if(this.questionNum<this.questionLength-1){
-            this.questionNum++;
-            this.problemData=this.answerData.problem[this.questionNum];
+            if(this.problemData.answers!=""){
+              this.questionNum++
+              this.problemData=this.answerData.problem[this.questionNum];
+              this.checkAddShow(this.answerData)
+            }else{
+              this.$message.warning("请选择答案")
+            }
+           
           }else{
             this.$message.warning("最后一题了")
           }
-
         },
       }
     }

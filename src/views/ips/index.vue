@@ -27,7 +27,7 @@
         <el-table-column label="序号" width="60" align="center">
           <template slot-scope="scope">{{scope.$index+1}}</template>
         </el-table-column>
-        <el-table-column label="编号" width="80"align="center">
+        <el-table-column label="编号" width="80" align="center">
           <template slot-scope="scope">{{scope.row.pid}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
@@ -102,13 +102,6 @@
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
       </span>
-    </el-dialog>
-    <el-dialog
-      title="量表答题"
-      :visible.sync="dialogVisible2"
-      width="700px">
-      <question :scale-id="'1'"></question>
-
     </el-dialog>
   </div>
 </template>

@@ -7,11 +7,10 @@
                default-expand-all
                @node-click="handleNodeClick"
                @check="handleNodeClick">
-
       </el-tree>
     </div>
     <div class="dep-content">
-    <el-form :inline="true" :model="listQuery" size="small">
+    <el-form :inline="true" :model="listQuery" size="small" >
         <el-form-item >
           <el-input  placeholder="科室名称" v-model="listQuery.deptName"></el-input>
         </el-form-item>
@@ -45,7 +44,6 @@
             {{scope.row.navState}}
           </template>
         </el-table-column>
-
         <el-table-column label="备注" align="center">
           <template slot-scope="scope">{{scope.row.remark }}</template>
         </el-table-column>

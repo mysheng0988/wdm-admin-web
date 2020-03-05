@@ -13,7 +13,7 @@
        "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
        "answers": "",
       "hidden":true,
-      "nextNum": 1
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "2、脑功能状态",
@@ -22,7 +22,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum": 2
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "3、自主神经功能状态",
@@ -31,7 +31,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum":3
+      "nextNum":0
     },{
       "label": "一、生物学维度",
       "title": "3、自主神经功能状态",
@@ -112,7 +112,7 @@
         }],
       "data": [],
       "hidden":false,
-      "nextNum": 4
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -121,7 +121,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 5
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -130,7 +130,7 @@
       "answer":["A 次及以下","B 2-3次","C 4-6次","D 7-9次", "E 10次以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 6
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "4、免疫状况",
@@ -139,7 +139,7 @@
       "answer":["A 没有","B 有一项","C 有两项","D 有三项", "E 有四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 7
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "5、营养状况",
@@ -148,7 +148,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":true,
-      "nextNum": 8
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "5、营养状况",
@@ -157,7 +157,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 9
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -166,7 +166,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 1
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -175,7 +175,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 11
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -184,7 +184,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 12
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "6、睡眠状况",
@@ -193,7 +193,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 13
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -202,7 +202,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":true,
-      "nextNum": 14
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -211,7 +211,7 @@
       "answer":["A 否","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 15
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "7、内分泌状况",
@@ -220,7 +220,7 @@
       "answer":["A 否","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 16
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -229,7 +229,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 17
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -238,7 +238,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 18
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -247,7 +247,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 19
+      "nextNum": 0
     },{
       "label": "一、生物学维度",
       "title": "8、体质特点",
@@ -256,7 +256,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 20
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -265,16 +265,16 @@
       "answer":["A 没有","B 一项","C 两项","D 重度", "E 四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 21
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
       "questionNum": "(22)",
       "question":"那些不良经历让您寝食难安或心情不好吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
-      "answers": "",
+      "answers": "1",
       "hidden":false,
-      "nextNum": 22
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
@@ -283,16 +283,16 @@
       "answer":["A 没有","B 一项","C 两项","D 重度", "E 四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 23
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "9、应激",
       "questionNum": "(24)",
       "question":"近期这些转折让您感到焦虑吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
-      "answers": "",
+      "answers": "1",
       "hidden":false,
-      "nextNum": 24
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -301,7 +301,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 25
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -310,7 +310,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 26
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -319,7 +319,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 27
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -328,7 +328,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 28
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -337,7 +337,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 29
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -346,7 +346,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 30
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "10、精神情绪状态",
@@ -355,7 +355,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 31
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
@@ -364,7 +364,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 32
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
@@ -373,16 +373,16 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 33
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "11、压力状态",
       "questionNum": "(34)",
       "question":"您感到压力与自身的抗压能力失衡了吗？",
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
-      "answers": "",
+      "answers": "1",
       "hidden":false,
-      "nextNum": 34
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -391,7 +391,7 @@
       "answer":["A 完全不了解","B 有点不了解","C 不确定","D 有点了解", "E 完全了解"],
       "answers": "",
       "hidden":false,
-      "nextNum": 35
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -400,7 +400,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 36
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -409,7 +409,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 37
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "12、疾病认知",
@@ -418,7 +418,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 38
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -427,7 +427,7 @@
       "answer":["A 找人倾诉或其他合理调节方法（运动、听音乐等）","B 默默忍受","C 不理会","D 大吵大叫", "E 摔东西"],
       "answers": "",
       "hidden":false,
-      "nextNum": 39
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -436,7 +436,7 @@
       "answer":["A 与人协调，合理表达自己的诉求","B 压抑不表达","C 因此郁郁寡欢感叹不公平","D 生气、发脾气", "E 发生冲突"],
       "answers": "",
       "hidden":false,
-      "nextNum": 40
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -445,7 +445,7 @@
       "answer":["A 很长时间且需要借助外力","B 很长时间","C 相当一部分时间","D 一小会儿", "E 不需要时间消化"],
       "answers": "",
       "hidden":false,
-      "nextNum": 41
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -454,7 +454,7 @@
       "answer":["A 完全不能","B 不能","C 有时能有时不能","D 能", "E 完全可以"],
       "answers": "",
       "hidden":false,
-      "nextNum": 42
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "13、心身反应模式",
@@ -463,7 +463,7 @@
       "answer":["A 完全是","B 大部分情况是","C 有时这样有时不这样","D 大部分不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 43
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -472,7 +472,7 @@
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 44
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -481,7 +481,7 @@
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 45
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -490,7 +490,7 @@
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 46
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -499,7 +499,7 @@
       "answer":["A 完全有界限","B 有点界限","C 不确定","D 有点没有界限", "E 完全没有界限"],
       "answers": "",
       "hidden":false,
-      "nextNum": 47
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "14、重要客体的影响",
@@ -508,7 +508,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 48
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -517,25 +517,25 @@
       "answer":["A 没有","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 49
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
       "questionNum": "(50)",
       "question":"您体能消耗的严重吗？",
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
-      "answers": "",
+      "answers": "1",
       "hidden":false,
-      "nextNum": 50
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
       "questionNum": "(51)",
       "question":"您智能（脑力）消耗的严重吗？",
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
-      "answers": "",
+      "answers": "1",
       "hidden":false,
-      "nextNum": 51
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "15、心身消耗状态",
@@ -544,7 +544,7 @@
       "answer":["A 不重","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 52
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -553,7 +553,7 @@
       "answer":["A 极其好","B 非常好","C 一般","D 非常不好", "E 极其不好"],
       "answers": "",
       "hidden":false,
-      "nextNum": 53
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -562,7 +562,7 @@
       "answer":["A 完全清晰","B 很清晰","C 一般","D 很不清晰", "E 完全不清晰"],
       "answers": "",
       "hidden":false,
-      "nextNum": 54
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "16、自体状态",
@@ -571,7 +571,7 @@
       "answer":["A 极其好","B 非常好","C 一般","D 非常不好", "E 极其不好"],
       "answers": "",
       "hidden":false,
-      "nextNum": 55
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -580,7 +580,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 56
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -589,7 +589,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 57
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -598,7 +598,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 58
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -607,7 +607,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 59
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -616,7 +616,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 60
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -625,7 +625,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 61
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -634,7 +634,7 @@
       "answer":["A 完全不能","B 不能","C 有时能有时不能","D 能", "E 完全可以"],
       "answers": "",
       "hidden":false,
-      "nextNum": 62
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -643,7 +643,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 63
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -652,7 +652,7 @@
       "answer":["A 完全是","B 有点是","C 不确定","D 有点不是", "E 完全不是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 64
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -661,7 +661,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 65
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -670,7 +670,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 66
+      "nextNum": 0
     },{
       "label": "二、心理学维度",
       "title": "17、人格特征",
@@ -679,7 +679,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 67
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -688,7 +688,7 @@
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 68
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -697,7 +697,7 @@
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 69
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -706,7 +706,7 @@
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 70
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "18、健康生活方式",
@@ -715,7 +715,7 @@
       "answer":["A 无","B 一项","C 两项","D 三项", "E 四项及以上"],
       "answers": "",
       "hidden":false,
-      "nextNum": 71
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -724,7 +724,7 @@
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
       "hidden":false,
-      "nextNum": 72
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -733,7 +733,7 @@
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
       "hidden":false,
-      "nextNum": 73
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -742,7 +742,7 @@
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
       "hidden":74,
-      "nextNum": 1
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "19、社会功能",
@@ -751,7 +751,7 @@
       "answer":["A 非常差","B 很差","C 一般","D 很好", "E 非常好"],
       "answers": "",
       "hidden":false,
-      "nextNum": 75
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -760,7 +760,7 @@
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
       "hidden":false,
-      "nextNum": 76
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -769,7 +769,7 @@
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
       "hidden":false,
-      "nextNum": 77
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "20、习惯改变",
@@ -778,7 +778,7 @@
       "answer":["A 有非常大","B 有很大","C 有影响一般","D 有影响不大", "E 没有发生"],
       "answers": "",
       "hidden":false,
-      "nextNum": 78
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "21、社会支持",
@@ -787,7 +787,7 @@
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 79
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "21、社会支持",
@@ -796,7 +796,7 @@
       "answer":["A 完全不是","B 大部分情况不是","C 有时这样有时不这样","D 大部分是", "E 完全是"],
       "answers": "",
       "hidden":false,
-      "nextNum": 80
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "22、周围环境",
@@ -805,7 +805,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 81
+      "nextNum": 0
     },{
       "label": "三、社会学维度",
       "title": "22、周围环境",
@@ -814,7 +814,7 @@
       "answer":["A 无","B 轻度","C 中度","D 重度", "E 极重"],
       "answers": "",
       "hidden":false,
-      "nextNum": 82
+      "nextNum": 0
     }]
   }
 }
