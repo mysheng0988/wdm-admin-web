@@ -8,7 +8,7 @@ import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 import VCharts from 'v-charts'
 
 import '@/styles/index.scss' // global css
-
+import htmlToPdf from "@/utils/html2pdf"
 import App from './App'
 import router from './router'
 import store from './store'
@@ -31,7 +31,7 @@ Vue.config.productionTip = false
 Vue.use(VueClipboard)
 Vue.use(VueAMap);
 Vue.use(Viewer);
-
+Vue.use(htmlToPdf);
 VueAMap.initAMapApiLoader({
   key: '88c9bb8dea021721ce5eb52511e90a35',
   plugin: ['AMap.Geocoder','AMap.Autocomplete','AMap.Geolocation', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" id="pdfCentent">
     <el-card class="operate-container" shadow="never">
       <el-row :gutter="10">
         <el-col :span="24">
@@ -108,6 +108,7 @@
         @finishCommit="finishCommit">
       </cure-plan>
     </el-card>
+     <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
   </div>
 </template>
 

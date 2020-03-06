@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="answer-box" v-if="answerData.type==1" >
-      <div class="title">{{answerData.scaleTitle}}</div>
-      <div class="explain">说明:{{answerData.explain}}</div>
+    <div class="answer-box" v-if="data.type==1" >
+      <div class="title">{{data.scaleTitle}}</div>
+      <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}} {{problemData.answers}}</div>
@@ -12,30 +12,30 @@
         </div>
       </el-radio-group>
     </div>
-    <div class="answer-box" v-else-if="answerData.type==2" >
-      <div class="title">{{answerData.scaleTitle}}</div>
-      <div class="explain">说明:{{answerData.explain}}</div>
+    <div class="answer-box" v-else-if="data.type==2" >
+      <div class="title">{{data.scaleTitle}}</div>
+      <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
       <div class="question" v-for="(item,index) in problemData.data" :key="index">
-        <div class="question" v-if="item.type==='0'">
+        <div class="question flex" v-if="item.type==='0'">
           <span>({{index+1}})、{{item.label}}</span>
-          <el-radio-group v-model="item.answers">
-            <el-radio v-model="radio" v-for="(itemData,itemIndex) in item.answer" :label="itemIndex+1" :key="itemIndex">{{itemData}}</el-radio>
+          <el-radio-group v-model="item.answers" class="flex">
+            <el-radio v-model="item.answers" v-for="(itemData,itemIndex) in item.answer" :label="itemIndex+1" :key="itemIndex">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
         <div class="question" v-else-if="item.type==='1'">
-          <span>({{index+1}})、{{item.label}}</span><el-input-number v-model="num" size="small" label="描述文字"></el-input-number>
+          <span>({{index+1}})、{{item.label}}</span><el-input-number v-model="item.answers" size="small" label="描述文字"></el-input-number>
         </div>
         <div class="question" v-else-if="item.type==='2'">
-          <span>({{index+1}})、{{item.label}}</span><el-input class="remark" v-model="num"  label="描述文字"></el-input>
+          <span>({{index+1}})、{{item.label}}</span><el-input class="remark" v-model="item.answers"  label="描述文字"></el-input>
         </div>
       </div>
     </div>
-    <div class="answer-box" v-else-if="answerData.type==3" >
-      <div class="title">{{answerData.scaleTitle}}</div>
-      <div class="explain">说明:{{answerData.explain}}</div>
+    <div class="answer-box" v-else-if="data.type==3" >
+      <div class="title">{{data.scaleTitle}}</div>
+      <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question">{{problemData.label}}</div>
       <div class="question">{{problemData.title}}</div>
@@ -46,7 +46,7 @@
         </el-checkbox-group>
         <div class="symptom" v-for="(item,index) in problemData.data" :key="index">
          ({{index+1}})、{{item.label}}
-          <el-radio-group v-model="item.answers" @change="handleChange">
+          <el-radio-group v-model="item.answers">
               <el-radio v-for="(itemData,indexData) in item.answer" :label="indexData+1" :key="indexData">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
@@ -74,30 +74,24 @@
     export default {
       name: "question",
       props: {
-        scaleId: {
-            type: String,
-            default:"1"
+        data: {
+            type: Object,
+            default:{}
           }
         },
       data() {
         return {
-          answerData:[],
           problemData:[],
           questionNum:0,
           questionLength:0,
         }
       },
       mounted(){
-        let num=Math.floor(Math.random()*31)
-        getScaleJson(31).then(res=>{
-          this.answerData=res.data;
-          this.problemData=res.data.problem[this.questionNum];
+          this.problemData=this.data.problem[this.questionNum];
+          this.questionLength=this.data.problem.length;
           if(this.problemData.hidden){
-              this.checkAddShow(res.data);
+              this.checkAddShow(this.data);
           }
-
-          this.questionLength=res.data.problem.length;
-        })
       },
       computed:{
         percentage(){
@@ -124,18 +118,6 @@
             this.checkReduceShow(arr);
           }
         },
-        handleChange(){
-          if(this.problemData.answers=="1"){
-
-          }
-        },
-        checkNone(arr){
-          if(this.problemData.hidden){
-            this.questionNum++
-            this.problemData=arr.problem[this.questionNum];
-            this.checkAddShow(arr);
-          }
-        },
         formatPercentage(){
           return (this.questionNum+1)+"/"+this.questionLength
         },
@@ -144,17 +126,22 @@
             this.$message.warning("当前是第一题")
           }else{
             this.questionNum--;
-            this.problemData=this.answerData.problem[this.questionNum];
-             this.checkReduceShow(this.answerData)
+            this.problemData=this.data.problem[this.questionNum];
+             this.checkReduceShow(this.data)
           }
 
         },
         nextQuestion(){
           if(this.questionNum<this.questionLength-1){
             if(this.problemData.answers!=""){
-              this.questionNum++
-              this.problemData=this.answerData.problem[this.questionNum];
-              this.checkAddShow(this.answerData)
+              if(this.problemData.nextNum==0){
+                this.questionNum++
+                this.problemData=this.data.problem[this.questionNum];
+                this.checkAddShow(this.data)
+              }else{
+                this.questionNum=this.problemData.nextNum;
+                 this.problemData=this.data.problem[this.questionNum];
+              }
             }else{
               this.$message.warning("请选择答案")
             }
@@ -191,7 +178,7 @@
   }
   .question label{
     line-height: 40px;
-    width: 100%;text-overflow: ellipsis;white-space: normal;
+    max-width: 100%;text-overflow: ellipsis;white-space: normal;
   }
   .remark{width: 60%}
   .btn-box{

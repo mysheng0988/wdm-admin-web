@@ -12,16 +12,17 @@
       </el-form-item>
     </el-form>
     <el-dialog
-      title="量表答题"
+      title="答题卡"
       :visible.sync="dialogVisible"
       width="700px">
-      <question :scale-id="'1'"></question>
+      <question :data="answerData"></question>
 
     </el-dialog>
   </div>
 </template>
 
 <script>
+import {getScaleJson} from '@/api/getJson'
   import question from './question';
   export default {
     name: "easyQuestion",
@@ -47,11 +48,14 @@
     data() {
       return {
         dialogVisible:false,
+        answerData:{},
       };
     },
     created() {
-
-
+       let num=Math.floor(Math.random()*31)
+        getScaleJson(num).then(res=>{
+          this.answerData=res.data;
+        })
     },
     methods: {
       startQuestion(){

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 50px" v-loading.fullscreen.lock="listLoading">
+  <div style="margin-top: 50px" v-loading.fullscreen.lock="listLoading" >
     <el-form  :model="pursueObj" :rules="rules" ref="pursueInfoForm" label-width="180px"  >
       <el-form-item label="主诉:">
         <el-input
@@ -130,13 +130,13 @@
       <el-form-item label="运动症状:">
         <div class="flex">
           <p class="add-btn"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox v-model="checked">暂无运动症状</el-checkbox>
+          <el-checkbox :checked="true">暂无运动症状</el-checkbox>
         </div>
       </el-form-item>
       <el-form-item label="就诊经历:">
         <div class="flex">
           <p class="add-btn" @click="addExperience"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox v-model="list.length==0">暂无就诊经历</el-checkbox>
+          <el-checkbox :checked="list.length==0">暂无就诊经历</el-checkbox>
         </div>
         <div class="table-container">
           <el-table ref="productCateTable"
@@ -199,13 +199,13 @@
           <p class="add-btn" @click="addFamily"><i class="el-icon-plus"></i>
             {{familyObj.familyMemberDiseaseHistoryList.length!=0?"修改家族史":"添加家族史"}}
           </p>
-          <el-checkbox v-model="familyObj.familyMemberDiseaseHistoryList.length==0">暂无家族史</el-checkbox>
+          <el-checkbox :checked="familyObj.familyMemberDiseaseHistoryList.length==0">暂无家族史</el-checkbox>
         </div>
       </el-form-item>
       <el-form-item label="应激源:">
         <div class="flex">
           <p class="add-btn" @click="addStress"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox v-model="eventList.length==0">暂无应激源</el-checkbox>
+          <el-checkbox :checked="eventList.length==0">暂无应激源</el-checkbox>
         </div>
       </el-form-item>
       <el-form-item style="text-align: center">

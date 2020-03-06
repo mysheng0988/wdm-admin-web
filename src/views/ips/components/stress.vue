@@ -19,11 +19,11 @@
         <el-button type="primary" size="small" round @click="addEventData">确认添加</el-button>
       </div>
       <p class="tree-title">2、已添加的应激源</p>
-      <p v-for="(item,index) in eventList" class="label">
+      <p v-for="(item,index) in eventList" class="label" :key="index">
         {{index+1}}、{{item.event}}
         <i class="close el-icon-error" @click="handleRemove(index)"></i>
       </p>
-      <p v-for="(item,index) in addEventList" class="label">
+      <p v-for="(item,index) in addEventList" class="label" :key="index">
         {{eventList.length+index+1}}、{{item.event}}
         <i class="close el-icon-error" @click="handleAddRemove(index)"></i>
       </p>
