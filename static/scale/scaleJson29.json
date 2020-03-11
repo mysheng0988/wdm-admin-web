@@ -10,13 +10,13 @@
         "questionNum": "1",
         "label": "",
         "question": "做什么事都没兴趣，沒意思？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -24,13 +24,13 @@
         "questionNum": "2",
         "label": "",
         "question": "感到心情低落，抑郁，沒希望？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -38,13 +38,13 @@
         "questionNum": "3",
         "label": "",
         "question": "入睡困难，总是醒着，或睡得太多嗜睡？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -52,13 +52,13 @@
         "questionNum": "4",
         "label": "",
         "question": "常感到很疲倦，沒劲？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -66,13 +66,13 @@
         "questionNum": "5",
         "label": "",
         "question": "口味不好，或吃的太多？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -80,13 +80,13 @@
         "questionNum": "6",
         "label": "",
         "question": "自己对自己不满，觉得自己是个失败者，或让家人丟脸了？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -94,13 +94,13 @@
         "questionNum": "7",
         "label": "",
         "question": "无法集中精力，即便是读报纸或看电视时，记忆力下降？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -108,13 +108,13 @@
         "questionNum": "8",
         "label": "",
         "question": "行动或说话缓慢到引起人们的注意，或刚好相反，坐卧不安；烦躁易怒，到处走动？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -122,13 +122,13 @@
         "questionNum": "9",
         "label": "",
         "question": "有不如一死了之的念头，或想怎样伤害自己一下？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 有几天",
           "C 一半以上时间",
           "D 几乎天天"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

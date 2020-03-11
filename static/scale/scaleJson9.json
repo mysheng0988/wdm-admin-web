@@ -10,12 +10,12 @@
         "questionNum": "1",
         "label": "",
         "question": "每到一个新环境，我总要经过很长一段时间才能适应？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -23,12 +23,12 @@
         "questionNum": "2",
         "label": "",
         "question": "每到一个新的地方，我很容易同别人接近？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -36,12 +36,12 @@
         "questionNum": "3",
         "label": "",
         "question": "在陌生人面前，我常无话可说，以至感到尴尬？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -49,12 +49,12 @@
         "questionNum": "4",
         "label": "",
         "question": "我最喜欢学习新知识或接受新事物，它给我一种新鲜感，能调动我的积极性？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -62,12 +62,12 @@
         "questionNum": "5",
         "label": "",
         "question": "每到一个新地方，我第一天总是睡不好，就是在家里，只要换一张床，有时也会失眠",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -75,12 +75,12 @@
         "questionNum": "6",
         "label": "",
         "question": "不管生活条件有多大变化，我也能很快习惯？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -88,12 +88,12 @@
         "questionNum": "7",
         "label": "",
         "question": "越是人多的地方，我越感到紧张？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -101,12 +101,12 @@
         "questionNum": "8",
         "label": "",
         "question": "在正式比赛或考核时，我的成绩多半不会比平时练习差？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -114,12 +114,12 @@
         "questionNum": "9",
         "label": "",
         "question": "我最怕在公众场合发言，其他人都看着我，心都快跳出来了？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -127,12 +127,12 @@
         "questionNum": "10",
         "label": "",
         "question": "即使有的朋友对我有看法，我仍能同他(她)交往？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -140,12 +140,12 @@
         "questionNum": "11",
         "label": "",
         "question": "领导/老师在场的时候，我做事情总有些不自在？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -153,12 +153,12 @@
         "questionNum": "12",
         "label": "",
         "question": "和别人相处，我很少固执己见，乐于采纳别人的看法？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -166,12 +166,12 @@
         "questionNum": "13",
         "label": "",
         "question": "同别人争论时，我常常感到语塞，事后才想起该怎样反驳对方，可惜已经太迟了？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -179,12 +179,12 @@
         "questionNum": "14",
         "label": "",
         "question": "我对生活条件要求不高，即使生活条件很艰苦，我也能过得很愉快？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -192,12 +192,12 @@
         "questionNum": "15",
         "label": "",
         "question": "有时自己明明把演讲/课文背得滚瓜烂熟，可在表达的时候，还是会出差错？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -205,12 +205,12 @@
         "questionNum": "16",
         "label": "",
         "question": "在决定胜负成败的关键时刻，我虽然很紧张，但总能很快使自己镇定下来？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -218,12 +218,12 @@
         "questionNum": "17",
         "label": "",
         "question": "我不喜欢的东西，不管怎么学也学不会？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -231,12 +231,12 @@
         "questionNum": "18",
         "label": "",
         "question": "在嘈杂混乱的环境里，我仍然能集中精力工作/学习，并且效率较高？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -244,12 +244,12 @@
         "questionNum": "19",
         "label": "",
         "question": "我不喜欢陌生人来家里做客，每逢这种情况，我就有意回避？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -257,12 +257,12 @@
         "questionNum": "20",
         "label": "",
         "question": "我很喜欢参加社交活动，我感到这是交朋友的好机会？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 无法肯定",
           "C 否"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

@@ -10,12 +10,12 @@
         "questionNum": "1",
         "label": "",
         "question": "您的BMI是多少？BMI等于体重（公斤）除以身高（米）的平方，例如：某人体重52公斤，身高1.55米，则他的BMI为：52÷（1.55×1.55）= 21.6",
-        "answer": [
+        "answers": [
           "A BMI＞20",
           "B 18.5≤BMI＜20",
           "C BMI＜18.5"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -23,12 +23,12 @@
         "questionNum": "2",
         "label": "",
         "question": "您最近三个月体重有没有下降？",
-        "answer": [
+        "answers": [
           "A 体重下降小于5% ",
           "B 体重下降5%~10%",
           "C 体重下降大于10%"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -36,11 +36,11 @@
         "questionNum": "3",
         "label": "",
         "question": "您有没有以下情况：因为疾病，5天以上不能摄入富含营养的食物？",
-        "answer": [
+        "answers": [
           "A 有",
           "B 没有"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

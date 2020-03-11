@@ -10,14 +10,14 @@
         "questionNum": "1",
         "label": "",
         "question": "能尽快地将不愉快忘掉？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -25,14 +25,14 @@
         "questionNum": "2",
         "label": "",
         "question": "陷入对事件的回忆和幻想之中而不能摆脱？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -40,14 +40,14 @@
         "questionNum": "3",
         "label": "",
         "question": "当作事情根本未发生过？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -55,14 +55,14 @@
         "questionNum": "4",
         "label": "",
         "question": "易迁怒于别人而经常发脾气？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -70,14 +70,14 @@
         "questionNum": "5",
         "label": "",
         "question": "通常向好的方面想，想开些？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -85,14 +85,14 @@
         "questionNum": "6",
         "label": "",
         "question": "不愉快的事很容易引起情绪波动？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -100,14 +100,14 @@
         "questionNum": "7",
         "label": "",
         "question": "将情绪压在心底里不表现出来，但又忘不掉？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -115,14 +115,14 @@
         "questionNum": "8",
         "label": "",
         "question": "通常与类似的人比较，就觉得算不了什么？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -130,14 +130,14 @@
         "questionNum": "9",
         "label": "",
         "question": "将消极因素化为积极因素，例如参加活动？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -145,14 +145,14 @@
         "questionNum": "10",
         "label": "",
         "question": "遇烦恼的事很容易想悄悄地哭一场？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -160,14 +160,14 @@
         "questionNum": "11",
         "label": "",
         "question": "旁人很容易使你重新高兴起来",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -175,14 +175,14 @@
         "questionNum": "12",
         "label": "",
         "question": "如果与人发生冲突，宁可长期不理对方？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -190,14 +190,14 @@
         "questionNum": "13",
         "label": "",
         "question": "对重大困难往往举棋不定，想不出办法？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -205,14 +205,14 @@
         "questionNum": "14",
         "label": "",
         "question": "对困难和痛苦能很快适应？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -220,14 +220,14 @@
         "questionNum": "15",
         "label": "",
         "question": "相信困难和挫折可以锻炼人？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -235,14 +235,14 @@
         "questionNum": "16",
         "label": "",
         "question": "在很长的时间里回忆所遇到的不愉快事？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -250,14 +250,14 @@
         "questionNum": "17",
         "label": "",
         "question": "遇到难题往往责怪自己无能而怨恨自己？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -265,14 +265,14 @@
         "questionNum": "18",
         "label": "",
         "question": "认为天底下没有什么大不了的事？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -280,14 +280,14 @@
         "questionNum": "19",
         "label": "",
         "question": "遇苦恼事喜欢一人独处？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -295,14 +295,14 @@
         "questionNum": "20",
         "label": "",
         "question": "通常以幽默的方式化解尴尬局面？",
-        "answer": [
+        "answers": [
           "A 与我一点儿也不相符合",
           "B 与我一点儿相符",
           "C 与我中等程度相符",
           "D 与我非常相符",
           "E 与我极其相符"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

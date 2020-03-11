@@ -10,14 +10,14 @@
         "questionNum": "1",
         "label": "",
         "question": "头痛？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -25,14 +25,14 @@
         "questionNum": "2",
         "label": "",
         "question": "头昏或昏倒？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -40,14 +40,14 @@
         "questionNum": "3",
         "label": "",
         "question": "胸痛？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -55,14 +55,14 @@
         "questionNum": "4",
         "label": "",
         "question": "腰痛？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -70,14 +70,14 @@
         "questionNum": "5",
         "label": "",
         "question": "恶心或胃部不舒服？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -85,14 +85,14 @@
         "questionNum": "6",
         "label": "",
         "question": "肌肉酸痛？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -100,14 +100,14 @@
         "questionNum": "7",
         "label": "",
         "question": "呼吸有困难？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -115,14 +115,14 @@
         "questionNum": "8",
         "label": "",
         "question": "一阵阵发冷或发热？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -130,14 +130,14 @@
         "questionNum": "9",
         "label": "",
         "question": "身体发麻或刺痛？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -145,14 +145,14 @@
         "questionNum": "10",
         "label": "",
         "question": "喉咙有梗塞感？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -160,14 +160,14 @@
         "questionNum": "11",
         "label": "",
         "question": "感到身体的某一部分软弱无力？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -175,14 +175,14 @@
         "questionNum": "12",
         "label": "",
         "question": "感到手或脚发重？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 很轻",
           "C 中等",
           "D 偏重",
           "E 严重"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

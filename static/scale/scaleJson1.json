@@ -10,12 +10,12 @@
         "questionNum": "1",
         "label": "",
         "question": "你吃早饭的习惯是？",
-        "answer": [
+        "answers": [
           "每天吃",
           "偶尔吃",
           "从不吃"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -23,12 +23,12 @@
         "questionNum": "2",
         "label": "",
         "question": "一日三餐进餐的时间是否规律？",
-        "answer": [
+        "answers": [
           "十分规律",
           "偶尔没规律",
           "经常不规律"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -36,12 +36,12 @@
         "questionNum": "3",
         "label": "",
         "question": "每天所吃食物的搭配情况？",
-        "answer": [
+        "answers": [
           "肉多蔬菜少",
           "蔬菜多肉少",
           "荤素均衡"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -49,12 +49,12 @@
         "questionNum": "4",
         "label": "",
         "question": "你是否偏食？",
-        "answer": [
+        "answers": [
           "偏食严重",
           "很少偏食",
           "不偏食"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -62,12 +62,12 @@
         "questionNum": "5",
         "label": "",
         "question": "除一日三餐外的其它摄食情况？",
-        "answer": [
+        "answers": [
           "除了喝水基本不吃零食",
           "经常吃零食",
           "经常吃烧烤等油炸食物"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -75,13 +75,13 @@
         "questionNum": "6",
         "label": "",
         "question": "经常吃鸡蛋或者喝牛奶吗？",
-        "answer": [
+        "answers": [
           "天天吃",
           "一周3～4次",
           "一周1～2次",
-          "D 基本不怎么吃"
+          "基本不怎么吃"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -89,13 +89,13 @@
         "questionNum": "7",
         "label": "",
         "question": "经常吃水果吗？",
-        "answer": [
+        "answers": [
           "天天吃",
           "一周3～4次",
           "一周1～2次",
           "基本不怎么吃"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -103,12 +103,12 @@
         "questionNum": "8",
         "label": "",
         "question": "你的喝水情况如何？",
-        "answer": [
+        "answers": [
           "经常喝水",
           "经常喝饮料",
           "不怎么喝水也不喜欢喝饮料"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -116,12 +116,12 @@
         "questionNum": "9",
         "label": "",
         "question": "你经常喝酒吗？",
-        "answer": [
+        "answers": [
           "经常喝酒",
           "偶尔喝一次酒",
           "不喝酒"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

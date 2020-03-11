@@ -210,7 +210,6 @@
       </el-form-item>
       <el-form-item style="text-align: center">
         <el-button type="primary" size="medium" @click="handleNext('pursueInfoForm')">下一步，{{nextTitle}}</el-button>
-        <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
       </el-form-item>
     </el-form>
     <el-dialog

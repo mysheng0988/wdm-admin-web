@@ -10,14 +10,14 @@
         "questionNum": "1",
         "label": "",
         "question": "能理智地应付困境？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -25,14 +25,14 @@
         "questionNum": "2",
         "label": "",
         "question": "善于从失败中吸取经验？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -40,14 +40,14 @@
         "questionNum": "3",
         "label": "",
         "question": "制定一些克服困难的计划并按计划去做？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -55,14 +55,14 @@
         "questionNum": "4",
         "label": "",
         "question": "常希望自己已经解决了面临的困难？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -70,14 +70,14 @@
         "questionNum": "5",
         "label": "",
         "question": "对自己取得成功的能力充满信心？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -85,14 +85,14 @@
         "questionNum": "6",
         "label": "",
         "question": "认为“人生经历就是磨难”？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -100,14 +100,14 @@
         "questionNum": "7",
         "label": "",
         "question": "常感叹生活的艰难？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -115,14 +115,14 @@
         "questionNum": "8",
         "label": "",
         "question": "专心于工作或学习以忘却不快？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -130,14 +130,14 @@
         "questionNum": "9",
         "label": "",
         "question": "常认为“生死有命，富贵在天”？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -145,14 +145,14 @@
         "questionNum": "10",
         "label": "",
         "question": "常常喜欢找人聊天以减轻烦恼？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -160,14 +160,14 @@
         "questionNum": "11",
         "label": "",
         "question": "请求别人帮助自己克服困难？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -175,14 +175,14 @@
         "questionNum": "12",
         "label": "",
         "question": "常只按自己想的做，且不考虑后果？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -190,14 +190,14 @@
         "questionNum": "13",
         "label": "",
         "question": "不愿过多思考影响自己情绪的问题？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -205,14 +205,14 @@
         "questionNum": "14",
         "label": "",
         "question": "投身其他社会活动，寻找新寄托？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -220,14 +220,14 @@
         "questionNum": "15",
         "label": "",
         "question": "常自暴自弃？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -235,14 +235,14 @@
         "questionNum": "16",
         "label": "",
         "question": "常以无所谓的态度来掩饰内心的感受？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -250,14 +250,14 @@
         "questionNum": "17",
         "label": "",
         "question": "常想“这不是真的就好了”？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -265,14 +265,14 @@
         "questionNum": "18",
         "label": "",
         "question": "认为自己的失败多系外因所致？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -280,14 +280,14 @@
         "questionNum": "19",
         "label": "",
         "question": "对困难采取等待观望任其发展的态度？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -295,14 +295,14 @@
         "questionNum": "20",
         "label": "",
         "question": "与人冲突，常是对方性格怪异引起？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -310,14 +310,14 @@
         "questionNum": "21",
         "label": "",
         "question": "常向引起问题的人和事发脾气？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -325,14 +325,14 @@
         "questionNum": "22",
         "label": "",
         "question": "常幻想自己有克服困难的超人本领？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -340,14 +340,14 @@
         "questionNum": "23",
         "label": "",
         "question": "常自我责备？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -355,14 +355,14 @@
         "questionNum": "24",
         "label": "",
         "question": "常用睡觉的方式逃避痛苦？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -370,14 +370,14 @@
         "questionNum": "25",
         "label": "",
         "question": "常借娱乐活动来消除烦恼？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -385,14 +385,14 @@
         "questionNum": "26",
         "label": "",
         "question": "常爱想些高兴的事自我安慰？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -400,14 +400,14 @@
         "questionNum": "27",
         "label": "",
         "question": "避开困难以求心中宁静？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -415,14 +415,14 @@
         "questionNum": "28",
         "label": "",
         "question": "为不能回避困难而懊恼？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -430,14 +430,14 @@
         "questionNum": "29",
         "label": "",
         "question": "常用两种以上的办法解决困难？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -445,14 +445,14 @@
         "questionNum": "30",
         "label": "",
         "question": "常认为没有必要那么费力去争成败？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -460,14 +460,14 @@
         "questionNum": "31",
         "label": "",
         "question": "努力去改变现状，使情况向好的一面转化？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -475,14 +475,14 @@
         "questionNum": "32",
         "label": "",
         "question": "借烟或酒消愁？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -490,14 +490,14 @@
         "questionNum": "33",
         "label": "",
         "question": "常责怪他人？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -505,14 +505,14 @@
         "questionNum": "34",
         "label": "",
         "question": "对困难常采用回避的态度？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -520,14 +520,14 @@
         "questionNum": "35",
         "label": "",
         "question": "认为“退后一步自然宽”？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -535,14 +535,14 @@
         "questionNum": "36",
         "label": "",
         "question": "把不愉快的事埋在心里？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -550,14 +550,14 @@
         "questionNum": "37",
         "label": "",
         "question": "常自卑自怜？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -565,14 +565,14 @@
         "questionNum": "38",
         "label": "",
         "question": "常认为这是生活对自己不公平的表现？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -580,14 +580,14 @@
         "questionNum": "39",
         "label": "",
         "question": "常压抑内心的愤怒与不满？",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -595,14 +595,14 @@
         "questionNum": "40",
         "label": "",
         "question": "吸取自己或他人的经验去应付困难",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -610,14 +610,14 @@
         "questionNum": "41",
         "label": "",
         "question": "常不相信那些对自己不利的事",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -625,14 +625,14 @@
         "questionNum": "42",
         "label": "",
         "question": "为了自尊，常不愿让人知道自己的遭遇",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -640,14 +640,14 @@
         "questionNum": "43",
         "label": "",
         "question": "常与同事，朋友一起讨论解决问题的办法",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -655,14 +655,14 @@
         "questionNum": "44",
         "label": "",
         "question": "常告诫自己“能忍者自安”",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -670,14 +670,14 @@
         "questionNum": "45",
         "label": "",
         "question": "常祈祷神灵保佑",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -685,14 +685,14 @@
         "questionNum": "46",
         "label": "",
         "question": "常用幽默或玩笑的方式缓解冲突或不快",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -700,14 +700,14 @@
         "questionNum": "47",
         "label": "",
         "question": "自己能力有限，只有忍耐",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -715,14 +715,14 @@
         "questionNum": "48",
         "label": "",
         "question": "常怪自己没出息",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -730,14 +730,14 @@
         "questionNum": "49",
         "label": "",
         "question": "常爱幻想一些不现实的事来消除烦恼",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -745,14 +745,14 @@
         "questionNum": "50",
         "label": "",
         "question": "常抱怨自己无能",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -760,14 +760,14 @@
         "questionNum": "51",
         "label": "",
         "question": "常能看到坏事中有好的一面",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -775,14 +775,14 @@
         "questionNum": "52",
         "label": "",
         "question": "自感挫折是对自己的考验",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -790,14 +790,14 @@
         "questionNum": "53",
         "label": "",
         "question": "向有经验的亲友、师长求教解决问题的方法",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -805,14 +805,14 @@
         "questionNum": "54",
         "label": "",
         "question": "平心静气，淡化烦恼",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -820,14 +820,14 @@
         "questionNum": "55",
         "label": "",
         "question": "努力寻找解决问题的办法",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -835,14 +835,14 @@
         "questionNum": "56",
         "label": "",
         "question": "选择职业不当，是自己常遇挫折的主要原因",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -850,14 +850,14 @@
         "questionNum": "57",
         "label": "",
         "question": "总怪自己不好",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -865,14 +865,14 @@
         "questionNum": "58",
         "label": "",
         "question": "经常是看破红尘，不在乎自己的不幸遭遇",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -880,14 +880,14 @@
         "questionNum": "59",
         "label": "",
         "question": "常自感运气不好",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -895,14 +895,14 @@
         "questionNum": "60",
         "label": "",
         "question": "向他人诉说心中的烦恼",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -910,14 +910,14 @@
         "questionNum": "61",
         "label": "",
         "question": "常自感无所作为而任其自然",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -925,14 +925,14 @@
         "questionNum": "62",
         "label": "",
         "question": "寻求别人的理解和同情",
-        "answer": [
+        "answers": [
           "A 是",
           "B 否",
           "C 有效",
           "D 比较有效",
           "E 无效"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

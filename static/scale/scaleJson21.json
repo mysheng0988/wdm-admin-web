@@ -10,7 +10,7 @@
         "questionNum": "1",
         "label": "",
         "question": "我入睡或维持睡眠困难？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -18,7 +18,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -26,7 +26,7 @@
         "questionNum": "2",
         "label": "",
         "question": "我感觉坐立不安？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -34,7 +34,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -42,7 +42,7 @@
         "questionNum": "3",
         "label": "",
         "question": "我有“无时间感的感觉？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -50,7 +50,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -58,7 +58,7 @@
         "questionNum": "4",
         "label": "",
         "question": "我反应迟缓？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -66,7 +66,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -74,7 +74,7 @@
         "questionNum": "5",
         "label": "",
         "question": "我试图回避与事件有关的感受？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -82,7 +82,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -90,7 +90,7 @@
         "questionNum": "6",
         "label": "",
         "question": "我反复做与应激性事件有关的噩梦？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -98,7 +98,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -106,7 +106,7 @@
         "questionNum": "7",
         "label": "",
         "question": "如果暴露于使我想起应激性事件某方面的事件，我感到异常心烦？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -114,7 +114,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -122,7 +122,7 @@
         "questionNum": "8",
         "label": "",
         "question": "对于小事情我也经常出现惊跳反应？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -130,7 +130,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -138,7 +138,7 @@
         "questionNum": "9",
         "label": "",
         "question": "应激性事件使我完成工作或需要做的事情感到困难？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -146,7 +146,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -154,7 +154,7 @@
         "questionNum": "10",
         "label": "",
         "question": "我没有通常存在的我是谁的感觉？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -162,7 +162,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -170,7 +170,7 @@
         "questionNum": "11",
         "label": "",
         "question": "我试图回避使我想起应激性事件的活动？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -178,7 +178,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -186,7 +186,7 @@
         "questionNum": "12",
         "label": "",
         "question": "我感觉高度警惕或者“紧张兮兮？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -194,7 +194,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -202,7 +202,7 @@
         "questionNum": "13",
         "label": "",
         "question": "我感自己好像是个陌生人？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -210,7 +210,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -218,7 +218,7 @@
         "questionNum": "14",
         "label": "",
         "question": "我试图回避交谈应激性事件？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -226,7 +226,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -234,7 +234,7 @@
         "questionNum": "15",
         "label": "",
         "question": "当暴露于与应激事件有关的提示时，我有身体上的反应？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -242,7 +242,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -250,7 +250,7 @@
         "questionNum": "16",
         "label": "",
         "question": "我回忆应激性事件的重要内容有困难？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -258,7 +258,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -266,7 +266,7 @@
         "questionNum": "17",
         "label": "",
         "question": "我试图回避与应激性事件有关的想法？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -274,7 +274,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -282,7 +282,7 @@
         "questionNum": "18",
         "label": "",
         "question": "我见到的事物与它们的实际情况感觉有不同？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -290,7 +290,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -298,7 +298,7 @@
         "questionNum": "19",
         "label": "",
         "question": "我反复出现此事件的不必要的记忆？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -306,7 +306,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -314,7 +314,7 @@
         "questionNum": "20",
         "label": "",
         "question": "我感觉与自己的情感很疏远？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -322,7 +322,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -330,7 +330,7 @@
         "questionNum": "21",
         "label": "",
         "question": "我急躁易怒或者发脾气？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -338,7 +338,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -346,7 +346,7 @@
         "questionNum": "22",
         "label": "",
         "question": "我回避与使我想起应激性事件的人接触？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -354,7 +354,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -362,7 +362,7 @@
         "questionNum": "23",
         "label": "",
         "question": "我经常突然行动或感觉，好像应激性事件又发生了？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -370,7 +370,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -378,7 +378,7 @@
         "questionNum": "24",
         "label": "",
         "question": "我的大脑一片空白？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -386,7 +386,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -394,7 +394,7 @@
         "questionNum": "25",
         "label": "",
         "question": "我忘记了事件的大部分过程？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -402,7 +402,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -410,7 +410,7 @@
         "questionNum": "26",
         "label": "",
         "question": "应激性事件导致我和其他人的关系出现问题？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -418,7 +418,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -426,7 +426,7 @@
         "questionNum": "27",
         "label": "",
         "question": "我集中注意力困难？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -434,7 +434,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -442,7 +442,7 @@
         "questionNum": "28",
         "label": "",
         "question": "我感觉和其他人疏远或分离？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -450,7 +450,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -458,7 +458,7 @@
         "questionNum": "29",
         "label": "",
         "question": "我有感觉事件又重新发生了一次的生动？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -466,7 +466,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -474,7 +474,7 @@
         "questionNum": "30",
         "label": "",
         "question": "我试图远离使我想起事件的地方？",
-        "answer": [
+        "answers": [
           "A 没有体验",
           "B 极少体验",
           "C 偶尔体验",
@@ -482,7 +482,7 @@
           "E 经常体验",
           "总是体验"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

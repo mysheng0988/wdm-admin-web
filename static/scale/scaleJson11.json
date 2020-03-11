@@ -10,13 +10,13 @@
         "questionNum": "1",
         "label": "",
         "question": "入睡时间（关灯后到睡着的时间）？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -24,13 +24,13 @@
         "questionNum": "2",
         "label": "",
         "question": "夜间苏醒？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -38,13 +38,13 @@
         "questionNum": "3",
         "label": "",
         "question": "比期望的时间早醒 ？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -52,13 +52,13 @@
         "questionNum": "4",
         "label": "",
         "question": "总睡眠时间？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -66,13 +66,13 @@
         "questionNum": "5",
         "label": "",
         "question": "总睡眠质量（无论睡多长）？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -80,13 +80,13 @@
         "questionNum": "6",
         "label": "",
         "question": "白天情绪？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -94,13 +94,13 @@
         "questionNum": "7",
         "label": "",
         "question": "白天身体功能（体力或精神：如记忆力、认知力和注意力等）？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -108,13 +108,13 @@
         "questionNum": "8",
         "label": "",
         "question": "白天思睡？",
-        "answer": [
+        "answers": [
           "A 没问题",
           "B 轻微延迟",
           "C 显著延迟",
           "D 延迟严重或没有睡觉"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }

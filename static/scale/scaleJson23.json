@@ -10,13 +10,13 @@
         "questionNum": "1",
         "label": "",
         "question": "头昏、头胀或头晕？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -24,13 +24,13 @@
         "questionNum": "2",
         "label": "",
         "question": "两眼憋胀、干涩、视物模糊？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -38,13 +38,13 @@
         "questionNum": "3",
         "label": "",
         "question": "我有“部位不定的烧灼感、紧束感？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -52,13 +52,13 @@
         "questionNum": "4",
         "label": "",
         "question": "四肢颤动、发麻？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -66,13 +66,13 @@
         "questionNum": "5",
         "label": "",
         "question": "情绪低落、消沉或绝望？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -80,13 +80,13 @@
         "questionNum": "6",
         "label": "",
         "question": "心前区不适、心慌（心率加快）、心悸（心跳加快）？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -94,13 +94,13 @@
         "questionNum": "7",
         "label": "",
         "question": "胸闷、气急、呼吸困难？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -108,13 +108,13 @@
         "questionNum": "8",
         "label": "",
         "question": "喉部不适感？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -122,13 +122,13 @@
         "questionNum": "9",
         "label": "",
         "question": "耳鸣或脑鸣？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -136,13 +136,13 @@
         "questionNum": "10",
         "label": "",
         "question": "做事时无兴趣、不快乐、无动力、无意义？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -150,13 +150,13 @@
         "questionNum": "11",
         "label": "",
         "question": "比平常更容易发脾气、冲动？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -164,13 +164,13 @@
         "questionNum": "12",
         "label": "",
         "question": "感到紧张、担心、害怕或濒死感？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -178,13 +178,13 @@
         "questionNum": "13",
         "label": "",
         "question": "口干、舌苔厚腻？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -192,13 +192,13 @@
         "questionNum": "14",
         "label": "",
         "question": "嗳气、反酸或烧心？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -206,13 +206,13 @@
         "questionNum": "15",
         "label": "",
         "question": "打嗝、恶心、呕吐？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -220,13 +220,13 @@
         "questionNum": "16",
         "label": "",
         "question": "肠鸣、腹胀、腹泻、便秘？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -234,13 +234,13 @@
         "questionNum": "17",
         "label": "",
         "question": "常常回避使你紧张的场景？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -248,13 +248,13 @@
         "questionNum": "18",
         "label": "",
         "question": "尿频、尿急、夜尿增多、排尿困难？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -262,13 +262,13 @@
         "questionNum": "19",
         "label": "",
         "question": "会阴部不适？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -276,13 +276,13 @@
         "questionNum": "20",
         "label": "",
         "question": "遗精早泄（限男性）/月经不调或痛经（限女性）？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -290,13 +290,13 @@
         "questionNum": "21",
         "label": "",
         "question": "常有伤害自己的想法？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -304,13 +304,13 @@
         "questionNum": "22",
         "label": "",
         "question": "手脚心发热、全身阵热阵汗或怕冷、四肢发凉、感觉有凉气进入身体？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -318,13 +318,13 @@
         "questionNum": "23",
         "label": "",
         "question": "疼痛、如全身或局部疼痛、游走性疼痛等？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -332,13 +332,13 @@
         "questionNum": "24",
         "label": "",
         "question": "感到全身乏力？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -346,13 +346,13 @@
         "questionNum": "25",
         "label": "",
         "question": "感到不得不去重复做某些事或想某些问题？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       },
@@ -360,13 +360,13 @@
         "questionNum": "26",
         "label": "",
         "question": "入睡困难、易醒、早醒？",
-        "answer": [
+        "answers": [
           "A 没有",
           "B 小部分时间",
           "C 相当多时间",
           "D 绝大部分或全部时间"
         ],
-        "answers": "",
+        "answer": "",
         "hidden": false,
         "nextNum": 0
       }
