@@ -13,27 +13,25 @@
         <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="姓名："  prop="realName"  maxlength="10" show-word-limit>
-              <el-input v-model="patObj.realName"></el-input>
+              <el-input v-model="patObj.realName" placeholder="请输入姓名"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="性别："   >
-              <el-radio-group v-model="patObj.gender">
+              <el-radio-group v-model="patObj.gender" @change="genderChange">
                 <el-radio :label="false">男</el-radio>
                 <el-radio :label="true">女</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="民族："  >
-              <el-input v-model="patObj.nation"></el-input>
+            <el-form-item label="民族："   prop="nation" >
+              <el-input v-model="patObj.nation" placeholder="请输入民族,如:汉族"></el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="身份证号："  prop="cardNo" >
-              <el-input v-model="patObj.cardNo"></el-input>
+              <el-input v-model="patObj.cardNo" placeholder="请输入身份证号"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -52,11 +50,9 @@
               <el-input v-model="age" readonly></el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="10">
           <el-col :span="8">
-            <el-form-item label="宗教/信仰："   >
-              <el-input v-model="patObj.faith"></el-input>
+            <el-form-item label="宗教/信仰："  prop="faith"  >
+              <el-input v-model="patObj.faith" placeholder="请输入内容"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -75,28 +71,28 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="职  业："  prop="profession" >
-              <el-input v-model="patObj.profession"></el-input>
+              <el-input v-model="patObj.profession" placeholder="请输入内容"></el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="联系方式："  prop="contactDetails" >
-              <el-input v-model="patObj.contactDetails"></el-input>
+              <el-input v-model="patObj.contactDetails" placeholder="请输入内容"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="身  高："  prop="height" >
-              <el-input v-model="patObj.height"></el-input>
+              <el-input v-model="patObj.height">
+                <template slot="append" placeholder="请输入内容">cm</template>
+              </el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="体  重："  prop="weight" >
-              <el-input v-model="patObj.weight"></el-input>
+              <el-input v-model="patObj.weight" placeholder="请输入内容">
+                <template slot="append">kg</template>
+              </el-input>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="左右利手："  prop="dominantHand" >
               <el-select  placeholder="请选择" v-model="patObj.dominantHand" clearable class="input-width">
@@ -112,7 +108,7 @@
         </div>
         <el-row :gutter="10">
           <el-col :span="8">
-            <el-form-item label="婚姻状况："   >
+            <el-form-item label="婚姻状况："  prop="maritaStatus" >
               <el-select  placeholder="请选择" v-model="patObj.maritaStatus"  clearable class="input-width">
                 <el-option label="未婚" value="未婚"></el-option>
                 <el-option label="已婚" value="已婚"></el-option>
@@ -129,36 +125,45 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="人群角色："  >
-              <el-select  placeholder="请选择" v-model="patObj.crowdRole" clearable class="input-width">
+            <el-form-item label="妊娠哺乳："  >
+              <el-select  placeholder="请选择" v-model="patObj.crowdRole" clearable class="input-width" :disabled="!patObj.gender">
+                <el-option label="无" value="无" ></el-option>
                 <el-option label="备孕" value="备孕" ></el-option>
                 <el-option label="孕期" value="孕期" ></el-option>
+                 <el-option label="产后" value="产后" ></el-option>
                 <el-option label="哺乳期" value="哺乳期"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="子女人数："   >
               <el-input v-model="patObj.childrenNumber"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="子女情况："   >
-              <el-input v-model="patObj.childrenSituation" maxlength="10" show-word-limit></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="父母情况："  >
-              <el-input v-model="patObj.parentSituation" maxlength="10" show-word-limit></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="10">
-          <el-col :span="8">
             <el-form-item label="主要抚养人："   >
-              <el-input v-model="patObj.caregiver"></el-input>
+              <el-input v-model="patObj.caregiver" placeholder="请输入内容"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="子女情况："   >
+              <el-input v-model="patObj.childrenSituation"
+                  type="textarea"
+                  placeholder="请输入内容"
+                  :autosize="{minRows: 2, maxRows: 4}"
+                  maxlength="50"
+                  show-word-limit ></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="父母情况："  >
+              <el-input v-model="patObj.parentSituation" 
+                  type="textarea"
+                  placeholder="请输入内容"
+                  :autosize="{minRows: 2, maxRows: 4}"
+                  maxlength="50"
+                  show-word-limit ></el-input>
+              
             </el-form-item>
           </el-col>
         </el-row>
@@ -225,13 +230,20 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="住院号："   >
+          <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"   >
             <el-input v-model="medObj.beHospitalizedNumber"></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="8">
-          <el-form-item label="床号："   >
-            <el-input v-model="medObj.bedNo"></el-input>
+         <el-col :span="8">
+          <el-form-item label="检测项目："   >
+            <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
+              <el-option
+                v-for="item in examinationList"
+                :key="item.name"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
           </el-form-item>
         </el-col>
         <el-col :span="8">
@@ -247,15 +259,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="检测项目："   >
-            <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
-              <el-option
-                v-for="item in examinationList"
-                :key="item.name"
-                :label="item.name"
-                :value="item.id">
-              </el-option>
-            </el-select>
+          <el-form-item label="床号："   >
+            <el-input v-model="medObj.bedNo"></el-input>
           </el-form-item>
         </el-col>
         <!--<el-col :span="8">-->
@@ -298,21 +303,21 @@
     caregiver: "",
     childrenNumber: 0,
     childrenSituation: "",
-    crowdRole: "",
+    crowdRole: "无",
     address: "",
     dominantHand: true,
     education: "",
     faith: "",
-    familyRanking: "",
+    familyRanking: 1,
     gender: true,
     height: "",
     maritaStatus: "",
-    nation: 0,
+    nation: '汉族',
     parentSituation: "",
     password: "",
     profession: "",
     realName: "",
-    siblingsNumber: "",
+    siblingsNumber: 1,
     username: "",
     weight: ""
   };
@@ -351,6 +356,12 @@
             {required: true, message: '请输入分类名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在 2 到 140 个字符', trigger: 'blur'}
           ],
+           nation: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+           faith: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
           birthday: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
@@ -358,6 +369,12 @@
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           contactDetails: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          education: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          maritaStatus: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           height: [
@@ -421,6 +438,11 @@
 
 
     methods: {
+      genderChange(){
+        if(!this.patObj.gender){
+          this.patObj.crowdRole="无"
+        }
+      },
       onSelected(val){
         this.select.province=val.province.value;
         this.select.city=val.city.value;
@@ -477,9 +499,8 @@
         })
       },
       onSubmit(formName) {
-        let patient=this.patObj;
-        patient.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
-        console.log(this.$route.path)
+
+        this.patObj.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$confirm('是否提交数据', '提示', {
@@ -487,34 +508,27 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              if(patient.pid!=null){
+              if(this.patObj.pid!=null){
                 updatePatient(this.patObj).then(res=>{
-                  console.log(res)
+                  this.medObj.patientId=this.patObj.pid;
+                  this.saveMedical()
+                  Message.success("保存成功")
                 })
               }else{
-              savePatient(patient).then(res=>{
-                if(res.code==200){
-                  this.medObj.patientId=res.dataList[0].pid;
-                  this.patObj=res.dataList[0];
-                  let arrStr=this.patObj.address.split(",");
-                  this.address=arrStr[3]
-                  this.select.province=arrStr[0]
-                  this.select.city=arrStr[1]
-                  this.select.area=arrStr[2]
+                savePatient(this.patObj).then(res=>{
+                  if(res.code==200){
+                    this.medObj.patientId=res.dataList[0].pid;
+                    this.patObj=res.dataList[0];
+                    let arrStr=this.patObj.address.split(",");
+                    this.address=arrStr[3]
+                    this.select.province=arrStr[0]
+                    this.select.city=arrStr[1]
+                    this.select.area=arrStr[2]
+                    this.saveMedical();
+                  }
+                })
                 }
-              })
-              }
-            })
-              .then(()=>{
-              saveMedicalRecord(this.medObj).then(res=>{
-                if(res.code==200){
-                  this.$store.commit('delete_tabs', this.$route.path)
-                   this.$router.push("/pat/list")
-                  Message.success("保存成功")
-                }
-              })
-
-           })
+          })
           } else {
             this.$message({
               message: '验证失败',
@@ -524,6 +538,15 @@
             return false;
           }
         });
+      },
+      saveMedical(){
+          saveMedicalRecord(this.medObj).then(res=>{
+                if(res.code==200){
+                  this.$store.commit('delete_tabs', this.$route.path)
+                  this.$router.push("/pat/list")
+                  Message.success("保存成功")
+                }
+          })
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

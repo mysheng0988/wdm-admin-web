@@ -27,7 +27,7 @@
         <el-table-column label="序号" width="60" align="center">
           <template slot-scope="scope">{{scope.$index+1}}</template>
         </el-table-column>
-        <el-table-column label="编号" width="80"align="center">
+        <el-table-column label="编号" width="80" align="center">
           <template slot-scope="scope">{{scope.row.pid}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">

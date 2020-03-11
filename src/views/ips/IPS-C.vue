@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container" id="pdfCentent">
+  <div class="app-container" >
     <el-card class="operate-container" shadow="never">
       <el-row :gutter="10">
         <el-col :span="24">
@@ -76,6 +76,7 @@
       v-if="showStatus[3]"
       :is-edit="isEdit"
       :patient-id="patientId+''"
+      :medical-record-id="medicalRecordId+''"
       prev-title="EEG"
       next-title="量表"
       @nextStep="nextStep"
@@ -108,7 +109,6 @@
         @finishCommit="finishCommit">
       </cure-plan>
     </el-card>
-     <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
   </div>
 </template>
 
@@ -168,6 +168,7 @@
 
         getPatient(this.$route.query.id).then(res=>{
           this.patient=res.dataList[0];
+          console.log(this.patient)
         })
       },
       hideAll() {

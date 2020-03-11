@@ -78,8 +78,8 @@ a:hover {
 }
 
 //表格栏样式
-.table-container {
-}
+// .table-container {
+// }
 
 //批量操作栏样式
 .batch-operate-container {
@@ -90,7 +90,6 @@ a:hover {
 //分页栏样式
 .pagination-container {
   display: inline-block;
-  float: right;
   margin-top: 20px;
 }
 
@@ -192,6 +191,17 @@ a:hover {
 .flex{
   display: flex;
   display: -webkit-flex;
+}
+.flex-center{
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+.flex-wrap{
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .el-dialog__body{
   padding: 10px 20px!important;

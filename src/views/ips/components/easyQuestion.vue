@@ -15,14 +15,17 @@
       title="答题卡"
       :visible.sync="dialogVisible"
       width="700px">
-      <question :data="answerData"></question>
+      <question :data="answerData"  :medical-record-id="medicalRecordId"
+        :patient-id="patientId" @closeDialog="closeDialog"></question>
 
     </el-dialog>
   </div>
 </template>
 
 <script>
+
 import {getScaleJson} from '@/api/getJson'
+import {getMedicalRecord} from '@/api/question'
   import question from './question';
   export default {
     name: "easyQuestion",
@@ -31,6 +34,10 @@ import {getScaleJson} from '@/api/getJson'
       isEdit: {
         type: Boolean,
         default: false
+      },
+      patientId:{
+        type:String,
+        value:""
       },
       medicalRecordId:{
         type:String,
@@ -53,13 +60,19 @@ import {getScaleJson} from '@/api/getJson'
     },
     created() {
        let num=Math.floor(Math.random()*31)
-        getScaleJson(num).then(res=>{
+        getScaleJson(31).then(res=>{
           this.answerData=res.data;
         })
+        getMedicalRecord(this.medicalRecordId).then(res=>{
+            console.log(res)
+        });
     },
     methods: {
       startQuestion(){
         this.dialogVisible=true;
+      },
+      closeDialog(){
+        this.dialogVisible=false;
       },
       handlePrev() {
         this.$emit('prevStep')

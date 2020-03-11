@@ -140,6 +140,11 @@ export const constantRouterMap = [
         name: 'edit',
         component: () => import('@/views/report/edit'),
         meta: {title: '编辑报告', icon: 'product-attr'}
+      },{
+        path: 'pdf',
+        name: 'pdf',
+        component: () => import('@/views/report/pdf'),
+        meta: {title: '报告', icon: 'product-attr'}
       }
     ],
   },

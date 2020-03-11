@@ -58,7 +58,7 @@
         <el-table-column label="序号" width="60" align="center">
           <template slot-scope="scope">{{scope.$index+1}}</template>
         </el-table-column>
-        <el-table-column label="编号" width="80"align="center">
+        <el-table-column label="编号" width="80" align="center">
           <template slot-scope="scope">{{scope.row.pid}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
@@ -81,14 +81,14 @@
         <el-table-column label="来源医生" align="center">
           <template slot-scope="scope">{{scope.row.fromRealName }}</template>
         </el-table-column>
-        <el-table-column label="身份证号" width="180"align="center">
+        <el-table-column label="身份证号" width="180" align="center">
           <template slot-scope="scope">{{scope.row.cardNo }}</template>
         </el-table-column>
         <el-table-column label="创建时间" width="180" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>
         <el-table-column width="250"   align="center">
-          <template slot="header" slot-scope="scope">
+          <template slot="header" >
             <el-button-group>
               <el-button round size="mini"  :class="active == 0 ? 'active-btn':''" @click="changeBtn(0)">测评任务</el-button>
               <el-button round size="mini" :class="active == 1 ? 'active-btn':''" @click="changeBtn(1)">治疗任务</el-button>
@@ -136,7 +136,6 @@
       <div class="cardContent">
         <el-image class="img" :src="require('@/views/pat/imgs/cardID.png')"></el-image>
         <p class="flag">请将磁卡置于机器上方</p>
-        <p class="flag-type">卡分类:<span class="text">200</span>/<span class="num">0</span></p>
         <p>刷卡成功后进行后续操作</p>
         <el-form ref="cardForm"
                  :model="cardForm"

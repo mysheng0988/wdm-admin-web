@@ -8,7 +8,7 @@
       <div class="question">{{problemData.questionNum}}、{{problemData.question}} {{problemData.answers}}</div>
       <el-radio-group v-model="problemData.answers" >
         <div class="question" v-for="(item,index) in problemData.answer" :key="index">
-          <el-radio :label="index+1" >{{item}}</el-radio>
+          <el-radio :label="index" >{{item}}</el-radio>
         </div>
       </el-radio-group>
     </div>
@@ -39,7 +39,7 @@
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question">{{problemData.label}}</div>
       <div class="question">{{problemData.title}}</div>
-      <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
+      <div class="question">({{problemData.questionNum}})、{{problemData.question}}</div>
       <div v-if="problemData.symptom" class="symptom">
         <el-checkbox-group v-model="problemData.data" >
           <el-checkbox v-for="(item,index) in problemData.symptom" :label="item" :key="index">{{item.label}}</el-checkbox>
@@ -47,14 +47,14 @@
         <div class="symptom" v-for="(item,index) in problemData.data" :key="index">
          ({{index+1}})、{{item.label}}
           <el-radio-group v-model="item.answers">
-              <el-radio v-for="(itemData,indexData) in item.answer" :label="indexData+1" :key="indexData">{{itemData}}</el-radio>
+              <el-radio v-for="(itemData,indexData) in item.answer" :label="indexData" :key="indexData">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
       </div>
      <div v-else>
        <el-radio-group v-model="problemData.answers">
          <div class="question" v-for="(item,index) in problemData.answer" :key="index">
-           <el-radio :label="index+1" >{{item}}</el-radio>
+           <el-radio :label="index" >{{item}}</el-radio>
          </div>
        </el-radio-group>
      </div>
@@ -63,7 +63,7 @@
     <div class="btn-box">
       <el-button type="primary" plain @click="prevQuestion">上一题</el-button>
       <el-button type="primary" plain @click="nextQuestion" v-if="questionLength!=questionNum+1">下一题</el-button>
-      <el-button type="primary" plain @click="nextQuestion" v-else>提交</el-button>
+      <el-button type="primary" plain @click="submitData" v-else>提交</el-button>
     </div>
   </div>
 
@@ -71,14 +71,24 @@
 
 <script>
   import {getScaleJson} from '@/api/getJson'
+  import {submitQuestion} from '@/api/question'
+import addVue from '../../home/add.vue'
     export default {
       name: "question",
       props: {
         data: {
             type: Object,
             default:{}
-          }
+          },
+        medicalRecordId:{
+          type:String,
+          value:""
         },
+        patientId:{
+          type:String,
+          value:"",
+        },
+       },
       data() {
         return {
           problemData:[],
@@ -89,9 +99,6 @@
       mounted(){
           this.problemData=this.data.problem[this.questionNum];
           this.questionLength=this.data.problem.length;
-          if(this.problemData.hidden){
-              this.checkAddShow(this.data);
-          }
       },
       computed:{
         percentage(){
@@ -104,7 +111,7 @@
 
       },
       methods:{
-        checkAddShow(arr){
+         checkAddShow(arr){
           if(this.problemData.hidden){
             this.questionNum++
             this.problemData=arr.problem[this.questionNum];
@@ -125,31 +132,86 @@
           if(this.questionNum<=0){
             this.$message.warning("当前是第一题")
           }else{
-            this.questionNum--;
-            this.problemData=this.data.problem[this.questionNum];
-             this.checkReduceShow(this.data)
+            if(this.problemData.prevNum!=0){
+              this.questionNum=this.problemData.prevNum;
+               this.problemData=this.data.problem[this.questionNum]
+            }else{
+               this.questionNum--;
+              this.problemData=this.data.problem[this.questionNum];
+            }
+           
           }
 
         },
-        nextQuestion(){
+         nextQuestion(){
           if(this.questionNum<this.questionLength-1){
-            if(this.problemData.answers!=""){
-              if(this.problemData.nextNum==0){
-                this.questionNum++
-                this.problemData=this.data.problem[this.questionNum];
-                this.checkAddShow(this.data)
-              }else{
-                this.questionNum=this.problemData.nextNum;
-                 this.problemData=this.data.problem[this.questionNum];
-              }
+            if(this.problemData.answers===""){
+               this.$message.warning("请选择答案")
             }else{
-              this.$message.warning("请选择答案")
+              if(this.problemData.nextNum!=0&&this.problemData.answers==0){
+              
+                  for(let x=this.questionNum+1;x<this.problemData.nextNum;x++){
+                       this.data.problem[x].answers=0;
+                  }
+                 this.questionNum=this.problemData.nextNum;
+                 this.problemData=this.data.problem[this.questionNum];
+                  
+              }else{
+                 this.questionNum++
+                this.problemData=this.data.problem[this.questionNum];
+              }
             }
            
           }else{
             this.$message.warning("最后一题了")
           }
         },
+        submitData(){
+          if(this.problemData.answers===""){
+            this.$message.warning("请选择答案!")
+            return;
+          }
+          let param={
+            questionnaireNo:2,
+            medicalRecordId:this.medicalRecordId,
+            patientId:this.patientId,
+            questionResultList:[]
+          }
+          for(let item of this.data.problem){
+             let qr={}
+            if(!item.symptom){
+              qr.optionOrder=item.answers;
+              qr.optionValue=item.answer[item.answers];
+              qr.order=item.questionNum;
+            }else{
+               let arr=[];
+               let score=0;
+              for(let itemData of item.data){
+                 arr.push(itemData.label)
+                 score=+itemData.answers;
+              } 
+            
+              qr.order=item.questionNum;
+              qr.returnValue=arr.join(",");
+              if(item.data.length>0){
+                  qr.optionOrder=Math.round(score/item.data.length);
+              }else{
+                 qr.optionOrder=0;
+              }
+            }
+            param.questionResultList.push(qr);
+          }
+          submitQuestion(param).then(res=>{
+            if(res.code==200){
+              this.$emit('closeDialog');
+               this.$message.success(res.message)
+            }else{
+              this.$message.warning(res.message)
+            }
+               
+          })
+        },
+       
       }
     }
 </script>

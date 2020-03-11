@@ -7,7 +7,7 @@ export function queryHospital(data) {
 }
 export function saveHospital(data) {
   return request({
-    url:'base/hospital/create',
+    url:'base/hospital',
     method:'post',
     data:data,
   })

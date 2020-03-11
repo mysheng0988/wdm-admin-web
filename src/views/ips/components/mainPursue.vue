@@ -1,11 +1,11 @@
 <template>
-  <div style="margin-top: 50px" v-loading.fullscreen.lock="listLoading" >
+  <div style="margin-top: 50px" v-loading.fullscreen.lock="listLoading"  id="pdfCentent">
     <el-form  :model="pursueObj" :rules="rules" ref="pursueInfoForm" label-width="180px"  >
       <el-form-item label="主诉:">
         <el-input
           placeholder="请输入内容"
-          type="textarea"
           v-model="pursueObj.mainComplaint"
+          type="textarea"
           :autosize="{minRows: 2, maxRows: 4}"
           maxlength="500"
           show-word-limit
@@ -33,7 +33,7 @@
           <el-form-item label="发作频率:" prop="onsetInterval">
             <el-input
               v-model="pursueObj.onsetInterval"
-              placeholder="请输入内容"
+              placeholder="请输入内容,如1周一次"
               type="text"
               clearable></el-input>
           </el-form-item>
@@ -111,7 +111,7 @@
         </el-select>
 
       </el-form-item>
-      <el-form-item label="临床专科诊断补充">
+      <el-form-item label="自定义临床专科诊断:">
         <el-input
           v-model="clinicalSpecialist"
           placeholder="请输入内容,多个用','分割"
@@ -210,6 +210,7 @@
       </el-form-item>
       <el-form-item style="text-align: center">
         <el-button type="primary" size="medium" @click="handleNext('pursueInfoForm')">下一步，{{nextTitle}}</el-button>
+        <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
       </el-form-item>
     </el-form>
     <el-dialog
