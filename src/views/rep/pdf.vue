@@ -119,7 +119,7 @@
           <div class="symptom-box">
             <div class="symptom-title">症状描述</div>
             <div class="symptom-content flex-center">
-              <img class="img" src="@/views/report/img/main-symptom.png">
+              <img class="img" src="@/views/rep/img/main-symptom.png">
               <div class="content">
                 <div class="title">主要症状</div>
                 <div class="lable"> 胸憋、胸痛、憋气、头晕、头痛、濒死感</div>
@@ -130,33 +130,33 @@
               </div>
             </div>
             <div class="symptom-content flex-center">
-              <img class="img" src="@/views/report/img/icon-symptom.png">
+              <img class="img" src="@/views/rep/img/icon-symptom.png">
               <div class="content">
                 <div class="title">伴随症状</div>
                 <div class="lable">恶心、呕吐、视线模糊</div>                   
               </div>
             </div>
-            <div class="symptom-content flex-center">
-              <img class="img" src="@/views/report/img/motion-symptom.png">
+            <div class="symptom-content flex-center">p
+              <img class="img" src="@/views/rep/img/motion-symptom.png">
               <div class="content">
                 <div class="title">运动症状</div>
                 <div class="lable">手抖</div>              
               </div>
             </div>
           </div>
-          <img class="footer-img" src="@/views/report/img/icon-foot.png">
+          <img class="footer-img" src="@/views/rep/img/icon-foot.png">
         </div>
-        <experience></experience>
+        <!-- <experience></experience> -->
     </div>
-   <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
+   <!-- <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button> -->
   </div>
 </template>
 
 <script>
-    import experience from 'components/experience'
+    // import experience from './components/experience'
     export default {
       name: "pdf",
-      components: { experience },
+      // components: { experience },
       data() {
         return {
           activeNames: ['1']

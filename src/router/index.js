@@ -124,26 +124,26 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/report',
-    name: 'report',
+    path: '/rep',
+    name: 'rep',
     component: Layout,
-    redirect: '/report/index',
+    redirect: '/rep/index',
     meta: {title: '心身报告', icon: 'sms-flash'},
     children: [
       {
         path: 'index',
         name: 'index',
-        component: () => import('@/views/report/index'),
+        component: () => import('@/views/rep/index'),
         meta: {title: '报告列表', icon: 'product-list'}
       },{
         path: 'edit',
         name: 'edit',
-        component: () => import('@/views/report/edit'),
+        component: () => import('@/views/rep/edit'),
         meta: {title: '编辑报告', icon: 'product-attr'}
       },{
         path: 'pdf',
         name: 'pdf',
-        component: () => import('@/views/report/pdf'),
+        component: () => import('@/views/rep/pdf'),
         meta: {title: '报告', icon: 'product-attr'}
       }
     ],
