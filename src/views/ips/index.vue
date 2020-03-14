@@ -1,19 +1,34 @@
 <template>
   <div class="app-container">
-    <el-form :inline="true" :model="listQuery" size="small">
+    <el-form :inline="true" :model="listQuery" size="small" >
         <el-form-item >
           <el-input  placeholder="患者编号" v-model="listQuery.pid"></el-input>
         </el-form-item>
         <el-form-item >
           <el-input placeholder="患者姓名" v-model="listQuery.realName"></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-date-picker
+              v-model="createDate"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="起始日期"
+              end-placeholder="结束日期"
+              value-format="yyyy-MM-dd"
+              @change="handleTimeChange">
+          </el-date-picker>
+        </el-form-item>
         <el-form-item label="测评状态:">
-          <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
+          <el-radio-group v-model="listQuery.examinationStatus">
+            <el-radio :label="1" >未测评</el-radio>
+            <el-radio :label="2" >测评中</el-radio>
+          </el-radio-group>
+          <!-- <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
             <el-option label="全部" value=""></el-option>
             <el-option label="未测评" value="1"></el-option>
             <el-option label="测评中" value="2"></el-option>
             <el-option label="已完成" value="3"></el-option>
-          </el-select>
+          </el-select> -->
         </el-form-item>
         <el-form-item>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
@@ -115,7 +130,7 @@
     data() {
       return {
         contentState:null,
-        radio:null,
+        createDate:[],
         list: null,
         examinationList:[],
         cardForm:{
@@ -129,7 +144,7 @@
           cardNo: "",
           createTimeStart: "",
           examinationId: null,
-          examinationStatus: null,
+          examinationStatus: 1,
           pid: "",
           realName: "",
           pageNum: 1,
@@ -173,6 +188,10 @@
       }
     },
     methods: {
+       handleTimeChange(val){
+        this.listQuery.createTimeStart=this.createDate[0];
+        this.listQuery.createTimeEnd=this.createDate[1];
+      },
       addPursue(data){
         this.$router.push({
           path: '/ips/IPS-C',

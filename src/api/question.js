@@ -7,6 +7,13 @@ export function submitQuestion(params) {
   })
 }
 
+export function submitSacleQuestion(params) {
+  return request({
+    url:'ips/scale/submit',
+    method:'post',
+    data:params
+  })
+}
 export function getMedicalRecord(params) {
   return request({
     url:'base/medicalRecord/'+params,

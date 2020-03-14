@@ -25,9 +25,19 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
   response => {
-    const res = response.data
+    const res = response.data;
     if(res.code==0||res.code==804||res.code=="200"){
       return response.data
+    }else if(res.code=="601"){
+      Message({
+        message:"登录信息已过期",
+        type: 'error',
+        duration: 3 * 1000
+      })
+      setTimeout(function(){
+        window.location.href="/"
+      },500)
+      
     }else{
       let message=res.message?res.message:res.msg;
       Message({

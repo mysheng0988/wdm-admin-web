@@ -86,6 +86,7 @@
         v-if="showStatus[4]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
         prev-title="问卷"
         next-title="综合分析"
         @nextStep="nextStep"

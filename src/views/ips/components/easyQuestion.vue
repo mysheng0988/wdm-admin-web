@@ -2,7 +2,7 @@
   <div style="margin-top: 50px">
     <el-form  ref="easyQuestion" label-width="120px" >
       <el-form-item  style="text-align: center">
-        <div class="ips-input">首访问卷</div>
+        <div class="ips-input">{{questionNo==1?"初筛首访问卷":"首访问卷"}}</div>
         <el-button type="primary">测试记录</el-button>
         <el-button type="primary" @click="startQuestion">开始问卷</el-button>
       </el-form-item>
@@ -15,7 +15,7 @@
       title="答题卡"
       :visible.sync="dialogVisible"
       width="700px">
-      <question :data="answerData"  :medical-record-id="medicalRecordId"
+      <question :scale-id="scaleId"  :medical-record-id="medicalRecordId"
         :patient-id="patientId" @closeDialog="closeDialog"></question>
 
     </el-dialog>
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-
-import {getScaleJson} from '@/api/getJson'
 import {getMedicalRecord} from '@/api/question'
   import question from './question';
   export default {
@@ -55,20 +53,25 @@ import {getMedicalRecord} from '@/api/question'
     data() {
       return {
         dialogVisible:false,
-        answerData:{},
+        completeQuestionnaire:false,
+        scaleId:"",
+        questionNo:""
       };
     },
     created() {
        let num=Math.floor(Math.random()*31)
-        getScaleJson(31).then(res=>{
-          this.answerData=res.data;
-        })
+       
         getMedicalRecord(this.medicalRecordId).then(res=>{
-            console.log(res)
+          if(res.code==200){
+              this.questionNo=res.dataList[0].questionnaireNo;
+              this.completeQuestionnaire=res.dataList[0].questionnaireNo;
+          }
+            
         });
     },
     methods: {
       startQuestion(){
+        this.scaleId=this.questionNo;
         this.dialogVisible=true;
       },
       closeDialog(){
@@ -78,7 +81,12 @@ import {getMedicalRecord} from '@/api/question'
         this.$emit('prevStep')
       },
       handleNext() {
-        this.$emit('nextStep');
+        if(this.completeQuestionnaire){
+          this.$emit('nextStep');
+        }else{
+          this.$message.warning("您还没有做问卷！")
+        }
+        
       }
     }
   }

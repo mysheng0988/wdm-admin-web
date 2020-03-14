@@ -2,9 +2,8 @@ import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
 export default{
   install (Vue, options) {
-    Vue.prototype.getPdf = function () {
-      var title = this.htmlTitle
-      html2Canvas(document.querySelector('#pdfCentent'), {
+    Vue.prototype.getPdf = function (dom,title) {
+      html2Canvas(document.querySelector('#'+dom), {
         allowTaint: true
       }).then(function (canvas) {
         let contentWidth = canvas.width

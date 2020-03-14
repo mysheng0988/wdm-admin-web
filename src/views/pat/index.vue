@@ -12,31 +12,26 @@
           <el-input placeholder="身份证号" v-model="listQuery.cardNo"></el-input>
         </el-form-item>
         <el-form-item >
-          <el-date-picker
+          <!-- <el-date-picker
             v-model="listQuery.createTimeStart"
             class="input-width"
             value-format="yyyy-MM-dd"
             type="date"
             placeholder="创建日期">
+          </el-date-picker> -->
+          <el-date-picker
+            v-model="createDate"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="起始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-dd"
+            @change="handleTimeChange">
           </el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
           <el-button type="success" round class="search-btn" @click="dialogVisible = true">患者登记</el-button>
-        </el-form-item>
-      </div>
-      <div>
-        <el-form-item label="测评状态:">
-          <el-radio-group v-model="listQuery.examinationStatus">
-            <el-radio label="1">待完成</el-radio>
-            <el-radio label="2">进行中</el-radio>
-            <el-radio label="3">已完成</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="测评内容:">
-          <el-radio-group v-model="listQuery.examinationId">
-            <el-radio v-for="item in examinationList" :key="item.name" :label="item.id">{{item.name}}</el-radio>
-          </el-radio-group>
         </el-form-item>
       </div>
     </el-form>
@@ -75,43 +70,30 @@
         <el-table-column label="性别" align="center">
           <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
         </el-table-column>
-        <el-table-column label="来源科室"  align="center">
-          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
-        </el-table-column>
-        <el-table-column label="来源医生" align="center">
-          <template slot-scope="scope">{{scope.row.fromRealName }}</template>
-        </el-table-column>
-        <el-table-column label="身份证号" width="180" align="center">
+        <el-table-column label="身份证号" align="center">
           <template slot-scope="scope">{{scope.row.cardNo }}</template>
         </el-table-column>
-        <el-table-column label="创建时间" width="180" align="center">
+        <el-table-column label="创建时间"  align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>
-        <el-table-column width="250"   align="center">
-          <template slot="header" >
-            <el-button-group>
-              <el-button round size="mini"  :class="active == 0 ? 'active-btn':''" @click="changeBtn(0)">测评任务</el-button>
-              <el-button round size="mini" :class="active == 1 ? 'active-btn':''" @click="changeBtn(1)">治疗任务</el-button>
-            </el-button-group>
-          </template>
+        <el-table-column width="250" label="操作"  align="center">
           <template slot-scope="scope" >
                <el-button
                 size="mini"
                 round
                 class="active"
-                @click="handleRecord(scope.row)">测评记录
+                @click="handleEdit(scope.row.cardNo)">编辑
               </el-button>
               <el-button
                 size="mini"
                 round
-                :class="scope.row.examinationId!=3?'active':''">
-                测评
+                >
+                历史记录
               </el-button>
               <el-button
                 size="mini"
-                round
-                :class="scope.row.examinationStatus==3?'active':''">
-                报告
+                round>
+               任务
               </el-button>
           </template>
         </el-table-column>
@@ -162,20 +144,19 @@
     name: "list",
     data() {
       return {
-        contentState:null,
-        radio:null,
-        list: null,
+        createDate:[],
         examinationList:[],
         cardForm:{
           cardID:""
         },
+        list:[],
         listLoading: false,
         dialogVisible:false,
         total:0,
-        active:0,
         listQuery: {
           cardNo: "",
           createTimeStart: "",
+          createTimeEnd:"",
           examinationId: null,
           examinationStatus: null,
           pid: "",
@@ -198,7 +179,6 @@
       ])
     },
     created() {
-       this.getExaminationBtn();
        this.getList()
     },
     filters:{
@@ -220,6 +200,19 @@
           }
         })
       },
+      handleEdit(val){
+        console.log(val)
+         this.$router.push({
+              path: '/pat/patUpdate',
+              query: {
+                id: val
+              }
+            })
+      },
+      handleTimeChange(val){
+        this.listQuery.createTimeStart=this.createDate[0];
+        this.listQuery.createTimeEnd=this.createDate[1];
+      },
       addPatient(formName){
         this.$refs[formName].validate((valid) => {
           if(valid){
@@ -237,16 +230,6 @@
       queryData(){
         this.listQuery.pageNum = 1;
         this.getList();
-      },
-      getExaminationBtn(){
-        queryExamination(this.info.deptId).then(res=>{
-          if(res.code==200){
-            this.examinationList=res.dataList;
-          }
-        })
-      },
-      changeBtn(val){
-        this.active=val;
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

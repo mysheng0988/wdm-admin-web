@@ -41,13 +41,20 @@ export const constantRouterMap = [
         path: 'list',
         name: 'list',
         component: () => import('@/views/pat/index'),
-        meta: {title: '患者列表', icon: 'product-list'},
+        meta: {title: '患者管理', icon: 'product-list'},
       },
       {
         path: 'patAdd',
         name: 'patAdd',
         component: () => import('@/views/pat/add'),
         meta: {title: '新增患者', icon: 'product-add'},
+        hidden:true,
+      },
+      {
+        path: 'patUpdate',
+        name: 'patUpdate',
+        component: () => import('@/views/pat/update'),
+        meta: {title: '修改患者', icon: 'product-update'},
         hidden:true,
       },
       {
@@ -120,6 +127,11 @@ export const constantRouterMap = [
         name: 're-scale',
         component: () => import('@/views/ips/resultScale'),
         meta: {title: '记录结果-量表', icon: 'product-list'}
+      },{
+        path: 'questionResult',
+        name: 'questionResult',
+        component: () => import('@/views/ips/questionResult'),
+        meta: {title: '答题结果', icon: 'product-list'}
       }
     ]
   },

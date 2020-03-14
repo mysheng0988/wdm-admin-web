@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.fullscreen.lock="loading">
     <div class="answer-box" v-if="data.type==1" >
       <div class="title">{{data.scaleTitle}}</div>
       <div class="explain">说明:{{data.explain}}</div>
@@ -67,15 +67,13 @@
 </template>
 
 <script>
-  import {getScaleJson} from '@/api/getJson'
+  import {getQuestionJson} from '@/api/getJson'
   import {submitQuestion} from '@/api/question'
-import addVue from '../../home/add.vue'
     export default {
       name: "question",
       props: {
-        data: {
-            type: Object,
-            default:{}
+        scaleId: {
+            type: Number,
           },
         medicalRecordId:{
           type:String,
@@ -88,14 +86,22 @@ import addVue from '../../home/add.vue'
        },
       data() {
         return {
+          loading:false,
+          data:[],
           problemData:[],
           questionNum:0,
           questionLength:0,
         }
       },
+       watch:{
+         scaleId(newName, oldName) {
+           
+            this.handleChangeJSON();
+         }
+      },
       mounted(){
-          this.problemData=this.data.problem[this.questionNum];
-          this.questionLength=this.data.problem.length;
+        console.log(this.scaleId)
+         this.handleChangeJSON();
       },
       computed:{
         percentage(){
@@ -108,6 +114,14 @@ import addVue from '../../home/add.vue'
 
       },
       methods:{
+         handleChangeJSON(){
+            getQuestionJson(this.scaleId).then(res=>{
+            this.data=res.data;
+            this.problemData=this.data.problem[this.questionNum];
+            this.questionLength=this.data.problem.length;
+          })
+          
+        },
         handleChange(){
           this.nextQuestion();
         },
@@ -171,11 +185,13 @@ import addVue from '../../home/add.vue'
             this.$message.warning("请选择答案!")
             return;
           }
+          console.log(this.data.id)
           let param={
-            questionnaireNo:2,
+            questionnaireNo:this.data.id,
             medicalRecordId:this.medicalRecordId,
             patientId:this.patientId,
-            questionResultList:[]
+            questionResultList:[],
+            resultContent:JSON.stringify(this.data),
           }
           for(let item of this.data.problem){
              let qr={}
@@ -200,7 +216,9 @@ import addVue from '../../home/add.vue'
             }
             param.questionResultList.push(qr);
           }
+          this.loading=true;
           submitQuestion(param).then(res=>{
+             this.loading=false;
             if(res.code==200){
               this.$emit('closeDialog');
                this.$message.success(res.message)
@@ -208,6 +226,8 @@ import addVue from '../../home/add.vue'
               this.$message.warning(res.message)
             }
                
+          }).catch(error=>{
+             this.loading=false;
           })
         },
        

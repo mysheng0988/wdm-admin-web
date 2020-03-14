@@ -44,12 +44,6 @@
         <el-table-column label="性别" align="center">
           <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
         </el-table-column>
-        <el-table-column label="来源科室"  align="center">
-          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
-        </el-table-column>
-        <el-table-column label="来源医生" align="center">
-          <template slot-scope="scope">{{scope.row.fromRealName }}</template>
-        </el-table-column>
         <el-table-column label="身份证号" width="180" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>

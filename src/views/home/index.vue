@@ -48,7 +48,6 @@
             <el-button
               v-show="selectData.status==-1||selectData.status==-2"
               icon="iconfont icon-bill"
-              @click=""
               type="success" plain
               size="mini">
               续费

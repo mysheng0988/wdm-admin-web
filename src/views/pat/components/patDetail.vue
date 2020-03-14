@@ -289,9 +289,11 @@
     getDeptList,
     getInfoCard,
     saveMedicalRecord,
+    updateMedicalRecord,
     queryExamination,
     getDoctorList,
-    updatePatient} from '@/api/patient';
+    updatePatient,
+    getMedicalRecordPatient} from '@/api/patient';
 
   import {findShop} from '@/api/shop';
   import { Message, MessageBox } from 'element-ui'
@@ -488,6 +490,16 @@
             }
 
           }
+          return this.patObj.pid;
+        }).then(patientId=>{
+          console.log(patientId)
+          getMedicalRecordPatient(patientId).then(res=>{
+             if(res.code==200){
+                this.medObj=res.dataList[0];
+               this.medObj.patientId=patientId;
+             }
+              
+          })
         })
       },
       getDept(){
@@ -540,13 +552,24 @@
         });
       },
       saveMedical(){
-          saveMedicalRecord(this.medObj).then(res=>{
+          if(this.medObj.id){
+            updateMedicalRecord(res=>{
                 if(res.code==200){
                   this.$store.commit('delete_tabs', this.$route.path)
                   this.$router.push("/pat/list")
                   Message.success("保存成功")
                 }
-          })
+            })
+          }else{
+            saveMedicalRecord(this.medObj).then(res=>{
+                if(res.code==200){
+                  this.$store.commit('delete_tabs', this.$route.path)
+                  this.$router.push("/pat/list")
+                  Message.success("保存成功")
+                }
+            })
+          }
+          
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

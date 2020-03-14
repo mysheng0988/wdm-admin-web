@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 50px">
-    <el-form  :rules="rules" ref="productInfoForm" label-width="120px" >
-        <el-form-item label="药物治疗:">
+    <el-form  :rules="rules" ref="productInfoForm" label-width="160px" >
+       <el-form-item label="心身疾病成因分析:">
           <el-input
             class="textarea"
             placeholder="请输入详细内容"
@@ -10,10 +10,28 @@
             show-word-limit
             clearable></el-input>
         </el-form-item>
-        <el-form-item label="心身治疗:"  prop="name" >
+        <el-form-item label="神经递质调节药物方案:">
+          <el-input
+            class="textarea"
+            placeholder="请输入详细内容"
+            type="textarea"
+            :autosize="{minRows: 3, maxRows: 6}"
+            show-word-limit
+            clearable></el-input>
+        </el-form-item>
+        <el-form-item label="躯体化症状药物方案:">
+          <el-input
+            class="textarea"
+            placeholder="请输入详细内容"
+            type="textarea"
+            :autosize="{minRows: 3, maxRows: 6}"
+            show-word-limit
+            clearable></el-input>
+        </el-form-item>
+        <el-form-item label="心身治疗方案:"  prop="name" >
           <el-input  placeholder="请输入角色名称" maxlength="10" show-word-limit></el-input>
         </el-form-item>
-        <el-form-item label="社会功能:">
+        <el-form-item label="营养处方:">
           <el-input
             class="textarea"
             placeholder="请输入详细内容"
@@ -31,7 +49,16 @@
             show-word-limit
             clearable></el-input>
         </el-form-item>
-        <el-form-item label="营养处方:">
+        <el-form-item label="功能医学建议:">
+          <el-input
+            class="textarea"
+            placeholder="请输入详细内容"
+            type="textarea"
+            :autosize="{minRows: 3, maxRows: 6}"
+            show-word-limit
+            clearable></el-input>
+        </el-form-item>
+        <el-form-item label="其他建议:">
           <el-input
             class="textarea"
             placeholder="请输入详细内容"
@@ -49,13 +76,13 @@
             show-word-limit
             clearable></el-input>
         </el-form-item>
-        <el-form-item label="当前用药方案:">
+        <!-- <el-form-item label="当前用药方案:">
           <el-select  placeholder="请选择" clearable class="input-width">
             <el-option label="三级甲等" value="三级甲等" ></el-option>
             <el-option label="二级甲等" value="二级甲等" ></el-option>
             <el-option label="民营" value="民营"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleFinishCommit">完成</el-button>

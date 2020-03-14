@@ -53,7 +53,7 @@
           <template slot-scope="scope">{{scope.row.goodsUnit }}</template>
         </el-table-column>
         <el-table-column label="结论" width="580"   align="center">
-          <template slot-scope="scope"></template>
+          <!-- <template slot-scope="scope"></template> -->
         </el-table-column>
       </el-table>
     </div>

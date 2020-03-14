@@ -76,9 +76,21 @@ export function getDoctorList(data) {
 }
 export function saveMedicalRecord(data) {
   return request({
-    url:'' +
-      'base/medicalRecord',
+    url:'base/medicalRecord',
     method:'post',
     data:data,
+  })
+}
+export function updateMedicalRecord(data) {
+  return request({
+    url:'base/medicalRecord',
+    method:'put',
+    data:data,
+  })
+}
+export function getMedicalRecordPatient(param) {
+  return request({
+    url:'base/medicalRecord/patientId/'+param,
+    method:'get'
   })
 }

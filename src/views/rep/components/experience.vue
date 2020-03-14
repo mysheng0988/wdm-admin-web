@@ -1,35 +1,55 @@
 <template>
-  <div class="form-pdf"  >
-        
+  <div class="form-pdf experience">
+    <div class="content-box">
+      <el-timeline class="time-box">
+            <el-timeline-item timestamp="2018" placement="top" type="primary" size="large">
+            </el-timeline-item>
+            <el-timeline-item timestamp="02.05" placement="top" color="#1B9BC0">
+                <p>患者再次因突发性胸憋、胸痛、憋气、头晕、头痛、濒死感入院</p>
+                <p>心电图示ST段抬高，心肌酶、肌钙蛋白、肌钙蛋白I正常,血压最高216/115mHg，诊断为冠心病、高血压3级 很高危；</p>
+                <p>出院后给予硝苯地平控释片30mg BID，厄贝沙坦氢氯噻嗪1片 QD治疗。</p>
+            </el-timeline-item>
+            <el-timeline-item timestamp="02.25" placement="top" color="#1B9BC0">
+                <p>患者再次因突发性胸憋、胸痛、憋气、头晕、头痛、濒死感入院</p>
+                <p>心电图示ST段抬高，心肌酶、肌钙蛋白、肌钙蛋白I正常,血压最高216/115mHg，诊断为冠心病、高血压3级 很高危；</p>
+                <p>出院后给予硝苯地平控释片30mg BID，厄贝沙坦氢氯噻嗪1片 QD治疗。</p>
+            </el-timeline-item>
+            <el-timeline-item timestamp="2019" type="primary"  placement="top" size="large">
+            </el-timeline-item>
+            <el-timeline-item timestamp="02.15" placement="top" color="#1B9BC0">
+                <p>患者再次因突发性胸憋、胸痛、憋气、头晕、头痛、濒死感入院</p>
+                <p>心电图示ST段抬高，心肌酶、肌钙蛋白、肌钙蛋白I正常,血压最高216/115mHg，诊断为冠心病、高血压3级 很高危；</p>
+                <p>出院后给予硝苯地平控释片30mg BID，厄贝沙坦氢氯噻嗪1片 QD治疗。</p>
+            </el-timeline-item>
+            <el-timeline-item timestamp="02.25" placement="top" color="#1B9BC0">
+                <p>患者再次因突发性胸憋、胸痛、憋气、头晕、头痛、濒死感入院</p>
+                <p>心电图示ST段抬高，心肌酶、肌钙蛋白、肌钙蛋白I正常,血压最高216/115mHg，诊断为冠心病、高血压3级 很高危；</p>
+                <p>出院后给予硝苯地平控释片30mg BID，厄贝沙坦氢氯噻嗪1片 QD治疗。</p>
+            </el-timeline-item>
+      </el-timeline>
+    </div>
   </div>
 </template>
-<script>
-  export default {
-    name: 'experience',
 
-  }
+<script>
+    export default {
+        name: "experience"
+    }
 </script>
-<style scoped >
-   .form-pdf{
-     position: relative;
-      width: 768px;
-      height: 1092px;
-      border:1px solid #eee;
+
+<style scoped>
+    .form-pdf.experience{
+      padding: 70px;
+      background:url("../img/experience.png");
+      background-size: 768px 1091px;
    }
-   .pdf-bar{
-     width: 649px;
-     height: 10px;
-     position:absolute;
-     right: 0;
-     top:12px;
-     background:url("./img/pdf-bar.png") no-repeat;
-     background-size: 100% 100%;
+   .content-box{
+     margin-top: 100px;
+     text-align: left;
    }
-   .pdf-bar-left{
-     width: 649px;
-     height: 10px;
-     margin-top: 12px;
-     background:url("./img/pdf-bar2.png") no-repeat;
-     background-size: 100% 100%;
-   }
+  .time-box{
+    width:600px;
+    margin: auto;
+    line-height: 35px;
+  }
 </style>
