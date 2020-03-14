@@ -92,7 +92,9 @@
               </el-button>
               <el-button
                 size="mini"
-                round>
+                round 
+                @click="handleTask(scope.row)">
+
                任务
               </el-button>
           </template>
@@ -133,6 +135,60 @@
         <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      title="患者任务"
+      :visible.sync="dialogVisible2"
+      width="40%">
+      <el-card class="card-box"  shadow="never">
+          <el-row :gutter="10">
+            <el-col :span="4">
+              <div>姓名:<span>{{patientMsg.realName}}</span></div>
+            </el-col>
+            <el-col :span="4">
+              <div>年龄:<span>{{patientMsg.birthday|formatAge}}</span></div>
+            </el-col>
+            <el-col :span="4">
+              <div>性别:<span>{{patientMsg.gender?"女":"男"}}</span></div>
+            </el-col>
+             <el-col :span="12">
+              <div>身份证号:<span>{{patientMsg.cardNo}}</span></div>
+            </el-col>
+          </el-row>
+      </el-card>
+      <el-table
+        :data="taskList"
+        border
+        style="width: 100%">
+         <el-table-column label="项目类型">
+          <template slot-scope="scope">{{scope.row.examinationName }}</template>
+        </el-table-column>
+        <el-table-column label="项目状态" align="center">
+          <template slot-scope="scope">{{scope.row.examinationStatus|formatState }}</template>
+        </el-table-column>
+        <el-table-column label="来源科室"  align="center">
+          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
+        </el-table-column>
+        <el-table-column label="来源医生"  align="center">
+          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
+        </el-table-column>
+       
+         <el-table-column  label="操作"  align="center">
+          <template slot-scope="scope" >
+               <el-button
+                size="mini"
+                round
+                class="active"
+                @click="handle(scope.row.id)">操作
+              </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible2 = false">取 消</el-button>
+        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -149,7 +205,10 @@
         cardForm:{
           cardID:""
         },
+        patientMsg:"",
         list:[],
+        taskList:[],
+        dialogVisible2:false,
         listLoading: false,
         dialogVisible:false,
         total:0,
@@ -186,12 +245,43 @@
         return gender?"女":"男"
       },
       formatAge(birthday){
-        let age=birthday.substring(0,4);
-        let year=new Date().getFullYear();
-        return year-age-1;
+        if(birthday&&birthday!=""){
+          let age=birthday.substring(0,4);
+          let year=new Date().getFullYear();
+          return year-age-1;
+        }
+         return "";
+      },
+      formatState(val){
+        if(val==1){
+          return "未测评"
+        }else if(val==2){
+          return "测评中"
+        }else{
+          return "已完成"
+        }
+        return "";
       }
     },
     methods: {
+      handleTask(val){
+        this.patientMsg=val;
+        this.listLoading=true;
+        let param={
+           pid: val.pid,
+           pageNum: 1,
+          pageSize: 20
+        }
+        queryPatient(param).then(res=>{
+          this.listLoading=false;
+          if(res.code==200){
+            this.taskList=res.dataList;
+            this.dialogVisible2=true;
+          }
+        }).catch(error => {
+         this.listLoading=false;
+        })
+      },
       handleRecord(data){
         this.$router.push({
           path: '/pat/assessRecord',
@@ -201,13 +291,12 @@
         })
       },
       handleEdit(val){
-        console.log(val)
          this.$router.push({
               path: '/pat/patUpdate',
               query: {
                 id: val
               }
-            })
+          })
       },
       handleTimeChange(val){
         this.listQuery.createTimeStart=this.createDate[0];
@@ -258,6 +347,10 @@
 </script>
 
 <style scoped>
+  .card-box{
+    text-align: center;
+    margin-bottom: 30px;
+  }
   .cardContent{
     width: 100%;
     text-align: center;

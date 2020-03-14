@@ -2,10 +2,10 @@
   <div class="item-box flex-center">
       <div class="chart"> <ve-gauge :data="chartData" width="100%" height="100%" :settings="chartSettings"></ve-gauge></div>
       <div class="content">
-          <div class="content-title">广泛性焦虑障碍量表(GAD-7）</div>
-          <div>总分：14分</div>
-          <div>您的状态：中度焦虑</div>
-          <div>您的焦虑倾向到了中度水平，建议您与专业的心理医生多聊一聊，会对 您的帮助很大。</div>
+          <div class="content-title">{{data.questionnaireName}}</div>
+          <div>总分：{{data.score}}分</div>
+          <div>{{data.conclusion}}</div>
+          <div>{{data.explanation}}。</div>
       </div>
   </div>
 </template>
@@ -21,11 +21,14 @@
     data(){
       return {
         chartSettings:{
+          labelMap: {
+          'score': '得分'
+          },
           dataName: {
-          '评分': '得分'
+          'score': '分'
           },
            seriesMap: {
-            '评分': {
+            'score': {
               min:0,
               max:22,
               startAngle: 200 ,
@@ -45,7 +48,10 @@
                 offsetCenter:[10,0]
               },
               detail:{
-                fontSize:12
+                fontSize:12,
+                formatter: function (value) {
+                    return "总分:"+value+"分";
+                }
               }
             }
           }
@@ -53,10 +59,14 @@
         chartData: {
           columns: ['type','value'],
           rows: [
-            { type: '评分', value: 6 }
+            { type: 'score', value: 14 },
           ]
         }
       }
+    },
+     mounted(){
+      this.chartData.rows[0].value=this.data.score;
+      this.chartSettings.max=this.data.maxValue;
     }
   }
 </script>

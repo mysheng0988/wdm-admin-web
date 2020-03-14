@@ -10,6 +10,9 @@
             show-word-limit
             clearable></el-input>
         </el-form-item>
+        <el-form-item label="药物筛选">
+           <p class="add-btn"><i class="el-icon-plus" @click="dialogVisible=true"></i>药物筛选</p>
+        </el-form-item>
         <el-form-item label="神经递质调节药物方案:">
           <el-input
             class="textarea"
@@ -88,6 +91,15 @@
         <el-button type="primary" size="medium" @click="handleFinishCommit">完成</el-button>
       </el-form-item>
     </el-form>
+    <el-dialog
+      title="药物筛选"
+      :visible.sync="dialogVisible"
+      width="30%">
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -97,24 +109,7 @@
   import {saveGoods,getGoodsMsg} from '@/api/goods';
   import {findShop} from '@/api/shop';
   const defaultProductParam = {
-    id: null,
-    shopId: '',
-    goodsBrand: '',
-    goodsCode: '',
-    classifyCode:null,
-    goodsName: '',
-    goodsTitle: '',
-    oneCode:0,
-    twoCode:0,
-    threeCode:0,
-    goodsState: 0,
-    examineState: 0,
-    goodsNews: 0,
-    goodsRecommend: 0,
-    goodsNotice: 0,
-    goodsEnsure:"",
-    salesVolume: 0,
-    comments:"",
+   
   };
   export default {
     name: "ProductInfoDetail",
@@ -134,7 +129,7 @@
     },
     data() {
       return {
-
+        dialogVisible:true,
         rules: {
           goodsName: [
             {required: true, message: '请输入商品名称', trigger: 'blur'},
@@ -162,8 +157,15 @@
 </script>
 
 <style scoped>
-  .ips-input{
-    margin: 0 10px;
-    width: 400px;
+  .add-btn{
+    width: 100px;
+    height: 30px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 8px;
+    border: 1px solid #1197D6;
+    color: #1197D6;
+    cursor: pointer;
   }
 </style>

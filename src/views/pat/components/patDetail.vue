@@ -294,8 +294,6 @@
     getDoctorList,
     updatePatient,
     getMedicalRecordPatient} from '@/api/patient';
-
-  import {findShop} from '@/api/shop';
   import { Message, MessageBox } from 'element-ui'
   const defaultPatient = {
     pid:null,
@@ -491,19 +489,18 @@
 
           }
           return this.patObj.pid;
-        }).then(patientId=>{
-          console.log(patientId)
-          getMedicalRecordPatient(patientId).then(res=>{
-             if(res.code==200){
-                this.medObj=res.dataList[0];
-               this.medObj.patientId=patientId;
-             }
-              
-          })
         })
+        // .then(patientId=>{
+        //   getMedicalRecordPatient(patientId).then(res=>{
+        //      if(res.code==200){
+        //         this.medObj=res.dataList[0];
+        //        this.medObj.patientId=patientId;
+        //      }
+              
+        //   })
+        // })
       },
       getDept(){
-
         getDeptList(this.info.hospitalId).then(res=>{
           if(res.code==200){
             this.deptList=res.dataList;
@@ -511,7 +508,6 @@
         })
       },
       onSubmit(formName) {
-
         this.patObj.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -539,7 +535,7 @@
                     this.saveMedical();
                   }
                 })
-                }
+              }
           })
           } else {
             this.$message({
@@ -552,24 +548,13 @@
         });
       },
       saveMedical(){
-          if(this.medObj.id){
-            updateMedicalRecord(res=>{
-                if(res.code==200){
-                  this.$store.commit('delete_tabs', this.$route.path)
-                  this.$router.push("/pat/list")
-                  Message.success("保存成功")
-                }
-            })
-          }else{
-            saveMedicalRecord(this.medObj).then(res=>{
-                if(res.code==200){
-                  this.$store.commit('delete_tabs', this.$route.path)
-                  this.$router.push("/pat/list")
-                  Message.success("保存成功")
-                }
-            })
-          }
-          
+          saveMedicalRecord(this.medObj).then(res=>{
+              if(res.code==200){
+                this.$store.commit('delete_tabs', this.$route.path)
+                this.$router.push("/pat/list")
+                Message.success("保存成功")
+              }
+          })
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
