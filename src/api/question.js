@@ -20,3 +20,22 @@ export function getMedicalRecord(params) {
     method:'get',
   })
 }
+export function getQuestionnaire(params) {
+  return request({
+    url:'ips/questionnaire/echo',
+    method:'get',
+    params:params,
+  })
+}
+export function additionalQuestions(medicalRecordId) {
+  return request({
+    url:'ips/scale/additionalQuestions/'+medicalRecordId,
+    method:'get',
+  })
+}
+export function submitAdditionalQuestions(data) {
+  return request({
+    url:'ips/scale/additionalQuestions/'+data.medicalRecordId+"?answers="+data.answers[0]+"&answers="+data.answers[1]+"&answers="+data.answers[2]+"&answers="+data.answers[3],
+    method:'post',
+  })
+}

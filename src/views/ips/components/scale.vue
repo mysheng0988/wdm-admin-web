@@ -8,8 +8,8 @@
        </el-form-item> -->
       <el-form-item style="text-align: center" v-for="(item,index) of scaleNoList" :key="index">
         <div class="ips-input" >{{arrTitle[item-1]}}{{item}}</div>
-        <el-button type="primary">记录结果</el-button>
         <el-button type="primary" @click="startQuestion(item)">开始检测</el-button>
+         <el-button type="primary" :class="completeScaleNoList.includes(item)?'':'disable'" @click="handleRecord(false,item)">记录结果</el-button>
       </el-form-item>
      
       <el-form-item style="text-align: center">
@@ -25,13 +25,30 @@
         :patient-id="patientId" @closeDialog="closeDialog" ref="scale"></question-scale>
 
     </el-dialog>
+    <el-dialog
+      title="追加问题"
+      :visible.sync="dialogVisible2"
+      width="40%">
+      <div class="answer-box" v-for="(item,index) in problemData" :key="index">
+        <div class="question">{{item.num}}、{{item.question}}</div>
+        <el-radio-group v-model="item.answer"  @change="handleChange(index)">
+          <div class="question">
+            <el-radio   v-for="(itemData,indexData) in item.answers" :key="indexData" :label="indexData" >{{itemData}}</el-radio>
+          </div>
+        </el-radio-group>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible2 = false">取 消</el-button>
+        <el-button type="primary" @click="handleAddQusetion">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
  
   import questionScale from './questionScale';
-   import {getMedicalRecord} from '@/api/question'
+   import {getMedicalRecord,additionalQuestions,submitAdditionalQuestions} from '@/api/question'
   const defaultProductParam = {
     
   };
@@ -66,22 +83,43 @@
          ,"生活满意度量表（SWLS）","压力自评量表（SSQ-53）","YALE-BROWN强迫量表","防御方式问卷DSQ","A型行为问卷","应付方式问卷","青少年生活事件量表（ASLEC）","抑郁性质问卷","焦虑性质问卷","家庭亲密度与适应性量表","领悟社会支持量表(PSSS)",
          "父母教养方式评价量表（EMBU）","特质应对方式问卷（TCSQ）","营养初次问诊表","创伤后应激障碍自评量表（PCL-C）","躯体化症状自评量表","生活事件量表（ＬＥＳ）"],
         dialogVisible:false,
+        dialogVisible2:false,
         scaleId:"",
+        problemData:[],
         scaleState:false,
         answerData:{},
         scaleNoList:[],
+        completeScaleNoList:[],
       };
     },
     created() {
+       this.initData();
+    },
+    methods: {
+      initData(){
         getMedicalRecord(this.medicalRecordId).then(res=>{
           if(res.code==200){
               this.scaleNoList=res.dataList[0].scaleNoList;
-              this.scaleState=res.dataList[0].scaleNoList.length==res.dataList[0].completeScaleNoList.length;
+              this.completeScaleNoList=res.dataList[0].completeScaleNoList;
+              this.scaleState=res.dataList[0].scaleNoList.length===res.dataList[0].completeScaleNoList.length;
           }
             
         });
-    },
-    methods: {
+      },
+      handleRecord(questionnaire,questionnaireId){
+          if(this.completeScaleNoList.includes(questionnaireId)){
+           this.$router.push({path:'/ips/questionResult',
+            query: {
+              medicalRecordId: this.medicalRecordId,
+              questionnaire:questionnaire,
+              questionnaireId,questionnaireId
+            }
+            });
+          }else{
+            this.$message.warning("您还没有答题呢！")
+          }
+         
+      },
       customQuestion(){
         if(this.scaleId>0&&this.scaleId<28){
           this.dialogVisible=true;
@@ -97,16 +135,47 @@
       },
       closeDialog(){
         this.dialogVisible=false;
+        this.initData()
       },
       handlePrev() {
         this.$emit('prevStep')
       },
+      handleChange(index){
+        if(index==0&&this.problemData[0].answer==1){
+          this.handleAddQusetion();
+        }
+      },
+      handleAddQusetion(){
+          let param={
+            medicalRecordId:this.medicalRecordId,
+            answers:[]
+          };
+          for(let item of this.problemData){
+            if(item.answer===""){
+              item.answer=0;
+            }
+            param.answers.push(item.answer)
+          }
+          submitAdditionalQuestions(param).then(res=>{
+              if(res.code==200){
+                this.$emit('nextStep');
+                this.dialogVisible2=false;
+              }
+          })
+      },
       handleNext() {
-        // if(this.scaleState){
-          this.$emit('nextStep');
-        // }else{
-        //   this.$message.warning("您的量表还没有做完")
-        // }
+      if(this.scaleState){
+         additionalQuestions(this.medicalRecordId).then(res=>{
+           if(res.code==200){
+             this.dialogVisible2=true;
+             this.problemData=JSON.parse(res.dataList[0]);
+                console.log(this.problemData)
+           }
+         })
+        //this.$emit('nextStep');
+      }else{
+        this.$message.warning("您的量表还没有做完")
+       }
        
       }
 
@@ -115,6 +184,10 @@
 </script>
 
 <style scoped>
+  .disable{
+    background: #ccc;
+    border: 1px solid #ccc;
+  }
  .ips-input{
     margin: 0 10px;
     width: 400px;
@@ -122,5 +195,43 @@
     border: 1px solid #eeee;
     border-radius: 10px;
     color: #999;
+  }
+  .answer-box{
+    width: 100%;
+  }
+  .answer-box span{
+    margin: 0 20px;
+  }
+  .title{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .explain{
+    font-size: 14px;
+    color: #666;
+    line-height: 35px;
+    text-indent: 2em;
+  }
+  .question{
+    line-height: 45px;
+  }
+  .question label{
+    line-height: 40px;
+    max-width: 100%;text-overflow: ellipsis;white-space: normal;
+  }
+  .remark{width: 60%}
+  .btn-box{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+  }
+  .symptom{
+    margin-left: 20px;
+    line-height: 45px;
+  }
+  .el-checkbox{
+    margin-right: 5px;
   }
 </style>

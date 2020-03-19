@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :inline="true" :model="listQuery" size="small" >
-        <el-form-item >
+        <!-- <el-form-item >
           <el-input  placeholder="患者编号" v-model="listQuery.pid"></el-input>
         </el-form-item>
         <el-form-item >
@@ -17,7 +17,7 @@
               value-format="yyyy-MM-dd"
               @change="handleTimeChange">
           </el-date-picker>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="测评状态:">
           <el-radio-group v-model="listQuery.examinationStatus">
             <el-radio :label="1" >未测评</el-radio>
@@ -63,7 +63,7 @@
           <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
         </el-table-column>
         <el-table-column label="来源医生" align="center">
-          <template slot-scope="scope">{{scope.row.fromRealName }}</template>
+          <template slot-scope="scope">{{scope.row.fromRealname }}</template>
         </el-table-column>
         <el-table-column label="创建时间" width="180" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
@@ -122,7 +122,7 @@
 </template>
 
 <script>
-  import {queryPatient,queryExamination} from '@/api/patient'
+  import {medicalRecordList} from '@/api/medicalRecord'
   import {getScaleJson} from '@/api/getJson'
   import { Message, MessageBox } from 'element-ui'
   export default {
@@ -160,17 +160,22 @@
       }
     },
     created() {
-        //this.getExaminationBtn();
         this.getList()
     },
     filters:{
       formatGender(gender){
-        return gender?"女":"男"
+        if(gender){
+          return gender?"女":"男"
+        }
+       return "";
       },
       formatAge(birthday){
-        let age=birthday.substring(0,4);
-        let year=new Date().getFullYear();
-        return year-age-1;
+        if(birthday){
+          let age=birthday.substring(0,4);
+          let year=new Date().getFullYear();
+          return year-age-1;
+        }
+       return ""
       },
       formatExaminationStatus(value){
         switch (value) {
@@ -196,8 +201,8 @@
         this.$router.push({
           path: '/ips/IPS-C',
           query: {
-            id: data.pid,
-            medicalRecordId:data.medicalRecordId
+            id: data.patientId,
+            medicalRecordId:data.id
           }
         })
       },
@@ -240,7 +245,7 @@
       },
       getList(){
         this.listLoading=true;
-        queryPatient(this.listQuery).then(res=>{
+        medicalRecordList(this.listQuery).then(res=>{
           this.listLoading=false;
           if(res.code==200){
             this.list=res.dataList;

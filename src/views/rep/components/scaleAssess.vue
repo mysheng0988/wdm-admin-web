@@ -7,11 +7,11 @@
         <p>S<span>CALE ASSESSMENT</span></p>
       </div>
      <chart-gauge :data="data" ></chart-gauge>
-     <chart-gauge :data="data2" ></chart-gauge>
-     <chart-gauge :data="data3" ></chart-gauge>
-     <!-- <chart-histogram ></chart-histogram>
+     <!-- <chart-gauge :data="data2" ></chart-gauge>
+     <chart-gauge :data="data3" ></chart-gauge> -->
+     <chart-histogram ></chart-histogram>
      <chart-line></chart-line>
-     <chart-radar></chart-radar> -->
+     <chart-radar></chart-radar>
     </div>
   </div>
 </template>
@@ -32,13 +32,13 @@
       return {
        data:{
          questionnaireName:"广泛性焦虑障碍量表(GAD-7）",
-         score:"16.8",
+         score:"-10",
          conclusion:"您的状态：中度焦虑",
-         maxValue:"22",
+         maxValue:"33",
          explanation:"您的焦虑倾向到了中度水平，建议您与专业的心理医生多聊一聊，会对 您的帮助很大。",
          chartInfoVO:{
-            maxValue:22,
-            minValue:0,
+            maxValue:40,
+            minValue:-40,
          }
        },
        data2:{
@@ -48,7 +48,7 @@
          maxValue:"22",
          explanation:"您的焦虑倾向到了重度水平，建议您与专业的心理医生多聊一聊，会对您的帮助很大。",
          chartInfoVO:{
-            maxValue:22,
+            maxValue:98,
             minValue:0,
          }
        },
@@ -56,7 +56,8 @@
          questionnaireName:"生活事件量表（LES）",
          score:"10",
          conclusion:"您的状态：重度焦虑",
-         maxValue:"56",
+         maxValue:"200",
+         minValue:"0",
          explanation:"您的焦虑倾向到了重度水平，建议您与专业的心理医生多聊一聊，会对您的帮助很大。",
        }
       };

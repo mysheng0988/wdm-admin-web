@@ -4,9 +4,9 @@
         <el-form-item style="text-align: center" >
           <!--<el-input class="ips-input" placeholder="植物神经功能检测&#45;&#45;》检测科室：心理科" ></el-input>-->
           <div class="ips-input">植物神经功能检测--》检测科室:{{info.deptName}}</div>
-          <el-button type="primary">记录结果</el-button>
           <el-button type="primary" @click="verificationCode" >获取验证码</el-button>
           <el-button type="primary" ><a href="HRV://">开始检测</a></el-button>
+          <el-button type="primary" @click="handleResult">记录结果</el-button>
         </el-form-item>
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
@@ -56,15 +56,17 @@
       },
     },
     created() {
-      this.getHRVData();
+    //  this.getHRVData();
     },
     methods: {
-
-      getHRVData(){
-        getHRV(this.medicalRecordId).then(res=>{
-            console.log(res)
-        })
+      handleResult(){
+        this.$router.push('/ips/resultHRV');
       },
+      // getHRVData(){
+      //   getHRV(this.medicalRecordId).then(res=>{
+      //       console.log(res)
+      //   })
+      // },
       verificationCode(){
         getVerificationCode().then(res=>{
           if(res.code==200){

@@ -33,7 +33,7 @@
           <el-form-item label="发作频率:" prop="onsetInterval">
             <el-input
               v-model="pursueObj.onsetInterval"
-              placeholder="请输入内容,如1周一次"
+              placeholder="请输入内容,如:一周一次"
               type="text"
               clearable></el-input>
           </el-form-item>
@@ -128,15 +128,23 @@
         </el-select>
       </el-form-item>
       <el-form-item label="运动症状:">
-        <div class="flex">
+        <!-- <div class="flex">
           <p class="add-btn"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox :checked="true">暂无运动症状</el-checkbox>
-        </div>
+          <el-checkbox :checked="false">暂无运动症状</el-checkbox>
+        </div> -->
+        <el-select  placeholder="请选择伴随症状"  filterable multiple v-model="pursueObj.motorSymptomsIdList" clearable class="input-width">
+          <el-option
+            v-for="item in optionMotorSymptoms"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="就诊经历:">
         <div class="flex">
           <p class="add-btn" @click="addExperience"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox :checked="list.length==0">暂无就诊经历</el-checkbox>
+          <el-checkbox v-model="list.length==0">暂无就诊经历</el-checkbox>
         </div>
         <div class="table-container">
           <el-table ref="productCateTable"
@@ -336,6 +344,7 @@
         clinicalSpecialist:"",
         optionSymptomsList:[],
         optionAccompanyingSymptoms:[],
+        optionMotorSymptoms:[],
         list:[],
         pursueObj:Object.assign({},defaultPursue),
         loadingOption:false,
@@ -392,15 +401,12 @@
         "info"
       ])
     },
-    created() {
-
-    },
     mounted(){
-      console.log(this.medicalRecordId)
       this.getExperienceList();
       this.queryFamily();
       this.getSymptoms("1");
       this.getSymptoms("2");
+      this.getSymptoms("3");
       this.getPursueData();
       this.getStressList();
     },
@@ -429,6 +435,8 @@
           this.listLoading=false;
           if(val==2){
             this.optionAccompanyingSymptoms=res.dataList;
+          }else if(val==3){
+            this.optionMotorSymptoms=res.dataList;
           }else{
             this.optionSymptomsList=res.dataList;
           }
@@ -518,8 +526,9 @@
                    this.listLoading = false;
                    if(res.code==200){
                      this.$message.success("更新成功")
-                     this.getPursueData();
+                     
                      this.$emit('nextStep');
+                     this.getPursueData();
                    }
 
                  }).catch(error => {

@@ -11,6 +11,7 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: '/home',
+    hidden:true,
     children: [{
       path: 'home',
       name: 'home',
@@ -98,40 +99,46 @@ export const constantRouterMap = [
         path: 'index',
         name: 'index',
         component: () => import('@/views/ips/index'),
-        meta: {title: '检查列表', icon: 'product-list'}
+        meta: {title: '检查列表', icon: 'product-list'},
       },
       {
         path: 'IPS-A',
         name: 'IPS-A',
         component: () => import('@/views/ips/IPS-A'),
         meta: {title: '专科测评', icon: 'product-list'},
+        hidden:true,
       },{
         path: 'IPS-B',
         name: 'IPS-B',
         component: () => import('@/views/ips/IPS-B'),
         meta: {title: '综合测评', icon: 'product-list'},
+        hidden:true,
       },{
         path: 'IPS-C',
         name: 'IPS-C',
         component: () => import('@/views/ips/IPS-C'),
         meta: {title: '筛查测评', icon: 'product-list'},
+        hidden:true,
       },
       {
         path: 'resultHRV',
         name: 'resultHRV',
         component: () => import('@/views/ips/resultHRV'),
-        meta: {title: '记录结果-HRV', icon: 'product-list'}
+        meta: {title: '记录结果-HRV', icon: 'product-list'},
+        hidden:true,
       },
       {
         path: 're-scale',
         name: 're-scale',
         component: () => import('@/views/ips/resultScale'),
-        meta: {title: '记录结果-量表', icon: 'product-list'}
+        meta: {title: '记录结果-量表', icon: 'product-list'},
+        hidden:true,
       },{
         path: 'questionResult',
         name: 'questionResult',
         component: () => import('@/views/ips/questionResult'),
-        meta: {title: '答题结果', icon: 'product-list'}
+        meta: {title: '答题结果', icon: 'product-list'},
+        hidden:true,
       }
     ]
   },

@@ -1,8 +1,8 @@
 <template>
   <el-tabs type="card" v-model="activePath" class="tabs" closable @tab-remove="tabRemove" @tab-click="tabClick()">
     <el-tab-pane
-      :key="item.path"
-      v-for="(item, index) in tabs"
+     v-for="item in tabs" 
+      :key="item.index"
       :label="item.name"
       :name="item.path"
     >
@@ -29,10 +29,13 @@
       },
       watch: {
         '$route' (to) {
-          console.log(to)
           let tabObj={};
           let param="";
-          tabObj.name=to.meta.title;
+          let id="";
+          if(to.query.id){
+            id=to.query.id;
+          }
+          tabObj.name=to.meta.title+id;
           let query=to.query;
           if(JSON.stringify(query)!="{}"){
               param="?"+this.objToParam(query);
@@ -73,7 +76,7 @@
         notRepeat(tabObj){
           let tabs=this.tabs;
           for(let x=0;x<tabs.length;x++){
-            if(tabObj.path.split("?")[0]===tabs[x].path.split("?")[0]){
+            if(tabObj.path===tabs[x].path){
               return false;
             }
           }
@@ -83,7 +86,7 @@
           this.$router.push(this.activePath)
         },
         tabRemove (targetName) {
-          if (targetName === '/home') {
+          if (targetName === '/pat/list') {
             return
           }
           this.$store.commit('delete_tabs', targetName)

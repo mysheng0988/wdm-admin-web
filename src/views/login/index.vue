@@ -101,10 +101,9 @@
           if (valid) {
             this.loading = true;
             this.$store.dispatch('Login', this.loginForm).then((res) => {
-                console.log(res)
               this.loading = false;
               if(res.code=="200"){
-                this.$router.push({path: '/home'})
+                this.$router.push({path: '/pat'})
               }else{
                 this.$message.error(res.msg);
               }

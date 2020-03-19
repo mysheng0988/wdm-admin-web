@@ -160,7 +160,7 @@
         :data="taskList"
         border
         style="width: 100%">
-         <el-table-column label="项目类型">
+         <el-table-column label="项目类型" align="center">
           <template slot-scope="scope">{{scope.row.examinationName }}</template>
         </el-table-column>
         <el-table-column label="项目状态" align="center">
@@ -172,7 +172,6 @@
         <el-table-column label="来源医生"  align="center">
           <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
         </el-table-column>
-       
          <el-table-column  label="操作"  align="center">
           <template slot-scope="scope" >
                <el-button

@@ -147,7 +147,6 @@
     },
     methods: {
       changeTab(index){
-        console.log(index)
         this.active=index;
         this.hideAll();
         this.showStatus[index] = true;
@@ -171,7 +170,6 @@
         }
       },
       nextStep() {
-        console.log(this.active)
         if (this.active < this.showStatus.length - 1) {
           this.active++;
           this.hideAll();

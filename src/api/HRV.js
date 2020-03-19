@@ -11,4 +11,9 @@ export function getVerificationCode() {
     method:'get',
   })
 }
-
+export function historyHrv(param) {
+  return request({
+    url:'ips/hrv/medicalRecordId/'+param,
+    method:'get',
+  })
+}

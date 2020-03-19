@@ -52,8 +52,8 @@
         <el-table-column label="测试医生"  align="center">
           <template slot-scope="scope">{{scope.row.goodsUnit }}</template>
         </el-table-column>
-        <el-table-column label="结论" width="580"   align="center">
-          <template slot-scope="scope"></template>
+        <el-table-column label="操作"   align="center">
+          <!-- <template slot-scope="scope"></template> -->
         </el-table-column>
       </el-table>
     </div>
@@ -73,11 +73,7 @@
 </template>
 
 <script>
-  import {queryCustomClass,
-          deleteCustomClass,
-          saveCustomClass} from '@/api/classify'
-  import {findShop} from '@/api/shop';
-  import { Message, MessageBox } from 'element-ui'
+  import {historyHrv} from '@/api/HRV'
   export default {
     name: "resultHRV",
     data() {
@@ -89,85 +85,37 @@
         listLoading: false,
         total:0,
         listQuery: {
-          shopId:null,
-          currentPage: 1,
+          pageNum: 1,
           pageSize: 10
         },
       }
     },
     created() {
-      // findShop().then((res) => {
-      //   this.shopList=res.data;
-      //   this.loading = false;
-      // }).catch(() => {
-      //   this.loading = false
-      // })
-      //  this.getList();
+       this.getList();
     },
 
     methods: {
-      clearState(){
-        this.listQuery.shopId=null;
-        //this.getList();
-      },
-      shopSelect(){
-        this.getList();
-      },
-      resetParentId(){
-        if (this.$route.query.parentId != null) {
-          this.parentId = this.$route.query.parentId;
-        } else {
-          this.parentId = 0;
-        }
-      },
       getList(){
-        queryCustomClass(this.listQuery).then(res=>{
-          if(res.code!=0){
-            Message.warning(res.code)
+        historyHrv(17).then(res=>{
+          if(res.code==200){
+            this.list=res.data.items;
+            this.total=res.data.totalNum;
           }
-          this.list=res.data.items;
-          this.total=res.data.totalNum;
+         
         })
       },
       handleAddProductCate() {
         this.$router.push('/pms/addCustomClass');
       },
       handleSizeChange(val) {
-        this.listQuery.currentPage = 1;
+        this.listQuery.pageNum = 1;
         this.listQuery.pageSize = val;
         this.getList();
       },
       handleCurrentChange(val) {
-        this.listQuery.currentPage = val;
+        this.listQuery.pageNum = val;
         this.getList();
       },
-      handleNavStatusChange(index, row) {
-        saveCustomClass(row).then(res=>{
-          this.getList();
-        })
-      },
-      handleTransferProduct(index, row) {
-        console.log('handleAddProductCate');
-      },
-      handleUpdate(index, row) {
-        this.$router.push({path:'/pms/updateCustomClass',query:{id:row.id}});
-      },
-      handleDelete(index, row) {
-        this.$confirm('是否要删除该品牌', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          deleteCustomClass(row.id).then(response => {
-            this.$message({
-              message: '删除成功',
-              type: 'success',
-              duration: 1000
-            });
-            this.getList();
-          });
-        });
-      }
     },
 
   }

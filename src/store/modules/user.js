@@ -8,10 +8,11 @@ const user = {
     avatar: '',
     roles: [],
     deptId:"",
-    activePath:"/home",
+    activePath:"/pat/list",
+    // tabs:[]
     tabs:[{
-      path:"/home",
-      name:"首页",
+      path:"/pat/list",
+      name:"患者列表",
     }]
   },
 

@@ -35,9 +35,8 @@ service.interceptors.response.use(
         duration: 3 * 1000
       })
       setTimeout(function(){
-        window.location.href="/"
+        window.location="/"
       },500)
-      
     }else{
       let message=res.message?res.message:res.msg;
       Message({

@@ -43,12 +43,13 @@
         <el-step title="问卷"></el-step>
         <el-step title="量表"></el-step>
         <el-step title="综合分析"></el-step>
-        <el-step title="治疗方案"></el-step>
+        <el-step title="生成评估报告" @click.native="changeTab(6)"></el-step>
       </el-steps>
       <main-pursue
         v-if="showStatus[0]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
         :medical-record-id="medicalRecordId+''"
         next-title="HRV"
         @nextStep="nextStep">
@@ -56,6 +57,7 @@
       <hrv
         v-if="showStatus[1]"
         :is-edit="isEdit"
+        :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"
         @nextStep="nextStep"
@@ -66,6 +68,7 @@
       <eeg
         v-if="showStatus[2]"
         :is-edit="isEdit"
+         :key="patientId"
         :patient-id="patientId+''"
         @nextStep="nextStep"
         prev-title="HRV"
@@ -75,6 +78,7 @@
       <easy-question
       v-if="showStatus[3]"
       :is-edit="isEdit"
+       :key="patientId"
       :patient-id="patientId+''"
       :medical-record-id="medicalRecordId+''"
       prev-title="EEG"
@@ -85,6 +89,7 @@
       <scale
         v-if="showStatus[4]"
         :is-edit="isEdit"
+         :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"
         prev-title="问卷"
@@ -95,7 +100,9 @@
       <analysis
         v-if="showStatus[5]"
         :is-edit="isEdit"
+         :key="patientId"
         :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
         prev-title="量表"
         next-title="治疗方案"
         @nextStep="nextStep"
@@ -104,7 +111,9 @@
       <cure-plan
         v-if="showStatus[6]"
         :is-edit="isEdit"
+         :key="patientId"
         :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
         prev-title="综合分析"
         @prevStep="prevStep"
         @finishCommit="finishCommit">
@@ -143,6 +152,13 @@
         },
       }
     },
+    watch: {
+      $route(to) {
+          this.patientId=this.$route.query.id;
+          this.medicalRecordId=this.$route.query.medicalRecordId;
+          this.getPatientMsg();
+      }
+    },
     created() {
       this.patientId=this.$route.query.id;
       this.medicalRecordId=this.$route.query.medicalRecordId;
@@ -160,7 +176,6 @@
     },
     methods: {
       changeTab(index){
-        console.log(index)
         this.active=index;
         this.hideAll();
         this.showStatus[index] = true;
@@ -168,6 +183,7 @@
       getPatientMsg(){
 
         getPatient(this.$route.query.id).then(res=>{
+          console.log(res)
           this.patient=res.dataList[0];
           console.log(this.patient)
         })
@@ -185,7 +201,6 @@
         }
       },
       nextStep() {
-        console.log(this.active)
         if (this.active < this.showStatus.length - 1) {
           this.active++;
           this.hideAll();

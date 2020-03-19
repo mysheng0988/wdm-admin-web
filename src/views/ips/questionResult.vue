@@ -65,7 +65,7 @@
 </template>
 
 <script>
-  import {getQuestionJson} from '@/api/getJson'
+  import {getQuestionnaire} from '@/api/question'
   import { Message, MessageBox } from 'element-ui'
   export default {
     name: "questionResult",
@@ -75,12 +75,22 @@
       }
     },
     created() {
-      getQuestionJson(2).then(res=>{
-        this.data=res.data;
-      })
+      let param={
+          medicalRecordId:this.$route.query.medicalRecordId,
+          questionnaire:this.$route.query.questionnaire,
+          questionnaireId:this.$route.query.questionnaireId,
+        }
+      this.getQuestionData(param);
     },
     methods: {
-
+      getQuestionData(param){
+        
+        console.log(param)
+        getQuestionnaire(param).then(res=>{
+           console.log(res)
+           this.data=JSON.parse(res.dataList[0]);
+         })
+      }
     }
 
   }

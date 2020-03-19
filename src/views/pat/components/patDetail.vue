@@ -194,6 +194,11 @@
           </el-col>
         </el-row>
       </div>
+    </el-form>
+     <el-form :model="medObj"
+             :rules="medrules"
+             ref="medObjFrom"
+             label-width="120px">
       <div class="title">
         <i class="el-icon-tickets"></i>
         <span>来源（病例）信息</span>
@@ -210,7 +215,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="患者来源："   >
+          <el-form-item label="患者来源："    prop="outpatient">
             <el-select  placeholder="请选择" v-model="medObj.outpatient" clearable class="input-width">
               <el-option label="门诊" :value="true" ></el-option>
               <el-option label="住院" :value="false"></el-option>
@@ -218,7 +223,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="科 室："  >
+          <el-form-item label="科 室："   prop="fromDeptId">
             <el-select  placeholder="请选择" v-model="medObj.fromDeptId" clearable class="input-width">
               <el-option
                 v-for="item in deptList"
@@ -230,12 +235,12 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"   >
+          <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"  prop="beHospitalizedNumber" >
             <el-input v-model="medObj.beHospitalizedNumber"></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">
-          <el-form-item label="检测项目："   >
+          <el-form-item label="检测项目："   prop="examinationId">
             <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
               <el-option
                 v-for="item in examinationList"
@@ -247,7 +252,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="医 生：" >
+          <el-form-item label="医 生：" prop="fromUid">
             <el-select  placeholder="请选择" v-model="medObj.fromUid" clearable class="input-width">
               <el-option
                 v-for="item in doctorList"
@@ -260,7 +265,13 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="床号："   >
-            <el-input v-model="medObj.bedNo"></el-input>
+            <el-input v-model="medObj.bedNo"  placeholder="请输入床号"></el-input>
+          </el-form-item>
+        </el-col>
+         <el-col :span="8">
+          <el-form-item label="卡号："   prop="cardId">
+            <el-input v-model="medObj.cardId" placeholder="请刷卡" 
+            clearable maxlength="8" show-word-limit></el-input>
           </el-form-item>
         </el-col>
         <!--<el-col :span="8">-->
@@ -278,9 +289,9 @@
       </el-row>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('patObjFrom')">提交</el-button>
-        <el-button v-if="!isEdit" @click="resetForm('patObjFrom')">重置</el-button>
+        <el-button v-if="!patObj.pid" @click="resetForm('patObjFrom')">重置</el-button>
       </el-form-item>
-    </el-form>
+      </el-form>
   </el-card>
 </template>
 
@@ -330,6 +341,7 @@
     examinationId: "",
     fromUid:"",
     remark: "",
+    cardId:"",
     sid: 0
   }
   export default {
@@ -392,7 +404,9 @@
           cardNo: [
             {required: true, message: '请输入身份证号码', trigger: 'blur'},
             { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
-          ],
+          ]
+        },
+        medrules:{
           fromDeptId: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
@@ -402,13 +416,16 @@
           bedNo: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
+          cardId: [
+            {required: true, message: '必填字段', trigger: 'blur'}
+          ],
           fromUid: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           examinationId: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
-        },
+        }
       }
     },
     computed:{
@@ -510,41 +527,43 @@
       onSubmit(formName) {
         this.patObj.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
         this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.$confirm('是否提交数据', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              if(this.patObj.pid!=null){
-                updatePatient(this.patObj).then(res=>{
-                  this.medObj.patientId=this.patObj.pid;
-                  this.saveMedical()
-                  Message.success("保存成功")
-                })
-              }else{
-                savePatient(this.patObj).then(res=>{
-                  if(res.code==200){
-                    this.medObj.patientId=res.dataList[0].pid;
-                    this.patObj=res.dataList[0];
-                    let arrStr=this.patObj.address.split(",");
-                    this.address=arrStr[3]
-                    this.select.province=arrStr[0]
-                    this.select.city=arrStr[1]
-                    this.select.area=arrStr[2]
-                    this.saveMedical();
+          this.$refs["medObjFrom"].validate((valid2)=>{
+            if (valid&&valid2) {
+              this.$confirm('是否提交数据', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                  if(this.patObj.pid!=null){
+                    updatePatient(this.patObj).then(res=>{
+                      this.medObj.patientId=this.patObj.pid;
+                      this.saveMedical()
+                      Message.success("保存成功")
+                    })
+                  }else{
+                    savePatient(this.patObj).then(res=>{
+                      if(res.code==200){
+                        this.medObj.patientId=res.dataList[0].pid;
+                        this.patObj=res.dataList[0];
+                        let arrStr=this.patObj.address.split(",");
+                        this.address=arrStr[3]
+                        this.select.province=arrStr[0]
+                        this.select.city=arrStr[1]
+                        this.select.area=arrStr[2]
+                        this.saveMedical();
+                      }
+                    })
                   }
-                })
+              })
+              } else {
+                this.$message({
+                  message: '验证失败',
+                  type: 'error',
+                  duration: 1000
+                });
+                return false;
               }
           })
-          } else {
-            this.$message({
-              message: '验证失败',
-              type: 'error',
-              duration: 1000
-            });
-            return false;
-          }
         });
       },
       saveMedical(){

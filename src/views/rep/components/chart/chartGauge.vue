@@ -29,7 +29,7 @@
           },
            seriesMap: {
             'score': {
-              min:0,
+              min:-40,
               max:22,
               startAngle: 200 ,
               endAngle: -20 ,
@@ -64,9 +64,12 @@
         }
       }
     },
+    watch(){
+
+    },
      mounted(){
       this.chartData.rows[0].value=this.data.score;
-      this.chartSettings.max=this.data.maxValue;
+      this.chartSettings.seriesMap.score.max=this.data.maxValue;
     }
   }
 </script>

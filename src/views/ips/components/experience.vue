@@ -22,10 +22,10 @@
             remote
             reserve-keyword
             placeholder="请输入关键词检索"
-            :remote-method="querySearchICD"
+            :remote-method="querySymptomsData"
             :loading="loadingOption">
             <el-option
-              v-for="item in optionICD"
+              v-for="item in symptomOption"
               :key="item.id"
               :label="item.name"
               :value="item.id">
@@ -124,6 +124,7 @@
     treatmentPrograms: "",
     visitDate:"",
   }
+  import {mapGetters} from 'vuex'
   import {queryHospital} from "@/api/manage"
     export default {
       name: "experience",
@@ -141,6 +142,7 @@
         return {
           optionICD:[],
           optionCheck:[],
+          symptomOption:[],
           expObj:Object.assign({},defaultExp),
           loadingOption:false,
           hostList:[],
@@ -156,6 +158,11 @@
           }
         }
       },
+      computed:{
+      ...mapGetters([             //步骤二，对象扩展运算符方式
+        "info"
+      ])
+     },
       created(){
         this.getHospital();
       },
@@ -207,6 +214,21 @@
             })
 
           }, 300);
+        },
+        querySymptomsData(queryString){
+           clearTimeout(this.timeout);
+          this.timeout = setTimeout(() => {
+            this.loadingOption=true;
+            querySymptoms({departmentCategoryId:this.info.deptId,queryParam:queryString,type:1}).then(res=>{
+                  this.loadingOption=false;
+                if(res.code==200){
+                  this.symptomOption=res.dataList;
+                }else{
+                  this.symptomOption=[];
+                }
+                
+              })
+            }, 300);
         },
         querySearchCheck(queryString) {
           clearTimeout(this.timeout);

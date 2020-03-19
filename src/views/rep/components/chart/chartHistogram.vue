@@ -42,7 +42,7 @@
             show:true,
           },
           barWidth:20,
-          barGap:"100%",
+         
           series: {
             label: { show: true, position: "top" }
           }
@@ -50,7 +50,9 @@
         chartData: {
           columns: [ "项目",'TH时间紧迫感', 'CH好胜心', 'L测谎'],
           rows: [
-            { "项目":"",'TH时间紧迫感': 20, 'CH好胜心': 22, 'L测谎':5 },
+            { "项目":"",'TH时间紧迫感': 20,},
+            { "项目":"",  'CH好胜心': 22,},
+            { "项目":"",  'L测谎':5 },
           ]
         }
       }
