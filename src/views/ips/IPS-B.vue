@@ -47,7 +47,8 @@
       <main-pursue
         v-if="showStatus[0]"
         :is-edit="isEdit"
-        :patient-id="patientId+''"
+       :patient-id="patientId+''"
+        :key="patientId"
         :medical-record-id="medicalRecordId+''"
         next-title="EEG"
         @nextStep="nextStep">
@@ -56,6 +57,8 @@
         v-if="showStatus[1]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
         @nextStep="nextStep"
         prev-title="主诉"
         next-title="问卷"
@@ -65,6 +68,8 @@
       v-if="showStatus[2]"
       :is-edit="isEdit"
       :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
       prev-title="EEG"
       next-title="量表"
       @nextStep="nextStep"
@@ -74,6 +79,8 @@
         v-if="showStatus[3]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
         prev-title="问卷"
         next-title="综合分析"
         @nextStep="nextStep"
@@ -83,6 +90,8 @@
         v-if="showStatus[4]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
         prev-title="量表"
         next-title="治疗方案"
         @nextStep="nextStep"
@@ -92,6 +101,8 @@
         v-if="showStatus[5]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
         prev-title="综合分析"
         @prevStep="prevStep"
         @finishCommit="finishCommit">
@@ -111,7 +122,7 @@
   import curePlan from './components/curePlan';
   import { Message, MessageBox } from 'element-ui'
   export default {
-    name: "IPS-A",
+    name: "IPS-B",
     components: {mainPursue, hrv, eeg,easyQuestion,scale,analysis,curePlan},
     data() {
       return {

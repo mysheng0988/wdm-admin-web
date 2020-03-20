@@ -29,36 +29,32 @@
       },
       watch: {
         '$route' (to) {
-          let tabObj={};
+          this.initPath(to)
+        }
+      },
+      mounted () {
+        this.initPath(this.$route)
+      },
+      methods: {
+        initPath(obj){
+           let tabObj={};
           let param="";
           let id="";
-          if(to.query.id){
-            id=to.query.id;
+          if(obj.query.id){
+            id=obj.query.id;
           }
-          tabObj.name=to.meta.title+id;
-          let query=to.query;
+          tabObj.name=obj.meta.title+id;
+          let query=obj.query;
           if(JSON.stringify(query)!="{}"){
               param="?"+this.objToParam(query);
           }
 
-          tabObj.path=to.path+param;
+          tabObj.path=obj.path+param;
           if(this.notRepeat(tabObj)){
             this.$store.commit('SET_TABS',tabObj);
           }
           this.$store.commit('SET_ACTIVE',tabObj.path)
-        }
-      },
-      mounted () {
-       let tabObj={};
-       tabObj.name=this.$route.meta.title;
-       tabObj.path=this.$route.path;
-       let repeat=this.notRepeat(tabObj);
-        if (repeat) {
-          this.$store.commit('SET_TABS', {path: this.$route.path, name: this.$route.meta.title})
-          this.$store.commit('SET_ACTIVE', this.$route.path)
-        }
-      },
-      methods: {
+        },
         objToParam(data) {
           let _result = [];
           for (let key in data) {

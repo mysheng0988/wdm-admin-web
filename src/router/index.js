@@ -99,7 +99,7 @@ export const constantRouterMap = [
         path: 'index',
         name: 'index',
         component: () => import('@/views/ips/index'),
-        meta: {title: '检查列表', icon: 'product-list'},
+        meta: {title: '心身检查', icon: 'product-list'},
       },
       {
         path: 'IPS-A',

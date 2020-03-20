@@ -97,10 +97,10 @@
             <el-input v-model="formDept.deptNo" placeholder="请输入科室编号" maxlength="10" show-word-limit clearable></el-input>
           </el-form-item>
           <el-form-item label="负责人:"  prop="supervisorName" >
-            <el-input v-model="formDept.supervisorName" placeholder="请输入角色名称" maxlength="10" show-word-limit clearable></el-input>
+            <el-input v-model="formDept.supervisorName" placeholder="请输入负责人" maxlength="10" show-word-limit clearable></el-input>
           </el-form-item>
           <el-form-item label="手机号码:"  prop="supervisorPhoneNumber" >
-            <el-input v-model="formDept.supervisorPhoneNumber" placeholder="请输入角色名称" maxlength="11" show-word-limit clearable></el-input>
+            <el-input v-model="formDept.supervisorPhoneNumber" placeholder="请输入手机号" maxlength="11" show-word-limit clearable></el-input>
           </el-form-item>
           <el-form-item label="备注:">
             <el-input
@@ -168,6 +168,7 @@
           ],
           supervisorPhoneNumber: [
             {required: true, message: '填写负责任手机号', trigger: 'blur'},
+            {pattern: /^1[3456789]\d{9}$/, message: '身份证格式不正确',trigger: 'blur'}
           ],
         },
         dialogTitle:"新增科室",

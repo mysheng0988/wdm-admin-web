@@ -1,21 +1,28 @@
 <template>
   <div style="margin-top: 50px">
     <el-form   ref="productInfoForm" label-width="160px" >
-        <el-form-item label="神经递质调节药物方案:">
+        <el-form-item label="神经递质调节药物方案:" v-if="drugPlan==0">
            <p class="add-btn" @click="dialogVisible=true"><i class="el-icon-plus" ></i>药物筛选</p>
         </el-form-item>
-        <el-form-item label="神经递质调节药物方案:" v-if="false">
-          <el-input
+        <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length!=0">
+           <div class="text-box"  >
+             <div v-for="(item,index) in drugPlan" :key="index">
+                <p>({{index+1}})、{{item.diagnosis}}:</p>
+               <p>{{item.drugName}},{{item.dosage}},{{item.medicationAdvice}}</p>
+             </div>
+             
+          </div>
+          <!-- <el-input
             class="textarea"
             placeholder="请输入详细内容"
             type="textarea"
             :autosize="{minRows: 3, maxRows: 6}"
             show-word-limit
-            clearable></el-input>
+            clearable></el-input> -->
         </el-form-item>
-        <el-form-item label="躯体化症状药物方案:">
-           <div class="text-box" >
-            <div v-for="(item1,index1) in dataIndex" :key="index1">
+        <el-form-item label="躯体化症状药物方案:" v-if="somatizationSymptomsDrugRegimen">
+           <div class="text-box"  >
+            <div v-for="(item1,index1) in somatizationSymptomsDrugRegimen.data" :key="index1">
                 <div class="box-title">{{item1.title}}</div>
                 <div  v-for="(item2,index2) in item1.data" :key="index2" style="padding-left:20px" >
                     <div class="box-title">{{item2.title}}</div>
@@ -190,21 +197,21 @@
       <el-transfer
         filterable
         :filter-method="filterMethod"
-        filter-placeholder="请输入城市拼音"
+        filter-placeholder="请输入关键字检索"
         v-model="value2"
         :titles="titles"
         :data="data2">
       </el-transfer>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
+        <el-button type="primary" @click="saveFilterData">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-  import {analysisData,saveContraindications} from '@/api/analysis'
+  import {analysisData,saveContraindications,saveFilter} from '@/api/analysis'
   const defaultPlan={
     psychosomaticTherapy:"",//心身治疗建议
     exercisePrescription:"",//"运动处方"
@@ -218,7 +225,6 @@
       "第2个月随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；"
       ,"第3个月随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容。"]
     },//随访建议
-    somatizationSymptomsDrugRegimen:"",
   }
   import { Loading } from 'element-ui';
   export default {
@@ -259,14 +265,17 @@
            titles:["可选药物","已选药物"],
         value2: [],
         filterMethod(query, item) {
-          return item.pinyin.indexOf(query) > -1;
+          return item.label.indexOf(query) > -1;
         },
+        drugPlan:[],
         dialogVisible:false,
-         dialogVisible2:true,
+         dialogVisible2:false,
         filterText:"",
         selectedData:[],
         data: [],
-  dataIndex: [
+  somatizationSymptomsDrugRegimen:{
+    title:"hhhhhh",
+    data: [
                     {
                         "data": [
                             {
@@ -400,7 +409,7 @@
                         ],
                         "title": "应激性心肌病用药建议"
                     }
-                ],
+                ]},
         defaultProps: {
           children: 'subList',
           label: 'name'
@@ -417,13 +426,38 @@
        this.initDataList();
     },
     methods: {
+
+      saveFilterData(){
+        
+          let param={
+            interaction:this.value2
+            }
+          saveFilter(param,this.medicalRecordId).then(res=>{
+            if(res.code=200){
+                console.log(res)
+                this.drugPlan=res.dataList;
+                this.dialogVisible2=false;
+            }
+          })
+      },
       saveContraindicationsData(){
           let param={
-            medicalRecordId:this.medicalRecordId,
             contraindications:this.$refs.tree.getCheckedNodes(true)
           }
-          saveContraindications(param).then(res=>{
+          saveContraindications(param,this.medicalRecordId).then(res=>{
             if(res.code=200){
+
+              this.data2=[];
+              for(let item of res.dataList){
+                  let param={};
+                  param.key=item;
+                  param.label=item;
+                  this.data2.push(param)
+              }
+              console.log(this.data2)
+
+               this.dialogVisible=false;
+              this.dialogVisible2=true;
               console.log(res)
             }
           })
@@ -486,6 +520,7 @@
       analysisData(param).then(res=>{
          loading.close();
           let data={};
+          console.log(55555555555555555555)
           if(res.code==200){
             data=res.dataList[0]; 
             this.data=data.contraindicationsList;

@@ -33,9 +33,10 @@ export function additionalQuestions(medicalRecordId) {
     method:'get',
   })
 }
-export function submitAdditionalQuestions(data) {
+export function submitAdditionalQuestions(data,medicalRecordId) {
   return request({
-    url:'ips/scale/additionalQuestions/'+data.medicalRecordId+"?answers="+data.answers[0]+"&answers="+data.answers[1]+"&answers="+data.answers[2]+"&answers="+data.answers[3],
+    url:'ips/scale/additionalQuestions/'+medicalRecordId,
     method:'post',
+    data:data
   })
 }

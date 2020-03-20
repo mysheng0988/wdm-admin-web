@@ -1,13 +1,21 @@
 <template> 
-  <div>
-   
-  </div>
+   <el-input placeholder="请输入详细内容"
+              v-model="editText"
+              class="text-boder"
+              type="textarea"
+              autosize>
+    </el-input>
 </template>
 <script>
-  import PatDetail from './components/patDetail'
+   
   export default {
-    name: 'updatePat',
-    components: { PatDetail }
+    name: 'editText',
+     props: {
+      editText: {
+        type: String,
+        value:""
+      }
+    }
   }
 </script>
 <style>

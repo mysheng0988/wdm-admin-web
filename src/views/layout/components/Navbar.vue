@@ -9,12 +9,13 @@
         <p>{{name}}</p>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
-        <router-link class="inlineBlock" to="/">
+        <!-- <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
             首页
           </el-dropdown-item>
-        </router-link>
-        <el-dropdown-item divided>
+        </router-link> -->
+        <!-- <el-dropdown-item divided> -->
+        <el-dropdown-item>
           <span @click="logout" style="display:block;">退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -26,7 +27,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-
+import { Loading } from 'element-ui';
 export default {
   components: {
     Breadcrumb,
@@ -47,8 +48,20 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout() {
-      this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
+      const loading =Loading.service({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.8)'
+        });
+      this.$store.dispatch('LogOut').then(res => {
+        loading.close();
+        if(res.code==200){
+          sessionStorage.clear();
+           location.reload()
+        }
+      }).catch(err=>{
+         loading.close();
       })
     }
   }

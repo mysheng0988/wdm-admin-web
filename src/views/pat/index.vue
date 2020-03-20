@@ -3,13 +3,13 @@
     <el-form :inline="true" :model="listQuery" size="small">
       <div>
         <el-form-item >
-          <el-input  placeholder="患者编号" v-model="listQuery.pid"></el-input>
+          <el-input  placeholder="患者编号" v-model="listQuery.pid" clearable></el-input>
         </el-form-item>
         <el-form-item >
-          <el-input placeholder="患者姓名" v-model="listQuery.realName"></el-input>
+          <el-input placeholder="患者姓名" v-model="listQuery.realName" clearable></el-input>
         </el-form-item>
         <el-form-item >
-          <el-input placeholder="身份证号" v-model="listQuery.cardNo"></el-input>
+          <el-input placeholder="身份证号" v-model="listQuery.cardNo" clearable></el-input>
         </el-form-item>
         <el-form-item >
           <!-- <el-date-picker
@@ -50,25 +50,25 @@
                 style="width: 100%"
                 :data="list"
                 v-loading="listLoading" border>
-        <el-table-column label="序号" width="60" align="center">
+        <!-- <el-table-column label="序号" width="60" align="center">
           <template slot-scope="scope">{{scope.$index+1}}</template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="编号" width="80" align="center">
           <template slot-scope="scope">{{scope.row.pid}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
           <template slot-scope="scope">{{scope.row.realName }}</template>
         </el-table-column>
-        <el-table-column label="出生日期"  align="center">
-          <template slot-scope="scope">{{scope.row.birthday }}</template>
-        </el-table-column>
-        <el-table-column label="年龄"  align="center">
+        <el-table-column label="年龄" width="100" align="center">
           <template slot-scope="scope">
             {{scope.row.birthday|formatAge}}
           </template>
         </el-table-column>
-        <el-table-column label="性别" align="center">
+        <el-table-column label="性别" width="100" align="center">
           <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
+        </el-table-column>
+         <el-table-column label="出生日期"  align="center">
+          <template slot-scope="scope">{{scope.row.birthday }}</template>
         </el-table-column>
         <el-table-column label="身份证号" align="center">
           <template slot-scope="scope">{{scope.row.cardNo }}</template>
@@ -131,8 +131,8 @@
 
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
+        <el-button type="primary" @click="readCardData">刷 卡</el-button>
+        <el-button type="success" @click="addPatient('cardForm')">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -185,7 +185,7 @@
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
+        <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -193,6 +193,8 @@
 
 <script>
   import {queryPatient,queryExamination} from '@/api/patient'
+  import {medicalRecordListData} from '@/api/medicalRecord'
+  import {readCard} from '@/api/cardRead'
   import {mapGetters} from 'vuex'
   import { Message, MessageBox } from 'element-ui'
   export default {
@@ -267,11 +269,13 @@
         this.patientMsg=val;
         this.listLoading=true;
         let param={
-           pid: val.pid,
+           queryParamMedicalRecord : {
+             patientId:this.patientId
+           },
            pageNum: 1,
           pageSize: 20
         }
-        queryPatient(param).then(res=>{
+        medicalRecordListData(param).then(res=>{
           this.listLoading=false;
           if(res.code==200){
             this.taskList=res.dataList;
@@ -300,6 +304,16 @@
       handleTimeChange(val){
         this.listQuery.createTimeStart=this.createDate[0];
         this.listQuery.createTimeEnd=this.createDate[1];
+      },
+      readCardData(){
+        readCard().then(res=>{
+          if(res.cardno){
+            this.cardForm.cardID=res.cardno
+            let cardNo=res.cardNo;
+          }else{
+            this.$message.warning("刷卡失败")
+          }
+        })
       },
       addPatient(formName){
         this.$refs[formName].validate((valid) => {

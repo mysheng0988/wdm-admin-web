@@ -26,7 +26,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     const res = response.data;
-    if(res.code==0||res.code==804||res.code=="200"){
+    if(res.retcode||res.code==804||res.code=="200"){
       return response.data
     }else if(res.code=="601"){
       Message({

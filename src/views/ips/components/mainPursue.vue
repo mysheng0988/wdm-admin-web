@@ -124,7 +124,7 @@
           <el-option label="轻度" value="轻度"></el-option>
           <el-option label="中度" value="中度"></el-option>
           <el-option label="重度" value="重度"></el-option>
-          <el-option label="极中度" value="极中度"></el-option>
+          <el-option label="极重度" value="极中度"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="运动症状:">

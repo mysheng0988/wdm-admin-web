@@ -7,12 +7,11 @@
         <el-form-item >
           <el-input placeholder="患者姓名" v-model="listQuery.realName"></el-input>
         </el-form-item>
-        <el-form-item label="测评状态:">
+        <el-form-item label="报告类型:">
           <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
-            <el-option label="全部" value=""></el-option>
-            <el-option label="未测评" value="1"></el-option>
-            <el-option label="测评中" value="2"></el-option>
-            <el-option label="已完成" value="3"></el-option>
+            <el-option label="全部" ></el-option>
+            <el-option label="筛查报告" ></el-option>
+            <el-option label="综合测评报告"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>

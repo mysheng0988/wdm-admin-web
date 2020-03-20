@@ -20,8 +20,8 @@ export function getInfo() {
 
 export function logout() {
   return request({
-    url: '/admin/logout',
-    method: 'post'
+    url: 'base/user/logout',
+    method: 'get'
   })
 }
 

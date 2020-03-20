@@ -18,10 +18,11 @@
               @change="handleTimeChange">
           </el-date-picker>
         </el-form-item> -->
-        <el-form-item label="测评状态:">
-          <el-radio-group v-model="listQuery.examinationStatus">
-            <el-radio :label="1" >未测评</el-radio>
-            <el-radio :label="2" >测评中</el-radio>
+        <el-form-item label="测评状态:" >
+          <el-radio-group v-model="listQuery.examinationStatus" @change="queryData">
+            <el-radio label="" >全部</el-radio>
+            <el-radio label="1" >未测评</el-radio>
+            <el-radio label="2" >测评中</el-radio>
           </el-radio-group>
           <!-- <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
             <el-option label="全部" value=""></el-option>
@@ -30,34 +31,37 @@
             <el-option label="已完成" value="3"></el-option>
           </el-select> -->
         </el-form-item>
-        <el-form-item>
+        <!-- <el-form-item>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
-        </el-form-item>
+        </el-form-item> -->
     </el-form>
     <div class="table-container">
       <el-table ref="productCateTable"
                 style="width: 100%"
                 :data="list"
                 v-loading="listLoading" border>
-        <el-table-column label="序号" width="60" align="center">
+        <!-- <el-table-column label="序号" width="60" align="center">
           <template slot-scope="scope">{{scope.$index+1}}</template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="编号" width="80" align="center">
-          <template slot-scope="scope">{{scope.row.pid}}</template>
+          <template slot-scope="scope">{{scope.row.patientId}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
-          <template slot-scope="scope">{{scope.row.realName }}</template>
+          <template slot-scope="scope">{{scope.row.patientVO.realName }}</template>
         </el-table-column>
         <el-table-column label="出生日期"  align="center">
-          <template slot-scope="scope">{{scope.row.birthday }}</template>
+          <template slot-scope="scope">{{scope.row.patientVO.birthday }}</template>
         </el-table-column>
         <el-table-column label="年龄"  align="center">
           <template slot-scope="scope">
-            {{scope.row.birthday|formatAge}}
+            {{scope.row.patientVO.birthday|formatAge}}
           </template>
         </el-table-column>
         <el-table-column label="性别" align="center">
-          <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
+          <template slot-scope="scope">{{scope.row.patientVO.gender |formatGender}}</template>
+        </el-table-column>
+         <el-table-column label="测评项目"  align="center">
+          <template slot-scope="scope">{{scope.row.examinationId |formatExamination}}</template>
         </el-table-column>
         <el-table-column label="来源科室"  align="center">
           <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
@@ -141,12 +145,7 @@
         total:0,
         active:0,
         listQuery: {
-          cardNo: "",
-          createTimeStart: "",
-          examinationId: null,
-          examinationStatus: 1,
-          pid: "",
-          realName: "",
+          examinationStatus: "",
           pageNum: 1,
           pageSize: 10
         },
@@ -167,7 +166,7 @@
         if(gender){
           return gender?"女":"男"
         }
-       return "";
+       return "男";
       },
       formatAge(birthday){
         if(birthday){
@@ -190,6 +189,19 @@
             break;
         }
 
+      },
+      formatExamination(val){
+        switch (val) {
+          case 1:
+            return "筛查测评"
+            break;
+          case 2:
+            return "专科测评"
+            break;
+          case 3:
+            return "综合测评"
+            break;
+        }
       }
     },
     methods: {
@@ -198,8 +210,14 @@
         this.listQuery.createTimeEnd=this.createDate[1];
       },
       addPursue(data){
+        let path="IPS-C";
+        if(data.examinationId==1){
+          path="IPS-A"
+        }else if(data.examinationId==2){
+          path="IPS-B"
+        }
         this.$router.push({
-          path: '/ips/IPS-C',
+          path: '/ips/'+path,
           query: {
             id: data.patientId,
             medicalRecordId:data.id

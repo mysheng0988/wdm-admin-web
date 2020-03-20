@@ -12,8 +12,8 @@
       <div v-show="showBase">
         <el-row :gutter="10">
           <el-col :span="8">
-            <el-form-item label="姓名："  prop="realName"  maxlength="10" show-word-limit>
-              <el-input v-model="patObj.realName" placeholder="请输入姓名"></el-input>
+            <el-form-item label="姓名："  prop="realName" >
+              <el-input v-model="patObj.realName" placeholder="请输入姓名" clearable maxlength="20" show-word-limit></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -81,14 +81,14 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="身  高："  prop="height" >
-              <el-input v-model="patObj.height">
+              <el-input v-model.number="patObj.height">
                 <template slot="append" placeholder="请输入内容">cm</template>
               </el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="体  重："  prop="weight" >
-              <el-input v-model="patObj.weight" placeholder="请输入内容">
+              <el-input v-model.number="patObj.weight" placeholder="请输入内容">
                 <template slot="append">kg</template>
               </el-input>
             </el-form-item>
@@ -236,7 +236,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"  prop="beHospitalizedNumber" >
-            <el-input v-model="medObj.beHospitalizedNumber"></el-input>
+            <el-input  v-model.number="medObj.beHospitalizedNumber"></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">
@@ -264,13 +264,13 @@
           </el-form-item>
         </el-col>
         <el-col :span="8">
-          <el-form-item label="床号："   >
-            <el-input v-model="medObj.bedNo"  placeholder="请输入床号"></el-input>
+          <el-form-item label="床号："  prop="bedNo" >
+            <el-input type="number" v-model.number="medObj.bedNo"  placeholder="请输入床号" clearable></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">
           <el-form-item label="卡号："   prop="cardId">
-            <el-input v-model="medObj.cardId" placeholder="请刷卡" 
+            <el-input v-model.number="medObj.cardId"   placeholder="请刷卡" 
             clearable maxlength="8" show-word-limit></el-input>
           </el-form-item>
         </el-col>
@@ -316,7 +316,7 @@
     childrenSituation: "",
     crowdRole: "无",
     address: "",
-    dominantHand: true,
+    dominantHand: false,
     education: "",
     faith: "",
     familyRanking: 1,
@@ -366,7 +366,7 @@
         rules: {
           realName: [
             {required: true, message: '请输入分类名称', trigger: 'blur'},
-            {min: 2, max: 140, message: '长度在 2 到 140 个字符', trigger: 'blur'}
+            {min: 2, max: 140, message: '长度在 2 到 20 个字符', trigger: 'blur'}
           ],
            nation: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -390,10 +390,12 @@
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           height: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type:'number', message: '必须为数字',trigger: 'blur'}
           ],
           weight: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type:'number', message: '必须为数字',trigger: 'blur'}
           ],
           maritaStatus: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -411,13 +413,15 @@
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           beHospitalizedNumber: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+            { type: 'number', message: '必须为数字',trigger: 'blur'}
           ],
-          bedNo: [
-            {required: true, message: '必填字段', trigger: 'blur'}
-          ],
+          // bedNo: [
+          //   {required: false, type: 'number',trigger: 'blur',message: '必须为数字值'}
+          // ],
           cardId: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type: 'number', message: '卡号必须数字',trigger: 'blur'}
           ],
           fromUid: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -495,10 +499,10 @@
             this.medObj.patientId=this.patObj.pid;
             let arrStr=this.patObj.address.split(",");
             if(arrStr.length>2){
-              this.address=arrStr[3]
               this.select.province=arrStr[0]
               this.select.city=arrStr[1]
               this.select.area=arrStr[2]
+              this.address=arrStr[3]
             }else{
               this.address=arrStr[0]
               this.showBase=true;

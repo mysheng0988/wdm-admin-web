@@ -39,7 +39,7 @@
       <el-steps :active="active" finish-status="success" align-center>
         <el-step title="主诉" @click.native="changeTab(0)"></el-step>
         <el-step title="HRV"  @click.native="changeTab(1)"></el-step>
-        <el-step title="问卷"></el-step>
+        <el-step title="初筛首访简易问卷"></el-step>
         <el-step title="量表"></el-step>
         <el-step title="综合分析"></el-step>
       </el-steps>
@@ -47,6 +47,7 @@
         v-if="showStatus[0]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
         :medical-record-id="medicalRecordId+''"
         next-title="HRV"
         @nextStep="nextStep">
@@ -54,34 +55,42 @@
       <hrv
         v-if="showStatus[1]"
         :is-edit="isEdit"
-        :patient-id="patient.pid+''"
+        :key="patientId"
+        :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
         @nextStep="nextStep"
         prev-title="主诉"
-        next-title="问卷"
+        next-title="初筛首访简易问卷"
         @prevStep="prevStep">
       </hrv>
       <easy-question
-      v-if="showStatus[3]"
+      v-if="showStatus[2]"
       :is-edit="isEdit"
+      :key="patientId"
       :patient-id="patientId+''"
+      :medical-record-id="medicalRecordId+''"
       prev-title="HRV"
       next-title="量表"
       @nextStep="nextStep"
       @prevStep="prevStep">
     </easy-question>
       <scale
-        v-if="showStatus[4]"
+        v-if="showStatus[3]"
         :is-edit="isEdit"
-        :patient-id="patientId+''"
-        prev-title="问卷"
+       :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
+        prev-title="初筛首访简易问卷"
         next-title="综合分析"
         @nextStep="nextStep"
         @prevStep="prevStep">
       </scale>
       <analysis
-        v-if="showStatus[5]"
+        v-if="showStatus[4]"
         :is-edit="isEdit"
         :patient-id="patientId+''"
+        :key="patientId"
+        :medical-record-id="medicalRecordId+''"
         prev-title="量表"
         @nextStep="nextStep"
         @prevStep="prevStep">

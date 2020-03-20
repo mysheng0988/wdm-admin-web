@@ -37,42 +37,39 @@
            <el-button @click="addText('socialFunction')" class="text-boder blue" icon="el-icon-edit">
              {{index+1}}、</el-button>
               <el-input placeholder="请输入详细内容"
-              v-model="data.socialFunction[index]"
-              class="text-boder"
-              type="textarea"
-              autosize>
-            </el-input>
+                v-model="data.socialFunction[index]"
+                class="text-boder"
+                type="textarea"
+                autosize>
+              </el-input>
+            <!-- <edit-text :edit-text="item"></edit-text> -->
             <el-button  @click="deleteText(data.socialFunction,index)" class="text-boder red" icon="el-icon-delete"></el-button>
           </div>
         </div>
       </el-form-item>
       <el-form-item label="辅助诊断建议:">
        <div class="text-box" >
-          <div class="flex-wrap" v-for="(item,index) in data.initialDiagnosis" :key="index" >
-            <div v-for="(itemData ,indexData) in item" :key="indexData">
-                    {{indexData}}：{{itemData}}
+          <div class="flex-wrap" v-for="(item,index) in data.initialDiagnosisVO" :key="index" >
+            <div >
+                  {{item}}
             </div>
-           <!-- <el-button @click="addText('initialDiagnosis')" class="text-boder blue" icon="el-icon-edit">
-             {{index+1}}、</el-button>
-              <el-input placeholder="请输入详细内容"
-              v-model="data.initialDiagnosis[index]"
-              class="text-boder"
-              type="textarea"
-              autosize>
-            </el-input>
-            <el-button  @click="deleteText(data.initialDiagnosis,index)" class="text-boder red" icon="el-icon-delete"></el-button> -->
           </div>
         </div>
       </el-form-item>
       <el-form-item label="心身疾病成因分析:">
-          <el-input
-            class="textarea"
-            v-model="data.causes"
-            placeholder="请输入详细内容"
-            type="textarea"
-            :autosize="{minRows: 3, maxRows: 6}"
-            show-word-limit
-            clearable></el-input>
+        <div class="text-box" >
+          <div class="flex-wrap" v-for="(item,index) in data.causes" :key="index" >
+            <el-button @click="addText('causes')" class="text-boder blue" icon="el-icon-edit">
+             {{index+1}}、</el-button>
+              <el-input placeholder="请输入详细内容"
+              v-model="data.causes[index]"
+              class="text-boder"
+              type="textarea"
+              autosize>
+            </el-input>
+            <el-button  @click="deleteText(data.causes,index)" class="text-boder red" icon="el-icon-delete"></el-button>
+          </div>
+        </div>
       </el-form-item>
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
@@ -86,8 +83,10 @@
 <script>
   import {analysisData,updataData} from '@/api/analysis'
   import { Loading } from 'element-ui';
+   import editText from './editText';
   export default {
     name: "analysis",
+     components: {editText},
     props: {
       isEdit: {
         type: Boolean,
@@ -155,11 +154,13 @@
             data.socialFunction=[],
             data.socialFunction.push("");
         }
-        if(!data.initialDiagnosis||data.initialDiagnosis.length==0){
-           data.initialDiagnosis=[],
-           data.initialDiagnosis.push("");
-        }
+        // if(!data.initialDiagnosis||data.initialDiagnosis.length==0){
+        //    data.initialDiagnosis=[],
+        //    data.initialDiagnosis.push("");
+        // }
           this.data=data;
+      }).catch(err=>{
+        loading.close();
       })
 
     },
@@ -185,15 +186,15 @@
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.8)'
         });
-         this.$emit('nextStep');
-        // updataData(this.data).then(res=>{
-        //     loading.close();
-        //     if(res.code==200){
-        //         this.$emit('nextStep');
-        //     }
-        // }).catch(err=>{
-        //     loading.close();
-        // });
+         //this.$emit('nextStep');
+        updataData(this.data).then(res=>{
+            loading.close();
+            if(res.code==200){
+                this.$emit('nextStep');
+            }
+        }).catch(err=>{
+            loading.close();
+        });
        
       },
       handleFinishCommit(){

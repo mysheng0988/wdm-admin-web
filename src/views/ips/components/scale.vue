@@ -141,22 +141,26 @@
         this.$emit('prevStep')
       },
       handleChange(index){
-        if(index==0&&this.problemData[0].answer==1){
-          this.handleAddQusetion();
-        }
+        // if(index==0&&this.problemData[0].answer==1){
+        //   this.handleAddQusetion();
+        // }
       },
       handleAddQusetion(){
-          let param={
-            medicalRecordId:this.medicalRecordId,
-            answers:[]
-          };
-          for(let item of this.problemData){
-            if(item.answer===""){
-              item.answer=0;
+  
+            let param={
+              answers:[]
             }
-            param.answers.push(item.answer)
+          
+          for(let item of this.problemData){
+            let param1={};
+              console.log(item)
+              console.log(item.num)
+               console.log(item.answer)
+              param1[item.num]=item.answer;
+              param.answers.push(param1);
           }
-          submitAdditionalQuestions(param).then(res=>{
+          // console.log(param)
+          submitAdditionalQuestions(param,this.medicalRecordId).then(res=>{
               if(res.code==200){
                 this.$emit('nextStep');
                 this.dialogVisible2=false;
@@ -168,11 +172,12 @@
          additionalQuestions(this.medicalRecordId).then(res=>{
            if(res.code==200){
              this.dialogVisible2=true;
-             this.problemData=JSON.parse(res.dataList[0]);
-                console.log(this.problemData)
+             this.problemData=res.dataList[0];
+           }else{
+            this.$emit('nextStep');
            }
          })
-        //this.$emit('nextStep');
+        
       }else{
         this.$message.warning("您的量表还没有做完")
        }

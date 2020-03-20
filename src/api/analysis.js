@@ -13,9 +13,16 @@ export function updataData(data) {
     data:data
   })
 }
-export function saveContraindications(data) {
+export function saveContraindications(data,medicalRecordId) {
   return request({
-    url:'ips/report/filter/contraindications/'+data.medicalRecordId,
+    url:'ips/report/filter/contraindications/'+medicalRecordId,
+    method:'post',
+    data:data
+  })
+}
+export function saveFilter(data,medicalRecordId) {
+  return request({
+    url:'ips/report/filter/interaction/'+medicalRecordId,
     method:'post',
     data:data
   })

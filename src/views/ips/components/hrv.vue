@@ -14,6 +14,16 @@
       </el-form-item>
 
     </el-form>
+    <el-dialog
+        title="HRV检测结果"
+        :visible.sync="dialogVisible"
+        width="700px">
+        <el-image :src="hrvPath"></el-image>
+        <!-- <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span> -->
+      </el-dialog>
   </div>
 </template>
 
@@ -41,7 +51,8 @@
     },
     data() {
       return {
-
+        hrvPath:"",
+        dialogVisible:false,
         rules: {
           goodsName: [
             {required: true, message: '请输入商品名称', trigger: 'blur'},
@@ -56,17 +67,23 @@
       },
     },
     created() {
-    //  this.getHRVData();
+     
     },
     methods: {
       handleResult(){
-        this.$router.push('/ips/resultHRV');
+      this.getHRVData()
       },
-      // getHRVData(){
-      //   getHRV(this.medicalRecordId).then(res=>{
-      //       console.log(res)
-      //   })
-      // },
+      getHRVData(){
+
+        getHRV(this.medicalRecordId).then(res=>{
+          if(res.code==200){
+              this.dialogVisible=true;
+              this.hrvPath=res.dataList[0].resultImageUrl;
+          }
+           
+            console.log(res)
+        })
+      },
       verificationCode(){
         getVerificationCode().then(res=>{
           if(res.code==200){

@@ -276,7 +276,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
         getMedicalRecord(this.medicalRecordId).then(res=>{
           if(res.code==200){
               this.questionNo=res.dataList[0].questionnaireNo;
-              this.completeQuestionnaire=res.dataList[0].questionnaireNo;
+              this.completeQuestionnaire=res.dataList[0].completeQuestionnaire;
           }
         });
       },

@@ -3,9 +3,9 @@
     <el-form  :rules="rules" ref="productInfoForm" label-width="120px" >
         <el-form-item style="text-align: center" >
           <div class="ips-input">植物神经功能检测--》检测科室:{{info.deptName}}</div>
-          <el-button type="primary">记录结果</el-button>
           <el-button type="primary" @click="verificationCode" >获取验证码</el-button>
           <el-button type="primary" ><a href="EEG://">开始检测</a></el-button>
+           <el-button type="primary" @click="getEEGData">记录结果</el-button>
         </el-form-item>
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
@@ -13,11 +13,22 @@
       </el-form-item>
 
     </el-form>
+    <el-dialog
+        title="EEG检测结果"
+        :visible.sync="dialogVisible"
+        top="5vh"
+        width="700px">
+        <el-image :src="eegPath"></el-image>
+        <!-- <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span> -->
+      </el-dialog>
   </div>
 </template>
 
 <script>
-  import {getHRV,getVerificationCode} from '@/api/HRV'
+  import {getEEG,getVerificationCode} from '@/api/HRV'
   export default {
     name: "ProductInfoDetail",
     props: {
@@ -40,7 +51,8 @@
     },
     data() {
       return {
-
+        dialogVisible:false,
+        eegPath:"",
         rules: {
           goodsName: [
             {required: true, message: '请输入商品名称', trigger: 'blur'},
@@ -58,12 +70,18 @@
       },
     },
     created() {
-
+      //this.getHRVData()
 
     },
     methods: {
-      getHRVData(){
-        getHRV(this.medicalRecordId).then(res=>{
+      getEEGData(){
+        getEEG(this.medicalRecordId).then(res=>{
+          if(res.code==200){
+            this.dialogVisible=true;
+            this.eegPath=res.dataList[0].resultImageUrl;
+          }else{
+            this.$message.warning("没有查到数据")
+          }
           console.log(res)
         })
       },

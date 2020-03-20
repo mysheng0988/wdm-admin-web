@@ -17,3 +17,9 @@ export function historyHrv(param) {
     method:'get',
   })
 }
+export function getEEG(medicalRecordId) {
+  return request({
+    url:'ips/eeg/medicalRecordId/'+medicalRecordId,
+    method:'get',
+  })
+}

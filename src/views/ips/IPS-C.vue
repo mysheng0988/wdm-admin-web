@@ -70,6 +70,7 @@
         :is-edit="isEdit"
          :key="patientId"
         :patient-id="patientId+''"
+         :medical-record-id="medicalRecordId+''"
         @nextStep="nextStep"
         prev-title="HRV"
         next-title="问卷"

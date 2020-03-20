@@ -78,7 +78,7 @@
                   class="textarea"
                   placeholder="请输入详细内容"
                   type="textarea"
-                  v-model="hosForm.address"
+                  v-model="address"
                   :autosize="{minRows: 2, maxRows: 2}"
                   maxlength="100"
                   show-word-limit
@@ -149,6 +149,7 @@
         radio:null,
         list: null,
         shopList:[],
+        address:"",
         listLoading: false,
         dialogVisible:false,
         total:0,
@@ -186,13 +187,13 @@
           this.select.city=selectAddress[1];
           this.select.area=selectAddress[2];
           this.hosForm=obj
-          this.hosForm.address=selectAddress[3]
+          this.address=selectAddress[3]
         }else{
           this.hosForm=obj
         }
       },
       addHos(){
-        this.hosForm.address=this.select.province+","+this.select.city+","+this.select.area+","+this.hosForm.address;
+        this.hosForm.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
         if(this.hosForm.id){
           updateHospital(this.hosForm).then(res=>{
             if(res.code==200){

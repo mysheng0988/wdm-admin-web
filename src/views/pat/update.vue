@@ -79,14 +79,14 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="身  高："  prop="height" >
-              <el-input v-model="patObj.height">
+              <el-input v-model.number="patObj.height">
                 <template slot="append" placeholder="请输入内容">cm</template>
               </el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="体  重："  prop="weight" >
-              <el-input v-model="patObj.weight" placeholder="请输入内容">
+              <el-input v-model.number="patObj.weight" placeholder="请输入内容">
                 <template slot="append">kg</template>
               </el-input>
             </el-form-item>
@@ -212,7 +212,7 @@
     childrenSituation: "",
     crowdRole: "无",
     address: "",
-    dominantHand: true,
+    dominantHand: false,
     education: "",
     faith: "",
     familyRanking: 1,
@@ -273,10 +273,12 @@
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           height: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type:'number', message: '必须为数字',trigger: 'blur'}
           ],
           weight: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type:'number', message: '必须为数字',trigger: 'blur'}
           ],
           maritaStatus: [
             {required: true, message: '必填字段', trigger: 'blur'}
