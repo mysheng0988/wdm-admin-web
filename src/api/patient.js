@@ -88,3 +88,10 @@ export function getMedicalRecordPatient(param) {
     method:'get'
   })
 }
+
+export function getRecordPatient(id) {
+  return request({
+    url:'base/medicalRecord/'+id,
+    method:'get',
+  })
+}

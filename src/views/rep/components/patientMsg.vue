@@ -6,46 +6,43 @@
         <el-form ref="form" label-width="80px" size="mini">
             <div class="flex-wrap">
               <el-form-item class="flex-item" label="姓 名:">
-                <p>小明</p>
+                <p>{{patientVo.realName}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="性别:">
-                <p>女</p>
+                <p>{{patientVo.gender?"女":"男"}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="年 龄:">
-                <p>41</p>
+                <p> {{patientVo.birthday | formatAge}}</p>
               </el-form-item>
           </div>
             <div class="flex-wrap">
               <el-form-item class="flex-item" label="病历号:">
-                <p>0009617136</p>
+                <p>{{patientData.beHospitalizedNumber}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="民 族:">
-                <p>汉</p>
+                <p>{{patientVo.nation}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="宗教:">
-                <p>无</p>
+                <p>{{patientVo.profession}}</p>
               </el-form-item>
           </div>
           <div class="flex-wrap">
               <el-form-item class="flex-item" label="婚姻:">
-                <p>未婚</p>
+                <p>{{patientVo.maritaStatus}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="文化程度:">
-                <p>大专</p>
+                <p>{{patientVo.education}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="科室:">
-                <p>心血管内科</p>
+                <p>{{patientVo.fromDeptName}}</p>
               </el-form-item>
             </div>
             <div class="flex-wrap">
-              <el-form-item class="flex-item" label="临床诊断:">
-                <p>高血压</p>
-              </el-form-item>
-              <el-form-item class="flex-item" label="住院号:">
-                <p>41</p>
+              <el-form-item class="flex-width"  label="临床诊断:">
+                <span v-for="(item,index) in mainPursue.clinicalSpecialistDiagnosisList" :key="index">{{item.name}}、</span>
               </el-form-item>
               <el-form-item class="flex-item" label="床号:">
-                <p>41</p>
+                <p>{{patientData.bedNo}}</p>
               </el-form-item>
             </div>
         </el-form>
@@ -57,25 +54,25 @@
         <img class="img" src="@/views/rep/img/main-symptom.png">
         <div class="content">
           <div class="title">主要症状</div>
-          <div class="lable"> 胸憋、胸痛、憋气、头晕、头痛、濒死感</div>
-          <div class="lable">发作频率：每月2次</div>
-          <div class="lable">首次发作时间：2018-04-19 12:19</div>
-          <div class="lable">末次发作时间：2019-10-28  09:36</div>
-          <div class="lable">严重程度：重</div>                    
+          <div class="lable"> <span v-for="(item,index) in mainPursue.mainSymptomsList" :key="index">{{item.name}}、</span></div>
+          <div class="lable">发作频率：{{mainPursue.onsetInterval}}</div>
+          <div class="lable">首次发作时间：{{mainPursue.firstOnsetTime}}</div>
+          <div class="lable">末次发作时间：{{mainPursue.recentOnsetTime}}</div>
+          <div class="lable">严重程度：{{mainPursue.illnessDegree}}</div>                    
         </div>
       </div>
       <div class="symptom-content flex-center">
         <img class="img" src="@/views/rep/img/icon-symptom.png">
         <div class="content">
           <div class="title">伴随症状</div>
-          <div class="lable">恶心、呕吐、视线模糊</div>                   
+          <div class="lable"> <span v-for="(item,index) in mainPursue.accompanyingSymptomsList" :key="index">{{item.name}}、</span></div>                   
         </div>
       </div>
       <div class="symptom-content flex-center">
         <img class="img" src="@/views/rep/img/motion-symptom.png">
         <div class="content">
           <div class="title">运动症状</div>
-          <div class="lable">手抖</div>              
+          <div class="lable"><span v-for="(item,index) in mainPursue.motorSymptomsList" :key="index">{{item.name}}、</span></div>              
         </div>
       </div>
     </div>
@@ -84,7 +81,28 @@
 </template>
 <script>
   export default {
-    name: 'patientMsg'
+    name: 'patientMsg',
+    props:{
+      patientData:{
+        type:Object,
+      },
+      patientVo:{
+        type:Object
+      },
+      mainPursue:{
+        type:Object,
+      }
+    },
+    filters:{
+     formatAge(birthday){
+        if(birthday&&birthday!=""){
+          let age=birthday.substring(0,4);
+          let year=new Date().getFullYear();
+          return year-age-1;
+        }
+         return "";
+      },
+    }
   }
 </script>
 <style  scoped>
@@ -109,6 +127,9 @@
   .msg-box .flex-item{
     flex:1;
     margin-bottom: 5px;
+  }
+  .flex-width{
+    flex: 2
   }
   .symptom-title{
     width: 205px;

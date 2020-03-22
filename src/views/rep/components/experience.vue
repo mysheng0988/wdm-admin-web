@@ -33,7 +33,25 @@
 
 <script>
     export default {
-        name: "experience"
+        name: "experience",
+        props:{
+          experienceData:{
+            type:Array,
+            default:[]
+          },
+      },
+      data(){
+        return{
+
+        }
+      },
+      mounted(){
+          // let experienceYear=[];
+          // let 
+          // for(let item of this.experienceData){
+
+          // }
+      },
     }
 </script>
 

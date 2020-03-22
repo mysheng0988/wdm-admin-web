@@ -1,86 +1,57 @@
-{
-  "code": 200,
-  "message": "操作成功",
-  "dataList": [
-    {
-      "drugName": "艾地苯醌片",
-      "tradeName": "申维",
-      "tabooDisease": [],
-      "avoidInteraction": {
-        "drugs": [],
-        "categories": [
-          "A01AA04",
-          "A01AA05"
-        ]
-      },
-      "possibleInteraction": {
-        "drugs": [],
-        "categories": [
-          "A01AA04",
-          "A01AA05"
-        ]
-      },
-      "cautionInteraction": {
-        "drugs": [],
-        "categories": [
-          "A01AA04",
-          "A01AA05"
-        ]
-      },
-      "dosage": "1片BID（唐山工人医院常规）",
-      "medicationAdvice": "长期用药需检查GOT、GPT等肝功能指标。",
-      "diagnosis": "焦虑状态",
-      "comorbidites": "",
-      "literatureSource": "",
-      "whetherPreferred": false,
-      "order": 0
-    },
-    {
-      "drugName": "阿普唑仑片",
-      "tradeName": "aa",
-      "tabooDisease": [
-        "肝功能损害",
-        "肾功能损害"
-      ],
-      "avoidInteraction": {
-        "drugs": [],
-        "categories": [
-          "A01AA04",
-          "A01AA05"
-        ]
-      },
-      "possibleInteraction": {
-        "drugs": [],
-        "categories": [
-          "A01AA04",
-          "A01AA05"
-        ]
-      },
-      "cautionInteraction": {
-        "drugs": [
-          "地高辛",
-          "利福平"
+ {
+        "questionNum": "60",
+        "question": "您生气或恼怒时，会把它藏在内心不表露吗？",
+        "answers": [
+          "无",
+          "轻度",
+          "中度",
+          "重度",
+          "极重"
         ],
-        "categories": [
-          "S02DA",
-          "N05AB",
-          "N06AG",
-          "N05AC",
-          "A01AA04",
-          "A01AA05",
-          "C02",
-          "N05AA",
-          "N01A"
-        ]
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
       },
-      "dosage": "0.4mgQN（阿普唑仑片说明书）",
-      "medicationAdvice": "与抗高血压药和利尿降压药合用，可使降压作用增强；服药期间尽量避免饮酒；避免长期大量服用导致成瘾；高空作业、驾驶员、精细工作、危险工作慎用；癫痫患者突然停药可导致发作。",
-      "diagnosis": "焦虑状态",
-      "comorbidites": "",
-      "literatureSource": "",
-      "whetherPreferred": false,
-      "order": 4
-    }
-  ],
-  "success": true
-}
+      {
+        "questionNum": "61",
+        "question": "当不成功时，您就会觉得一切都完了吗？",
+        "answers": [
+          "无",
+          "轻度",
+          "中度",
+          "重度",
+          "极重"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "62",
+        "question": "当有人阻挠您的愿望与要求时，您会试图理解他吗？",
+        "answers": [
+          "完全不能",
+          "不能",
+          "有时能有时不能",
+          "能",
+          "完全可以"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "63",
+        "question": "即使有足够的理由，您也不会对别人发火吗？",
+        "answers": [
+          "完全是",
+          "有点是",
+          "不确定",
+          "有点不是",
+          "完全不是"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      }
+  }

@@ -9,9 +9,9 @@
      <chart-gauge :data="data" ></chart-gauge>
      <!-- <chart-gauge :data="data2" ></chart-gauge>
      <chart-gauge :data="data3" ></chart-gauge> -->
-     <chart-histogram ></chart-histogram>
+     <!-- <chart-histogram ></chart-histogram>
      <chart-line></chart-line>
-     <chart-radar></chart-radar>
+     <chart-radar></chart-radar> -->
     </div>
   </div>
 </template>

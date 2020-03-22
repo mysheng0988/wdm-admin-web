@@ -42,7 +42,7 @@
         <el-step title="EEG"  @click.native="changeTab(2)"></el-step>
         <el-step title="问卷"></el-step>
         <el-step title="量表"></el-step>
-        <el-step title="综合分析"></el-step>
+        <el-step title="综合分析"  @click.native="changeTab(5)"></el-step>
         <el-step title="生成评估报告" @click.native="changeTab(6)"></el-step>
       </el-steps>
       <main-pursue

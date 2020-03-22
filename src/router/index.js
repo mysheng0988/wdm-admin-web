@@ -146,12 +146,12 @@ export const constantRouterMap = [
     path: '/rep',
     name: 'rep',
     component: Layout,
-    redirect: '/rep/index',
+    redirect: '/rep/list',
     meta: {title: '心身报告', icon: 'sms-flash'},
     children: [
       {
-        path: 'index',
-        name: 'index',
+        path: 'list',
+        name: 'repList',
         component: () => import('@/views/rep/index'),
         meta: {title: '报告列表', icon: 'product-list'}
       },{

@@ -2,43 +2,47 @@
   <div class="form-pdf">
     <div class="pdf-bar"></div>
     <div class="label-title">报告分析总结/repprt Analysis</div>
-    <div class="content-box flex">
-        <img class="img" src="@/views/rep/img/icon-problem.png">
+    <div class="content-box flex" v-for="(item,index) in analysisData" :key="index" >
+        <img class="img" :src="item.imgPath">
         <div class="content">
-          <div class="label">焦点问题</div>  
-          <p>（1）应激：社会性应激 - 症状发生前48小时与同事发生激烈争吵；</p>
-          <p>（2）压力状态：生理压力 - 近3个月夜眠差，睡眠不足，情绪压力--焦虑情绪、易激惹；</p>
-          <p>（3）心身反应模式：躯体化 - 当压力过大、情绪波动时，易以躯体症状表达，如胸憋、胸痛、憋气等；</p>
-          <p>（4）健康生活方式：近半年作息不规律，缺乏运动，饮食营养结构欠佳，健康风险升高如吸烟、饮酒、服用刺激性食物；</p>
-          <p>（5）人格特质：典型A型行为 - 工作节奏快，伴有时间紧迫感，争强好胜，对阻碍自己发展的人或事表现出强烈的反感或攻击意识。</p>
+          <div class="label">{{item.label}}</div>  
+          <p v-for="(item1,index1) in item.data" :key="index1">{{item1}}</p>
         </div>
     </div>
-    <div class="content-box flex">
+    <!-- <div class="content-box flex">
         <img class="img" src="@/views/rep/img/icon-nutrition.png">
         <div class="content">
           <div class="label">心身因素</div>  
-          <p>焦虑状态中度，失眠障碍轻度，植物神经功能紊乱中度。</p>
+           <p v-for="(item,index) in analysisData.psychosomaticFactors" :key="index">（{{index+1}}）、{{item}}</p>
         </div>
     </div>
      <div class="content-box flex">
         <img class="img" src="@/views/rep/img/icon-society.png">
         <div class="content">
           <div class="label">社会因素</div>  
-          <p>焦虑状态中度，失眠障碍轻度，植物神经功能紊乱中度。</p>
+          <p v-for="(item,index) in analysisData.focusProblem" :key="index">（{{index+1}}）、{{item}}</p>
         </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
+  import iconProblem from "@/views/rep/img/icon-problem.png"
   export default {
     name: 'rep-analysis',
+    props:{
+      analysisData:{
+        type:Array,
+      }
+    },
     data(){
       return {
+        iconProblem:"@/views/rep/img/icon-problem.png",
       };
     },
     mounted(){
-    
-    }
+     // console.log(this.analysisData.focusProblem)
+    },
+   
   }
 </script>
 <style scoped>

@@ -1,15 +1,36 @@
 <template> 
    <div class="index-pdf">
      <div class="title">IPS系统心身综合报告</div>
-     <div class="dept">来源科室：心血管内科</div>
-     <div class="user-msg">高云  女  41岁</div>
-     <div class="case-num">病例号:0009617136</div>
+     <div class="dept">来源科室：{{patientData.fromDeptName}}</div>
+     <div class="user-msg" >{{patientVo.realName}} 
+        <span>{{patientVo.gender?"女":"男"}}</span> 
+         {{patientVo.birthday|formatAge}} </div>
+     <div class="case-num">病例号:{{patientData.beHospitalizedNumber}}</div>
    </div>
 </template>
 <script>
   
   export default {
     name: 'rep-index',
+    props:{
+      patientData:{
+        type:Object,
+      },
+      patientVo:{
+        type:Object,
+      }
+    },
+    filters:{
+     formatAge(birthday){
+        if(birthday&&birthday!=""){
+          let age=birthday.substring(0,4);
+          let year=new Date().getFullYear();
+          return year-age-1;
+        }
+         return "";
+      },
+    }
+   
   }
 </script>
 <style  scoped>
@@ -41,7 +62,7 @@
      top: 373px;
    }
    .user-msg{
-      width: 230px;
+      width: 320px;
       height: 35px;
       line-height: 35px;
       font-size: 36px;
@@ -51,6 +72,7 @@
       left: 80px;
       top:480px;
    }
+   .user-msg span{margin: 0 10px}
    .case-num{
      width: 297px;
      height: 30px;

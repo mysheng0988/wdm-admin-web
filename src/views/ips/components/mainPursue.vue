@@ -164,7 +164,7 @@
               </template>
             </el-table-column>
             <el-table-column label="医院" align="center">
-              <template slot-scope="scope">{{scope.row.createTime }}</template>
+              <template slot-scope="scope">{{scope.row.hospitalName }}</template>
             </el-table-column>
             <el-table-column label="检查" align="center">
               <template slot-scope="scope">
