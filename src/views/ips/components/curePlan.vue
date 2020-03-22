@@ -1,24 +1,21 @@
 <template>
   <div style="margin-top: 50px">
     <el-form   ref="productInfoForm" label-width="160px" >
-        <el-form-item label="神经递质调节药物方案:" v-if="drugPlan==0">
+        <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length==0">
            <p class="add-btn" @click="dialogVisible=true"><i class="el-icon-plus" ></i>药物筛选</p>
         </el-form-item>
         <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length!=0">
            <div class="text-box"  >
              <div v-for="(item,index) in drugPlan" :key="index">
-                <p>({{index+1}})、{{item.diagnosis}}:</p>
-               <p>{{item.drugName}},{{item.dosage}},{{item.medicationAdvice}}</p>
+               <div v-if="item.diagnosis">
+                 <p>({{index+1}})、{{item.diagnosis}}:</p>
+                 <p>{{item.drugName}},{{item.dosage}},{{item.medicationAdvice}}</p>
+               </div>
+               <div v-else>
+                 <p>{{item}}:</p>
+               </div>
              </div>
-             
           </div>
-          <!-- <el-input
-            class="textarea"
-            placeholder="请输入详细内容"
-            type="textarea"
-            :autosize="{minRows: 3, maxRows: 6}"
-            show-word-limit
-            clearable></el-input> -->
         </el-form-item>
         <el-form-item label="躯体化症状药物方案:" v-if="somatizationSymptomsDrugRegimen">
            <div class="text-box"  >
@@ -30,13 +27,13 @@
                       <div v-if="item3.title">{{index3+1}}、{{item3.title}}:<span v-for="(item,index) in item3.data" :key="index">{{item}}</span></div>
                       <div v-else>{{index3+1}}、{{item3}}</div>
                     </div>
-                    
+
                     <!-- <div v-else>
                       <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2" >
                           <div>{{index2+1}}、{{item2}}</div>
                       </div>
                     </div> -->
-                </div> 
+                </div>
             </div>
           </div>
         </el-form-item>
@@ -59,9 +56,9 @@
                   <el-button  @click="deleteText3('psychosomaticTherapy',index1,index2,index3)" class="text-boder red" icon="el-icon-delete"></el-button>
                   </div>
                 </div>
-              
+
             </div>
-            
+
           </div>
         </el-form-item>
         <el-form-item label="营养处方:">
@@ -211,13 +208,14 @@
 </template>
 
 <script>
-  import {analysisData,saveContraindications,saveFilter} from '@/api/analysis'
+  import {analysisData,saveContraindications,saveFilter,updataData} from '@/api/analysis'
   const defaultPlan={
     psychosomaticTherapy:"",//心身治疗建议
     exercisePrescription:"",//"运动处方"
     nutritionPrescription:"",//营养处方
     functionalMedicineAdvice:"",//功能医学建议
     otherSuggestion:"",//其他建议
+    somatizationSymptomsDrugRegimen:"",
     followUpRecommendations:{
       data:["第1周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内",
       "第2周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；",
@@ -428,25 +426,27 @@
     methods: {
 
       saveFilterData(){
-        
+
           let param={
             interaction:this.value2
             }
           saveFilter(param,this.medicalRecordId).then(res=>{
-            if(res.code=200){
-                console.log(res)
+            if(res.code==200){
                 this.drugPlan=res.dataList;
                 this.dialogVisible2=false;
+            }else{
+             // this.$message.warning(res.message)
+              this.drugPlan[0]=res.message;
+              this.dialogVisible2=false;
             }
           })
       },
       saveContraindicationsData(){
-          let param={
+        let param={
             contraindications:this.$refs.tree.getCheckedNodes(true)
           }
           saveContraindications(param,this.medicalRecordId).then(res=>{
-            if(res.code=200){
-
+            if(res.code==200){
               this.data2=[];
               for(let item of res.dataList){
                   let param={};
@@ -454,11 +454,13 @@
                   param.label=item;
                   this.data2.push(param)
               }
-              console.log(this.data2)
-
                this.dialogVisible=false;
-              this.dialogVisible2=true;
-              console.log(res)
+               this.dialogVisible2=true;
+            }else{
+              this.dialogVisible=false;
+              this.dialogVisible2=false;
+              this.drugPlan[0]=res.message;
+              //this.$message.warning(res.message)
             }
           })
       },
@@ -468,7 +470,7 @@
       deleteItem3(key,index1,index2){
          let arr=this.initData[key].data[index1].data;
          if(arr.length>1){
-          arr.splice(index2,1); 
+          arr.splice(index2,1);
         }else{
           this.$message.warning("最后一行不可以删除！")
         }
@@ -476,11 +478,11 @@
       deleteText1(key,index){
         let arr=this.initData[key].data;
         if(arr.length>1){
-          arr.splice(index,1); 
+          arr.splice(index,1);
         }else{
           this.$message.warning("最后一行不可以删除！")
         }
-        
+
       },
       addText2(key,index){
         this.initData[key].data[index].data.push("");
@@ -488,11 +490,11 @@
       deleteText2(key,index,index2){
         let arr=this.initData[key].data[index].data;
         if(arr.length>1){
-          arr.splice(index2,1); 
+          arr.splice(index2,1);
         }else{
           this.$message.warning("最后一行不可以删除！")
         }
-        
+
       },
        addText3(key,index1,index2){
         this.initData[key].data[index1].data[index2].data.push("");
@@ -500,11 +502,11 @@
       deleteText3(key,index1,index2,index3){
         let arr=this.initData[key].data[index1].data[index2].data;
         if(arr.length>1){
-          arr.splice(index3,1); 
+          arr.splice(index3,1);
         }else{
           this.$message.warning("最后一行不可以删除！")
         }
-        
+
       },
       initDataList(){
         const loading =Loading.service({
@@ -520,9 +522,8 @@
       analysisData(param).then(res=>{
          loading.close();
           let data={};
-          console.log(55555555555555555555)
           if(res.code==200){
-            data=res.dataList[0]; 
+            data=res.dataList[0];
             this.data=data.contraindicationsList;
             this.initData.psychosomaticTherapy=JSON.parse(data.psychosomaticTherapy);
             this.initData.exercisePrescription=JSON.parse(data.exercisePrescription);
@@ -532,14 +533,9 @@
             this.somatizationSymptomsDrugRegimen=data.somatizationSymptomsDrugRegimen;//躯体化治疗方案
             // this.initData.followUpRecommendations=JSON.parse(data.followUpRecommendations)
           }
-          console.log(this.initData)
         }).catch(err=>{
           loading.close();
         })
-      },
-      screenDrug(){
-        this.dialogVisible=false;
-        this.dialogVisible2=true;
       },
       handleNodeClick(val){
         this.$refs.tree.setChecked(val.id,true,false)
@@ -567,7 +563,22 @@
         this.$emit('prevStep')
       },
       handleFinishCommit(){
-        this.$emit('finishCommit',"");
+       // this.$emit('finishCommit',"");
+        let loading= Loading.service({
+          lock: true,
+          text: '加载中',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.8)'
+        });
+        //this.$emit('nextStep');
+        updataData(this.data).then(res=>{
+          loading.close();
+          if(res.code==200){
+           this.$message.success("保存成功")
+          }
+        }).catch(err=>{
+          loading.close();
+        });
       }
     }
   }
@@ -620,7 +631,7 @@
     cursor: pointer;
   }
 
-  
+
   .ips-input{
     margin: 0 10px;
     width: 400px;
