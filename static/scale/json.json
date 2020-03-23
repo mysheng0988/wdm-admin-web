@@ -1,19 +1,10 @@
 {
-  "page":[[{
-    "imgPath":"@/views/rep/img/icon-problem.png",
-    "label":"焦点问题",
-    "data":[]
-  },{
-    "imgPath":"@/views/rep/img/icon-nutrition.png",
-    "label":"心身因素",
-    "data":[]
-  },{
-    "imgPath":"@/views/rep/img/icon-society.png",
-    "label":"社会因素",
-    "data":[]
-  }],[{
-    "imgPath":"@/views/rep/img/icon-society.png",
-    "label":"社会因素",
-    "data":[]
-  }]]
+  "page":[{
+    "2019":{
+      "month":"0205",
+      "symptom":"",
+      "diagnosis":"",
+      "cureItem":""
+    }
+  }]
 }

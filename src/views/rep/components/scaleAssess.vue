@@ -16,6 +16,7 @@
   </div>
 </template>
 <script>
+ import{scaleResult} from "@/api/report"
  import chartGauge from './chart/chartGauge'
  import chartHistogram from './chart/chartHistogram'
  import chartLine from './chart/chart-line'
@@ -63,7 +64,9 @@
       };
     },
     mounted(){
-    
+        scaleResult(36).then(res=>{
+              console.log(res)
+        })
     }
   }
 </script>

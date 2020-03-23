@@ -8,22 +8,24 @@
           <ve-pie :data="chartData" width="300px" height="200px" :extend="extend" :settings="settings"></ve-pie>
         </div>
         <div class="chart-content">
-          <div>生物学维度 23% | 1.5</div>
-          <div>心理学维度 43% | 2.8</div>
-          <div>社会学维度 34% | 2.2</div>
+          <div>生物学维度 {{dataVal}} | {{dataList["生物学"]}}</div>
+          <div>心理学维度 {{dataVal2}} | {{dataList["心理学"]}}</div>
+          <div>社会学维度 {{dataVal3}} | {{dataList["社会学"]}}</div>
         </div>
       </div>
       <div class="result">
         <p>结论分析：</p>
-        <p>生物学：轻度 躯体症状与生物学指数轻度相关; </p>
-        <p>心理学：中度 躯体症状与心理情绪状态中度相关; </p>
-        <p>心理学：中度 躯体症状与心理情绪状态中度相关; </p>
+        <p v-for="(item,index) in conclusion" :key="index">
+          <span v-for="(item1,index1) in item" :key="index1">{{index1}}：{{item1}}</span>
+        </p>
       </div>
     </div>
     
   </div>
 </template>
 <script>
+  import {questionnaireResult} from "@/api/report"
+  let that;
   export default {
     name: 'assess',
     data(){
@@ -39,18 +41,57 @@
           radius:80,
           offsetY:120
         },
+        conclusion:[],
+        dataList:[],
         chartData: {
-          columns: ['维度', '数据'],
+          columns: ['维度', 'data'],
           rows: [
-            { '维度': '生物学', '数据': 2.8 },
-            { '维度': '心理学', '数据': 1.5 },
-            { '维度': '社会学', '数据': 3.6 },
+            { '维度': '生物学', 'data': 2.8 },
+            { '维度': '心理学', 'data': 1.5 },
+            { '维度': '社会学', 'data': 3.6 },
           ]
         }
       };
     },
+    computed: {
+      dataVal: function () {
+        if(this.dataList["生物学"]){
+          let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
+          let num= this.dataList["生物学"]
+          console.log(num)
+          return Math.round(num/total*100)+"%"
+        }
+       
+      },
+       dataVal2: function () {
+          if(this.dataList["心理学"]){
+          let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
+          let num= this.dataList["心理学"]
+          console.log(num)
+          return Math.round(num/total*100)+"%"
+        }
+      },
+       dataVal3: function () {
+          if(this.dataList["社会学"]){
+          let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
+          let num= this.dataList["社会学"]
+          console.log(num)
+          return Math.round(num/total*100)+"%"
+        }
+        
+      }
+   },
     mounted(){
-    
+        questionnaireResult(30).then(res=>{
+          if(res.code==200){
+            this.conclusion=JSON.parse(res.dataList[0].conclusion);
+            this.dataList=JSON.parse(res.dataList[0].chartData)
+            this.chartData.rows[0].data=this.dataList["生物学"];
+             this.chartData.rows[1].data=this.dataList["心理学"];
+             this.chartData.rows[2].data=this.dataList["社会学"];
+            
+          }
+        })
     }
   }
 </script>

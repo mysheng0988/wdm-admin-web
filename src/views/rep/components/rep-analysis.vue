@@ -3,30 +3,16 @@
     <div class="pdf-bar"></div>
     <div class="label-title">报告分析总结/repprt Analysis</div>
     <div class="content-box flex" v-for="(item,index) in analysisData" :key="index" >
-        <img class="img" :src="item.imgPath">
+        <img class="img" :src="item.imgPath" v-if="item.label">
+        <div class="img" v-else></div>
         <div class="content">
-          <div class="label">{{item.label}}</div>  
+          <div class="label" v-if="item.label">{{item.label}}</div>  
           <p v-for="(item1,index1) in item.data" :key="index1">{{item1}}</p>
         </div>
     </div>
-    <!-- <div class="content-box flex">
-        <img class="img" src="@/views/rep/img/icon-nutrition.png">
-        <div class="content">
-          <div class="label">心身因素</div>  
-           <p v-for="(item,index) in analysisData.psychosomaticFactors" :key="index">（{{index+1}}）、{{item}}</p>
-        </div>
-    </div>
-     <div class="content-box flex">
-        <img class="img" src="@/views/rep/img/icon-society.png">
-        <div class="content">
-          <div class="label">社会因素</div>  
-          <p v-for="(item,index) in analysisData.focusProblem" :key="index">（{{index+1}}）、{{item}}</p>
-        </div>
-    </div> -->
   </div>
 </template>
 <script>
-  import iconProblem from "@/views/rep/img/icon-problem.png"
   export default {
     name: 'rep-analysis',
     props:{
@@ -36,7 +22,7 @@
     },
     data(){
       return {
-        iconProblem:"@/views/rep/img/icon-problem.png",
+      
       };
     },
     mounted(){

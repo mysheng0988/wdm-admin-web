@@ -7,24 +7,31 @@
         <p>A<span>UTONOMIC NERVE EXAMNATION</span></p>
       </div>
       <div class="content-title">1.自主神经症状：</div>
-      <div class="content indent"> 口干、出汗、心悸、呼吸困难、喉部堵塞感、气急、面色潮红或苍白、阵发性发冷发热、头疼、
-头晕、失平衡感，疲劳或乏力，腹胀、恶心、呕吐、腹泻、便秘，多部位疼痛或不适。</div>
+      <div class="content indent"> 
+          {{data.symptom}}
+      </div>
       <div class="content-title">2.HRV检测结果：</div>
-      <img class="img" :src="hrv">
+      <img class="img" :src="data.resultImageUrl">
     </div>
   </div>
 </template>
 <script>
 import hrv from '@/assets/images/hrv-icon.png'
+import {getHRV} from "@/api/HRV"
   export default {
     name: 'nerveExamine',
     data(){
       return {
-        hrv
+        data:[]
       };
     },
     mounted(){
-    
+     getHRV(30).then(res=>{
+          if(res.code==200){
+             console.log(res)
+              this.data=res.dataList[0];
+          }
+        })
     }
   }
 </script>

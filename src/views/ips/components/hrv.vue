@@ -80,8 +80,6 @@
               this.dialogVisible=true;
               this.hrvPath=res.dataList[0].resultImageUrl;
           }
-           
-            console.log(res)
         })
       },
       verificationCode(){

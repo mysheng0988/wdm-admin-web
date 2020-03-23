@@ -353,7 +353,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
                   this.dialogVisible2=true;
                   this.$nextTick(function() {
                       this.$refs.tree.setCheckedKeys(scaleNoList);
-                      this.selectedData=this.$refs.tree.getCheckedNodes();
+                      this.selectedData=this.$refs.tree.getCheckedNodes(true);
                   }) 
               }else{
                  this.$emit('nextStep');

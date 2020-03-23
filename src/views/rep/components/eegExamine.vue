@@ -6,21 +6,28 @@
         <p>附录3. EEG检测</p>
         <p>E<span>EG DETECTION</span></p>
       </div>
-      <img class="img" :src="eeg">
+      <img class="img" :src="eegPath">
     </div>
   </div>
 </template>
 <script>
 import eeg from '@/assets/images/eeg-icon.png'
+import{getEEG} from "@/api/HRV"
   export default {
     name: 'eegExamine',
     data(){
       return {
-        eeg,
+        eegPath:eeg,
       };
     },
     mounted(){
-    
+      getEEG(36).then(res=>{
+          if(res.code==200){
+            this.eegPath=res.dataList[0].resultImageUrl;
+          }else{
+            this.$message.warning("没有查到数据")
+          }
+        })
     }
   }
 </script>
