@@ -66,7 +66,7 @@
       </eeg>
       <easy-question
       v-if="showStatus[2]"
-      :is-edit="isEdit"
+      type="B"
        :key="patientId"
       :patient-id="patientId+''"
       :medical-record-id="medicalRecordId+''"
@@ -77,7 +77,7 @@
     </easy-question>
       <scale
         v-if="showStatus[3]"
-        :is-edit="isEdit"
+         type="B"
          :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"
@@ -88,7 +88,7 @@
       </scale>
       <analysis
         v-if="showStatus[4]"
-        :is-edit="isEdit"
+          type="B"
          :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"

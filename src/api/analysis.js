@@ -15,7 +15,7 @@ export function analysisFirstData(params) {
 }
 export function updataData(data) {
   return request({
-    url:'ips/report',
+    url:'ips/report/',
     method:'put',
     data:data
   })

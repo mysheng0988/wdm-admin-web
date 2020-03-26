@@ -215,6 +215,7 @@
     functionalMedicineAdvice:"",//功能医学建议
     otherSuggestion:"",//其他建议
     somatizationSymptomsDrugRegimen:"",
+    complete:true,
     followUpRecommendations:{
       data:["第1周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内",
       "第2周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；",
@@ -293,7 +294,7 @@
         updataReportData(param).then(res=>{
           if(res.code==200){
             this.$store.commit('delete_tabs', this.$route.path)
-            this.$router.push({path:"/rep/pdf",query:{medicalRecordId:this.medicalRecordId,id:this.patientId}})
+            this.$router.push({path:"/rep/pdf",query:{id:this.medicalRecordId}})
           }
         })
       },

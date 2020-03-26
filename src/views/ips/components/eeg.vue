@@ -48,6 +48,7 @@
 
 <script>
   import{readCardMsg} from "@/api/cardRead"
+  import {getRecordPatient} from "@/api/patient";
   import {getEEG,getHRV,getVerificationCode} from '@/api/HRV'
   export default {
     name: "ProductInfoDetail",
@@ -134,10 +135,20 @@
         })
       },
       handlePrev() {
+       
         this.$emit('prevStep')
       },
       handleNext() {
-        this.$emit('nextStep');
+         getRecordPatient(this.medicalRecordId).then(res=>{
+           if(res.code==200){
+             if(res.dataList[0].examinationStatus>20){
+                 this.$emit('nextStep');
+             }else{
+               this.$message.warning("设备检测为完成")
+             }
+
+           }
+        })
       }
     }
   }

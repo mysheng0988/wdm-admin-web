@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
+
+import router from '@/router/index';
 import { getToken } from '@/utils/auth'
 
 // 创建axios实例
@@ -28,15 +30,15 @@ service.interceptors.response.use(
     const res = response.data;
     if(res.retcode||res.code==804||res.code=="200"){
       return response.data
+      
     }else if(res.code=="601"){
+      sessionStorage.clear()
       Message({
         message:"登录信息已过期",
         type: 'error',
         duration: 3 * 1000
       })
-      setTimeout(function(){
-        window.location="/"
-      },500)
+      router.push({path:"/login"})
     }else{
       let message=res.message?res.message:res.msg;
       Message({

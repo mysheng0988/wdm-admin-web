@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 50px">
     <el-form  :rules="rules" ref="productInfoForm" label-width="150px" >
-      <el-form-item label="焦点问题:">
+      <el-form-item label="焦点问题:" v-if="type!='A'">
         <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.focusProblem" :key="index" >
            <el-button @click="addText('focusProblem')" class="text-boder blue" icon="el-icon-edit">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="社会功能:">
+      <el-form-item label="社会功能:" v-if="type!='A'">
         <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.socialFunction" :key="index" >
            <el-button @click="addText('socialFunction')" class="text-boder blue" icon="el-icon-edit">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="辅助诊断建议:">
+      <el-form-item label="辅助诊断建议:" v-if="type!='A'">
        <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.initialDiagnosisVO" :key="index" >
             <div >
@@ -56,7 +56,7 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="心身疾病成因分析:">
+      <el-form-item label="心身疾病成因分析:" v-if="type!='A'">
         <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.causes" :key="index" >
             <el-button @click="addText('causes')" class="text-boder blue" icon="el-icon-edit">
@@ -88,9 +88,9 @@
     name: "analysis",
      components: {editText},
     props: {
-      isEdit: {
-        type: Boolean,
-        default: false
+      type: {
+        type: String,
+        default: "C"
       },
       patientId:{
         type:String,
@@ -112,7 +112,6 @@
     data() {
       return {
         data:"",
-        
         rules: {
           goodsName: [
             {required: true, message: '请输入商品名称', trigger: 'blur'},
@@ -125,6 +124,7 @@
       };
     },
     created() {
+      console.log(this.type)
       const loading =Loading.service({
           lock: true,
           text: 'Loading',
@@ -186,7 +186,8 @@
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.8)'
         });
-         //this.$emit('nextStep');
+         //this.$emit('nextStep')
+        this.data["complete"]=false;
         updataData(this.data).then(res=>{
             loading.close();
             if(res.code==200){
@@ -204,11 +205,12 @@
           spinner: 'el-icon-loading',
           background: 'rgba(0, 0, 0, 0.8)'
         });
+         this.data["complete"]=true;
         updataData(this.data).then(res=>{
             loading.close();
             if(res.code==200){
                 this.$store.commit('delete_tabs', this.$route.path)
-                this.$router.push({path:"/rep/pdf",query:{medicalRecordId:this.medicalRecordId,id:this.patientId}})
+                this.$router.push({path:"/rep/pdf",query:{id:this.medicalRecordId}})
             }
         }).catch(err=>{
             loading.close();

@@ -12,13 +12,6 @@
           <el-input placeholder="身份证号" v-model="listQuery.cardNo" clearable></el-input>
         </el-form-item>
         <el-form-item >
-          <!-- <el-date-picker
-            v-model="listQuery.createTimeStart"
-            class="input-width"
-            value-format="yyyy-MM-dd"
-            type="date"
-            placeholder="创建日期">
-          </el-date-picker> -->
           <el-date-picker
             v-model="createDate"
             type="daterange"

@@ -2,16 +2,31 @@
   <div class="app-container">
     <el-form :inline="true" :model="listQuery" size="small">
         <el-form-item >
-          <el-input  placeholder="患者编号" v-model="listQuery.pid"></el-input>
+          <el-input  placeholder="患者编号" v-model="listQuery.condition.patientId" clearable></el-input>
         </el-form-item>
         <el-form-item >
-          <el-input placeholder="患者姓名" v-model="listQuery.realName"></el-input>
+          <el-input placeholder="患者姓名" v-model="listQuery.condition.patientName" clearable></el-input>
+        </el-form-item>
+        <el-form-item >
+          <el-input placeholder="身份证号" v-model="listQuery.condition.cardNo" clearable></el-input>
+        </el-form-item>
+        <el-form-item >
+          <el-date-picker
+            v-model="createDate"
+            type="daterange"
+            range-separator="至"
+            start-placeholder="起始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-dd"
+            clearable
+            @change="handleTimeChange">
+          </el-date-picker>
         </el-form-item>
         <el-form-item label="报告类型:">
-          <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
-            <el-option label="全部" ></el-option>
-            <el-option label="筛查报告" ></el-option>
-            <el-option label="综合测评报告"></el-option>
+          <el-select placeholder="请选择" v-model="listQuery.condition.typeId" clearable>
+            <el-option value="" >全部</el-option>
+            <el-option value="3" >筛查报告</el-option>
+            <el-option value="4">综合测评报告</el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -23,9 +38,6 @@
                 style="width: 100%"
                 :data="list"
                 v-loading="listLoading" border>
-        <el-table-column label="序号" width="60" align="center">
-          <template slot-scope="scope">{{scope.$index+1}}</template>
-        </el-table-column>
         <el-table-column label="编号" width="80" align="center">
           <template slot-scope="scope">{{scope.row.pid}}</template>
         </el-table-column>
@@ -83,57 +95,30 @@
         :total="total">
       </el-pagination>
     </div>
-    <el-dialog
-      title="刷卡验证"
-      :visible.sync="dialogVisible"
-      width="30%">
-      <div class="cardContent">
-        <el-image class="img" :src="require('@/views/pat/imgs/cardID.png')"></el-image>
-        <p class="flag">请将磁卡置于机器上方</p>
-        <p class="flag-type">卡分类:<span class="text">200</span>/<span class="num">0</span></p>
-        <p>刷卡成功后进行后续操作</p>
-        <el-form ref="cardForm"
-                 :model="cardForm"
-                 :rules="rules">
-          <el-form-item   prop="cardID" >
-             <el-input v-model="cardForm.cardID" placeholder="请输入身份证号"></el-input>
-          </el-form-item>
-        </el-form>
-
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addPatient('cardForm')">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-  import {queryPatient,queryExamination} from '@/api/patient'
+  import {getReportListData} from '@/api/report'
   import { Message, MessageBox } from 'element-ui'
   export default {
     name: "list",
     data() {
       return {
-        contentState:null,
-        radio:null,
-        list: null,
-        examinationList:[],
-        cardForm:{
-          cardID:""
-        },
+       
+        list: [],
         listLoading: false,
-        dialogVisible:false,
         total:0,
-        active:0,
+        createDate:[],
         listQuery: {
-          cardNo: "",
-          createTimeStart: "",
-          examinationId: null,
-          examinationStatus: null,
-          pid: "",
-          realName: "",
+           condition : {
+            cardNo: "",
+            endTime: "",
+            patientId: "",
+            patientName: "",
+            startTime: "",
+            typeId: ""
+          },
           pageNum: 1,
           pageSize: 10
         },
@@ -147,8 +132,7 @@
       }
     },
     created() {
-        //this.getExaminationBtn();
-        //this.getList()
+      this.getList()
     },
     filters:{
       formatGender(gender){
@@ -169,33 +153,13 @@
           }
         })
       },
-      addPatient(formName){
-        this.$refs[formName].validate((valid) => {
-          if(valid){
-            this.dialogVisible=false;
-            this.$router.push({
-              path: '/pat/patAdd',
-              query: {
-                id: this.cardForm.cardID
-              }
-            })
-          }
-        })
-
-      },
       queryData(){
         this.listQuery.pageNum = 1;
         this.getList();
       },
-      getExaminationBtn(){
-        queryExamination(this.info.deptId).then(res=>{
-          if(res.code==200){
-            this.examinationList=res.dataList;
-          }
-        })
-      },
-      changeBtn(val){
-        this.active=val;
+       handleTimeChange(val){
+        this.listQuery.condition.startTime=this.createDate[0]+" 00:00:00";
+        this.listQuery.condition.endTime=this.createDate[1]+ "23:59:59";
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;
@@ -208,7 +172,7 @@
       },
       getList(){
         this.listLoading=true;
-        queryPatient(this.listQuery).then(res=>{
+        getReportListData(this.listQuery).then(res=>{
           this.listLoading=false;
           if(res.code==200){
             this.list=res.dataList;

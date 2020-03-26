@@ -29,6 +29,7 @@
 
 <script>
   import {getHRV,getVerificationCode} from '@/api/HRV'
+  import {getRecordPatient} from "@/api/patient";
   export default {
     name: "HRV",
     props: {
@@ -93,8 +94,17 @@
       handlePrev() {
         this.$emit('prevStep')
       },
-      handleNext() {
-        this.$emit('nextStep');
+     handleNext() {
+         getRecordPatient(this.medicalRecordId).then(res=>{
+           if(res.code==200){
+             if(res.dataList[0].examinationStatus>10){
+                 this.$emit('nextStep');
+             }else{
+               this.$message.warning("设备检测为完成")
+             }
+
+           }
+        })
       }
     }
   }

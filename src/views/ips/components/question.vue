@@ -162,6 +162,14 @@
         },
          nextQuestion(){
           if(this.questionNum<this.questionLength-1){
+            if(this.problemData.data&&this.problemData.data.length>0){
+              for(let item of this.problemData.data){
+                if(item.answer===""){
+                  this.$message.warning("请选择答案");
+                  return
+                }
+              }
+            }
             if(this.problemData.answer===""){
                this.$message.warning("请选择答案")
             }else{

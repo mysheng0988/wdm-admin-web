@@ -68,9 +68,9 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
     name: "easyQuestion",
     components: {question},
     props: {
-      isEdit: {
-        type: Boolean,
-        default: false
+      type: {
+        type: String,
+        default: "C"
       },
       patientId:{
         type:String,
@@ -345,6 +345,11 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
       },
       handleNext() {
         if(this.completeQuestionnaire){
+          console.log(this.type)
+          if(this.type==="A"){
+             this.$emit('nextStep');
+             return;
+          }
           getMedicalRecord(this.medicalRecordId).then(res=>{
           if(res.code==200){
               let scaleNoList=res.dataList[0].scaleNoList;

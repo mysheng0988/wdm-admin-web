@@ -53,16 +53,20 @@
 <script>
  
   import questionScale from './questionScale';
-   import {getMedicalRecord,additionalQuestions,submitAdditionalQuestions} from '@/api/question'
+   import {getMedicalRecord,
+   additionalQuestions,
+   additionalScreeningA,
+   submitAdditionalQuestions,
+   } from '@/api/question'
   const defaultProductParam = {
     
   };
   export default {
     name: "scale",
     props: {
-      isEdit: {
-        type: Boolean,
-        default: false
+      type: {
+        type: String,
+        default: "C"
       },
        patientId:{
         type:String,
@@ -207,7 +211,14 @@
       },
       handleNext() {
       if(this.scaleState){
-         additionalQuestions(this.medicalRecordId).then(res=>{
+        if(this.type=="A"){
+          additionalScreeningA(this.medicalRecordId).then(res=>{
+           if(res.code==200){
+             this.$emit('nextStep');
+           }
+         })
+        }else{
+          additionalQuestions(this.medicalRecordId).then(res=>{
            if(res.code==200){
              this.problemData=res.dataList[0];
              this.dialogVisible2=true;
@@ -215,6 +226,8 @@
             this.$emit('nextStep');
            }
          })
+        }
+         
         
       }else{
         this.$message.warning("您的量表还没有做完")

@@ -4,7 +4,7 @@
       <div class="title">{{data.scaleTitle}}</div>
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
-      <div class="question" >{{problemData.label}}</div>
+      <div class="question" v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
       <el-radio-group v-model="problemData.answer" @change="handleChange" >
         <div class="question" v-for="(item,index) in problemData.answers" :key="index">
@@ -150,22 +150,25 @@
           return ((this.questionNum+1)/this.questionLength*100).toFixed()+"%"
         },
         prevQuestion(){
+          console.log( this.questionNum)
           if(this.questionNum<=0){
             this.$message.warning("当前是第一题")
           }else{
-            if(this.data.type!=2&&this.problemData.prevNum!=0){
-              this.questionNum=this.problemData.prevNum;
-               this.problemData=this.data.problem[this.questionNum]
-            }else{
                this.questionNum--;
               this.problemData=this.data.problem[this.questionNum];
-            }
-           
           }
 
         },
          nextQuestion(){
           if(this.questionNum<this.questionLength-1){
+            if(this.problemData.data&&this.problemData.data.length>0){
+              for(let item of this.problemData.data){
+                if(item.answer===""){
+                  this.$message.warning("请选择答案");
+                  return
+                }
+              }
+            }
             if(this.problemData.answer===""&&this.data.type==1){
                this.$message.warning("请选择答案")
             }else{

@@ -4,9 +4,12 @@
       <div>
         <el-form-item label="测评内容">
           <el-select  placeholder="全部" v-model="listQuery.examinationId" clearable class="input-width">
-              <option label="1">筛查测评</option>
-              <option label="2">专科测评</option>
-              <option label="3">综合测评</option>
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -50,7 +53,7 @@
               size="mini"
               round
               class="active"
-              @click="readRecord(scope.row)">查看报告
+              @click="readReport(scope.row)">查看报告
             </el-button>
 
           </template>
@@ -65,7 +68,7 @@
         layout="total, sizes,prev, pager, next,jumper"
         :page-size="listQuery.pageSize"
         :page-sizes="[5,10,15]"
-        :current-page.sync="listQuery.currentPage"
+        :current-page.sync="listQuery.pageNum"
         :total="total">
       </el-pagination>
     </div>
@@ -82,6 +85,16 @@
         list: [],
         listLoading: false,
         total:0,
+        options:[{
+          label:"筛查测评",
+          value:1,
+        },{
+          label:"专科测评",
+          value:2,
+        },{
+          label:"综合测评",
+          value:3,
+        }],
         listQuery: {
           examinationId: "",
           examinationStatus: "100",
@@ -98,10 +111,10 @@
     filters:{
       formatStatus(val){
         let str="待完成"
-        if(val==2){
-          str="进行中"
-        }else if(val==3){
+        if(val==100){
           str="已完成"
+        }else if(val==0){
+           str="待测评"
         }
         return str
       },
@@ -117,8 +130,9 @@
     },
     methods: {
       readReport(data){
+        console.log(data)
         this.$router.push({
-          path: '/pat/readRecord',
+          path: '/rep/pdf',
           query: {
             id: data.id
           }

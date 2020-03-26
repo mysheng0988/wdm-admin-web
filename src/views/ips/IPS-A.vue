@@ -49,7 +49,7 @@
         :patient-id="patientId+''"
         :key="patientId"
         :medical-record-id="medicalRecordId+''"
-        next-title="HRV"
+        next-title="设备检查"
         @nextStep="nextStep">
       </main-pursue>
       <hrv
@@ -64,19 +64,19 @@
         @prevStep="prevStep">
       </hrv>
       <easy-question
-      v-if="showStatus[2]"
-      :is-edit="isEdit"
-      :key="patientId"
-      :patient-id="patientId+''"
-      :medical-record-id="medicalRecordId+''"
-      prev-title="HRV"
-      next-title="量表"
-      @nextStep="nextStep"
-      @prevStep="prevStep">
-    </easy-question>
+        v-if="showStatus[2]"
+         type="A"
+        :key="patientId"
+        :patient-id="patientId+''"
+        :medical-record-id="medicalRecordId+''"
+        prev-title="设备检查"
+        next-title="量表"
+        @nextStep="nextStep"
+        @prevStep="prevStep">
+      </easy-question>
       <scale
         v-if="showStatus[3]"
-        :is-edit="isEdit"
+         type="A"
        :patient-id="patientId+''"
         :key="patientId"
         :medical-record-id="medicalRecordId+''"
@@ -87,7 +87,7 @@
       </scale>
       <analysis
         v-if="showStatus[4]"
-        :is-edit="isEdit"
+        type="A"
         :patient-id="patientId+''"
         :key="patientId"
         :medical-record-id="medicalRecordId+''"

@@ -613,7 +613,7 @@
       },
       {
         "questionNum": "12",
-        "question": "夫妻两地分居（工作需要）",
+        "question": "配偶一方有外遇",
         "data": [
           {
             "label": "两年内发生次数",
@@ -1603,7 +1603,7 @@
       },
       {
         "questionNum": "30",
-        "question": "待开始就业",
+        "question": "开始就业",
         "data": [
           {
             "label": "两年内发生次数",

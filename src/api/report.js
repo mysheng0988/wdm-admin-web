@@ -23,3 +23,10 @@ export function getReportList(param) {
     method:'get',
   })
 }
+export function getReportListData(data) {
+  return request({
+    url:'ips/report/list/'+data.pageNum+'/'+data.pageSize,
+    method:'post',
+    data: data.condition
+  })
+}

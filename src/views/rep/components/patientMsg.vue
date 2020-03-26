@@ -34,7 +34,7 @@
                 <p>{{patientVo.education}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="科室:">
-                <p>{{patientVo.fromDeptName}}</p>
+                <p>{{patientData.fromDeptName}}</p>
               </el-form-item>
             </div>
             <div class="flex-wrap">

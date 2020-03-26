@@ -66,7 +66,7 @@
       </eeg>
       <easy-question
       v-if="showStatus[2]"
-      :is-edit="isEdit"
+        type="C"
        :key="patientId"
       :patient-id="patientId+''"
       :medical-record-id="medicalRecordId+''"
@@ -77,7 +77,7 @@
     </easy-question>
       <scale
         v-if="showStatus[3]"
-        :is-edit="isEdit"
+         type="C"
          :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"
@@ -88,7 +88,7 @@
       </scale>
       <analysis
         v-if="showStatus[4]"
-        :is-edit="isEdit"
+         type="C"
          :key="patientId"
         :patient-id="patientId+''"
         :medical-record-id="medicalRecordId+''"
@@ -188,7 +188,6 @@
       getPatientData(){
         getRecordPatient(this.medicalRecordId).then(res=>{
           if(res.code==200){
-            console.log(111111111111111)
             this.patient=res.dataList[0];
             this.patientVO=res.dataList[0].patientVO;
             let active=res.dataList[0].examinationStatus  

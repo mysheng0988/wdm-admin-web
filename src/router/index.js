@@ -10,7 +10,7 @@ export const constantRouterMap = [
   {
     path: '',
     component: Layout,
-    redirect: '/home',
+    redirect: '/pat',
     hidden:true,
     children: [{
       path: 'home',
@@ -147,7 +147,6 @@ export const constantRouterMap = [
         name: 'edit',
         component: () => import('@/views/rep/edit'),
         meta: {title: '编辑报告', icon: 'product-attr',roleId:[13,18]},
-        hidden:true
       },{
         path: 'pdf',
         name: 'pdf',

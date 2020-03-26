@@ -77,6 +77,7 @@ import {analysisData} from "@/api/analysis"
       },
       data() {
         return{
+          medicalRecordId:"",
           patientData:{},
           patientVo:{},
           mainPursue:{},
@@ -89,6 +90,10 @@ import {analysisData} from "@/api/analysis"
         }
       },
       created(){
+        this.medicalRecordId=this.$route.query.id;
+        if(this.medicalRecordId==""||this.medicalRecordId==undefined){
+          this.medicalRecordId=36;
+        }
         this.getPatientData();
         this.getPursueData();
         this.getExperienceList();
@@ -108,134 +113,66 @@ import {analysisData} from "@/api/analysis"
               if(res.code==200){
                   let pageNum=0;
                   let rowNum=0;
-                  let maxRowNum=18;
+                  let maxRowNum=22;
                   let data=res.dataList[0];
+                  let exercisePrescription=JSON.parse(data.exercisePrescription);//营养处方
                  let nutritionPrescription=JSON.parse(data.nutritionPrescription);//营养处方
                  let functionalMedicineAdvice=JSON.parse(data.functionalMedicineAdvice);//功能医学建议
                  let otherSuggestion=JSON.parse(data.otherSuggestion);
+                 let neurotransmitterRegulators=JSON.parse(data.neurotransmitterRegulators)
+                 let followUpRecommendations=JSON.parse(data.followUpRecommendations);
+                    followUpRecommendations["title"]="随访建议";
                  let suggestData=[];
-                  suggestData[pageNum]=[];
-                    let param={
-                      content:nutritionPrescription.title,
-                      type:0,
+                 let totalData=[];
+                totalData=this.pageThenData(totalData,exercisePrescription,0);
+                totalData=this.pageThenData(totalData,nutritionPrescription,0);
+                totalData=this.pageThenData(totalData,functionalMedicineAdvice,0);
+                totalData=this.pageThenData(totalData,otherSuggestion,0);
+                totalData=this.pageThenData(totalData,neurotransmitterRegulators,0);
+                totalData=this.pageThenData(totalData,followUpRecommendations,0);
+                suggestData[pageNum]=[];
+                for(let item of totalData){
+                   rowNum+=this.computeRowNum(item.content);
+                    if(rowNum>maxRowNum){
+                      rowNum=0;
+                      pageNum++;
+                      suggestData[pageNum]=[];
                     }
-                  suggestData[pageNum].push(param)
-                  let index=0
-                  for(let item1 of nutritionPrescription.data){
-                      index++;
-                      let param1={
-                        content:index+"、"+item1.title,
-                        type:1,
-                        }
-                      suggestData[pageNum].push(param1)
-                      let index1=0;
-                      for(let item of item1.data){
-                          let num=this.computeRowNum(item);
-                            rowNum+= num
-                         index1++;
-                          let param2={
-                            content:"("+index1+")、"+item,
-                            type:1,
-                          }
-                          if(rowNum>maxRowNum){
-                            rowNum=0;
-                            pageNum++;
-                            suggestData[pageNum]=[]
-                          }
-                          suggestData[pageNum].push(param2)
-                      }
-                  }
-                    let paramf={
-                      content:functionalMedicineAdvice.title,
-                      type:0,
-                    }
-                  suggestData[pageNum].push(paramf)
-                  let indexf=0
-                  for(let item of functionalMedicineAdvice.data){
-                         let num=this.computeRowNum(item);
-                            rowNum+= num
-                          if(rowNum>maxRowNum){
-                            rowNum=0;
-                            pageNum++;
-                            suggestData[pageNum]=[]
-                          }
-                      indexf++;
-                      let param1={
-                        content:indexf+"、"+item,
-                        type:1,
-                        }
-                      suggestData[pageNum].push(param1)
-                  }
-                  
-                    let paramo={
-                      content:otherSuggestion.title,
-                      type:0,
-                    }
-                  suggestData[pageNum].push(paramo)
-                  let indexo=0
-                  for(let item of otherSuggestion.data){
-                      indexo++;
-                      let param1={
-                        content:indexo+"、"+item.title,
-                        type:1,
-                      }
-                      suggestData[pageNum].push(param1)
-                      let index1o=0;
-                      for(let item1 of item.data){
-                          let num=this.computeRowNum(item1);
-                            rowNum+= num
-                         index1o++;
-                          let param2={
-                            content:"("+index1o+")、"+item1,
-                            type:1,
-                          }
-                        suggestData[pageNum].push(param2)   
-                      }
-                  }
+                    suggestData[pageNum].push(item)
+                }
                 this.suggestData=suggestData;
-                 console.log(suggestData)
-
+                
+                
+                //console.log(data22)
               }
               
                
             })
         },
-        pageThenData(obj){
-
-        },
-        pageDataText(suggestData,field,pageNum,rowNum,maxRowNum){
-            suggestData[pageNum]=[];
-            let param={
-              content:field.title,
-              type:0,
-            }
-          suggestData[pageNum].push(param)
-          let index=0
-          for(let item1 of field.data){
-               index++;
-              let param1={
-                content:index+"、"+item1.title,
-                type:1,
-                }
-              suggestData[pageNum].push(param1)
-              let index1=0;
-              for(let item of item1.data){
-                  let param2={
-                    content:"("+index+")、"+item,
-                    type:1,
-                  }
-                  index1++;
-                  let num=this.computeRowNum(item);
-                    rowNum+= num
-                  if(rowNum>20){
-                    rowNum=0;
-                    pageNum++;
-                    suggestData[pageNum]=[]
-                  }
-                  suggestData[pageNum].push(param2)
-              }
+        pageThenData(data,obj,index){
+          let str="";
+          if(index!=0){
+            str=index+"、"
           }
-          return suggestData;
+          if(typeof obj==="object"){
+             let param={
+                content:str+obj.title,
+                type:index
+              }
+              data.push(param)
+              let index2=0;
+             for(let item of obj.data){
+               index2++;
+              this.pageThenData(data,item,index2)
+             }
+          }else{
+            let param={
+              content:"("+index+")、"+obj,
+              type:1
+              } 
+             data.push(param)
+          }
+          return data;
         },
         getScaleResult(){
           scaleResult(36).then(res=>{
@@ -262,7 +199,7 @@ import {analysisData} from "@/api/analysis"
           })
         },
         getPatientData(){
-          getRecordPatient(20).then(res=>{
+          getRecordPatient(this.medicalRecordId).then(res=>{
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
@@ -271,14 +208,14 @@ import {analysisData} from "@/api/analysis"
           })
         },
         getPursueData(){
-          getPursue(20).then(res=>{
+          getPursue(this.medicalRecordId).then(res=>{
            if(res.code==200){
             this.mainPursue=res.dataList[0];
            }
           })
         }, 
         getExperienceList(){
-         queryExperience(17).then(res=>{
+         queryExperience(36).then(res=>{
             if(res.code==200){
               this.experienceData=res.dataList;
               let exeList=[];

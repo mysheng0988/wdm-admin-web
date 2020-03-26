@@ -33,6 +33,12 @@ export function additionalQuestions(medicalRecordId) {
     method:'get',
   })
 }
+export function additionalScreeningA(medicalRecordId) {
+  return request({
+    url:'ips/scale/screeningA/'+medicalRecordId,
+    method:'post',
+  })
+}
 export function submitAdditionalQuestions(data,medicalRecordId) {
   return request({
     url:'ips/scale/additionalQuestions/'+medicalRecordId,
