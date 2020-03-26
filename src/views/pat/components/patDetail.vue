@@ -299,8 +299,8 @@
           <el-form  :model="cardFrom"
              :rules="cardRules"
              ref="cardFrom">
-              <el-form-item label="卡号："   prop="cardId">
-                  <el-input v-model.number="cardFrom.cardId"   placeholder="请刷卡" 
+              <el-form-item label="卡号："   prop="cardNo">
+                  <el-input v-model.number="cardFrom.cardNo"   placeholder="请刷卡" 
                   clearable maxlength="8" show-word-limit></el-input>
               </el-form-item>
           </el-form>
@@ -358,7 +358,7 @@
     examinationId: "",
     fromUid:"",
     remark: "",
-    cardId:"",
+    cardNo:"",
     sid: 0
   }
   export default {
@@ -374,10 +374,9 @@
         patObj: Object.assign({}, defaultPatient),
         medObj: Object.assign({}, defaultMedical),
         cardFrom:{
-          cardId:""
+          cardNo:""
         },
         dialogVisible:false,
-        cardId:"",
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
         address:"",
         doctorList:[],
@@ -431,7 +430,7 @@
           ]
         },
         cardRules:{
-           cardId: [
+           cardNo: [
             {required: true, message: '必填字段', trigger: 'blur'},
              { type: 'number', message: '卡号必须数字',trigger: 'blur'}
           ],
@@ -605,7 +604,7 @@
         
       },
       saveMedical(){
-          this.medObj.cardId=this.cardFrom.cardId;
+          this.medObj.cardNo=this.cardFrom.cardNo;
           saveMedicalRecord(this.medObj).then(res=>{
               if(res.code==200){
                 this.$store.commit('delete_tabs', this.$route.path)
