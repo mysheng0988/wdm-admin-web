@@ -123,7 +123,10 @@
           
         },
         handleChange(){
-          this.nextQuestion();
+          setTimeout(()=>{
+              this.nextQuestion();
+          },500)
+        
         },
          checkAddShow(arr){
           if(this.problemData.hidden){

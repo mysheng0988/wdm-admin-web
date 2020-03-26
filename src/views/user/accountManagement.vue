@@ -111,7 +111,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="账户密码:"  prop="password" >
+            <el-form-item label="账户密码:"  prop="password"   v-if="!userForm.uid">
               <el-input v-model="userForm.password" placeholder="请输入账户密码" maxlength="10" show-word-limit></el-input>
             </el-form-item>
           </el-col>
@@ -141,7 +141,7 @@
           </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="用户角色:"  prop="roleId" >
+            <el-form-item label="用户角色:" prop="roleId">
               <el-select  placeholder="请选择" v-model="userForm.roleId" clearable class="input-width">
                 <el-option
                   v-for="item in roleList"
@@ -301,6 +301,16 @@
           this.hospitalChange(res)
         })
       },
+      updateUserStateData(data){
+          let uid=data.uid;
+          let enable=data.uid;
+          updateUserstate(uid,enable).then(res=>{
+            if(res.code==200){
+              this.$message.success("更新成功")
+            }
+
+          })
+      },
       saveUser(formName){
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -341,7 +351,7 @@
         })
       },
       getRole(){
-        getRoleList({pageNum: 1,pageSize: 200}).then(res=>{
+        getRoleList({pageNum: 1,pageSize: 200,roleName:""}).then(res=>{
           if(res.code==200){
             this.roleList=res.dataList;
           }
@@ -357,13 +367,14 @@
         })
       },
       handleChangeState(obj){
+        console.log(obj)
         if(obj.enable){
           this.$confirm('是否禁用该用户, 禁用之后该用户无法登陆?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            changeState({uid:obj.uid,enable:!obj.enable}).then(res=>{
+            changeState(obj.uid,!obj.enable).then(res=>{
               if(res.code==200){
                 this.getList()
                 Message.error("该用户已禁用")
@@ -371,7 +382,7 @@
             })
           })
         }else {
-          changeState({uid:obj.uid,enable:!obj.enable}).then(res=>{
+          changeState(obj.uid,!obj.enable).then(res=>{
             if(res.code==200){
               this.getList()
               Message.success("该用户已启用")

@@ -499,6 +499,7 @@
         queryExperience(this.patientId).then(res=>{
           if(res.code==200){
             this.list=res.dataList;
+            console.log(this.list)
           }
         }).catch(error => {
           this.listLoading=false;

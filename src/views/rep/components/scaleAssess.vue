@@ -6,7 +6,11 @@
         <p>附录4. 量表评估</p>
         <p>S<span>CALE ASSESSMENT</span></p>
       </div>
-     <chart-gauge :data="data" ></chart-gauge>
+      <div v-for="(item,index) in data" :key="index">
+        <chart-gauge :data="item"  v-if="item.type=='dial'"></chart-gauge>
+        <scale-text :data="item"  v-else-if="item.type=='text'"></scale-text>
+      </div>
+     
      <!-- <chart-gauge :data="data2" ></chart-gauge>
      <chart-gauge :data="data3" ></chart-gauge> -->
      <!-- <chart-histogram ></chart-histogram>
@@ -21,52 +25,29 @@
  import chartHistogram from './chart/chartHistogram'
  import chartLine from './chart/chart-line'
  import chartRadar from './chart/chart-radar'
+ import scaleText from './chart/scaleText'
   export default {
     name: 'scaleAssess',
     components:{
       chartGauge,
       chartHistogram,
       chartLine,
+      scaleText,
       chartRadar
+    },
+    props:{
+      data:{
+        type:Array,
+        default:[]
+      }
     },
     data(){
       return {
-       data:{
-         questionnaireName:"广泛性焦虑障碍量表(GAD-7）",
-         score:"-10",
-         conclusion:"您的状态：中度焦虑",
-         maxValue:"33",
-         explanation:"您的焦虑倾向到了中度水平，建议您与专业的心理医生多聊一聊，会对 您的帮助很大。",
-         chartInfoVO:{
-            maxValue:40,
-            minValue:-40,
-         }
-       },
-       data2:{
-         questionnaireName:"广泛性抑郁障碍量表(GAD-7）",
-         score:"30",
-         conclusion:"您的状态：重度焦虑",
-         maxValue:"22",
-         explanation:"您的焦虑倾向到了重度水平，建议您与专业的心理医生多聊一聊，会对您的帮助很大。",
-         chartInfoVO:{
-            maxValue:98,
-            minValue:0,
-         }
-       },
-        data3:{
-         questionnaireName:"生活事件量表（LES）",
-         score:"10",
-         conclusion:"您的状态：重度焦虑",
-         maxValue:"200",
-         minValue:"0",
-         explanation:"您的焦虑倾向到了重度水平，建议您与专业的心理医生多聊一聊，会对您的帮助很大。",
-       }
+       
       };
     },
     mounted(){
-        scaleResult(36).then(res=>{
-              console.log(res)
-        })
+       console.log(this.data)
     }
   }
 </script>

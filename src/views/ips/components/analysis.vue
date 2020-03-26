@@ -198,7 +198,21 @@
        
       },
       handleFinishCommit(){
-        this.$emit('finishCommit');
+        let loading= Loading.service({
+           lock: true,
+           text: '加载中',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.8)'
+        });
+        updataData(this.data).then(res=>{
+            loading.close();
+            if(res.code==200){
+                this.$store.commit('delete_tabs', this.$route.path)
+                this.$router.push({path:"/rep/pdf",query:{medicalRecordId:this.medicalRecordId,id:this.patientId}})
+            }
+        }).catch(err=>{
+            loading.close();
+        });
       }
     }
   }

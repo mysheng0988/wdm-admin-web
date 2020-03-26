@@ -16,7 +16,7 @@
           <span v-if="item.meta&&item.meta.title" slot="title">{{item.meta.title}}</span>
         </template>
 
-        <template v-for="child in item.children" v-if="!child.hidden">
+        <template v-for="child in item.children" v-if="!child.hidden&&child.meta.roleId.includes(roles)">
           <sidebar-item :is-nest="true" class="nest-menu" v-if="child.children&&child.children.length>0" :routes="[child]" :key="child.path"></sidebar-item>
           <router-link v-else :to="item.path+'/'+child.path" :key="child.name" >
             <el-menu-item :index="item.path+'/'+child.path" >
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'SidebarItem',
   props: {
@@ -43,12 +44,21 @@ export default {
       default: false
     }
   },
+  computed:{
+      ...mapGetters([             //步骤二，对象扩展运算符方式
+        "roles"
+      ])
+  },
+  mounted(){
+    console.log(this.roles)
+  },
   methods: {
     hasOneShowingChildren(children) {
       const showingChildren = children.filter(item => {
-        //console.log(item)
-        return !item.hidden
+        //let flag=item.meta.roleId.includes[this.roles]
+        return !item.hidden;
       })
+      console.log(showingChildren)
       if (showingChildren.length === 1) {
         return true
       }

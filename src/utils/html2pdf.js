@@ -3,7 +3,8 @@ import JsPDF from 'jspdf'
 export default{
   install (Vue, options) {
     Vue.prototype.getPdf = function (dom,title) {
-      html2Canvas(document.querySelector('#'+dom), {
+      let element=document.getElementById(dom)
+      html2Canvas(element, {
         allowTaint: true
       }).then(function (canvas) {
         let contentWidth = canvas.width

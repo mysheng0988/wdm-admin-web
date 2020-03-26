@@ -1,35 +1,44 @@
 <template>
   <div class="app-container" >
-    <div class="pdf-container" id="pdfCentent">
+    <div class="pdf-container" id="pdfCentent" ref="content">
         <rep-index :patient-data="patientData" :patient-vo="patientVo"></rep-index>
         <contents></contents>
         <patient-msg :patient-data="patientData" :patient-vo="patientVo" :main-pursue="mainPursue"></patient-msg>
         <div v-for="(item2,index2) in experienceData" :key="'exe-'+index2">
           <experience :experience-data="item2"></experience>
         </div>
-        
         <assess></assess>
         <div v-for="(item,index) in page" :key="index">
           <rep-analysis  :analysis-data="item"></rep-analysis>
         </div>
-        <suggest-drug></suggest-drug>
+        <!-- <div v-for="(item,index) in drugData" :key="'drug'+index"> -->
+            <suggest-drug></suggest-drug>
+        <!-- </div> -->
+        
         <follow-suggest></follow-suggest>
         <patient-edu></patient-edu>
         <patient-edu2></patient-edu2>
-        <patient-ni></patient-ni>
+        <div v-for="(item,index) in suggestData" :key="'ni'+index">
+          <patient-ni :data="item"></patient-ni>
+        </div>
+        
         <nerve-examine></nerve-examine>
         <eeg-examine></eeg-examine>
-        <scale-assess></scale-assess>
+        <div v-for="(item,index) in scaleData" :key="'scale'+index">
+           <scale-assess :data="item"></scale-assess>
+        </div>
+       
         <assessment></assessment>
     </div>
-   <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
+   <!-- <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button> -->
+   <el-button type="danger" @click="outPut">导出PDF</el-button>
   </div>
 </template>
 <script>
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
 import {analysisData} from "@/api/analysis"
-import { formatRowspanAndColspan} from '@/utils/auth'
+ import{scaleResult,getReportMsg} from "@/api/report"
       import repIndex from './components/rep-index'
        import contents from './components/contents'
         import patientMsg from './components/patientMsg'
@@ -73,6 +82,9 @@ import { formatRowspanAndColspan} from '@/utils/auth'
           mainPursue:{},
           analysisData:{},
           experienceData:[],
+          scaleData:[],
+          drugData:[],
+          suggestData:[],
           page:[],
         }
       },
@@ -81,8 +93,174 @@ import { formatRowspanAndColspan} from '@/utils/auth'
         this.getPursueData();
         this.getExperienceList();
         this.getAnalysisData();
+        this.getScaleResult();
+        this.getReportMsgData();
       },
       methods: {
+        outPut(){
+          //  this.$nextTick(() => {
+          //   this.$refs.content.window.print()
+            
+          // })
+        },
+        getReportMsgData(){
+            getReportMsg(36).then(res=>{
+              if(res.code==200){
+                  let pageNum=0;
+                  let rowNum=0;
+                  let maxRowNum=18;
+                  let data=res.dataList[0];
+                 let nutritionPrescription=JSON.parse(data.nutritionPrescription);//营养处方
+                 let functionalMedicineAdvice=JSON.parse(data.functionalMedicineAdvice);//功能医学建议
+                 let otherSuggestion=JSON.parse(data.otherSuggestion);
+                 let suggestData=[];
+                  suggestData[pageNum]=[];
+                    let param={
+                      content:nutritionPrescription.title,
+                      type:0,
+                    }
+                  suggestData[pageNum].push(param)
+                  let index=0
+                  for(let item1 of nutritionPrescription.data){
+                      index++;
+                      let param1={
+                        content:index+"、"+item1.title,
+                        type:1,
+                        }
+                      suggestData[pageNum].push(param1)
+                      let index1=0;
+                      for(let item of item1.data){
+                          let num=this.computeRowNum(item);
+                            rowNum+= num
+                         index1++;
+                          let param2={
+                            content:"("+index1+")、"+item,
+                            type:1,
+                          }
+                          if(rowNum>maxRowNum){
+                            rowNum=0;
+                            pageNum++;
+                            suggestData[pageNum]=[]
+                          }
+                          suggestData[pageNum].push(param2)
+                      }
+                  }
+                    let paramf={
+                      content:functionalMedicineAdvice.title,
+                      type:0,
+                    }
+                  suggestData[pageNum].push(paramf)
+                  let indexf=0
+                  for(let item of functionalMedicineAdvice.data){
+                         let num=this.computeRowNum(item);
+                            rowNum+= num
+                          if(rowNum>maxRowNum){
+                            rowNum=0;
+                            pageNum++;
+                            suggestData[pageNum]=[]
+                          }
+                      indexf++;
+                      let param1={
+                        content:indexf+"、"+item,
+                        type:1,
+                        }
+                      suggestData[pageNum].push(param1)
+                  }
+                  
+                    let paramo={
+                      content:otherSuggestion.title,
+                      type:0,
+                    }
+                  suggestData[pageNum].push(paramo)
+                  let indexo=0
+                  for(let item of otherSuggestion.data){
+                      indexo++;
+                      let param1={
+                        content:indexo+"、"+item.title,
+                        type:1,
+                      }
+                      suggestData[pageNum].push(param1)
+                      let index1o=0;
+                      for(let item1 of item.data){
+                          let num=this.computeRowNum(item1);
+                            rowNum+= num
+                         index1o++;
+                          let param2={
+                            content:"("+index1o+")、"+item1,
+                            type:1,
+                          }
+                        suggestData[pageNum].push(param2)   
+                      }
+                  }
+                this.suggestData=suggestData;
+                 console.log(suggestData)
+
+              }
+              
+               
+            })
+        },
+        pageThenData(obj){
+
+        },
+        pageDataText(suggestData,field,pageNum,rowNum,maxRowNum){
+            suggestData[pageNum]=[];
+            let param={
+              content:field.title,
+              type:0,
+            }
+          suggestData[pageNum].push(param)
+          let index=0
+          for(let item1 of field.data){
+               index++;
+              let param1={
+                content:index+"、"+item1.title,
+                type:1,
+                }
+              suggestData[pageNum].push(param1)
+              let index1=0;
+              for(let item of item1.data){
+                  let param2={
+                    content:"("+index+")、"+item,
+                    type:1,
+                  }
+                  index1++;
+                  let num=this.computeRowNum(item);
+                    rowNum+= num
+                  if(rowNum>20){
+                    rowNum=0;
+                    pageNum++;
+                    suggestData[pageNum]=[]
+                  }
+                  suggestData[pageNum].push(param2)
+              }
+          }
+          return suggestData;
+        },
+        getScaleResult(){
+          scaleResult(36).then(res=>{
+            let data=res.dataList;
+            let scaleData=[];
+            let pageNum=0;
+            let itemNum=0;
+            let pageMax=3;
+            scaleData[pageNum]=[]
+            for(let item of data){
+              if(item.questionnaireNumber!=12){
+                if(itemNum>pageMax){
+                  itemNum=0
+                  pageNum++;
+                  scaleData[pageNum]=[]
+                }
+                 if(item.chartData!=""){
+                    item.chartData=JSON.parse(item.chartData)
+                  }
+                  scaleData[pageNum].push(item)
+              }
+            }
+            this.scaleData=scaleData;
+          })
+        },
         getPatientData(){
           getRecordPatient(20).then(res=>{
             if(res.code==200){
@@ -123,7 +301,7 @@ import { formatRowspanAndColspan} from '@/utils/auth'
                       diagnosisList.push(item1.name)
                   }
                 if(itemNum<=pageMaxItem){
-                  console.log(itemNum)
+          
                   itemNum++;
                   if(exeList[pageNum][year]){
                    let param={
@@ -160,7 +338,6 @@ import { formatRowspanAndColspan} from '@/utils/auth'
                 
 
               }
-              console.log(exeList)
               this.experienceData=exeList;
             }
           }).catch(error => {
@@ -249,7 +426,7 @@ import { formatRowspanAndColspan} from '@/utils/auth'
                rowNum+=3;
                 let pageItem3={ //页面的最小单元
                     imgPath:require("@/views/rep/img/icon-society.png"),
-                    label:"社会因素",
+                    label:"社会功能",
                     data:[]
                   }
               if(rowNum>18){

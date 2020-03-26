@@ -11,3 +11,15 @@ export function scaleResult(medicalRecordId) {
     method:'get',
   })
 }
+export function getReportMsg(medicalRecordId) {
+  return request({
+    url:'ips/report/medicalRecordId/'+medicalRecordId,
+    method:'get',
+  })
+}
+export function getReportList(param) {
+  return request({
+    url:'ips/report/medicalRecordId/'+medicalRecordId,
+    method:'get',
+  })
+}

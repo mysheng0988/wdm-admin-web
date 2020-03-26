@@ -5,7 +5,7 @@
           <div class="content-title">{{data.questionnaireName}}</div>
           <div>总分：{{data.score}}分</div>
           <div>{{data.conclusion}}</div>
-          <div>{{data.explanation}}。</div>
+          <div>{{data.explanation}}</div>
       </div>
   </div>
 </template>
@@ -64,12 +64,13 @@
         }
       }
     },
-    watch(){
-
-    },
      mounted(){
       this.chartData.rows[0].value=this.data.score;
-      this.chartSettings.seriesMap.score.max=this.data.maxValue;
+      let data =this.data.chartData;
+      
+       console.log(data)
+      this.chartSettings.seriesMap.score.max=data[0].max;
+      this.chartSettings.seriesMap.score.min=data[0].min;
     }
   }
 </script>

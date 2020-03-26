@@ -6,32 +6,19 @@
         <p>附录1. 患者教育</p>
         <p>P<span>ATIENT EDUCATION</span></p>
       </div>
-      <div class="content-title">营养处方</div>
-      <div class="content">1.限制钠摄入</div>
-      <div class="content indent">中国营养学会推荐健康成人每日食盐摄入量不宜超过6g，高血压患者不超过3g。 避免高盐摄入的措施包括：</div>
-      <div class="content">（1）每人每餐放盐不超过2g，每人每天摄入盐不超过6g；</div>
-      <div class="content">（2）尽量避免进食高盐食物和调味品；</div>
-      <div class="content">（3）利用蔬菜本身的风味来调味；</div>
-      <div class="content">（4）利用醋、柠檬汁、苹果汁、番茄汁等各种调味汁来增添食物味道；</div>
-      <div class="content">（5）采用富钾低钠盐代替普通食盐，但对于伴有肾功能不全的患者应慎用，以防血钾升高。</div>
-      <div class="content">2.限制总热量</div>
-      <div class="content">（1）减少动物油和胆固醇的摄入；</div>
-      <div class="content">（2）减少反式脂肪酸摄入；</div>
-      <div class="content">（3）适量选用橄榄油，每星期3次或隔天1次;</div>
-      <div class="content">（4）高血压患者进食烹调油的4点注意：</div>
-      <div class="content indent">①选择脂肪酸数量及构成比合理的油脂，如橄榄油、茶油等；</div>
-      <div class="content indent">②每日烹调油用量＜25g（半两，相当于2.5汤匙）；</div>
-      <div class="content indent">③控制烹调温度，油温不宜太高。</div>
-       <div class="content"> 3.营养均衡</div>
-      <div class="content">（1）适量补充蛋白质；</div>
-      <div class="content">（2）适量增加新鲜蔬菜和水果； </div>
-      <div class="content">（3） 增加膳食钙摄入，保证奶类及其制品的摄入，250-500ml/天脱脂或低脂牛奶。</div>
+      <template v-for="(item,index) in data">
+        <div :class="item.type==0?'content-title':'content'"  :key="'t'+index" >{{item.content}}</div>
+      </template>
     </div>
   </div>
 </template>
 <script>
   export default {
     name: 'rep-analysis',
+    props:{
+      data:Array,
+
+    },
     data(){
       return {
       };

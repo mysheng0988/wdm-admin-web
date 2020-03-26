@@ -5,3 +5,9 @@ export function readCard() {
     method:'get'
   })
 }
+export function readCardMsg() {
+  return request({
+    url:'base/api/ReadMsg',
+    method:'get'
+  })
+}

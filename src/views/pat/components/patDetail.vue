@@ -236,7 +236,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"  prop="beHospitalizedNumber" >
-            <el-input  v-model.number="medObj.beHospitalizedNumber"></el-input>
+            <el-input  v-model.number="medObj.beHospitalizedNumber" clearable maxlength="15" show-word-limit></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">
@@ -265,15 +265,15 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="床号："  prop="bedNo" >
-            <el-input type="number" v-model.number="medObj.bedNo"  placeholder="请输入床号" clearable></el-input>
+            <el-input type="number" v-model.number="medObj.bedNo"  placeholder="请输入床号"  clearable maxlength="10" show-word-limit ></el-input>
           </el-form-item>
         </el-col>
-         <el-col :span="8">
+         <!-- <el-col :span="8">
           <el-form-item label="卡号："   prop="cardId">
             <el-input v-model.number="medObj.cardId"   placeholder="请刷卡" 
             clearable maxlength="8" show-word-limit></el-input>
           </el-form-item>
-        </el-col>
+        </el-col> -->
         <!--<el-col :span="8">-->
           <!--<el-form-item label="治疗项目："  >-->
             <!--<el-select  placeholder="请选择" clearable class="input-width">-->
@@ -288,10 +288,27 @@
         <!--</el-col>-->
       </el-row>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('patObjFrom')">提交</el-button>
-        <el-button v-if="!patObj.pid" @click="resetForm('patObjFrom')">重置</el-button>
+        <el-button type="primary" @click="payByCard('patObjFrom')">刷卡</el-button>
+        <!-- <el-button v-if="!patObj.pid" @click="resetForm('patObjFrom')">重置</el-button> -->
       </el-form-item>
       </el-form>
+      <el-dialog
+        title="请您刷卡"
+        :visible.sync="dialogVisible"
+        width="30%">
+          <el-form  :model="cardFrom"
+             :rules="cardRules"
+             ref="cardFrom">
+              <el-form-item label="卡号："   prop="cardId">
+                  <el-input v-model.number="cardFrom.cardId"   placeholder="请刷卡" 
+                  clearable maxlength="8" show-word-limit></el-input>
+              </el-form-item>
+          </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="onSubmit('cardFrom')">提交数据</el-button>
+        </span>
+      </el-dialog>
   </el-card>
 </template>
 
@@ -356,6 +373,11 @@
       return {
         patObj: Object.assign({}, defaultPatient),
         medObj: Object.assign({}, defaultMedical),
+        cardFrom:{
+          cardId:""
+        },
+        dialogVisible:false,
+        cardId:"",
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
         address:"",
         doctorList:[],
@@ -408,6 +430,12 @@
             { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
           ]
         },
+        cardRules:{
+           cardId: [
+            {required: true, message: '必填字段', trigger: 'blur'},
+             { type: 'number', message: '卡号必须数字',trigger: 'blur'}
+          ],
+        },
         medrules:{
           fromDeptId: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -416,13 +444,10 @@
             {required: true, message: '必填字段', trigger: 'blur'},
             { type: 'number', message: '必须为数字',trigger: 'blur'}
           ],
+          
           // bedNo: [
           //   {required: false, type: 'number',trigger: 'blur',message: '必须为数字值'}
           // ],
-          cardId: [
-            {required: true, message: '必填字段', trigger: 'blur'},
-             { type: 'number', message: '卡号必须数字',trigger: 'blur'}
-          ],
           fromUid: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
@@ -459,6 +484,7 @@
 
 
     methods: {
+     
       genderChange(){
         if(!this.patObj.gender){
           this.patObj.crowdRole="无"
@@ -511,15 +537,6 @@
           }
           return this.patObj.pid;
         })
-        // .then(patientId=>{
-        //   getMedicalRecordPatient(patientId).then(res=>{
-        //      if(res.code==200){
-        //         this.medObj=res.dataList[0];
-        //        this.medObj.patientId=patientId;
-        //      }
-              
-        //   })
-        // })
       },
       getDept(){
         getDeptList(this.info.hospitalId).then(res=>{
@@ -528,22 +545,39 @@
           }
         })
       },
+       payByCard(formName){
+          this.$refs[formName].validate((valid) => {
+          this.$refs["medObjFrom"].validate((valid2)=>{
+            if (valid&&valid2) {
+                this.dialogVisible=true;
+              } else {
+                this.$message({
+                  message: '验证失败',
+                  type: 'error',
+                  duration: 1000
+                });
+                return false;
+              }
+          })
+        });
+        
+
+      },
       onSubmit(formName) {
         this.patObj.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
         this.$refs[formName].validate((valid) => {
-          this.$refs["medObjFrom"].validate((valid2)=>{
-            if (valid&&valid2) {
+            if (valid) {
               this.$confirm('是否提交数据', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
               }).then(() => {
                   if(this.patObj.pid!=null){
-                    updatePatient(this.patObj).then(res=>{
+                    //updatePatient(this.patObj).then(res=>{
                       this.medObj.patientId=this.patObj.pid;
                       this.saveMedical()
-                      Message.success("保存成功")
-                    })
+                      //Message.success("保存成功")
+                    //})
                   }else{
                     savePatient(this.patObj).then(res=>{
                       if(res.code==200){
@@ -568,17 +602,34 @@
                 return false;
               }
           })
-        });
+        
       },
       saveMedical(){
+          this.medObj.cardId=this.cardFrom.cardId;
           saveMedicalRecord(this.medObj).then(res=>{
               if(res.code==200){
                 this.$store.commit('delete_tabs', this.$route.path)
-                this.$router.push("/pat/list")
+                this.$router.push("/ips/index")
+                //this.resetRouter(this.medObj.patientId,this.medObj.examinationId)
                 Message.success("保存成功")
               }
           })
       },
+      // resetRouter(patientId,examinationId){
+      //     let path="IPS-C";
+      //   if(examinationId==1){
+      //     path="IPS-A"
+      //   }else if(examinationId==2){
+      //     path="IPS-B"
+      //   }
+      //   this.$router.push({
+      //     path: '/ips/'+path,
+      //     query: {
+      //       id: patientId,
+      //       medicalRecordId:data.id
+      //     }
+      //   })
+      // },
       resetForm(formName) {
         this.$refs[formName].resetFields();
         this.patObj = Object.assign({}, defaultPatient);

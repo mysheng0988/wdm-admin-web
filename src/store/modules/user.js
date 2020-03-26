@@ -6,7 +6,7 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: [],
+    roles: "",
     deptId:"",
     activePath:"/pat/list",
     // tabs:[]
@@ -78,8 +78,9 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const data = response.dataList[0];
+          console.log(data)
           // if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-          //   commit('SET_ROLES', data.roles)
+            commit('SET_ROLES', data.roleId)
           // } else {
           //   reject('getInfo: roles must be a non-null array !')
           // }deptId

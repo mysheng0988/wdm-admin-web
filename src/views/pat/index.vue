@@ -87,15 +87,8 @@
               <el-button
                 size="mini"
                 round
-                >
+                @click="historyRecord(scope.row)">
                 历史记录
-              </el-button>
-              <el-button
-                size="mini"
-                round 
-                @click="handleTask(scope.row)">
-
-               任务
               </el-button>
           </template>
         </el-table-column>
@@ -136,7 +129,7 @@
       </span>
     </el-dialog>
 
-    <el-dialog
+    <!-- <el-dialog
       title="患者任务"
       :visible.sync="dialogVisible2"
       width="40%">
@@ -187,7 +180,7 @@
         <el-button @click="dialogVisible2 = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -265,6 +258,15 @@
       }
     },
     methods: {
+      historyRecord(data){
+        console.log(data)
+         this.$router.push({
+          path: '/pat/assessRecord',
+          query: {
+            id: data.pid
+          }
+        })
+      },
       handleTask(val){
         this.patientMsg=val;
         this.listLoading=true;
@@ -307,9 +309,9 @@
       },
       readCardData(){
         readCard().then(res=>{
-          if(res.cardno){
-            this.cardForm.cardID=res.cardno
-            let cardNo=res.cardNo;
+          console.log(res)
+          if(res.code==200){
+            this.cardForm.cardID=res.data.cardno
           }else{
             this.$message.warning("刷卡失败")
           }

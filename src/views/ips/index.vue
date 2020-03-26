@@ -20,9 +20,9 @@
         </el-form-item> -->
         <el-form-item label="测评状态:" >
           <el-radio-group v-model="listQuery.examinationStatus" @change="queryData">
-            <el-radio label="" >全部</el-radio>
-            <el-radio label="1" >未测评</el-radio>
-            <el-radio label="2" >测评中</el-radio>
+            <el-radio label="102" >全部</el-radio>
+            <el-radio label="0" >待测评</el-radio>
+            <el-radio label="101" >测评中</el-radio>
           </el-radio-group>
           <!-- <el-select placeholder="请选择" v-model="listQuery.examinationStatus" clearable>
             <el-option label="全部" value=""></el-option>
@@ -81,7 +81,8 @@
                 size="mini"
                 round
                 class="active"
-                @click="addPursue(scope.row)">开始测评
+                @click="addPursue(scope.row)">
+                {{scope.row.examinationStatus===0?"开始测评":"继续测评"}}
               </el-button>
           </template>
         </el-table-column>
@@ -145,7 +146,7 @@
         total:0,
         active:0,
         listQuery: {
-          examinationStatus: "",
+          examinationStatus: "102",
           pageNum: 1,
           pageSize: 10
         },
@@ -178,14 +179,14 @@
       },
       formatExaminationStatus(value){
         switch (value) {
-          case 1:
-            return "未测评"
+          case 0:
+            return "待测评"
             break;
-          case 2:
-            return "待完成"
-            break;
-          case 3:
+          case 100:
             return "已完成"
+            break;
+           default:
+            return "测评中"
             break;
         }
 

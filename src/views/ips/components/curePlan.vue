@@ -2,24 +2,19 @@
   <div style="margin-top: 50px">
     <el-form   ref="productInfoForm" label-width="160px" >
         <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length==0">
-           <p class="add-btn" @click="dialogVisible=true"><i class="el-icon-plus" ></i>药物筛选</p>
+           <p class="add-btn" @click="drugProgram"><i class="el-icon-plus" ></i>药物筛选</p>
         </el-form-item>
         <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length!=0">
            <div class="text-box"  >
              <div v-for="(item,index) in drugPlan" :key="index">
-               <div v-if="item.diagnosis">
-                 <p>({{index+1}})、{{item.diagnosis}}:</p>
-                 <p>{{item.drugName}},{{item.dosage}},{{item.medicationAdvice}}</p>
-               </div>
-               <div v-else>
-                 <p>{{item}}:</p>
-               </div>
+                 <p>{{index+1}}、{{item.title}}:</p>
+                 <p v-for="(item1,index2) in item.data" :key="index2">{{item1}}</p>
              </div>
           </div>
         </el-form-item>
-        <el-form-item label="躯体化症状药物方案:" v-if="somatizationSymptomsDrugRegimen">
+        <el-form-item label="躯体化症状药物方案:" >
            <div class="text-box"  >
-            <div v-for="(item1,index1) in somatizationSymptomsDrugRegimen.data" :key="index1">
+            <div v-for="(item1,index1) in initData.somatizationSymptomsDrugRegimen.data" :key="index1">
                 <div class="box-title">{{item1.title}}</div>
                 <div  v-for="(item2,index2) in item1.data" :key="index2" style="padding-left:20px" >
                     <div class="box-title">{{item2.title}}</div>
@@ -40,10 +35,10 @@
         <el-form-item label="心身治疗方案:"   >
           <div class="text-box" >
             <div v-for="(item1,index1) in initData.psychosomaticTherapy.data" :key="index1">
-                <div class="box-title">{{item1.title}}</div>
+                <div class="box-title"  v-if="item1.data.length!=0">{{item1.title}}</div>
                 <div class="item-box" v-for="(item2,index2) in item1.data" :key="index2" style="padding-left:20px" >
                   <i class="close el-icon-error" @click="deleteItem3('psychosomaticTherapy',index1,index2)"></i>
-                  <div class="box-title">{{item2.title}}</div>
+                  <div class="box-title" v-if="item2.data.length!=0">{{item2.title}}</div>
                   <div class="flex-wrap" v-for="(item3,index3) in item2.data" :key="index3" >
                     <el-button @click="addText3('psychosomaticTherapy',index1,index2)" class="text-boder blue" icon="el-icon-edit">
                       {{index3+1}}、</el-button>
@@ -147,7 +142,7 @@
         </el-form-item>
       <el-form-item style="text-align: center">
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
-        <el-button type="primary" size="medium" @click="handleFinishCommit">完成</el-button>
+        <el-button type="primary" size="medium" @click="submitReportData">确认签名</el-button>
       </el-form-item>
     </el-form>
     <el-dialog
@@ -162,7 +157,7 @@
               v-model="filterText" size="small">
             </el-input>
             <el-tree
-                :data=data
+                :data="data"
                 show-checkbox
                 class="tree"
                 node-key="id"
@@ -195,9 +190,11 @@
         filterable
         :filter-method="filterMethod"
         filter-placeholder="请输入关键字检索"
-        v-model="value2"
+        v-model="selectedDurg"
         :titles="titles"
-        :data="data2">
+        :data="data2"
+        @change="transferChange"
+        @left-check-change="leftDrugChange">
       </el-transfer>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false">取 消</el-button>
@@ -208,8 +205,10 @@
 </template>
 
 <script>
-  import {analysisData,saveContraindications,saveFilter,updataData} from '@/api/analysis'
+  import {analysisFirstData,saveContraindications,saveFilter,updataData,updataReportData} from '@/api/analysis'
   const defaultPlan={
+    id:"",
+    medicalRecordId:"",
     psychosomaticTherapy:"",//心身治疗建议
     exercisePrescription:"",//"运动处方"
     nutritionPrescription:"",//营养处方
@@ -251,17 +250,10 @@
     },
     data() {
       return {
-         data2:[
-           {label:"上海",pinyin:"sh",key:0},
-            {label:"北京",pinyin:"bj",key:1},
-            {label:"广州",pinyin:"gz",key:2},
-            {label:"深圳",pinyin:"sz",key:3},
-             {label:"南京",pinyin:"nj",key:4},
-            {label:"西安",pinyin:"xa",key:5},
-             {label:"成都",pinyin:"cd",key:6},
-           ],
-           titles:["可选药物","已选药物"],
-        value2: [],
+         data2:[],
+         titles:["可选药物","已选药物"],
+        selectedDurg: [],
+        selectedDurgLeft:[],
         filterMethod(query, item) {
           return item.label.indexOf(query) > -1;
         },
@@ -271,143 +263,6 @@
         filterText:"",
         selectedData:[],
         data: [],
-  somatizationSymptomsDrugRegimen:{
-    title:"hhhhhh",
-    data: [
-                    {
-                        "data": [
-                            {
-                                "data": [
-                                    {
-                                        "data": [
-                                            "硝苯地平和阿替洛尔可能改善心理应激导致的室壁运动障碍，美托洛尔可能改善心理应激的导致稳定性冠心病。"
-                                        ],
-                                        "title": "β受体阻滞剂"
-                                    },
-                                    {
-                                        "data": [
-                                            "常用的5-羟色胺再摄取抑制剂及用法用量。氟西汀：每日一次 每次 20-40mg、帕罗西汀：每日一次 每次20-40mg 、舍曲林：每日一次 每次50-100mg。艾司西酞普兰可明显地改善心理应激导致的稳定性冠心病，推荐从最低剂量的半量（老年体弱者1/4量）开始用药，每5～7d缓慢加量1次，至最低有效剂量10mg/d。"
-                                        ],
-                                        "title": "选择性5-羟色胺再摄取抑制剂"
-                                    },
-                                    {
-                                        "data": [
-                                            "常用的长效药物有地西泮、艾司唑仑等，短效药物有劳拉西泮、阿普唑仑等。"
-                                        ],
-                                        "title": "苯二氮卓类药物"
-                                    },
-                                    {
-                                        "data": [
-                                            "坦度螺酮能有效控制精神压力导致的心脑血管系统功能变化，可降低血压、减缓心率、改善相关躯体和精神症状。"
-                                        ],
-                                        "title": "坦度螺酮"
-                                    },
-                                    {
-                                        "data": [
-                                            "可使用振源胶囊、心可舒片、心灵丸、复方丹参滴丸、乌林胶囊。"
-                                        ],
-                                        "title": "中药建议"
-                                    }
-                                ],
-                                "title": "药物治疗"
-                            },
-                            {
-                                "data": [
-                                    "无"
-                                ],
-                                "title": "用药原则"
-                            },
-                            {
-                                "data": [
-                                    "中国医师协会全科分会双心（心脏心理）学组.心理应激导致稳定性冠心病患者心肌缺血的诊断与治疗专家共识[J].中华心血管病杂志.2016,44(1):12-18."
-                                ],
-                                "title": "文献出处"
-                            }
-                        ],
-                        "title": "心理应激导致稳定性冠心病用药建议"
-                    },
-                    {
-                        "data": [
-                            {
-                                "data": [
-                                    {
-                                        "data": [
-                                            "①地尔硫卓：适用于心率偏快且心功能良好的患者。常用剂量为30~60mg/次，每日3~4次。其缓释或控释制剂 90mg/次，每日1~2 次，清晨发作者，可以睡前口服长效制剂。 ②氨氯地平：适用于合并心功能不全、心动过缓或传导阻滞的冠状动脉痉挛综合症患者。常规剂量 2.5~10mg/次，每日1次。③贝尼地平：适用于各类冠状动脉痉挛综合症患者。剂量 4~8mg/次，每日 1-2 次。"
-                                        ],
-                                        "title": "CCB"
-                                    },
-                                    {
-                                        "data": [
-                                            "应尽可能留下6~8h的空白期以防发生耐受。"
-                                        ],
-                                        "title": "硝酸酯类药物"
-                                    },
-                                    {
-                                        "data": [
-                                            "尼可地尔在增加冠状动脉血流的同时不影响血压、心率及心脏传导系统，无耐药性，可长期服用。禁用于心原性休克、伴有左心室衰竭、低血压和特异性体质的患者。常用剂量5-10mg/次，每日3次。"
-                                        ],
-                                        "title": "钾通道开放剂"
-                                    },
-                                    {
-                                        "data": [
-                                            "坚持长期应用。"
-                                        ],
-                                        "title": "他汀类药物"
-                                    },
-                                    {
-                                        "data": [
-                                            "治疗长期口服阿司匹林100mg/d。"
-                                        ],
-                                        "title": "抗血小板"
-                                    },
-                                    {
-                                        "data": [
-                                            ""
-                                        ],
-                                        "title": "β 受体阻滞剂。"
-                                    }
-                                ],
-                                "title": "药物治疗"
-                            },
-                            {
-                                "data": [
-                                    "对于合并有冠状动脉器质性狭窄或严重心肌桥，且临床主要表现为劳力性心绞痛的患者。若CCB和硝酸酯类疗效不佳时可以慎重联合使用高选择性β受体阻滞剂。对于冠状动脉无显著狭窄的CASS患者禁忌单独使用。长效 CCB 是预防冠状动脉痉挛综合症复发的主要药物，其中地尔硫卓和贝尼地平可以作为首选，若效果欠佳或不能耐受，可换用不同的CCB；若单一药物治疗控制不理想，可以联合应用CCB和硝酸酯类；若仍不理想可以换用CCB与尼可地尔联合；若CASS合并显著血管狭窄或心肌桥，在使用CCB及硝酸酯类无效的情况下，方可考虑 CCB 和（或）硝酸酯类与β受体阻滞剂的联合应用。所有CASS患者均不主张单用 β 受体阻滞剂治疗。抗血小板及调脂治疗应长期坚持应用。"
-                                ],
-                                "title": "用药原则"
-                            },
-                            {
-                                "data": [
-                                    "向定成,曾定尹,霍勇等. 冠状动脉痉挛综合征诊断与治疗中国专家共识[J].中国介入心脏病学杂志.2015,23(4):181-186."
-                                ],
-                                "title": "文献出处"
-                            }
-                        ],
-                        "title": "冠状动脉痉挛综合症用药建议"
-                    },
-                    {
-                        "data": [
-                            {
-                                "data": [
-                                    "吗啡镇痛,可同时使用利尿剂、β受体阻滞剂、阿司匹林、硝酸甘油、血管转换酶抑制剂ACEI、血管紧张素受体阻滞剂ARB、CCB(冠状痉挛的患者）等药物。专家推荐应激性心肌病恢复后，仍可长期服用血管紧张素转化酶抑制剂或血管紧张素受体阻断剂类药物及β受体阻滞剂，有冠状动脉痉挛者可考虑应用钙拮抗剂。但是如果存在左心室流出道狭窄，应避免应用血管紧张素转化酶抑制剂或血管紧张素受体阻断剂或利尿剂。同时,考虑到儿茶酚胺在该病发生中大量释放及其导致的心肌抑制,应尽量避免加压药物和β受体兴奋药物。"
-                                ],
-                                "title": "药物治疗"
-                            },
-                            {
-                                "data": [
-                                    "无"
-                                ],
-                                "title": "用药原则"
-                            },
-                            {
-                                "data": [
-                                    "胡大一,刘梅颜等.双心医学[M].第一版.北京:人民卫生出版社,2016:225-233."
-                                ],
-                                "title": "文献出处"
-                            }
-                        ],
-                        "title": "应激性心肌病用药建议"
-                    }
-                ]},
         defaultProps: {
           children: 'subList',
           label: 'name'
@@ -424,15 +279,65 @@
        this.initDataList();
     },
     methods: {
-
+      submitReportData(){
+        let param={
+             id:this.initData.id,
+            medicalRecordId:this.initData.medicalRecordId,
+            psychosomaticTherapy:JSON.stringify(this.initData.psychosomaticTherapy),//心身治疗建议
+            exercisePrescription:JSON.stringify(this.initData.exercisePrescription),//"运动处方"
+            nutritionPrescription:JSON.stringify(this.initData.nutritionPrescription),//营养处方
+            functionalMedicineAdvice:JSON.stringify(this.initData.functionalMedicineAdvice),//功能医学建议
+            otherSuggestion:JSON.stringify(this.initData.otherSuggestion),//其他建议
+            followUpRecommendations:JSON.stringify(this.initData.followUpRecommendations)
+        };
+        updataReportData(param).then(res=>{
+          if(res.code==200){
+            this.$store.commit('delete_tabs', this.$route.path)
+            this.$router.push({path:"/rep/pdf",query:{medicalRecordId:this.medicalRecordId,id:this.patientId}})
+          }
+        })
+      },
+      transferChange(val){
+        this.selectedDurgLeft=[];
+      },
+      leftDrugChange(val){
+        this.selectedDurgLeft.push(val)
+      },
+      drugProgram(){
+          if(this.data.length==0){
+            saveContraindications([],this.medicalRecordId).then(res=>{
+              if(res.code==200){
+                this.data2=[];
+                for(let item of res.dataList){
+                    let param={};
+                    param.key=item;
+                    param.label=item;
+                    this.data2.push(param)
+                }
+                this.dialogVisible=false;
+                this.dialogVisible2=true;
+              }else{
+                this.dialogVisible=false;
+                this.dialogVisible2=false;
+                this.drugPlan[0]=res.message;
+                //this.$message.warning(res.message)
+              }
+            })
+          }else{
+            this.dialogVisible=true;
+          }
+      },
       saveFilterData(){
-
-          let param={
-            interaction:this.value2
-            }
+          this.selectedDurg;
+          if(this.selectedDurgLeft.length!=0){
+            this.$message.warning("选择药物！")
+            return;
+          }
+          let param=this.selectedDurg
           saveFilter(param,this.medicalRecordId).then(res=>{
             if(res.code==200){
                 this.drugPlan=res.dataList;
+                console.log(this.drugPlan)
                 this.dialogVisible2=false;
             }else{
              // this.$message.warning(res.message)
@@ -442,9 +347,7 @@
           })
       },
       saveContraindicationsData(){
-        let param={
-            contraindications:this.$refs.tree.getCheckedNodes(true)
-          }
+        let param=this.$refs.tree.getCheckedNodes(true)
           saveContraindications(param,this.medicalRecordId).then(res=>{
             if(res.code==200){
               this.data2=[];
@@ -519,19 +422,25 @@
         param.medicalRecordId=this.medicalRecordId;
         param.source=1;
         param.patientId=this.patientId;
-      analysisData(param).then(res=>{
+      analysisFirstData(param).then(res=>{
          loading.close();
           let data={};
           if(res.code==200){
             data=res.dataList[0];
             this.data=data.contraindicationsList;
+            this.initData.id=data.id;
+            this.initData.medicalRecordId=data.medicalRecordId;
             this.initData.psychosomaticTherapy=JSON.parse(data.psychosomaticTherapy);
             this.initData.exercisePrescription=JSON.parse(data.exercisePrescription);
             this.initData.nutritionPrescription=JSON.parse(data.nutritionPrescription);
-            this.initData.functionalMedicineAdvice=JSON.parse(data.functionalMedicineAdvice);
+            let adviceData=JSON.parse(data.functionalMedicineAdvice);
+            if(adviceData.data.length>0){
+                adviceData.data.push("无")
+            }
+            this.initData.functionalMedicineAdvice=adviceData;
             this.initData.otherSuggestion=JSON.parse(data.otherSuggestion);
-            this.somatizationSymptomsDrugRegimen=data.somatizationSymptomsDrugRegimen;//躯体化治疗方案
-            // this.initData.followUpRecommendations=JSON.parse(data.followUpRecommendations)
+            let symptomsData=JSON.parse(data.somatizationSymptomsDrugRegimen);
+            this.initData.somatizationSymptomsDrugRegimen=symptomsData;//躯体化治疗方案
           }
         }).catch(err=>{
           loading.close();

@@ -11,7 +11,8 @@
           {{data.symptom}}
       </div>
       <div class="content-title">2.HRV检测结果：</div>
-      <img class="img" :src="data.resultImageUrl">
+      <el-image class="img" :src="data.resultImageUrl"></el-image>
+      <!-- <img class="img" :src="data.resultImageUrl" crossorigin="anonymous"> -->
     </div>
   </div>
 </template>

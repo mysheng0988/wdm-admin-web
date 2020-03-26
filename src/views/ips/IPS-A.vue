@@ -3,42 +3,42 @@
     <el-card class="operate-container" shadow="never">
       <el-row :gutter="10">
         <el-col :span="24">
-          <div>编号：<span>{{patient.pid}}</span></div>
+          <div>编号：<span>{{patient.patientId}}</span></div>
         </el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="6">
-          <div>姓名：<span>{{patient.realName}}</span></div>
+          <div>姓名：<span>{{patientVO.realName}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>年龄：<span>{{age}}</span></div>
         </el-col>
         <el-col :span="6">
-          <div>性别：<span>{{patient.gender?"女":"男"}}</span></div>
+          <div>性别：<span>{{patientVO.gender?"女":"男"}}</span></div>
         </el-col>
         <el-col :span="6">
-          <div>身高：<span>{{patient.height}}cm</span></div>
+          <div>身高：<span>{{patientVO.height}}cm</span></div>
         </el-col>
       </el-row>
       <el-row :gutter="10">
         <el-col :span="6">
-          <div>体重：<span>{{patient.weight}}</span></div>
+          <div>体重：<span>{{patientVO.weight}}kg</span></div>
         </el-col>
         <el-col :span="6">
-          <div>来源医生：<span>{{patient.fromRealName}}</span></div>
+          <div>来源医生：<span>{{patient.fromRealname}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>来源科室：<span>{{patient.fromDeptName}}</span></div>
         </el-col>
         <el-col :span="6">
-          <div>测评项目：<span>{{patient.examinationName}}</span></div>
+          <div>测评项目：<span>{{patient.examinationId|examinationFormat}}</span></div>
         </el-col>
       </el-row>
     </el-card>
     <el-card class="operate-container" shadow="never">
       <el-steps :active="active" finish-status="success" align-center>
         <el-step title="主诉" @click.native="changeTab(0)"></el-step>
-        <el-step title="HRV"  @click.native="changeTab(1)"></el-step>
+        <el-step title="设备检查"  @click.native="changeTab(1)"></el-step>
         <el-step title="初筛首访简易问卷"></el-step>
         <el-step title="量表"></el-step>
         <el-step title="综合分析"></el-step>
@@ -92,6 +92,7 @@
         :key="patientId"
         :medical-record-id="medicalRecordId+''"
         prev-title="量表"
+        next-title=""
         @nextStep="nextStep"
         @prevStep="prevStep">
       </analysis>
@@ -100,7 +101,7 @@
 </template>
 
 <script>
-  import {getPatient} from "@/api/patient";
+  import {getRecordPatient} from "@/api/patient";
   import mainPursue from './components/mainPursue';
   import hrv from './components/hrv';
   import eeg from './components/eeg';
@@ -121,6 +122,7 @@
         medicalRecordId:"",
         total:0,
         patient:"",
+        patientVO:"",
         isEdit:false,
         listQuery: {
           shopId:null,
@@ -129,15 +131,33 @@
         },
       }
     },
+     watch: {
+      $route(to) {
+          this.patientId=this.$route.query.id;
+          this.medicalRecordId=this.$route.query.medicalRecordId;
+          this.getPatientData();
+      }
+    },
     created() {
       this.patientId=this.$route.query.id;
       this.medicalRecordId=this.$route.query.medicalRecordId;
-      this.getPatientMsg();
+      this.getPatientData();
     },
+    filters: {      
+      examinationFormat (val) { 
+        let str="综合测评"
+        if(val==1){
+          str="筛查测评"
+        }else if(val==2){
+          str="专科测评"
+        }
+        return str;
+      } 
+    },   
     computed:{
       age:function () {
-        if(this.patient.birthday!=""&&this.patient.birthday){
-          let age=this.patient.birthday.substring(0,4);
+        if(this.patientVO.birthday!=""&&this.patientVO.birthday){
+          let age=this.patientVO.birthday.substring(0,4);
           let year=new Date().getFullYear()
           return year-age-1;
         }
@@ -149,6 +169,23 @@
         this.active=index;
         this.hideAll();
         this.showStatus[index] = true;
+      },
+     getPatientData(){
+        getRecordPatient(this.medicalRecordId).then(res=>{
+          if(res.code==200){
+            this.patient=res.dataList[0];
+            this.patientVO=res.dataList[0].patientVO;
+            let active=res.dataList[0].examinationStatus  
+            if(active>9){
+              this.active=res.dataList[0].examinationStatus/10-1;
+            }else{
+              this.active=0;
+            }
+            this.hideAll()
+            this.showStatus[this.active] = true;
+          }
+          
+        })
       },
       getPatientMsg(){
 

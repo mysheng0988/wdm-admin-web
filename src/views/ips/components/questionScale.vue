@@ -6,7 +6,7 @@
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question" >{{problemData.label}}</div>
       <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
-      <el-radio-group v-model="problemData.answer" >
+      <el-radio-group v-model="problemData.answer" @change="handleChange" >
         <div class="question" v-for="(item,index) in problemData.answers" :key="index">
           <el-radio :label="index" >{{item}}</el-radio>
         </div>
@@ -127,7 +127,10 @@
           
         },
         handleChange(){
-          this.nextQuestion();
+          setTimeout(()=>{
+              this.nextQuestion();
+          },500)
+          
         },
          checkAddShow(arr){
           if(this.problemData.hidden){

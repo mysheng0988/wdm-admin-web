@@ -39,11 +39,10 @@ export function getUserinfo(userId) {
     method:'get',
   })
 }
-export function changeState(data) {
+export function changeState(uid,enable) {
   return request({
-    url:'base/user/status',
+    url:'base/user/status/'+uid+'/'+enable,
     method:'put',
-    data:data,
   })
 }
 export function getUserList(data) {

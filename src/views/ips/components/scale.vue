@@ -29,18 +29,23 @@
       title="追加问题"
       :visible.sync="dialogVisible2"
       width="40%">
-      <div class="answer-box" v-for="(item,index) in problemData" :key="index">
-        <div class="question">{{item.num}}、{{item.question}}</div>
-        <el-radio-group v-model="item.answer"  @change="handleChange(index)">
+      <div class="answer-box" v-if="problemData.length>0 ">
+        <div class="question">{{problemNum+1}}、{{problemData[problemNum].question}}</div>
+        <el-radio-group v-model="problemData[problemNum].answer"  @change="handleChange()">
           <div class="question">
-            <el-radio   v-for="(itemData,indexData) in item.answers" :key="indexData" :label="indexData" >{{itemData}}</el-radio>
+            <el-radio   v-for="(itemData,indexData) in problemData[problemNum].answers" :key="indexData" :label="indexData" >{{itemData}}</el-radio>
           </div>
         </el-radio-group>
       </div>
-      <span slot="footer" class="dialog-footer">
+      <div class="btn-box">
+        <el-button type="primary" plain @click="prevQuestion">上一题</el-button>
+        <el-button type="primary" plain @click="nextQuestion" v-if="unfinish">下一题</el-button>
+        <el-button type="primary" plain @click="handleAddQusetion" v-else>提交</el-button>
+      </div>
+      <!-- <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible2 = false">取 消</el-button>
         <el-button type="primary" @click="handleAddQusetion">确 定</el-button>
-      </span>
+      </span> -->
     </el-dialog>
   </div>
 </template>
@@ -85,7 +90,9 @@
         dialogVisible:false,
         dialogVisible2:false,
         scaleId:"",
+        problemNum:0,
         problemData:[],
+        unfinish:true,
         scaleState:false,
         answerData:{},
         scaleNoList:[],
@@ -140,10 +147,44 @@
       handlePrev() {
         this.$emit('prevStep')
       },
-      handleChange(index){
-        // if(index==0&&this.problemData[0].answer==1){
-        //   this.handleAddQusetion();
-        // }
+       prevQuestion(){
+          if(this.problemNum<=0){
+            this.$message.warning("当前是第一题")
+          }else{
+            this.unfinish=true;
+           this.problemNum--;
+          }
+
+        },
+         nextQuestion(){
+          if(this.problemNum<this.problemData.length-1){
+            if(this.problemData[this.problemNum].answer!==""){
+               this.problemNum++;
+            }else{
+              this.$message.warning("请选择答案")
+            }
+          }else{
+            this.unfinish=false;
+            this.$message.warning("已是最后一题");
+          }
+         },
+      handleChange(){
+        if(this.problemData[this.problemNum].num==='1'&&this.problemData[this.problemNum].answer===1){
+            this.problemData[1].answer=0;
+            this.problemData[2].answer=0;
+            this.problemData[3].answer=0;
+            if(this.problemData.length>4){
+              this.problemNum=4;
+            }else{
+               this.unfinish=false;
+            }
+        }else{
+          setTimeout(()=>{
+              this.nextQuestion();
+          },500)
+         
+        }
+       
       },
       handleAddQusetion(){
   
@@ -153,9 +194,6 @@
           
           for(let item of this.problemData){
             let param1={};
-              console.log(item)
-              console.log(item.num)
-               console.log(item.answer)
               param1[item.num]=item.answer;
               param.answers.push(param1);
           }
@@ -171,8 +209,8 @@
       if(this.scaleState){
          additionalQuestions(this.medicalRecordId).then(res=>{
            if(res.code==200){
-             this.dialogVisible2=true;
              this.problemData=res.dataList[0];
+             this.dialogVisible2=true;
            }else{
             this.$emit('nextStep');
            }

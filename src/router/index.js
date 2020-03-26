@@ -16,19 +16,7 @@ export const constantRouterMap = [
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
-      meta: {title: '首页', icon: 'home'}
-    },{
-      path: 'home/addShop',
-      name: 'home/addShop',
-      component: () => import('@/views/home/add'),
-      meta: {title: '添加店铺'},
-      hidden: true
-    },{
-      path: 'home/update',
-      name: 'home/update',
-      component: () => import('@/views/home/update'),
-      meta: {title: '店铺详情'},
-      hidden: true
+      meta: {title: '首页', icon: 'home',roleId:[1]}
     }]
   },
   {
@@ -42,48 +30,48 @@ export const constantRouterMap = [
         path: 'list',
         name: 'list',
         component: () => import('@/views/pat/index'),
-        meta: {title: '患者管理', icon: 'product-list'},
+        meta: {title: '患者管理', icon: 'product-list',roleId:[13,18]},
       },
       {
         path: 'patAdd',
         name: 'patAdd',
         component: () => import('@/views/pat/add'),
-        meta: {title: '新增患者', icon: 'product-add'},
+        meta: {title: '新增患者', icon: 'product-add',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 'patUpdate',
         name: 'patUpdate',
         component: () => import('@/views/pat/update'),
-        meta: {title: '修改患者', icon: 'product-update'},
+        meta: {title: '修改患者', icon: 'product-update',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 'addRecord',
         name: 'addRecord',
         component: () => import('@/views/pat/addRecord'),
-        meta: {title: '新增病历', icon: 'product-add'},
+        meta: {title: '新增病历', icon: 'product-add',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 'assessRecord',
         name: 'assessRecord',
         component: () => import('@/views/pat/assessRecord'),
-        meta: {title: '测评记录', icon: 'product-comment'},
+        meta: {title: '历史记录', icon: 'product-comment',roleId:[13,18]},
         hidden:true
       },
       {
         path: 'cureRecord',
         name: 'cureRecord',
         component: () => import('@/views/pat/cureRecord'),
-        meta: {title: '治疗记录', icon: 'product-cate'},
+        meta: {title: '治疗记录', icon: 'product-cate',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 'readRecord',
         name: 'readRecord',
         component: () => import('@/views/pat/readRecord'),
-        meta: {title: '查看记录', icon: 'product-list'},
+        meta: {title: '查看记录', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       }
     ]
@@ -93,51 +81,51 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/ips/index',
     name: 'ips',
-    meta: {title: '心身检查', icon: 'order'},
+    meta: {title: '心身检查', icon: 'order',roleId:[13,18]},
     children: [
       {
         path: 'index',
         name: 'index',
         component: () => import('@/views/ips/index'),
-        meta: {title: '心身检查', icon: 'product-list'},
+        meta: {title: '心身检查', icon: 'product-list',roleId:[13,18]},
       },
       {
         path: 'IPS-A',
         name: 'IPS-A',
         component: () => import('@/views/ips/IPS-A'),
-        meta: {title: '专科测评', icon: 'product-list'},
+        meta: {title: '专科测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },{
         path: 'IPS-B',
         name: 'IPS-B',
         component: () => import('@/views/ips/IPS-B'),
-        meta: {title: '综合测评', icon: 'product-list'},
+        meta: {title: '综合测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },{
         path: 'IPS-C',
         name: 'IPS-C',
         component: () => import('@/views/ips/IPS-C'),
-        meta: {title: '筛查测评', icon: 'product-list'},
+        meta: {title: '筛查测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 'resultHRV',
         name: 'resultHRV',
         component: () => import('@/views/ips/resultHRV'),
-        meta: {title: '记录结果-HRV', icon: 'product-list'},
+        meta: {title: '记录结果-HRV', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },
       {
         path: 're-scale',
         name: 're-scale',
         component: () => import('@/views/ips/resultScale'),
-        meta: {title: '记录结果-量表', icon: 'product-list'},
+        meta: {title: '记录结果-量表', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },{
         path: 'questionResult',
         name: 'questionResult',
         component: () => import('@/views/ips/questionResult'),
-        meta: {title: '答题结果', icon: 'product-list'},
+        meta: {title: '答题结果', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       }
     ]
@@ -147,23 +135,24 @@ export const constantRouterMap = [
     name: 'rep',
     component: Layout,
     redirect: '/rep/list',
-    meta: {title: '心身报告', icon: 'sms-flash'},
+    meta: {title: '心身报告', icon: 'sms-flash',roleId:[13,18]},
     children: [
       {
         path: 'list',
         name: 'repList',
         component: () => import('@/views/rep/index'),
-        meta: {title: '报告列表', icon: 'product-list'}
+        meta: {title: '报告列表', icon: 'product-list',roleId:[13,18]}
       },{
         path: 'edit',
         name: 'edit',
         component: () => import('@/views/rep/edit'),
-        meta: {title: '编辑报告', icon: 'product-attr'}
+        meta: {title: '编辑报告', icon: 'product-attr',roleId:[13,18]},
+        hidden:true
       },{
         path: 'pdf',
         name: 'pdf',
         component: () => import('@/views/rep/pdf'),
-        meta: {title: '报告', icon: 'product-attr'}
+        meta: {title: '报告', icon: 'product-attr', roleId:[13,18]}
       }
     ],
   },
@@ -172,133 +161,34 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/sms/coupon',
     name: 'sms',
-    meta: {title: '心身治疗', icon: 'sms'},
-    children: [
-      {
-        path: 'advertise',
-        name: 'homeAdvertise',
-        component: () => import('@/views/sms/advertise/index'),
-        meta: {title: '广告列表', icon: 'sms-ad'}
-      },
-      {
-        path: 'addAdvertise',
-        name: 'addHomeAdvertise',
-        component: () => import('@/views/sms/advertise/add'),
-        meta: {title: '添加广告'},
-        hidden:true
-      },
-      {
-        path: 'updateAdvertise',
-        name: 'updateHomeAdvertise',
-        component: () => import('@/views/sms/advertise/update'),
-        meta: {title: '编辑广告'},
-        hidden:true
-      },
-      {
-        path: 'flash',
-        name: 'flash',
-        component: () => import('@/views/sms/flash/index'),
-        meta: {title: '秒杀商品列表', icon: 'sms-flash'}
-      },
-      {
-        path: 'flashSession',
-        name: 'flashSession',
-        component: () => import('@/views/sms/flash/sessionList'),
-        meta: {title: '秒杀时间段列表'},
-        hidden:true
-      },
-      {
-        path: 'selectSession',
-        name: 'selectSession',
-        component: () => import('@/views/sms/flash/selectSessionList'),
-        meta: {title: '秒杀时间段选择'},
-        hidden:true
-      },
-      {
-        path: 'flashProductRelation',
-        name: 'flashProductRelation',
-        component: () => import('@/views/sms/flash/productRelationList'),
-        meta: {title: '秒杀商品列表'},
-        hidden:true
-      },
-      {
-        path: 'coupon',
-        name: 'coupon',
-        component: () => import('@/views/sms/coupon/index'),
-        meta: {title: '优惠券列表', icon: 'sms-coupon'}
-      },
-      {
-        path: 'addCoupon',
-        name: 'addCoupon',
-        component: () => import('@/views/sms/coupon/add'),
-        meta: {title: '添加优惠券'},
-        hidden:true
-      },
-      {
-        path: 'updateCoupon',
-        name: 'updateCoupon',
-        component: () => import('@/views/sms/coupon/update'),
-        meta: {title: '修改优惠券'},
-        hidden:true
-      },
-      {
-        path: 'couponHistory',
-        name: 'couponHistory',
-        component: () => import('@/views/sms/coupon/history'),
-        meta: {title: '优惠券领取详情'},
-        hidden:true
-      },
-      {
-        path: 'brand',
-        name: 'homeBrand',
-        component: () => import('@/views/sms/brand/index'),
-        meta: {title: '品牌推荐', icon: 'product-brand'}
-      },
-      {
-        path: 'new',
-        name: 'homeNew',
-        component: () => import('@/views/sms/new/index'),
-        meta: {title: '新品推荐', icon: 'sms-new'}
-      },
-      {
-        path: 'hot',
-        name: 'homeHot',
-        component: () => import('@/views/sms/hot/index'),
-        meta: {title: '人气推荐', icon: 'sms-hot'}
-      },
-      {
-        path: 'subject',
-        name: 'homeSubject',
-        component: () => import('@/views/sms/subject/index'),
-        meta: {title: '专题推荐', icon: 'sms-subject'}
-      },
-
-    ]
+    meta: {title: '心身治疗', icon: 'sms',roleId:[1]},
+    hidden:true,
   },
   {
     path:'/param',
     component: Layout,
     redirect: '/param/cureItem',
     name: 'param',
-    meta: {title: '参数配置', icon: 'param'},
+    meta: {title: '参数配置', icon: 'param',roleId:[1]},
+    hidden:true,
     children: [
       {
         path: 'cureItem',
         name: 'cureItem',
         component: () => import('@/views/param/cureItem'),
-        meta: {title: '治疗项目', icon: 'sms-ad'}
+        meta: {title: '治疗项目', icon: 'sms-ad',roleId:[1]}
       },
       {
         path: 'assess',
         name: 'assess',
         component: () => import('@/views/param/assessItem'),
-        meta: {title: '测评项目', icon: 'sms-flash'}
+        meta: {title: '测评项目', icon: 'sms-flash',roleId:[1]}
       },
       {
         path: 'scale',
         name: 'scale',
         component: () => import('@/views/param/scaleManage'),
-        meta: {title: '量表管理',icon:'sms-new'},
+        meta: {title: '量表管理',icon:'sms-new',roleId:[1]},
       },
 
     ]
@@ -314,25 +204,26 @@ export const constantRouterMap = [
         path: 'account',
         name: 'account',
         component: () => import('@/views/user/accountManagement'),
-        meta: {title: '账户管理', icon: 'sms-ad'}
+        meta: {title: '账户管理', icon: 'sms-ad',roleId:[13]}
       },
       {
         path: 'role',
         name: 'role',
         component: () => import('@/views/user/roleManagement'),
-        meta: {title: '角色权限',icon:"sms-subject"},
+        meta: {title: '角色权限',icon:"sms-subject",roleId:[1]},
+        hidden:true,
       },
       {
         path: 'hos',
         name: 'hos',
         component: () => import('@/views/user/hosManagement'),
-        meta: {title: '医院管理',icon:"sms-subject"},
+        meta: {title: '医院管理',icon:"sms-subject",roleId:[18,13]},
       },
       {
         path: 'dep',
         name: 'dep',
         component: () => import('@/views/user/depManagement'),
-        meta: {title: '科室管理', icon: 'sms-flash'}
+        meta: {title: '科室管理', icon: 'sms-flash',roleId:[13]}
       },
     ]
   },
@@ -344,7 +235,7 @@ export const constantRouterMap = [
       path:'404',
       name:"404",
       component: () => import('@/views/404'),
-      meta: {title: '404', icon: 'sms-flash'},
+      meta: {title: '404', icon: 'sms-flash',},
       hidden: true
     }]
   },

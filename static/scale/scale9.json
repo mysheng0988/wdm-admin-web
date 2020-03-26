@@ -7,17 +7,6 @@
     "explain": "请根据您自身的实际情况，回答下列问题。",
     "problem": [
       {
-        "questionNum": "1",
-        "question": "您的BMI是多少BMI等于体重（公斤）除以身高（米）的平方，例如：某人体重52公斤，身高1.55米，则他的BMI为：52÷（1.55×1.55）= 21.6",
-        "answers": [
-          "BMI＞20",
-          "18.5≤BMI＜20",
-          "BMI＜18.5"
-        ],
-        "answer": "",
-        "nextNum": 0
-      },
-      {
         "questionNum": "2",
         "question": "您最近三个月体重有没有下降",
         "answers": [

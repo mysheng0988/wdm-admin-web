@@ -6,7 +6,8 @@
         <p>附录3. EEG检测</p>
         <p>E<span>EG DETECTION</span></p>
       </div>
-      <img class="img" :src="eegPath">
+      <el-image class="img" :src="eegPath" ></el-image>
+      <!-- <img class="img" :src="eegPath" crossorigin="anonymous"> -->
     </div>
   </div>
 </template>

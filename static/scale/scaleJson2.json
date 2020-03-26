@@ -255,20 +255,7 @@
         "nextNum": 0,
         "prevNum": 0
       },
-      {
-        "questionNum": "8",
-        "question": "体重及体脂率分析BMI值？",
-        "answers": [
-          "无",
-          "轻度",
-          "中度",
-          "重度",
-          "极重"
-        ],
-        "answer":"",
-        "nextNum": 0,
-        "prevNum": 0
-      },
+
       {
         "questionNum": "9",
         "question": "您偏食吗？",
@@ -434,7 +421,7 @@
           "四项及以上"
         ],
         "answer":"",
-        "nextNum": 18,
+        "nextNum": 17,
         "prevNum": 0
       },
       {
@@ -447,7 +434,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -462,8 +449,8 @@
           "四项及以上"
         ],
         "answer":"",
-        "nextNum": 20,
-        "prevNum": 16
+        "nextNum": 19,
+        "prevNum": 15
       },
       {
         "questionNum": "24",
@@ -475,7 +462,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -491,7 +478,7 @@
         ],
         "answer":"",
         "nextNum": 0,
-        "prevNum": 18
+        "prevNum": 17
       },
       {
         "questionNum": "26",
@@ -602,7 +589,7 @@
           "极重"
         ],
         "answer":"",
-        "nextNum": 30,
+        "nextNum": 29,
         "prevNum": 0
       },
       {
@@ -615,7 +602,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -631,7 +618,7 @@
         ],
         "answer":"",
         "nextNum": 0,
-        "prevNum": 28
+        "prevNum": 27
       },
       {
         "questionNum": "36",
@@ -826,7 +813,7 @@
           "极重"
         ],
         "answer":"",
-        "nextNum": 48,
+        "nextNum": 47,
         "prevNum": 0
       },
       {
@@ -839,7 +826,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -853,7 +840,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -867,7 +854,7 @@
           "重度",
           "极重"
         ],
-        "answer":0,
+        "answer":"",
         "nextNum": 0,
         "prevNum": 0
       },
@@ -883,7 +870,7 @@
         ],
         "answer":"",
         "nextNum": 0,
-        "prevNum": 44
+        "prevNum": 43
       },
       {
         "questionNum": "54",
@@ -964,6 +951,62 @@
           "中度",
           "重度",
           "极重"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "60",
+        "question": "您生气或恼怒时，会把他藏在内心不表露吗？",
+        "answers": [
+          "无",
+          "轻度",
+          "中度",
+          "重度",
+          "极重"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "61",
+        "question": "当不成功时，您就会觉得一切都完了吗？",
+        "answers": [
+          "无",
+          "轻度",
+          "中度",
+          "重度",
+          "极重"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "62",
+        "question": "当有人阻挠您的愿望与要求时，您会试图理解他吗？完全不能，不能，有时能有时不能，能，完全可以？",
+        "answers": [
+          "完全不能",
+          "不能",
+          "有时能有时不能",
+          "能",
+          "完全可以"
+        ],
+        "answer":"",
+        "nextNum": 0,
+        "prevNum": 0
+      },
+      {
+        "questionNum": "63",
+        "question": "即使有足够的理由，您也不会对别人发火吗？ 完全是，有点是，不确定，有点不是，完全不是？",
+        "answers": [
+          "完全是",
+          "有点是",
+          "不确定",
+          "有点不是",
+          "完全不是"
         ],
         "answer":"",
         "nextNum": 0,

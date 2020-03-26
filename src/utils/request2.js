@@ -12,10 +12,10 @@ service.defaults.withCredentials=true
 service.defaults.crossDomain=true
 // request拦截器
 service.interceptors.request.use(config => {
-  if (store.getters.token) {
-    config.headers['access-token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-  }
-  config.headers['service-id']="2000"
+  // if (store.getters.token) {
+  //   config.headers['access-token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+  // }
+  // config.headers['service-id']="2000"
   return config
 }, error => {
   // Do something with request error
