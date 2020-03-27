@@ -169,7 +169,7 @@
                 }
               }
             }
-            if(this.problemData.answer===""&&this.data.type===1){
+            if(this.problemData.answer===""&&this.data.type==1){
                this.$message.warning("请选择答案")
             }else{
               if(this.problemData.nextNum!=0&&this.problemData.answer==0){
