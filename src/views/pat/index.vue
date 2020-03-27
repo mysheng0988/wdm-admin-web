@@ -302,8 +302,11 @@
       },
       readCardData(){
         readCard().then(res=>{
-          if(res.code==200){
-            this.cardForm.cardID=res.data.cardno
+          // if(res.code==200){
+          //   this.cardForm.cardID=res.data.cardno
+          // }
+          if(res.cardno){
+               this.cardForm.cardID=res.cardno
           }else{
             this.$message.warning("刷卡失败")
           }

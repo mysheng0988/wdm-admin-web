@@ -216,7 +216,7 @@
            clearTimeout(this.timeout);
           this.timeout = setTimeout(() => {
             this.loadingOption=true;
-            querySymptoms({departmentCategoryId:this.info.deptId,queryParam:queryString,type:1}).then(res=>{
+            querySymptoms({departmentCategoryId:this.info.deptCategoryId,queryParam:queryString,type:1}).then(res=>{
                   this.loadingOption=false;
                 if(res.code==200){
                   this.symptomOption=res.dataList;

@@ -58,7 +58,7 @@
         </el-form-item>
         <el-form-item label="营养处方:">
           <div class="text-box"  v-if="initData.nutritionPrescription.data&&initData.nutritionPrescription.data[0]=='无'">
-                <div class="flex-wrap"  v-for="(item,index) in initData.functionalMedicineAdvice.data" :key="index">
+                <div class="flex-wrap"  v-for="(item,index) in initData.nutritionPrescription.data" :key="index">
                   <el-button @click="addText1('nutritionPrescription',1)" class="text-boder blue" icon="el-icon-edit">
                     {{index+1}}、</el-button>
                       <el-input placeholder="请输入详细内容"
@@ -616,6 +616,7 @@
   .text-box .item-box{
     border:1px solid #409EFF;
     margin-bottom: 10px;
+     border-radius: 10px;
     position: relative;
   }
   .text-box .item-box .close{
