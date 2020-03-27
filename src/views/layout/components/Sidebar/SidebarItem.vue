@@ -1,6 +1,6 @@
 <template>
   <div class="menu-wrapper">
-    <template v-for="item in routes" v-if="!item.hidden&&item.children">
+    <template v-for="item in routes" v-if="!item.hidden&&item.children&&item.meta.roleId.includes(roles)">
 
       <router-link v-if="hasOneShowingChildren(item.children) && !item.children[0].children&&!item.alwaysShow" :to="item.path+'/'+item.children[0].path"
         :key="item.children[0].name">
@@ -50,7 +50,7 @@ export default {
       ])
   },
   mounted(){
-    console.log(this.roles)
+   
   },
   methods: {
     hasOneShowingChildren(children) {
@@ -58,7 +58,6 @@ export default {
         //let flag=item.meta.roleId.includes[this.roles]
         return !item.hidden;
       })
-      console.log(showingChildren)
       if (showingChildren.length === 1) {
         return true
       }

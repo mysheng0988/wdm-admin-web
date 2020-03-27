@@ -25,7 +25,7 @@
           <div>体重：<span>{{patientVO.weight}}kg</span></div>
         </el-col>
         <el-col :span="6">
-          <div>来源医生：<span>{{patient.fromRealname}}</span></div>
+          <div>来源医生：<span>{{patient.fromRealName}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>来源科室：<span>{{patient.fromDeptName}}</span></div>

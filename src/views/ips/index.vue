@@ -67,7 +67,7 @@
           <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
         </el-table-column>
         <el-table-column label="来源医生" align="center">
-          <template slot-scope="scope">{{scope.row.fromRealname }}</template>
+          <template slot-scope="scope">{{scope.row.fromRealName }}</template>
         </el-table-column>
         <el-table-column label="创建时间" width="180" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>

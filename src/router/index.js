@@ -24,7 +24,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/pat/list',
     name: 'pat',
-    meta: {title: '患者管理', icon: 'management'},
+    meta: {title: '患者管理', icon: 'management',roleId:[18,13]},
     children: [
       {
         path: 'list',
@@ -93,19 +93,19 @@ export const constantRouterMap = [
         path: 'IPS-A',
         name: 'IPS-A',
         component: () => import('@/views/ips/IPS-A'),
-        meta: {title: '专科测评', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '筛查测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },{
         path: 'IPS-B',
         name: 'IPS-B',
         component: () => import('@/views/ips/IPS-B'),
-        meta: {title: '综合测评', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '专科测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },{
         path: 'IPS-C',
         name: 'IPS-C',
         component: () => import('@/views/ips/IPS-C'),
-        meta: {title: '筛查测评', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '综合测评', icon: 'product-list',roleId:[13,18]},
         hidden:true,
       },
       {
@@ -197,7 +197,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/user/account',
     name: 'user',
-    meta: {title: '用户管理', icon: 'user-manage'},
+    meta: {title: '用户管理', icon: 'user-manage',roleId:[13]},
     children: [
       {
         path: 'account',

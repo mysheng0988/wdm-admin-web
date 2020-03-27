@@ -509,9 +509,9 @@
         })
       },
       getExaminationBtn(){
-        queryExamination(this.info.deptId).then(res=>{
+        queryExamination(this.info.hospitalId).then(res=>{
           if(res.code==200){
-            console.log(this.examinationList)
+            console.log(res)
             this.examinationList=res.dataList;
           }
         })

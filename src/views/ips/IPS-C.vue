@@ -25,7 +25,7 @@
           <div>体重：<span>{{patientVO.weight}}kg</span></div>
         </el-col>
         <el-col :span="6">
-          <div>来源医生：<span>{{patient.fromRealname}}</span></div>
+          <div>来源医生：<span>{{patient.fromRealName}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>来源科室：<span>{{patient.fromDeptName}}</span></div>
@@ -200,14 +200,6 @@
             this.showStatus[this.active] = true;
           }
           
-        })
-      },
-      getPatientMsg(){
-
-        getPatient(this.$route.query.id).then(res=>{
-          console.log(res)
-          this.patient=res.dataList[0];
-          console.log(this.patient)
         })
       },
       hideAll() {

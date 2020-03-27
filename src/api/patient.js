@@ -6,9 +6,9 @@ export function queryPatient(data) {
     data:data
   })
 }
-export function queryExamination(deptId) {
+export function queryExamination(hospitalId) {
   return request({
-    url:'ips/examination/list/deptId/'+deptId,
+    url:'ips/examination/list/hospitalId/'+hospitalId,
     method:'get',
   })
 }

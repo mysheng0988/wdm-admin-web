@@ -163,13 +163,13 @@
           if(this.questionNum<this.questionLength-1){
             if(this.problemData.data&&this.problemData.data.length>0){
               for(let item of this.problemData.data){
-                if(item.answer===""){
+                if(item.answer===""&&item.type&&item.type!=2){
                   this.$message.warning("请选择答案");
                   return
                 }
               }
             }
-            if(this.problemData.answer===""&&this.data.type==1){
+            if(this.problemData.answer===""&&this.data.type===1){
                this.$message.warning("请选择答案")
             }else{
               if(this.problemData.nextNum!=0&&this.problemData.answer==0){

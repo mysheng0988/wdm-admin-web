@@ -25,7 +25,7 @@
           <div>体重：<span>{{patientVO.weight}}kg</span></div>
         </el-col>
         <el-col :span="6">
-          <div>来源医生：<span>{{patient.fromRealname}}</span></div>
+          <div>来源医生：<span>{{patient.fromRealName}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>来源科室：<span>{{patient.fromDeptName}}</span></div>
@@ -154,7 +154,6 @@
       this.patientId=this.$route.query.id;
       this.medicalRecordId=this.$route.query.medicalRecordId;
       this.getPatientData();
-      //this.getPatientData();
     
     },
     computed:{
@@ -188,7 +187,6 @@
       getPatientData(){
         getRecordPatient(this.medicalRecordId).then(res=>{
           if(res.code==200){
-            console.log(111111111111111)
             this.patient=res.dataList[0];
             this.patientVO=res.dataList[0].patientVO;
             let active=res.dataList[0].examinationStatus  
@@ -201,14 +199,6 @@
             this.showStatus[this.active] = true;
           }
           
-        })
-      },
-      getPatientMsg(){
-
-        getPatient(this.$route.query.id).then(res=>{
-          console.log(res)
-          this.patient=res.dataList[0];
-          console.log(this.patient)
         })
       },
       hideAll() {

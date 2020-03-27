@@ -221,6 +221,7 @@
           additionalQuestions(this.medicalRecordId).then(res=>{
            if(res.code==200){
              this.problemData=res.dataList[0];
+              this.problemNum=0;
              this.dialogVisible2=true;
            }else{
             this.$emit('nextStep');

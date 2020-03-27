@@ -98,7 +98,6 @@
           multiple
           filterable
           remote
-          reserve-keyword
           placeholder="请输入关键词检索"
           :remote-method="remoteDiagnosis"
           :loading="loadingOption">
@@ -431,7 +430,7 @@
         })
       },
       getSymptoms(val){
-        querySymptoms({departmentCategoryId:this.info.deptId,queryParam:"",type:val}).then(res=>{
+        querySymptoms({departmentCategoryId:this.info.deptCategoryId,queryParam:"",type:val}).then(res=>{
           this.listLoading=false;
           if(val==2){
             this.optionAccompanyingSymptoms=res.dataList;

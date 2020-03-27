@@ -12,7 +12,7 @@
              </div>
           </div>
         </el-form-item>
-        <el-form-item label="躯体化症状药物方案:" >
+        <el-form-item label="躯体化症状药物方案:" v-if="initData.somatizationSymptomsDrugRegimen.data>0" >
            <div class="text-box"  >
             <div v-for="(item1,index1) in initData.somatizationSymptomsDrugRegimen.data" :key="index1">
                 <div class="box-title">{{item1.title}}</div>
@@ -57,7 +57,20 @@
           </div>
         </el-form-item>
         <el-form-item label="营养处方:">
-          <div class="text-box" >
+          <div class="text-box"  v-if="initData.nutritionPrescription.data&&initData.nutritionPrescription.data[0]=='无'">
+                <div class="flex-wrap"  v-for="(item,index) in initData.functionalMedicineAdvice.data" :key="index">
+                  <el-button @click="addText1('nutritionPrescription',1)" class="text-boder blue" icon="el-icon-edit">
+                    {{index+1}}、</el-button>
+                      <el-input placeholder="请输入详细内容"
+                      v-model="initData.nutritionPrescription.data[index]"
+                      class="text-boder"
+                      type="textarea"
+                      autosize>
+                    </el-input>
+                <el-button  @click="deleteText1('nutritionPrescription',index)" class="text-boder red" icon="el-icon-delete"></el-button>
+              </div>
+          </div>
+          <div class="text-box" v-else>
             <div v-for="(item1,index1) in initData.nutritionPrescription.data" :key="index1">
                 <div class="box-title" v-if="item1.data.length>0">{{item1.title}}</div>
                   <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2" >
@@ -75,7 +88,20 @@
           </div>
         </el-form-item>
         <el-form-item label="运动处方:">
-          <div class="text-box" >
+          <div class="text-box"  v-if="initData.exercisePrescription.data&&initData.exercisePrescription.data[0]=='无'">
+                <div class="flex-wrap"  v-for="(item,index) in initData.exercisePrescription.data" :key="index">
+                  <el-button @click="addText1('exercisePrescription',1)" class="text-boder blue" icon="el-icon-edit">
+                    {{index+1}}、</el-button>
+                      <el-input placeholder="请输入详细内容"
+                      v-model="initData.exercisePrescription.data[index]"
+                      class="text-boder"
+                      type="textarea"
+                      autosize>
+                    </el-input>
+                <el-button  @click="deleteText1('exercisePrescription',index)" class="text-boder red" icon="el-icon-delete"></el-button>
+              </div>
+          </div>
+          <div class="text-box" v-else>
             <div v-for="(item1,index1) in initData.exercisePrescription.data" :key="index1">
                 <div class="box-title">{{item1.title}}</div>
                   <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2" >
@@ -93,7 +119,20 @@
              </div>
         </el-form-item>
         <el-form-item label="功能医学建议:">
-           <div class="text-box" >
+           <div class="text-box"  v-if="initData.functionalMedicineAdvice.data&&initData.functionalMedicineAdvice.data[0]=='无'">
+                <div class="flex-wrap"  v-for="(item,index) in initData.functionalMedicineAdvice.data" :key="index">
+                  <el-button @click="addText1('functionalMedicineAdvice',1)" class="text-boder blue" icon="el-icon-edit">
+                    {{index+1}}、</el-button>
+                      <el-input placeholder="请输入详细内容"
+                      v-model="initData.functionalMedicineAdvice.data[index]"
+                      class="text-boder"
+                      type="textarea"
+                      autosize>
+                    </el-input>
+                <el-button  @click="deleteText1('functionalMedicineAdvice',index)" class="text-boder red" icon="el-icon-delete"></el-button>
+              </div>
+          </div>
+           <div class="text-box" v-else >
                 <div class="flex-wrap" v-for="(item,index) in initData.functionalMedicineAdvice.data" :key="index" >
                   <el-button @click="addText1('functionalMedicineAdvice',index)" class="text-boder blue" icon="el-icon-edit">
                     {{index+1}}、</el-button>
@@ -106,9 +145,23 @@
                 <el-button  @click="deleteText1('functionalMedicineAdvice',index)" class="text-boder red" icon="el-icon-delete"></el-button>
               </div>
           </div>
+          
         </el-form-item>
         <el-form-item label="其他建议:">
-          <div class="text-box" >
+           <div class="text-box"  v-if="initData.otherSuggestion.data&&initData.otherSuggestion.data[0]=='无'">
+                <div class="flex-wrap"  v-for="(item,index) in initData.otherSuggestion.data" :key="index">
+                  <el-button @click="addText1('otherSuggestion',1)" class="text-boder blue" icon="el-icon-edit">
+                    {{index+1}}、</el-button>
+                      <el-input placeholder="请输入详细内容"
+                      v-model="initData.otherSuggestion.data[index]"
+                      class="text-boder"
+                      type="textarea"
+                      autosize>
+                    </el-input>
+                <el-button  @click="deleteText1('otherSuggestion',index)" class="text-boder red" icon="el-icon-delete"></el-button>
+              </div>
+          </div>
+          <div class="text-box" v-else>
             <div v-for="(item1,index1) in initData.otherSuggestion.data" :key="index1">
                 <div class="box-title">{{item1.title}}</div>
                   <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2" >
@@ -289,7 +342,8 @@
             nutritionPrescription:JSON.stringify(this.initData.nutritionPrescription),//营养处方
             functionalMedicineAdvice:JSON.stringify(this.initData.functionalMedicineAdvice),//功能医学建议
             otherSuggestion:JSON.stringify(this.initData.otherSuggestion),//其他建议
-            followUpRecommendations:JSON.stringify(this.initData.followUpRecommendations)
+            followUpRecommendations:JSON.stringify(this.initData.followUpRecommendations),
+            complete:true,
         };
         updataReportData(param).then(res=>{
           if(res.code==200){
@@ -431,21 +485,24 @@
             this.data=data.contraindicationsList;
             this.initData.id=data.id;
             this.initData.medicalRecordId=data.medicalRecordId;
-            this.initData.psychosomaticTherapy=JSON.parse(data.psychosomaticTherapy);
-            this.initData.exercisePrescription=JSON.parse(data.exercisePrescription);
-            this.initData.nutritionPrescription=JSON.parse(data.nutritionPrescription);
-            let adviceData=JSON.parse(data.functionalMedicineAdvice);
-            if(adviceData.data.length>0){
-                adviceData.data.push("无")
-            }
-            this.initData.functionalMedicineAdvice=adviceData;
-            this.initData.otherSuggestion=JSON.parse(data.otherSuggestion);
-            let symptomsData=JSON.parse(data.somatizationSymptomsDrugRegimen);
-            this.initData.somatizationSymptomsDrugRegimen=symptomsData;//躯体化治疗方案
+            this.initData.psychosomaticTherapy=this.cheakedEmpty(data.psychosomaticTherapy);
+            this.initData.exercisePrescription=this.cheakedEmpty(data.exercisePrescription);
+            this.initData.nutritionPrescription=this.cheakedEmpty(data.nutritionPrescription);
+            this.initData.functionalMedicineAdvice=this.cheakedEmpty(data.functionalMedicineAdvice);
+            this.initData.otherSuggestion=this.cheakedEmpty(data.otherSuggestion);
+            let symptomsData=this.cheakedEmpty(data.somatizationSymptomsDrugRegimen);
+            this.initData.somatizationSymptomsDrugRegimen=this.cheakedEmpty(data.somatizationSymptomsDrugRegimen);//躯体化治疗方案
           }
         }).catch(err=>{
           loading.close();
         })
+      },
+      cheakedEmpty(objData){
+          objData=JSON.parse(objData);
+          if(objData.data.length==0){
+            objData.data.push("无")
+          }
+          return objData;
       },
       handleNodeClick(val){
         this.$refs.tree.setChecked(val.id,true,false)

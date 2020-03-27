@@ -79,6 +79,7 @@
               </el-button>
               <el-button
                 size="mini"
+                class="active"
                 round
                 @click="historyRecord(scope.row)">
                 历史记录
@@ -252,7 +253,6 @@
     },
     methods: {
       historyRecord(data){
-        console.log(data)
          this.$router.push({
           path: '/pat/assessRecord',
           query: {
@@ -302,7 +302,6 @@
       },
       readCardData(){
         readCard().then(res=>{
-          console.log(res)
           if(res.code==200){
             this.cardForm.cardID=res.data.cardno
           }else{

@@ -20,7 +20,6 @@
             multiple
             filterable
             remote
-            reserve-keyword
             placeholder="请输入关键词检索"
             :remote-method="querySymptomsData"
             :loading="loadingOption">
@@ -47,7 +46,6 @@
             multiple
             filterable
             remote
-            reserve-keyword
             placeholder="请输入关键词检索"
             :remote-method="querySearchCheck"
             :loading="loadingOption">
@@ -66,7 +64,6 @@
             multiple
             filterable
             remote
-            reserve-keyword
             placeholder="请输入关键词检索"
             :remote-method="querySearchICD"
             :loading="loadingOption">

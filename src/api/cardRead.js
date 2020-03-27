@@ -5,9 +5,9 @@ export function readCard() {
     method:'get'
   })
 }
-export function readCardMsg() {
+export function readCardMI() {
   return request({
-    url:'base/api/ReadMsg',
+    url:'api/M1Reset',
     method:'get'
   })
 }

@@ -16,7 +16,7 @@
         </el-form-item>
         
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="test">测试读卡器</el-button>
+        <!-- <el-button @click="test">读取MI卡</el-button> -->
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleNext">下一步，{{nextTitle}}</el-button>
       </el-form-item>
@@ -27,10 +27,6 @@
         :visible.sync="dialogVisible"
         width="700px">
         <el-image :src="hrvPath"></el-image>
-        <!-- <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span> -->
       </el-dialog>
     <el-dialog
         title="EEG检测结果"
@@ -38,16 +34,12 @@
         top="5vh"
         width="700px">
         <el-image :src="eegPath"></el-image>
-        <!-- <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span> -->
-      </el-dialog>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-  import{readCardMsg} from "@/api/cardRead"
+  import{readCardMsg,readCardMI} from "@/api/cardRead"
   import {getRecordPatient} from "@/api/patient";
   import {getEEG,getHRV,getVerificationCode} from '@/api/HRV'
   export default {
@@ -98,10 +90,9 @@
     },
     methods: {
       test(){
-          readCardMsg().then(res=>{
-           // window.location.reload();
+        readCardMI().then(res=>{
             console.log(res)
-          })
+        })
       },
       handleResult(){
       this.getHRVData()
@@ -123,7 +114,6 @@
           }else{
             this.$message.warning("没有查到数据")
           }
-          console.log(res)
         })
       },
       verificationCode(){
@@ -141,10 +131,10 @@
       handleNext() {
          getRecordPatient(this.medicalRecordId).then(res=>{
            if(res.code==200){
-             if(res.dataList[0].examinationStatus>20){
+             if(res.dataList[0].examinationStatus>10){
                  this.$emit('nextStep');
              }else{
-               this.$message.warning("设备检测为完成")
+               this.$message.warning("请先完成HRV和EEG检查")
              }
 
            }

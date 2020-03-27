@@ -13,7 +13,7 @@
           {
             "label": "两年内发生次数",
             "type": "1",
-            "answer": 1,
+            "answer": "",
             "nextNum": 0
           },
           {
@@ -23,7 +23,7 @@
               "好事",
               "坏事"
             ],
-            "answer": 1,
+            "answer": "",
             "nextNum": 0
           },
           {
@@ -36,7 +36,7 @@
               "重度",
               "极重"
             ],
-            "answer": 2,
+            "answer": "",
             "nextNum": 0
           },
           {
@@ -48,7 +48,7 @@
               "一年内",
               "一年以上"
             ],
-            "answer": 3,
+            "answer": "",
             "nextNum": 0
           },
           {
@@ -68,7 +68,7 @@
           {
             "label": "两年内发生次数",
             "type": "1",
-            "answer": 1,
+            "answer": "",
             "nextNum": 0
           },
           {
