@@ -160,10 +160,18 @@ import {analysisData} from "@/api/analysis"
                  let suggestData=[];
                  let totalData=[];
                 totalData=this.pageThenData(totalData,patientMedicationPlan,0);
-                totalData=this.pageThenData(totalData,exercisePrescription,0);
-                totalData=this.pageThenData(totalData,nutritionPrescription,0);
-                totalData=this.pageThenData(totalData,functionalMedicineAdvice,0);
-                totalData=this.pageThenData(totalData,otherSuggestion,0);
+                if(exercisePrescription){
+                  totalData=this.pageThenData(totalData,exercisePrescription,0);
+                }
+                if(nutritionPrescription){
+                    totalData=this.pageThenData(totalData,nutritionPrescription,0);
+                }
+                if(functionalMedicineAdvice){
+                   totalData=this.pageThenData(totalData,functionalMedicineAdvice,0);
+                }
+                if(otherSuggestion){
+                  totalData=this.pageThenData(totalData,otherSuggestion,0);
+                }
                  if(data.neurotransmitterRegulators&&data.neurotransmitterRegulators!=""){
                      let neurotransmitterRegulators=JSON.parse(data.neurotransmitterRegulators)
                     totalData=this.pageThenData(totalData,neurotransmitterRegulators,0);
@@ -214,7 +222,9 @@ import {analysisData} from "@/api/analysis"
             totalData=this.pageThenData(totalData,doctorMedicationPlan,0);
             //心身治疗建议
             let psychosomaticTherapy=JSON.parse(data.psychosomaticTherapy);
-            totalData=this.pageThenData(totalData,psychosomaticTherapy,0);
+            if(psychosomaticTherapy){
+                totalData=this.pageThenData(totalData,psychosomaticTherapy,0);
+            }
             //随访建议
             let followUpRecommendations=JSON.parse(data.followUpRecommendations);
             if(followUpRecommendations){
@@ -278,9 +288,11 @@ import {analysisData} from "@/api/analysis"
                   pageNum++;
                   scaleData[pageNum]=[]
                 }
-          
-                 if(item.chartData!=""){
-                    item.chartData=JSON.parse(item.chartData)
+                if(item.chartData!=""){
+                    item.chartData=JSON.parse(item.chartData);
+                    if(item.chartData.length>4){
+                      itemNum++;
+                    }
                   }
                   scaleData[pageNum].push(item)
               }
@@ -404,9 +416,10 @@ import {analysisData} from "@/api/analysis"
                   pageNum++;
                    let pageItem={ //页面的最小单元
                     imgPath:require("@/views/rep/img/icon-problem.png"),
-                    label:"焦点问题",
+                    label:"",
                     data:[]
                   }
+                   page[pageNum]=[];
                   page[pageNum].push(pageItem);
                   page[pageNum][itemNum].data.push((item-0+1)+"、"+focusProblem[item])
 
@@ -433,9 +446,10 @@ import {analysisData} from "@/api/analysis"
                   pageNum++;
                    let pageItem={ //页面的最小单元
                       imgPath:require("@/views/rep/img/icon-nutrition.png"),
-                      label:"心身因素",
+                      label:"",
                       data:[]
                     }
+                  page[pageNum]=[];
                   page[pageNum].push(pageItem);
                   page[pageNum][0].data.push((item-0+1)+"、"+psychosomaticFactors[item])
 

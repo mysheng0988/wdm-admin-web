@@ -136,23 +136,25 @@ export const constantRouterMap = [
     name: 'rep',
     component: Layout,
     redirect: '/rep/list',
-    meta: {title: '心身报告', icon: 'sms-flash',roleId:[13,18]},
+    meta: {title: '报告列表', icon: 'sms-flash',roleId:[13,18]},
     children: [
       {
         path: 'list',
         name: 'repList',
         component: () => import('@/views/rep/index'),
-        meta: {title: '报告列表', icon: 'product-list',roleId:[13,18]}
+        meta: {title: '报告列表', icon: 'product-list',roleId:[13,18]},
       },{
         path: 'edit',
         name: 'edit',
         component: () => import('@/views/rep/edit'),
         meta: {title: '编辑报告', icon: 'product-attr',roleId:[13,18]},
+        hidden:true,
       },{
         path: 'pdf',
         name: 'pdf',
         component: () => import('@/views/rep/pdf'),
-        meta: {title: '报告', icon: 'product-attr', roleId:[13,18]}
+        meta: {title: '报告', icon: 'product-attr', roleId:[13,18]},
+        hidden:true,
       }
     ],
   },

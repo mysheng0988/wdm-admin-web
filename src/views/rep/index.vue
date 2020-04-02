@@ -39,22 +39,22 @@
                 :data="list"
                 v-loading="listLoading" border>
         <el-table-column label="编号" width="80" align="center">
-          <template slot-scope="scope">{{scope.row.pid}}</template>
+          <template slot-scope="scope">{{scope.row.patientId}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
-          <template slot-scope="scope">{{scope.row.realName }}</template>
+          <template slot-scope="scope">{{scope.row.patientName }}</template>
         </el-table-column>
-        <el-table-column label="出生日期"  align="center">
+        <!-- <el-table-column label="出生日期"  align="center">
           <template slot-scope="scope">{{scope.row.birthday }}</template>
         </el-table-column>
         <el-table-column label="年龄"  align="center">
           <template slot-scope="scope">
             {{scope.row.birthday|formatAge}}
           </template>
-        </el-table-column>
-        <el-table-column label="性别" align="center">
+        </el-table-column> -->
+        <!-- <el-table-column label="性别" align="center">
           <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column label="身份证号" width="180" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>
@@ -62,7 +62,7 @@
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>
         <el-table-column label="报告类型"  align="center">
-          <template slot-scope="scope">{{scope.row.createTime }}</template>
+          <template slot-scope="scope">{{scope.row.typeId|formatType }}</template>
         </el-table-column>
 
         <el-table-column   label="操作" align="center" width="200">
@@ -71,14 +71,8 @@
                 size="mini"
                 round
                 class="active"
-                @click="handleRecord(scope.row)">查看
+                @click="readReport(scope.row)">查看报告
               </el-button>
-            <el-button
-              size="mini"
-              round
-              class="active"
-              @click="handleRecord(scope.row)">编辑
-            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -135,6 +129,9 @@
       this.getList()
     },
     filters:{
+      formatType(val){
+        return val=="3"?"筛查报告":"综合测评报告";
+      },
       formatGender(gender){
         return gender?"女":"男"
       },
@@ -145,6 +142,16 @@
       }
     },
     methods: {
+      readReport(data){
+        console.log(data)
+        this.$router.push({
+          path: '/rep/pdf',
+          query: {
+            id: data.medicalRecordId,
+            name:data.patientName,
+          }
+        })
+      },
       handleRecord(data){
         this.$router.push({
           path: '/pat/assessRecord',

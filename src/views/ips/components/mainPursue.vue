@@ -246,7 +246,7 @@
       </el-form-item>
       <el-form-item label="应激源:">
         <div class="flex">
-          <p class="add-btn" @click="addStress"><i class="el-icon-plus"></i>点击添加</p>
+          <p class="add-btn" @click="addStress"><i class="el-icon-plus"></i>{{eventList.length==0?"点击添加":"点击修改"}}</p>
           <el-checkbox v-model="eventList.length==0">暂无应激源</el-checkbox>
         </div>
         <p v-for="(item,index) in eventList" :key="index">{{index+1}}、{{item.event}}</p>
