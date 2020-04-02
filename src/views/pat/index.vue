@@ -243,16 +243,17 @@
         this.listQuery.createTimeEnd=this.createDate[1];
       },
       readCardData(){
-        // if(res.cardno){
-        //     let cardMsg={}
-        //     cardMsg.realName=res.name;
-        //     cardMsg.gender=res.sex=="男"?false:true;
-        //     cardMsg.nation=res.nation;
-        //     cardMsg.cardNo=res.cardno;
-        //     sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
-        //     this.cardForm.cardID=res.cardno
-        //   }
+       
         readCard().then(res=>{
+          //  if(res.cardno){
+          //   let cardMsg={}
+          //   cardMsg.realName=res.name;
+          //   cardMsg.gender=res.sex=="男"?false:true;
+          //   cardMsg.nation=res.nation;
+          //   cardMsg.cardNo=res.cardno;
+          //   sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
+          //   this.cardForm.cardID=res.cardno
+          // }
           if(res.code==200){
             this.cardForm.cardID=res.data.cardno
              let cardMsg={}

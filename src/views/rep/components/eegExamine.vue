@@ -6,8 +6,8 @@
         <p>附录3. EEG检测</p>
         <p>E<span>EG DETECTION</span></p>
       </div>
-      <!-- <el-image class="img" :src="eegPath" ></el-image> -->
-      <img class="img" :src="eegPath" crossorigin="anonymous">
+      <el-image class="img" :src="eegPath" ></el-image>
+      <!-- <img class="img" :src="eegPath" crossorigin="anonymous"> -->
     </div>
   </div>
 </template>
@@ -23,8 +23,8 @@ import{getEEG} from "@/api/HRV"
     },
     data(){
       return {
-        eegPath:eeg,
-      };
+        eegPath:"",
+        }
     },
     mounted(){
       getEEG(this.medicalRecordId).then(res=>{
