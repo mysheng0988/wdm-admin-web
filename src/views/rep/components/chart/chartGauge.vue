@@ -67,8 +67,6 @@
      mounted(){
       this.chartData.rows[0].value=this.data.score;
       let data =this.data.chartData;
-      
-       console.log(data)
       this.chartSettings.seriesMap.score.max=data[0].max;
       this.chartSettings.seriesMap.score.min=data[0].min;
     }

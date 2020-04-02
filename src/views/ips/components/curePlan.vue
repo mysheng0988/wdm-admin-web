@@ -7,8 +7,11 @@
         <el-form-item label="神经递质调节药物方案:" v-if="drugPlan.length!=0">
            <div class="text-box"  >
              <div v-for="(item,index) in drugPlan" :key="index">
-                 <p>{{index+1}}、{{item.title}}:</p>
-                 <p v-for="(item1,index2) in item.data" :key="index2">{{item1}}</p>
+                <div v-if="item.title">
+                   <p>{{index+1}}、{{item.title}}:</p>
+                   <p v-for="(item1,index2) in item.data" :key="index2">{{item1}}</p>
+                </div>
+                <p v-else>{{item}}</p>
              </div>
           </div>
         </el-form-item>
@@ -371,11 +374,6 @@
                 }
                 this.dialogVisible=false;
                 this.dialogVisible2=true;
-              }else{
-                this.dialogVisible=false;
-                this.dialogVisible2=false;
-                this.drugPlan[0]=res.message;
-                //this.$message.warning(res.message)
               }
             })
           }else{
@@ -390,14 +388,14 @@
           }
           let param=this.selectedDurg
           saveFilter(param,this.medicalRecordId).then(res=>{
+            this.drugPlan=[];
             if(res.code==200){
                 this.drugPlan=res.dataList;
-                console.log(this.drugPlan)
                 this.dialogVisible2=false;
             }else{
-             // this.$message.warning(res.message)
-              this.drugPlan[0]=res.message;
+              this.drugPlan.push(res.message);
               this.dialogVisible2=false;
+             // this.$message.warning(res.message)
             }
           })
       },
@@ -492,6 +490,9 @@
             this.initData.otherSuggestion=this.cheakedEmpty(data.otherSuggestion);
             let symptomsData=this.cheakedEmpty(data.somatizationSymptomsDrugRegimen);
             this.initData.somatizationSymptomsDrugRegimen=this.cheakedEmpty(data.somatizationSymptomsDrugRegimen);//躯体化治疗方案
+            if(data.noneMedicationPlanPrompt){
+              this.drugPlan[0]=data.noneMedicationPlanPrompt;
+            }
           }
         }).catch(err=>{
           loading.close();

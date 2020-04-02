@@ -2,11 +2,17 @@
   <div class="app-container">
     <div class="dep-nav">
       <el-tree ref="tree" :data="data"   show-checkbox node-key="id"
-               :render-content="renderContent"
                highlight-current
                default-expand-all
                @node-click="handleNodeClick"
                @check="handleNodeClick">
+            <span class="custom-tree-node" slot-scope="{ node, data }">
+            <i :class="data.className"></i>
+              <el-tooltip class="item" effect="dark" :content="node.label" placement="top-start" v-if="node.label&&node.label.length>14">
+                  <span style="font-size:14px">{{node.label}}</span>
+            </el-tooltip>
+             <span style="font-size:14px" v-else>{{node.label}}</span>
+            </span>
       </el-tree>
     </div>
     <div class="dep-content">
@@ -297,13 +303,15 @@
         this.$refs.tree.setCheckedKeys([value.id]);
         this.getList();
       },
-      renderContent(h, { node, data, store }) {
-        return ( <span class="custom-tree-node">
-          <i class={data.className}></i>
-          <span style="font-size:14px">{node.label}</span>
-          </span>
-      );
-      }
+      // renderContent(h, { node, data, store }) {
+      //   return ( <span class="custom-tree-node">
+      //     <i class={data.className}></i>
+      //      <el-tooltip class="item" effect="dark" content="{{node.label}}" placement="top-start">
+      //         <span style="font-size:14px">{node.label}</span>
+      //     </el-tooltip>
+      //     </span>
+      // );
+     // }
     },
 
   }
@@ -330,6 +338,13 @@
   }
   .dep-nav .el-tree-node:focus > .el-tree-node__content {
     background-color: #1197D6 !important;
+  }
+  .span-ellipsis {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
   }
   .input-width{
     width: 100%;

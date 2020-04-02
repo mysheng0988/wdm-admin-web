@@ -28,7 +28,13 @@ export function saveExperience(data) {
     data:data,
   })
 }
-
+export function updateExperience(data) {
+  return request({
+    url:'base/visitingExperience',
+    method:'put',
+    data:data,
+  })
+}
 export function deleteExperience(id) {
   return request({
     url:'base/visitingExperience/'+id,

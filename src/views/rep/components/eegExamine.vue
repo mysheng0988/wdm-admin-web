@@ -6,8 +6,8 @@
         <p>附录3. EEG检测</p>
         <p>E<span>EG DETECTION</span></p>
       </div>
-      <el-image class="img" :src="eegPath" ></el-image>
-      <!-- <img class="img" :src="eegPath" crossorigin="anonymous"> -->
+      <!-- <el-image class="img" :src="eegPath" ></el-image> -->
+      <img class="img" :src="eegPath" crossorigin="anonymous">
     </div>
   </div>
 </template>
@@ -16,13 +16,18 @@ import eeg from '@/assets/images/eeg-icon.png'
 import{getEEG} from "@/api/HRV"
   export default {
     name: 'eegExamine',
+     props:{
+       medicalRecordId:{
+         type:String,
+       }
+    },
     data(){
       return {
         eegPath:eeg,
       };
     },
     mounted(){
-      getEEG(36).then(res=>{
+      getEEG(this.medicalRecordId).then(res=>{
           if(res.code==200){
             this.eegPath=res.dataList[0].resultImageUrl;
           }else{

@@ -33,3 +33,8 @@ export function validatePhone(str) {
   return reg.test(str)
 }
 
+export function validateNum(str) {
+  const reg = /^[0-9]*$/ 
+  return reg.test(str)
+}
+

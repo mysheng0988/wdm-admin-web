@@ -2,7 +2,24 @@
   <div class="form-pdf">
     <div class="pdf-bar"></div>
     <div class="label-title">三维评估</div>
-    <div class="chart-box ">
+    <div class="content" v-if="data.type=='table'">
+          <div class="content-title">{{data.questionnaireName}}</div>
+          <el-table
+            :data="data.chartData"
+            :show-header="false"
+            style="width: 100%">
+            <el-table-column>
+              <template slot-scope="scope">{{scope.row.item0}}</template>
+            </el-table-column>
+            <el-table-column>
+              <template slot-scope="scope">{{scope.row.item1}}</template>
+            </el-table-column>
+            <el-table-column>
+              <template slot-scope="scope">{{scope.row.item2}}</template>
+            </el-table-column>
+          </el-table>
+      </div>
+    <div class="chart-box " v-else>
       <div class="flex-center">
         <div class="chart">
           <ve-pie :data="chartData" width="300px" height="200px" :extend="extend" :settings="settings"></ve-pie>
@@ -28,6 +45,12 @@
   let that;
   export default {
     name: 'assess',
+    props:{
+      medicalRecordId:{
+        type:String,
+        value:""
+      }
+    },
     data(){
       return {
          extend:{
@@ -43,6 +66,7 @@
         },
         conclusion:[],
         dataList:[],
+        data:"",
         chartData: {
           columns: ['维度', 'data'],
           rows: [
@@ -58,7 +82,6 @@
         if(this.dataList["生物学"]){
           let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
           let num= this.dataList["生物学"]
-          console.log(num)
           return Math.round(num/total*100)+"%"
         }
        
@@ -67,7 +90,6 @@
           if(this.dataList["心理学"]){
           let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
           let num= this.dataList["心理学"]
-          console.log(num)
           return Math.round(num/total*100)+"%"
         }
       },
@@ -75,20 +97,26 @@
           if(this.dataList["社会学"]){
           let total=this.dataList["生物学"]+this.dataList["心理学"]+this.dataList["社会学"];
           let num= this.dataList["社会学"]
-          console.log(num)
           return Math.round(num/total*100)+"%"
         }
         
       }
    },
     mounted(){
-        questionnaireResult(30).then(res=>{
+    
+        questionnaireResult(this.medicalRecordId).then(res=>{
           if(res.code==200){
-            this.conclusion=JSON.parse(res.dataList[0].conclusion);
-            this.dataList=JSON.parse(res.dataList[0].chartData)
-            this.chartData.rows[0].data=this.dataList["生物学"];
+            this.data=res.dataList[0];
+            if(this.data.type=="table"){
+              this.data.chartData=JSON.parse(this.data.chartData);
+            }else{
+              this.conclusion=JSON.parse(res.dataList[0].conclusion);
+              this.dataList=JSON.parse(res.dataList[0].chartData)
+              this.chartData.rows[0].data=this.dataList["生物学"];
              this.chartData.rows[1].data=this.dataList["心理学"];
              this.chartData.rows[2].data=this.dataList["社会学"];
+            }
+           
             
           }
         })
@@ -128,6 +156,13 @@
     background:url("../img/pdf-label.png") no-repeat;
      background-size: 100% 100%;
      color: #fff;
+  }
+  .content{
+    padding:  70px;
+  }
+  .content .content-title{
+     font-size: 20px;
+     color: #48A3DA;
   }
   .chart-box{
     margin-top:30px;

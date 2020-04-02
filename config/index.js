@@ -9,7 +9,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/base': {
-        //target: 'http://121.36.64.179',//后端接口地址
+        //target: 'http://121.36.46.3',//后端接口地址
         target: 'http://192.168.2.131',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
@@ -17,7 +17,7 @@ module.exports = {
         }
       },
       '/ips': {
-        //target: 'http://121.36.64.179',//后端接口地址
+        //target: 'http://121.36.46.3',//后端接口地址
         target: 'http://192.168.2.131',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
@@ -25,7 +25,7 @@ module.exports = {
         }
       },
       '/api': {
-        //target: 'http://139.9.115.220',//后端接口地址
+        //target: 'http://121.36.46.3',//后端接口地址
         target: 'http://localhost:8080',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {

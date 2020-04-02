@@ -3,7 +3,7 @@
     <el-form :inline="true" :model="listQuery" size="small">
       <div>
         <el-form-item >
-          <el-input  placeholder="患者编号" v-model="listQuery.pid" clearable></el-input>
+          <el-input   placeholder="患者编号" v-model.number="listQuery.pid" clearable></el-input>
         </el-form-item>
         <el-form-item >
           <el-input placeholder="患者姓名" v-model="listQuery.realName" clearable></el-input>
@@ -75,7 +75,7 @@
                 size="mini"
                 round
                 class="active"
-                @click="handleEdit(scope.row.cardNo)">编辑
+                @click="handleEdit(scope.row)">编辑
               </el-button>
               <el-button
                 size="mini"
@@ -123,58 +123,6 @@
       </span>
     </el-dialog>
 
-    <!-- <el-dialog
-      title="患者任务"
-      :visible.sync="dialogVisible2"
-      width="40%">
-      <el-card class="card-box"  shadow="never">
-          <el-row :gutter="10">
-            <el-col :span="4">
-              <div>姓名:<span>{{patientMsg.realName}}</span></div>
-            </el-col>
-            <el-col :span="4">
-              <div>年龄:<span>{{patientMsg.birthday|formatAge}}</span></div>
-            </el-col>
-            <el-col :span="4">
-              <div>性别:<span>{{patientMsg.gender?"女":"男"}}</span></div>
-            </el-col>
-             <el-col :span="12">
-              <div>身份证号:<span>{{patientMsg.cardNo}}</span></div>
-            </el-col>
-          </el-row>
-      </el-card>
-      <el-table
-        :data="taskList"
-        border
-        style="width: 100%">
-         <el-table-column label="项目类型" align="center">
-          <template slot-scope="scope">{{scope.row.examinationName }}</template>
-        </el-table-column>
-        <el-table-column label="项目状态" align="center">
-          <template slot-scope="scope">{{scope.row.examinationStatus|formatState }}</template>
-        </el-table-column>
-        <el-table-column label="来源科室"  align="center">
-          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
-        </el-table-column>
-        <el-table-column label="来源医生"  align="center">
-          <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
-        </el-table-column>
-         <el-table-column  label="操作"  align="center">
-          <template slot-scope="scope" >
-               <el-button
-                size="mini"
-                round
-                class="active"
-                @click="handle(scope.row.id)">操作
-              </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button>
-      </span>
-    </el-dialog> -->
   </div>
 </template>
 
@@ -214,7 +162,7 @@
         rules:{
           cardID: [
             {required: true, message: '请输入身份证号码', trigger: 'blur'},
-            { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
+            { pattern:  /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/, message: '身份证格式不正确',trigger: 'blur' }
           ]
         }
 
@@ -256,7 +204,8 @@
          this.$router.push({
           path: '/pat/assessRecord',
           query: {
-            id: data.pid
+            id: data.pid,
+            name:data.realName
           }
         })
       },
@@ -280,19 +229,12 @@
          this.listLoading=false;
         })
       },
-      handleRecord(data){
-        this.$router.push({
-          path: '/pat/assessRecord',
-          query: {
-            id: data.pid
-          }
-        })
-      },
       handleEdit(val){
          this.$router.push({
               path: '/pat/patUpdate',
               query: {
-                id: val
+                id: val.cardNo,
+                name:val.realName
               }
           })
       },
@@ -304,9 +246,21 @@
         readCard().then(res=>{
           // if(res.code==200){
           //   this.cardForm.cardID=res.data.cardno
+          //    let cradMsg={}
+          //     cardMsg.realName=res.data.name;
+          //     cardMsg.gender=res.data.sex=="男"?false:true;
+          //     cardMsg.nation=res.data.nation;
+          //     cardMsg.cardNo=res.data.cardno;
+          //   sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
           // }
           if(res.cardno){
-               this.cardForm.cardID=res.cardno
+            let cardMsg={}
+            cardMsg.realName=res.name;
+            cardMsg.gender=res.sex=="男"?false:true;
+            cardMsg.nation=res.nation;
+            cardMsg.cardNo=res.cardno;
+            sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
+            this.cardForm.cardID=res.cardno
           }else{
             this.$message.warning("刷卡失败")
           }
@@ -316,10 +270,16 @@
         this.$refs[formName].validate((valid) => {
           if(valid){
             this.dialogVisible=false;
+            let cardMsg=JSON.parse(sessionStorage.getItem("cardMsg"))
+            let name="";
+            if(cardMsg&&cardMsg!=""){
+                name=cardMsg.realName
+            }
             this.$router.push({
               path: '/pat/patAdd',
               query: {
-                id: this.cardForm.cardID
+                id: this.cardForm.cardID,
+                name:name,
               }
             })
           }
@@ -340,12 +300,22 @@
         this.getList();
       },
       getList(){
+        
+        let reg=/^[0-9]*$/;
+        if(this.listQuery.pid!=""&&!reg.test(this.listQuery.pid)){
+          this.$message.warning("患者编号必须是数字");
+          return
+        } 
         this.listLoading=true;
         queryPatient(this.listQuery).then(res=>{
           this.listLoading=false;
           if(res.code==200){
             this.list=res.dataList;
             this.total=res.pageInfo.total;
+          }else{
+            this.$message.warning("没有查到数据")
+             this.list=[];
+            this.total=0;
           }
         }).catch(error => {
          this.listLoading=false;

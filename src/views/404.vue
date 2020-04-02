@@ -28,7 +28,7 @@
     },
     methods: {
       handleGoMain() {
-        this.$router.push({path: '/'})
+        this.$router.push({path: '/pat/list'})
       }
     },
   }

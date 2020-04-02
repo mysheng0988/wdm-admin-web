@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 50px" v-loading.fullscreen.lock="listLoading"  id="pdfCentent">
     <el-form  :model="pursueObj" :rules="rules" ref="pursueInfoForm" label-width="180px"  >
-      <el-form-item label="主诉:">
+      <el-form-item label="主诉:"  prop="mainComplaint">
         <el-input
           placeholder="请输入内容"
           v-model="pursueObj.mainComplaint"
@@ -33,7 +33,7 @@
           <el-form-item label="发作频率:" prop="onsetInterval">
             <el-input
               v-model="pursueObj.onsetInterval"
-              placeholder="请输入内容,如:一周一次"
+              placeholder="如:一周一次"
               type="text"
               clearable></el-input>
           </el-form-item>
@@ -120,6 +120,7 @@
       <el-form-item label="器质损害或疾病严重程度:" prop="organicDiseaseSeverity" >
         <el-select  placeholder="请选择" v-model="pursueObj.organicDiseaseSeverity" clearable class="input-width">
           <el-option label="无" value="无" ></el-option>
+           <el-option label="未知" value="未知" ></el-option>
           <el-option label="轻度" value="轻度"></el-option>
           <el-option label="中度" value="中度"></el-option>
           <el-option label="重度" value="重度"></el-option>
@@ -183,12 +184,22 @@
             </el-table-column>
             <el-table-column   label="操作" align="center">
               <template slot-scope="scope" >
-                <el-button
+                <div>
+                    <el-button
                   size="mini"
                   round
                   type="warning"
                   @click="handleDeleteExperience(scope.row.id)">删除
                 </el-button>
+                </div>
+                <div style="margin-top:10px">
+                  <el-button
+                  size="mini"
+                  round
+                  type="success"
+                  @click="handleUpdataExperience(scope.row)">修改
+                </el-button>
+                </div>
               </template>
             </el-table-column>
           </el-table>
@@ -201,19 +212,44 @@
           type="text"
           clearable></el-input>
       </el-form-item>
-      <el-form-item label="家族史:">
+      <el-form-item label="家族疾病史:">
         <div class="flex">
           <p class="add-btn" @click="addFamily"><i class="el-icon-plus"></i>
             {{familyObj.familyMemberDiseaseHistoryList.length!=0?"修改家族史":"添加家族史"}}
           </p>
-          <el-checkbox :checked="familyObj.familyMemberDiseaseHistoryList.length==0">暂无家族史</el-checkbox>
+          <el-checkbox v-model="familyObj.familyMemberDiseaseHistoryList.length==0">暂无家族史</el-checkbox>
         </div>
+       <el-table ref="familyHistory"
+                  style="width: 100%;margin-top: 10px;"
+                  :data="familyObj.familyMemberDiseaseHistoryList"
+                  border>
+          <el-table-column label="序号" width="100" align="center">
+            <template slot-scope="scope">{{scope.$index+1}}</template>
+          </el-table-column>
+          <el-table-column label="家庭成员"  align="center">
+            <template slot-scope="scope">{{scope.row.relativeTitle}}</template>
+          </el-table-column>
+          <el-table-column label="疾病"  align="center">
+            <template slot-scope="scope">
+              <p v-for="(item,index) in scope.row.icd11CodeList" :key="index">{{item.name}}</p>
+            </template>
+          </el-table-column>
+          <el-table-column label="疾病补充"  align="center">
+            <template slot-scope="scope">
+              {{scope.row.diseaseName}}
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-form-item>
+      <el-form-item label="家族的特质:">
+          {{familyObj.trait}}
       </el-form-item>
       <el-form-item label="应激源:">
         <div class="flex">
           <p class="add-btn" @click="addStress"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox :checked="eventList.length==0">暂无应激源</el-checkbox>
+          <el-checkbox v-model="eventList.length==0">暂无应激源</el-checkbox>
         </div>
+        <p v-for="(item,index) in eventList" :key="index">{{index+1}}、{{item.event}}</p>
       </el-form-item>
       <el-form-item style="text-align: center">
         <el-button type="primary" size="medium" @click="handleNext('pursueInfoForm')">下一步，{{nextTitle}}</el-button>
@@ -237,6 +273,7 @@
       <experience
               :medical-record-id="medicalRecordId"
               :patient-id="patientId"
+              :data="experienceData"
               @closeDialog="closeDialog"
       ></experience>
     </el-dialog>
@@ -245,7 +282,7 @@
       :visible.sync="dialogVisible3"
       width="70%">
       <family-history
-        :family-obj="familyObj"
+        :data="familyObj"
         :medical-record-id="medicalRecordId"
         :patient-id="patientId"
         @closeDialog="closeDialog"></family-history>
@@ -340,6 +377,7 @@
         dialogVisible3:false,
         accompanyingSymptoms:"",
         mainSymptoms:"",
+        experienceData:{},
         clinicalSpecialist:"",
         optionSymptomsList:[],
         optionAccompanyingSymptoms:[],
@@ -371,6 +409,9 @@
           }
         },
         rules: {
+          mainComplaint:[
+              {required: true, message: '请填写主诉', trigger: 'blur'},
+          ],
           mainSymptomsIdList: [
             {required: true, message: '请选择主诉症状', trigger: 'blur'},
           ],
@@ -424,6 +465,9 @@
         familyHistory(this.patientId).then(res=>{
           if(res.code == 200){
             this.familyObj=res.dataList[0];
+             for(let item of this.familyObj.familyMemberDiseaseHistoryList){
+                item.diseaseName=item.diseaseSupplementList.join(",")
+            }
           }
         }).catch(error => {
           this.listLoading=false;
@@ -456,6 +500,10 @@
           }
         }, 500);
       },
+      handleUpdataExperience(val){
+        this.experienceData=val;
+        this.dialogVisible2=true;
+      },
       handleDeleteExperience(expId){
         this.$confirm('确认删除此项就诊经历?', '提示', {
           confirmButtonText: '确定',
@@ -471,7 +519,9 @@
         })
       },
       addFamily(){
+         this.experienceData={};
         this.dialogVisible3=true;
+       
       },
       getStressList(){
         getStressPatient(this.medicalRecordId).then(res=>{
@@ -492,13 +542,13 @@
         })
       },
       addExperience(){
-        this.dialogVisible2=true
+        this.dialogVisible2=true;
+        this.experienceData={};
       },
       getExperienceList(){
         queryExperience(this.patientId).then(res=>{
           if(res.code==200){
             this.list=res.dataList;
-            console.log(this.list)
           }
         }).catch(error => {
           this.listLoading=false;

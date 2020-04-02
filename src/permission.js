@@ -29,8 +29,14 @@ router.beforeEach((to, from, next) => {
           })
         })
       } else {
-          console.log()
-        next()
+        let roleId=store.getters.roles;
+        let roles=to.meta.roleId;
+        if(roles.includes(roleId)){
+          next()
+        }else{
+          next({ path: "/404" })
+        }
+       
       }
     }
   } else {

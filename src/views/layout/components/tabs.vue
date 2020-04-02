@@ -39,11 +39,11 @@
         initPath(obj){
            let tabObj={};
           let param="";
-          let id="";
-          if(obj.query.id){
-            id=obj.query.id;
+          let name="";
+          if(obj.query.name){
+            name="-"+obj.query.name;
           }
-          tabObj.name=obj.meta.title+id;
+          tabObj.name=obj.meta.title+name;
           let query=obj.query;
           if(JSON.stringify(query)!="{}"){
               param="?"+this.objToParam(query);

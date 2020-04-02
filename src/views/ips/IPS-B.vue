@@ -179,9 +179,9 @@
     },   
     methods: {
       changeTab(index){
-        this.active=index;
-        this.hideAll();
-        this.showStatus[index] = true;
+        // this.active=index;
+        // this.hideAll();
+        // this.showStatus[index] = true;
       },
       //病例信息接口
       getPatientData(){
@@ -191,7 +191,7 @@
             this.patientVO=res.dataList[0].patientVO;
             let active=res.dataList[0].examinationStatus  
             if(active>9){
-              this.active=res.dataList[0].examinationStatus/10-1;
+              this.active=res.dataList[0].examinationStatus/10;
             }else{
               this.active=0;
             }

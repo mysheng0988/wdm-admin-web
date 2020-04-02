@@ -22,11 +22,11 @@
         <div class="question flex" v-if="item.type==='0'">
           <span>({{index+1}})、{{item.label}}</span>
           <el-radio-group v-model="item.answer" class="flex">
-            <el-radio v-model="item.answer" v-for="(itemData,itemIndex) in item.answers" :label="itemIndex+1" :key="itemIndex">{{itemData}}</el-radio>
+            <el-radio v-model="item.answer" v-for="(itemData,itemIndex) in item.answers" :label="itemIndex" :key="itemIndex" :disabled="problemData.data[0].answer===0">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
         <div class="question" v-else-if="item.type==='1'">
-          <span>({{index+1}})、{{item.label}}</span><el-input-number v-model="item.answer" size="small" label="描述文字"></el-input-number>
+          <span>({{index+1}})、{{item.label}}</span><el-input-number v-model="item.answer" :min="minValue" size="small" label="描述文字"></el-input-number>
         </div>
         <div class="question" v-else-if="item.type==='2'">
           <span>({{index+1}})、{{item.label}}</span><el-input class="remark" v-model="item.answer"  label="描述文字"></el-input>
@@ -37,7 +37,7 @@
       <div class="title">{{data.scaleTitle}}</div>
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
-      <div class="question">{{questionNum+1}}、{{problemData.question}}{{problemData.questionNum}}</div>
+      <div class="question">{{questionNum+1}}、{{problemData.question}}</div>
       <div v-if="problemData.symptom" class="symptom">
         <el-checkbox-group v-model="problemData.data" >
           <el-checkbox v-for="(item,index) in problemData.symptom" :label="item" :key="index">{{item.question}}</el-checkbox>
@@ -91,6 +91,7 @@
       data() {
         return {
           data:[],
+          minValue:0,
           problemData:[],
           loading:false,
           questionNum:0,
@@ -150,7 +151,6 @@
           return ((this.questionNum+1)/this.questionLength*100).toFixed()+"%"
         },
         prevQuestion(){
-          console.log( this.questionNum)
           if(this.questionNum<=0){
             this.$message.warning("当前是第一题")
           }else{
@@ -163,9 +163,17 @@
           if(this.questionNum<this.questionLength-1){
             if(this.problemData.data&&this.problemData.data.length>0){
               for(let item of this.problemData.data){
-                if(item.answer===""&&item.type&&item.type!=2){
+                if(item.answer===""&&!item.type){
                   this.$message.warning("请选择答案");
                   return
+                }else{
+                  if(this.problemData.data[0].answer<0){
+                    this.$message.warning("请选择发生次数,没有选0");
+                    return
+                  }else if(item.answer===""&&item.type&&item.type!=2&&this.problemData.data[0].answer>0){
+                    this.$message.warning("请选择答案");
+                    return
+                  }
                 }
               }
             }
@@ -208,6 +216,7 @@
                optionOrderList:[],
                optionValue:[],
                returnValue:[],
+               remark:"",
                order:"",
              }
             if(this.data.type==1){
@@ -232,13 +241,13 @@
              
             }else{
               for(let itemData of item.data){
-                  qr.optionOrderList.push(itemData.answer);
-                  if(item.answers){
-                     qr.optionValue.push(itemData.answers[item.answer]);
+                  if(itemData.type!="2"){
+                    console.log(itemData.answer)
+                    let answer=itemData.answer==""?0:itemData.answer;
+                     qr.optionOrderList.push(answer);
                   }else{
-                     qr.optionValue.push(itemData.answer);
+                    qr.remark=itemData.answer;
                   }
-                  console.log(item.question)
                   qr.returnValue.push(item.question);
                   qr.order=item.questionNum;
               }  

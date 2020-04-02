@@ -221,7 +221,8 @@
           path: '/ips/'+path,
           query: {
             id: data.patientId,
-            medicalRecordId:data.id
+            medicalRecordId:data.id,
+            name:data.patientVO.realName,
           }
         })
       },
@@ -269,6 +270,9 @@
           if(res.code==200){
             this.list=res.dataList;
             this.total=res.pageInfo.total;
+          }else{
+            this.list=[];
+            this.total=0;
           }
         }).catch(error => {
          this.listLoading=false;

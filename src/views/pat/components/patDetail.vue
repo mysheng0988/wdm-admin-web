@@ -81,8 +81,8 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="身  高："  prop="height" >
-              <el-input v-model.number="patObj.height">
-                <template slot="append" placeholder="请输入内容">cm</template>
+              <el-input v-model.number="patObj.height" placeholder="请输入内容">
+                <template slot="append" >cm</template>
               </el-input>
             </el-form-item>
           </el-col>
@@ -119,30 +119,44 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="排行/兄妹人数：" >
+            <el-form-item label="排行/兄妹人数：" prop="siblingsNumber">
               <el-input v-model="patObj.familyRanking" class="input2"></el-input>/
               <el-input v-model="patObj.siblingsNumber" class="input2"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="妊娠哺乳："  >
-              <el-select  placeholder="请选择" v-model="patObj.crowdRole" clearable class="input-width" :disabled="!patObj.gender">
-                <el-option label="无" value="无" ></el-option>
-                <el-option label="备孕" value="备孕" ></el-option>
-                <el-option label="孕期" value="孕期" ></el-option>
-                 <el-option label="产后" value="产后" ></el-option>
-                <el-option label="哺乳期" value="哺乳期"></el-option>
+            <el-form-item label="人群分类：" prop="crowdRole" >
+              <el-select  placeholder="请选择" v-model="patObj.crowdRole"  clearable class="input-width" >
+                <el-option v-for="(item,index) in optionRow" :key="index" 
+                     :label="item"
+                     :value="item"
+                   ></el-option>
+                
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="子女人数："   >
-              <el-input v-model="patObj.childrenNumber"></el-input>
+            <el-form-item label="子女人数："  prop="childrenNumber" >
+              <el-input  v-model.number="patObj.childrenNumber"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="主要抚养人："   >
-              <el-input v-model="patObj.caregiver" placeholder="请输入内容"></el-input>
+              <!-- <el-input v-model="patObj.caregiver" placeholder="请输入内容" clearable maxlength="10" show-word-limit></el-input> -->
+               <el-select
+                  v-model="patObj.caregiver"
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请选择主要抚养人"
+                  clearable class="input-width" >
+                  <el-option
+                    v-for="(item,index) in options"
+                    :key="index"
+                    :label="item"
+                    :value="item">
+                  </el-option>
+                </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -265,7 +279,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="床号："  prop="bedNo" >
-            <el-input type="number" v-model.number="medObj.bedNo"  placeholder="请输入床号"  clearable maxlength="10" show-word-limit ></el-input>
+            <el-input v-model.number="medObj.bedNo"  placeholder="请输入床号"  clearable maxlength="10" show-word-limit ></el-input>
           </el-form-item>
         </el-col>
          <!-- <el-col :span="8">
@@ -300,8 +314,8 @@
              :rules="cardRules"
              ref="cardFrom">
               <el-form-item label="卡号："   prop="cardNo">
-                  <el-input v-model.number="cardFrom.cardNo"   placeholder="请刷卡" 
-                  clearable maxlength="8" show-word-limit></el-input>
+                  <el-input id="cardNo" v-model.number="cardFrom.cardNo"   placeholder="请刷卡" 
+                  clearable maxlength="10" show-word-limit></el-input>
               </el-form-item>
           </el-form>
         <span slot="footer" class="dialog-footer">
@@ -313,6 +327,7 @@
 </template>
 
 <script>
+   import {validateNum} from '@/utils/validate';
   import {savePatient,
     getDeptList,
     getInfoCard,
@@ -328,7 +343,7 @@
     birthday: "",
     contactDetails: "",
     cardNo: "",
-    caregiver: "",
+    caregiver: "父母",
     childrenNumber: 0,
     childrenSituation: "",
     crowdRole: "无",
@@ -370,17 +385,50 @@
       }
     },
     data() {
+      const validateNumberSort= (rule, value, callback) => {
+        if (value!=""&&!validateNum(value)) {
+            callback(new Error('必须为数字'))
+        } else {
+          if(value>10){
+             callback(new Error('必须小于10的数字'))
+          }else if(this.patObj.familyRanking-value>0){
+             callback(new Error('排行数不能大于兄妹总数'))
+          }else{
+               callback()
+          }
+        }
+      };
+       const validateNumberTen = (rule, value, callback) => {
+        if (value!=""&&!validateNum(value)) {
+            callback(new Error('必须小于10的数字'))
+        } else {
+         if(value>10){
+            callback(new Error('必须小于10的数字'))
+          }else{
+              callback()
+          }
+        }
+      };
+       const validateNumber = (rule, value, callback) => {
+        if (value!=""&&!validateNum(value)) {
+          callback(new Error('必须是数字'))
+        } else {
+          callback()
+        }
+      };
       return {
         patObj: Object.assign({}, defaultPatient),
         medObj: Object.assign({}, defaultMedical),
         cardFrom:{
           cardNo:""
         },
+        options:["父母","父亲","母亲","祖父母","外祖父母"],
         dialogVisible:false,
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
         address:"",
         doctorList:[],
         examinationList:[],
+        optionRow:["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
         deptList:[],
         cureList:[],
         showBase:true,
@@ -402,7 +450,8 @@
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           contactDetails: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur'},
+            { pattern: /^1[3456789]\d{9}$/, message: '手机号格式不正确',trigger: 'blur' }
           ],
           education: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -424,9 +473,18 @@
           caregiver: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
+          crowdRole: [
+             {required: true, message: '必填字段', trigger: 'blur'}
+          ],
+          siblingsNumber:[
+             {required: false, trigger: 'blur', validator: validateNumberSort}
+          ],
+          childrenNumber:[ 
+            {required: false, trigger: 'blur', validator: validateNumberTen}
+          ],
           cardNo: [
             {required: true, message: '请输入身份证号码', trigger: 'blur'},
-            { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
+            { pattern: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/, message: '身份证格式不正确',trigger: 'blur' }
           ]
         },
         cardRules:{
@@ -443,10 +501,9 @@
             {required: true, message: '必填字段', trigger: 'blur'},
             { type: 'number', message: '必须为数字',trigger: 'blur'}
           ],
-          
-          // bedNo: [
-          //   {required: false, type: 'number',trigger: 'blur',message: '必须为数字值'}
-          // ],
+          bedNo:[
+            {required: false, trigger: 'blur', validator: validateNumber}
+          ],
           fromUid: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
@@ -461,8 +518,8 @@
           return this.$store.state.user.info
         },
       age:function () {
-        if(this.patObj.birthday!=""){
-          let age=this.patObj.birthday.substring(0,4);
+        if(this.patObj.cardNo!=""){
+          let age=this.patObj.cardNo.substring(6,10);
           let year=new Date().getFullYear()
           return year-age-1;
         }
@@ -471,9 +528,8 @@
     },
 
     created() {
-      //this.select.province+","+this.select.city+","+this.select.area;
-      let cardNo=this.$route.query.id;
-      this.patObj.cardNo=cardNo;
+       let cardNo=this.$route.query.id;
+       this.patObj.cardNo=cardNo;
       this.patObj.birthday=cardNo.substring(6,10)+"-"+cardNo.substring(10,12)+"-"+cardNo.substring(12,14);
       this.getDept();
       this.getInfoCardNum();
@@ -485,8 +541,9 @@
     methods: {
      
       genderChange(){
+        let optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]
         if(!this.patObj.gender){
-          this.patObj.crowdRole="无"
+          this.optionRow=optionRow;
         }
       },
       onSelected(val){
@@ -533,6 +590,15 @@
               this.showBase=true;
             }
 
+          }else{
+              let cardMsg=JSON.parse(sessionStorage.getItem("cardMsg"));
+              if(cardMsg){
+                this.patObj.cardNo=cardMsg.cardNo;
+                this.patObj.realName=cardMsg.realName;
+                this.patObj.gender=cardMsg.gender;
+                this.patObj.nation=cardMsg.nation;
+              }
+              
           }
           return this.patObj.pid;
         })
@@ -657,5 +723,9 @@
   .active{
     color: #409EFF;
     cursor: pointer;
+  }
+  #cardNo{
+    position:absolute;
+    top:-100px;
   }
 </style>

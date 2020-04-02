@@ -23,7 +23,7 @@
         {{index+1}}、{{item.event}}
         <i class="close el-icon-error" @click="handleRemove(index)"></i>
       </p>
-      <p v-for="(item,index) in addEventList" class="label" :key="index">
+      <p v-for="(item,index) in addEventList" class="label" :key="'eve'+index">
         {{eventList.length+index+1}}、{{item.event}}
         <i class="close el-icon-error" @click="handleAddRemove(index)"></i>
       </p>

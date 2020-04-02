@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form :inline="true" :model="listQuery" size="small">
         <el-form-item >
-          <el-input  placeholder="用户姓名"  v-model="listQuery.username" clearable></el-input>
+          <el-input  placeholder="账户名称"  v-model="listQuery.username" clearable></el-input>
         </el-form-item>
         <el-form-item >
           <el-input placeholder="手机号码" v-model="listQuery.phoneNumber" clearable></el-input>
@@ -107,11 +107,11 @@
         <el-row :gutter="10">
           <el-col :span="12">
             <el-form-item label="账户名称:"  prop="username"  >
-              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="10" show-word-limit></el-input>
+              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="10" show-word-limit :readonly="userForm.uid!=null"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="账户密码:"  prop="password"   v-if="!userForm.uid">
+            <el-form-item label="账户密码:"  prop="password"   v-if="!userForm.uid" >
               <el-input v-model="userForm.password" placeholder="请输入账户密码" maxlength="10" show-word-limit></el-input>
             </el-form-item>
           </el-col>
@@ -287,10 +287,12 @@
 
     methods: {
       addUser(){
+         this.dialogTitle="新增账户信息"
         this.dialogVisible=true;
         this.userForm=Object.assign({},defaultUser);
       },
       editUser(obj){
+        this.dialogTitle="编辑账户信息"
         getUserinfo(obj.uid).then(res=>{
           if(res.code==200){
             this.userForm=res.dataList[0];

@@ -15,14 +15,11 @@
         </el-form-item>
         <el-form-item label="症状:"  prop="symptomIdList" >
           <el-select
-            style="width: 100%"
+             clearable class="input-width"
+             multiple
             v-model="expObj.symptomIdList"
-            multiple
-            filterable
-            remote
-            placeholder="请输入关键词检索"
-            :remote-method="querySymptomsData"
-            :loading="loadingOption">
+            placeholder="请选择"
+            >
             <el-option
               v-for="item in symptomOption"
               :key="item.id"
@@ -32,7 +29,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="医院:"  prop="hospitalId" >
-          <el-select  placeholder="请选择" v-model="expObj.hospitalId" clearable class="input-width">
+          <el-select  placeholder="请选择" v-model="expObj.hospitalId">
             <el-option v-for="(item,index) in hostList"
                        :key="index"
                        :label="item.name"
@@ -75,13 +72,6 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="效果:"  prop="treatmentEffect" >
-          <el-select  placeholder="请选择" v-model="expObj.treatmentEffect" clearable class="input-width">
-            <el-option label="有效" value="有效"></el-option>
-            <el-option label="部分有效" value="部分有效"></el-option>
-            <el-option label="未见改善" value="未见改善"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item label="治疗方案:" prop="treatmentPrograms">
           <el-input
             class="textarea"
@@ -92,6 +82,13 @@
             maxlength="100"
             show-word-limit
             clearable></el-input>
+        </el-form-item>
+         <el-form-item label="效果:"  prop="treatmentEffect" >
+          <el-select  placeholder="请选择" v-model="expObj.treatmentEffect" clearable class="input-width">
+            <el-option label="有效" value="有效"></el-option>
+            <el-option label="部分有效" value="部分有效"></el-option>
+            <el-option label="未见改善" value="未见改善"></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div class="btn-box">
@@ -104,6 +101,7 @@
 <script>
   import {querySymptoms,
     saveExperience,
+    updateExperience,
     queryCheckUp,
     savaPursue,
     getPursue,
@@ -126,6 +124,10 @@
     export default {
       name: "experience",
       props: {
+        data:{
+          type:Object,
+         
+        },
         medicalRecordId: {
           type: String,
           value:""
@@ -135,20 +137,30 @@
           value:""
         },
       },
+       watch: {
+        data: {
+            handler(newValue, oldValue) {
+               this.expObj=newValue;
+               this.optionICD=this.expObj.diagnosisList;
+               this.optionCheck=this.expObj.checkupList;
+               
+            }
+        }
+      },
       data() {
         return {
           optionICD:[],
           optionCheck:[],
           symptomOption:[],
-          expObj:Object.assign({},defaultExp),
+          expObj:this.data,
           loadingOption:false,
           hostList:[],
           expRules: {
             visitDate: [
               {required: true, message: '请选择时间', trigger: 'blur'},
             ],
-            diagnosisIdList: [{required: true, message: '请选择诊断', }],
-            checkupIdList:[{required: true, message: '请选择诊断', }],
+            diagnosisIdList: [{required: true, message: '请输入关键词检索诊断', }],
+            checkupIdList:[{required: true, message: '请输入关键词检索', }],
             symptomsIdList: [{required: true, message: '请选择症状', }],
             hospitalId: [{required: true, message: '请选择医院', trigger: 'blur'}],
             treatmentPrograms: [{required: true, message: '请选择治疗方案', trigger: 'blur'}],
@@ -162,6 +174,11 @@
      },
       created(){
         this.getHospital();
+        this.querySymptomsData();
+        this.expObj=this.data;
+        this.optionICD=this.expObj.diagnosisList;
+        this.optionCheck=this.expObj.checkupList;
+        
       },
       methods:{
         getHospital(){
@@ -178,15 +195,26 @@
           this.expObj.patientId=this.patientId;
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              saveExperience(this.expObj).then(res => {
+              if(this.expObj.id){
+                updateExperience(this.expObj).then(res=>{
+                   if(res.code){
+                  this.$emit('closeDialog');
+                  this.$refs[formName].resetFields();
+                  this.expObj=Object.assign({},defaultExp);
+                  this.$message.success("修改成功");
+                }
+                })
+              }else{
+                saveExperience(this.expObj).then(res => {
                 if(res.code){
                   this.$emit('closeDialog');
                   this.$refs[formName].resetFields();
                   this.expObj=Object.assign({},defaultExp);
                   this.$message.success("保存成功");
                 }
-
-              })
+               })
+              }
+              
             } else {
               this.$message({
                 message: '验证失败',
@@ -213,11 +241,7 @@
           }, 300);
         },
         querySymptomsData(queryString){
-           clearTimeout(this.timeout);
-          this.timeout = setTimeout(() => {
-            this.loadingOption=true;
             querySymptoms({departmentCategoryId:this.info.deptCategoryId,queryParam:queryString,type:1}).then(res=>{
-                  this.loadingOption=false;
                 if(res.code==200){
                   this.symptomOption=res.dataList;
                 }else{
@@ -225,7 +249,6 @@
                 }
                 
               })
-            }, 300);
         },
         querySearchCheck(queryString) {
           clearTimeout(this.timeout);

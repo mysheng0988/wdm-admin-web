@@ -100,7 +100,7 @@
              if(res.dataList[0].examinationStatus>10){
                  this.$emit('nextStep');
              }else{
-               this.$message.warning("请先完成HRV和EEG检查")
+               this.$message.warning("请先完成HRV检查")
              }
 
            }

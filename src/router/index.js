@@ -7,10 +7,11 @@ Vue.use(Router)
 import Layout from '../views/layout/Layout'
 export const constantRouterMap = [
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+  {path: '/pdf', component: () => import('@/views/rep/pdf'), hidden: true,meta: {title: '报告打印', icon: 'home',roleId:[1,13,18]}},
   {
     path: '',
     component: Layout,
-    redirect: '/pat',
+    redirect: '/home',
     hidden:true,
     children: [{
       path: 'home',
@@ -197,7 +198,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/user/account',
     name: 'user',
-    meta: {title: '用户管理', icon: 'user-manage',roleId:[13]},
+    meta: {title: '系统管理', icon: 'user-manage',roleId:[13]},
     children: [
       {
         path: 'account',
@@ -234,11 +235,11 @@ export const constantRouterMap = [
       path:'404',
       name:"404",
       component: () => import('@/views/404'),
-      meta: {title: '404', icon: 'sms-flash',},
+      meta: {title: '404', icon: 'sms-flash',roleId:[1,13,18]},
       hidden: true
     }]
   },
-  {path: '*', redirect: '/404', hidden: true}
+  {path: '*', redirect: '/404', hidden: true,roleId:[1,13,18]}
 ]
 
 export default new Router({

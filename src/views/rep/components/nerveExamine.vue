@@ -11,8 +11,8 @@
           {{data.symptom}}
       </div>
       <div class="content-title">2.HRV检测结果：</div>
-      <el-image class="img" :src="data.resultImageUrl"></el-image>
-      <!-- <img class="img" :src="data.resultImageUrl" crossorigin="anonymous"> -->
+      <!-- <el-image class="img" :src="data.resultImageUrl"></el-image> -->
+      <img class="img" :src="data.resultImageUrl" crossorigin="anonymous">
     </div>
   </div>
 </template>
@@ -21,15 +21,19 @@ import hrv from '@/assets/images/hrv-icon.png'
 import {getHRV} from "@/api/HRV"
   export default {
     name: 'nerveExamine',
+    props:{
+       medicalRecordId:{
+         type:String,
+       }
+    },
     data(){
       return {
         data:[]
       };
     },
     mounted(){
-     getHRV(30).then(res=>{
+     getHRV(this.medicalRecordId).then(res=>{
           if(res.code==200){
-             console.log(res)
               this.data=res.dataList[0];
           }
         })

@@ -9,6 +9,9 @@
       <div v-for="(item,index) in data" :key="index">
         <chart-gauge :data="item"  v-if="item.type=='dial'"></chart-gauge>
         <scale-text :data="item"  v-else-if="item.type=='text'"></scale-text>
+        <scale-table :data="item" v-else-if="item.type=='table'"></scale-table>
+        <chart-radar :data="item" v-else-if="item.type=='Radar'"></chart-radar>
+        <chart-histogram :data="item" v-else-if="item.type=='Histogram'"></chart-histogram>
       </div>
      
      <!-- <chart-gauge :data="data2" ></chart-gauge>
@@ -26,6 +29,7 @@
  import chartLine from './chart/chart-line'
  import chartRadar from './chart/chart-radar'
  import scaleText from './chart/scaleText'
+ import scaleTable from './chart/scaleTable'
   export default {
     name: 'scaleAssess',
     components:{
@@ -33,6 +37,7 @@
       chartHistogram,
       chartLine,
       scaleText,
+      scaleTable,
       chartRadar
     },
     props:{
@@ -47,7 +52,6 @@
       };
     },
     mounted(){
-       console.log(this.data)
     }
   }
 </script>

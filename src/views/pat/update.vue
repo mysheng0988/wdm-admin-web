@@ -1,4 +1,5 @@
 <template>
+<div class="app-container">
   <el-card class="form-container" shadow="never">
     <el-form :model="patObj"
              :rules="rules"
@@ -123,13 +124,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="妊娠哺乳："  >
-              <el-select  placeholder="请选择" v-model="patObj.crowdRole" clearable class="input-width" :disabled="!patObj.gender">
-                <el-option label="无" value="无" ></el-option>
-                <el-option label="备孕" value="备孕" ></el-option>
-                <el-option label="孕期" value="孕期" ></el-option>
-                 <el-option label="产后" value="产后" ></el-option>
-                <el-option label="哺乳期" value="哺乳期"></el-option>
+            <el-form-item label="人群分类："  >
+              <el-select  placeholder="请选择" v-model="patObj.crowdRole" prop="crowdRole" clearable class="input-width" >
+                <el-option v-for="(item,index) in optionRow" :key="index" 
+                     :label="item"
+                     :value="item"
+                   ></el-option>
+                
               </el-select>
             </el-form-item>
           </el-col>
@@ -197,6 +198,7 @@
       </el-form-item>
     </el-form>
   </el-card>
+</div>
 </template>
 
 <script>
@@ -240,6 +242,7 @@
       return {
         patObj: Object.assign({}, defaultPatient),
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
+        optionRow:["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
         address:"",
         doctorList:[],
         examinationList:[],
@@ -288,7 +291,7 @@
           ],
           cardNo: [
             {required: true, message: '请输入身份证号码', trigger: 'blur'},
-            { pattern: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, message: '身份证格式不正确',trigger: 'blur' }
+            { pattern:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/, message: '身份证格式不正确',trigger: 'blur' }
           ],
         },
       }
@@ -297,9 +300,9 @@
       info () {
         return this.$store.state.user.info
       },
-      age:function () {
-        if(this.patObj.birthday!=""){
-          let age=this.patObj.birthday.substring(0,4);
+     age:function () {
+        if(this.patObj.cardNo!=""){
+          let age=this.patObj.cardNo.substring(6,10);
           let year=new Date().getFullYear()
           return year-age-1;
         }
@@ -318,8 +321,9 @@
 
     methods: {
       genderChange(){
+        let optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]
         if(!this.patObj.gender){
-          this.patObj.crowdRole="无"
+          this.optionRow=optionRow;
         }
       },
       onSelected(val){
