@@ -243,24 +243,24 @@
         this.listQuery.createTimeEnd=this.createDate[1];
       },
       readCardData(){
+        // if(res.cardno){
+        //     let cardMsg={}
+        //     cardMsg.realName=res.name;
+        //     cardMsg.gender=res.sex=="男"?false:true;
+        //     cardMsg.nation=res.nation;
+        //     cardMsg.cardNo=res.cardno;
+        //     sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
+        //     this.cardForm.cardID=res.cardno
+        //   }
         readCard().then(res=>{
-          // if(res.code==200){
-          //   this.cardForm.cardID=res.data.cardno
-          //    let cradMsg={}
-          //     cardMsg.realName=res.data.name;
-          //     cardMsg.gender=res.data.sex=="男"?false:true;
-          //     cardMsg.nation=res.data.nation;
-          //     cardMsg.cardNo=res.data.cardno;
-          //   sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
-          // }
-          if(res.cardno){
-            let cardMsg={}
-            cardMsg.realName=res.name;
-            cardMsg.gender=res.sex=="男"?false:true;
-            cardMsg.nation=res.nation;
-            cardMsg.cardNo=res.cardno;
+          if(res.code==200){
+            this.cardForm.cardID=res.data.cardno
+             let cardMsg={}
+              cardMsg.realName=res.data.name;
+              cardMsg.gender=res.data.sex=="男"?false:true;
+              cardMsg.nation=res.data.nation;
+              cardMsg.cardNo=res.data.cardno;
             sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
-            this.cardForm.cardID=res.cardno
           }else{
             this.$message.warning("刷卡失败")
           }
