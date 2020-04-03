@@ -6,23 +6,7 @@
         <p>附录4. 量表评估</p>
         <p>S<span>CALE ASSESSMENT</span></p>
       </div>
-      <!-- <div class="content-title">压力自评量表（SSQ-53）</div>
-      <div class="item-box flex-center">
-          <div class="chart"> 
-            <ve-radar :data="chartData" :settings="chartSettings" :extend="extend"  width="100%" height="100%"></ve-radar>
-          </div>
-          <div class="content">
-              <div v-for="(item,index) in data.conclusion" :key="index" class="flex-wrap">
-                <span>{{item.split("|")[0]}}</span>
-                <span>{{item.split("|")[1]}}</span>
-              </div>
-              
-          </div>
-      </div> -->
-      <!-- <div class="content">评语:</div> -->
       <div class="content indent" v-for="(item,index) in data" :key="index">{{item}}</div>
-      <!-- <div class="content indent">总体压力：评测结果显示，您目前的压力等级为7级，压力反应水平偏高，处于该水平的个体近期在工作和生活中感受到的压力已经超出正常水平，出现了一些不适症状，说明其压力管理能力较差。缺乏有效的压力缓解措施。若不及时改善目前的状态，越来越沉重的压力会对个体的身心健康造成威胁。</div>
-      <div class="content indent">个体感受到压力时，会在生理、情绪、认知和行为四个方面表现出症状，然而这四个方面对于压力的易感性不同，因此压力对这四个方面的影响程度不同，并且压力对身心整体的影响程度与对具体方面的影响程度也可能存在差异。下面详细描述您在生理、情绪、认知和行为四个方面的测评结果：</div> -->
     </div>
     <div class="pageNum">-{{pageNum}}-</div>   
   </div>

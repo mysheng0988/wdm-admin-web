@@ -3,11 +3,10 @@
     <div class="pdf-bar"></div>
     <div class="label-title">报告分析总结/repprt Analysis</div>
     <div class="content-box flex" v-for="(item,index) in analysisData" :key="index" >
-        <img class="img" :src="item.imgPath" v-if="item.label">
+        <img class="img" :src="item.imgPath" v-if="item.imgPath!=''"/>
         <div class="img" v-else></div>
-        <div class="content">
-          <div class="label" v-if="item.label">{{item.label}}</div>  
-          <p v-for="(item1,index1) in item.data" :key="index1">{{item1}}</p>
+        <div class="content ">
+          <div :class="item.imgPath!=''?'label':''">{{item.content}}</div>  
         </div>
     </div>
     <div class="pageNum">-{{pageNum}}-</div>   
@@ -30,7 +29,6 @@
       };
     },
     mounted(){
-     // console.log(this.analysisData.focusProblem)
     },
    
   }
@@ -73,7 +71,7 @@
   .content-box{
     padding: 0 50px;
     line-height: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .content-box .img{
     width: 40px;

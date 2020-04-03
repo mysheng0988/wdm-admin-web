@@ -159,10 +159,11 @@
             visitDate: [
               {required: true, message: '请选择时间', trigger: 'blur'},
             ],
-            diagnosisIdList: [{required: true, message: '请输入关键词检索诊断', }],
-            checkupIdList:[{required: true, message: '请输入关键词检索', }],
-            symptomsIdList: [{required: true, message: '请选择症状', }],
+            diagnosisIdList: [{required: true, message: '请输入关键词检索诊断', trigger: 'blur' }],
+            checkupIdList:[{required: true, message: '请输入关键词检索', trigger: 'blur' }],
+            symptomIdList: [{required: true, message: '请选择症状', trigger: 'blur' }],
             hospitalId: [{required: true, message: '请选择医院', trigger: 'blur'}],
+            treatmentEffect:[{required: true, message: '请选择治疗方案', trigger: 'blur'}],
             treatmentPrograms: [{required: true, message: '请选择治疗方案', trigger: 'blur'}],
           }
         }

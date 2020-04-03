@@ -16,7 +16,6 @@
                 <span>{{item.split("|")[0]}}</span>
                 <span>{{item.split("|")[1]}}</span>
               </div>
-              
           </div>
       </div>
       <div class="content">评语:</div>

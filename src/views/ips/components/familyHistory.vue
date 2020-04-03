@@ -202,7 +202,7 @@
                 this.familyObj=Object.assign({},defaultFamily);
                 this.familyObj.familyMedicalHistoryList=[];
                 this.$message.success("保存成功");
-                this.queryFamily();
+  
               }
             })
           }

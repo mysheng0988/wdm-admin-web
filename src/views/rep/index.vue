@@ -143,7 +143,6 @@
     },
     methods: {
       readReport(data){
-        console.log(data)
         this.$router.push({
           path: '/rep/pdf',
           query: {

@@ -12,7 +12,7 @@
       </el-form-item>
     </el-form>
     <el-dialog
-      title="答题卡"
+      title="问卷"
       :visible.sync="dialogVisible"
       width="700px">
       <question :scale-id="scaleId"  :medical-record-id="medicalRecordId"
@@ -53,7 +53,7 @@
           </div>
         </div>
         <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible2 = false">重新测试问卷</el-button>
+        <el-button @click="againMeasure">重新测试问卷</el-button>
         <el-button type="primary" @click="handleNextItem()">继续测试量表</el-button>
       </span>
     </el-dialog>
@@ -272,6 +272,10 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
        this.initData();
     },
     methods: {
+      againMeasure(){
+        this.dialogVisible2 = false
+        this.startQuestion();
+      },
       initData(){
         getMedicalRecord(this.medicalRecordId).then(res=>{
           if(res.code==200){
@@ -305,7 +309,6 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
        handleNodeClick(val){
         this.$refs.tree.setChecked(val.id,true,false)
         this.selectedData=this.$refs.tree.getCheckedNodes(true);
-        console.log(this.selectedData)
       },
       handleNodeChecked(){
         this.selectedData=this.$refs.tree.getCheckedNodes(true);
@@ -402,6 +405,8 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
   .screen-box{
     border: 1px solid #eee;
     border-radius: 10px;
+    height: 450px;
+    overflow:auto;
   }
   .tree-box{
     height: 300px;

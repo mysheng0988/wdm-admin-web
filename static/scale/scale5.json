@@ -122,8 +122,8 @@
       },
       {
         "questionNum": "9",
-        "label": "激越",
-        "question": "",
+        "label": "",
+        "question": "激越",
         "answers": [
           "轻度：检查时表现得有些心神不定",
           "中度：明显心神不定或小动作多",

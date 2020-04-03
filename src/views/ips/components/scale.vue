@@ -7,7 +7,7 @@
             <el-button type="primary" @click="customQuestion()">开始检测</el-button>
        </el-form-item> -->
       <el-form-item style="text-align: center" v-for="(item,index) of scaleNoList" :key="index">
-        <div class="ips-input" >{{arrTitle[item-1]}}{{item}}</div>
+        <div class="ips-input" >{{arrTitle[item-1]}}</div>
         <el-button type="primary" @click="startQuestion(item)">
           {{completeScaleNoList.includes(item)?"重新测评":"开始测试"}}</el-button>
          <el-button type="primary" :class="completeScaleNoList.includes(item)?'':'disable'" @click="handleRecord(false,item)">记录结果</el-button>

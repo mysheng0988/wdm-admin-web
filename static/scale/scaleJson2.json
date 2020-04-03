@@ -8,7 +8,7 @@
     "problem": [
       {
         "questionNum": "4",
-        "question": "您是否有以下症状，选择一项或多项？",
+        "question": "您是否有以下症状，选择一项或多项,选择一项或多项；若无症状，请直接点击下一题",
         "symptom": [
           {
             "question": "口干",

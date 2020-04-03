@@ -134,16 +134,16 @@ import {analysisData} from "@/api/analysis"
         if(this.medicalRecordId==""||this.medicalRecordId==undefined){
           this.medicalRecordId=36;
         }
-        this.getPatientData();
-        this.getPursueData();
-        this.getExperienceList();
-        this.getScaleResult();
-        this.getReportMsgData();
-        this.getScaleNumResult();
+        
          this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
-        
+           this.getExperienceList();
+           this.getPatientData();
+           this.getPursueData();
+           this.getScaleResult();
+           this.getReportMsgData();
+           this.getScaleNumResult();
       },
       methods: {
         outPut(){
@@ -154,14 +154,28 @@ import {analysisData} from "@/api/analysis"
         },
         getScaleNumResult(){
             scaleResultNum(this.medicalRecordId,{questionnaireNumbers:12}).then(res=>{
+              let rowNum=0;
+              let maxRow=15;
               if(res.code==200){
                 let pressureData=res.dataList[0];
                 pressureData.conclusion=JSON.parse(pressureData.conclusion);
-                let explanation=JSON.parse(pressureData.explanation);
-                pressureData.explanation=explanation.slice(0,4);
-                let pressureData2=explanation.slice(4,6);
                 pressureData.chartData=JSON.parse(pressureData.chartData);
-                 this.pressureData2=pressureData2;
+                let explanation=JSON.parse(pressureData.explanation);
+                let index=0;
+                for(let item of explanation){
+                   rowNum+=this.computeRowNum(item);
+                  if(rowNum<=maxRow){
+                      index++;
+                  }  
+                }
+                if(rowNum>maxRow){
+                    rowNum=0;
+                    pressureData.explanation=explanation.slice(0,index);
+                    let pressureData2=explanation.slice(index,6);
+                    this.pressureData2=pressureData2;
+                }else{
+                     pressureData.explanation=explanation;
+                }
                 this.pressureData=pressureData;
               }
             })
@@ -298,9 +312,9 @@ import {analysisData} from "@/api/analysis"
             return;
           }
           let str="";
-          if(index!=0){
-            str=index+"、"
-          }
+          // if(index!=0){
+          //   str=index+"、"
+          // }
           if(typeof obj==="object"){
              let param={
                 content:str+obj.title,
@@ -314,7 +328,7 @@ import {analysisData} from "@/api/analysis"
              }
           }else{
             let param={
-              content:"("+index+")、"+obj,
+              content:index+"、"+obj,
               type:1
               } 
              data.push(param)
@@ -438,14 +452,67 @@ import {analysisData} from "@/api/analysis"
         computeRowNum(text){
             return Math.ceil(text.length/45)
         },
+        copyAnalysis(toatalData,imagePath,label,data){
+          if(!data||data.length==0){
+            data.push("无");
+          }
+          let param={
+            imgPath:imagePath,
+            content:label
+          }
+          toatalData.push(param);
+          let index=0;
+          for(let item of data){
+            index++;
+            let dataObj={
+              imgPath:"",
+              content:index+"、"+item
+            }
+            toatalData.push(dataObj)
+          }
+          return toatalData;
+        },
         getAnalysisData(data){
+             let page=[];//数组长度为页面页数
+             let rowNum=0;//页面行数
+             let pageNum=0;//第多少页
+             let maxRowNum=15;//一页最大行数
+             page[pageNum]=[];
+             let toatalData=[]
+             if(data.typeId=="4"){
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-problem.png"),"焦点问题",data.focusProblem)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-society.png"),"社会功能",data.socialFunction)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-analysis.png"),"疾病成因分析",data.causes)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-diagnose.png"),"辅助诊断建议",data.initialDiagnosisVO)
+             }else{
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
+             }
+             for(let item of toatalData){
+               rowNum+=this.computeRowNum(item.content)
+               if(rowNum>maxRowNum){
+                 rowNum=this.computeRowNum(item.content);
+                 pageNum++;
+                  page[pageNum]=[];
+               }
+               page[pageNum].push(item)
+             }
+            this.page=page;
+            this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.page.length;//治疗方案参考
+            console.log(this.contentsData[3].pageNum)
+            console.log(this.page.length)
+            console.log(this.contentsData[4].pageNum)
+        },
+        getAnalysisData2(data){
                // this.analysisData=data;
                 let page=[];//数组长度为页面页数
                 let rowNum=0;//页面行数
                 let itemNum=0;//页面项目数
                 let pageNum=0;//第多少页
                 let maxRowNum=20;//一页最大行数
-              let focusProblem=data.focusProblem;//焦点问题
+                page[pageNum]=[];
+              if(data.type=="4"){
+                  let focusProblem=data.focusProblem;//焦点问题
                  rowNum+=2;
                let pageItem1={ //页面的最小单元
                     imgPath:require("@/views/rep/img/icon-problem.png"),
@@ -456,7 +523,7 @@ import {analysisData} from "@/api/analysis"
               if(focusProblem.length==0){
                 focusProblem.push("无")
               }
-              page[pageNum]=[];
+              
               page[pageNum].push(pageItem1);
              
               for(let item in focusProblem){
@@ -478,6 +545,8 @@ import {analysisData} from "@/api/analysis"
 
                 }
               }
+              }
+              
                let pageItem2={ //页面的最小单元
                   imgPath:require("@/views/rep/img/icon-nutrition.png"),
                   label:"心身因素",
@@ -511,8 +580,6 @@ import {analysisData} from "@/api/analysis"
               let socialFunction=data.socialFunction;//社会功能
                if(socialFunction.length!=0&&socialFunction[0]==""){
                   socialFunction[0]="无";
-               }else{
-                  socialFunction.push("无")
                }
                rowNum+=3;
                 let pageItem3={ //页面的最小单元
