@@ -16,33 +16,41 @@
               </el-form-item>
           </div>
             <div class="flex-wrap">
-              <el-form-item class="flex-item" label="病历号:">
-                <p>{{patientData.beHospitalizedNumber}}</p>
+              <el-form-item class="flex-item" label="婚姻:">
+                <p>{{patientVo.maritaStatus}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="民 族:">
                 <p>{{patientVo.nation}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="宗教:">
-                <p>{{patientVo.profession}}</p>
+                <p>{{patientVo.faith}}</p>
               </el-form-item>
           </div>
           <div class="flex-wrap">
-              <el-form-item class="flex-item" label="婚姻:">
-                <p>{{patientVo.maritaStatus}}</p>
-              </el-form-item>
               <el-form-item class="flex-item" label="文化程度:">
                 <p>{{patientVo.education}}</p>
               </el-form-item>
+              <el-form-item class="flex-item" label="职业:">
+                <p>{{patientVo.profession}}</p>
+              </el-form-item>
+              <el-form-item class="flex-item" label="人群分类:">
+                <p>{{patientVo.crowdRole}}</p>
+              </el-form-item>
+          </div>
+          <div class="flex-wrap">
               <el-form-item class="flex-item" label="科室:">
                 <p>{{patientData.fromDeptName}}</p>
+              </el-form-item>
+              <el-form-item class="flex-item" label="病历号:">
+                <p>{{patientData.beHospitalizedNumber}}</p>
+              </el-form-item>
+               <el-form-item class="flex-item" label="床号:">
+                <p>{{patientData.bedNo}}</p>
               </el-form-item>
             </div>
             <div class="flex-wrap">
               <el-form-item class="flex-width"  label="临床诊断:">
                 <span v-for="(item,index) in mainPursue.clinicalSpecialistDiagnosisList" :key="index">{{item.name}}、</span>
-              </el-form-item>
-              <el-form-item class="flex-item" label="床号:">
-                <p>{{patientData.bedNo}}</p>
               </el-form-item>
             </div>
         </el-form>
@@ -77,6 +85,7 @@
       </div>
     </div>
     <img class="footer-img" src="@/views/rep/img/icon-foot.png">
+    <div class="pageNum">-{{pageNum}}-</div>
   </div>
 </template>
 <script>
@@ -85,6 +94,10 @@
     props:{
       patientData:{
         type:Object,
+      },
+      pageNum:{
+        type:Number,
+        value:0
       },
       patientVo:{
         type:Object
@@ -167,6 +180,9 @@
     right: 10px;
     bottom: 10px;
   }
+  .form-pdf .pageNum{
+    color: #fff;
+   }
 </style>
 
 

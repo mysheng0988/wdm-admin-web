@@ -10,12 +10,16 @@
           <p v-for="(item1,index1) in item.data" :key="index1">{{item1}}</p>
         </div>
     </div>
+    <div class="pageNum">-{{pageNum}}-</div>   
   </div>
 </template>
 <script>
   export default {
     name: 'rep-analysis',
     props:{
+      pageNum:{
+        type:Number
+      },
       analysisData:{
         type:Array,
       }

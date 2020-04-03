@@ -19,6 +19,7 @@
      <!-- <chart-histogram ></chart-histogram>
      <chart-line></chart-line>
      <chart-radar></chart-radar> -->
+      <div class="pageNum">-{{pageNum}}-</div>   
     </div>
   </div>
 </template>
@@ -41,6 +42,9 @@
       chartRadar
     },
     props:{
+      pageNum:{
+        type:Number
+      },
       data:{
         type:Array,
         default:[]

@@ -16,6 +16,7 @@
           
       </el-timeline>
     </div>
+    <div class="pageNum">-{{pageNum}}-</div>   
   </div>
 </template>
 
@@ -23,6 +24,9 @@
     export default {
         name: "experience",
         props:{
+          pageNum:{
+            type:Number
+          },
           experienceData:{
             type:Object,
           },

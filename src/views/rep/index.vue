@@ -24,9 +24,9 @@
         </el-form-item>
         <el-form-item label="报告类型:">
           <el-select placeholder="请选择" v-model="listQuery.condition.typeId" clearable>
-            <el-option value="" >全部</el-option>
-            <el-option value="3" >筛查报告</el-option>
-            <el-option value="4">综合测评报告</el-option>
+            <el-option value="" label="全部" ></el-option>
+            <el-option value="3" label="筛查报告"></el-option>
+            <el-option value="4" label="综合报告"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -55,10 +55,10 @@
         <!-- <el-table-column label="性别" align="center">
           <template slot-scope="scope">{{scope.row.gender |formatGender}}</template>
         </el-table-column> -->
-        <el-table-column label="身份证号" width="180" align="center">
-          <template slot-scope="scope">{{scope.row.createTime }}</template>
+        <el-table-column label="身份证号"  align="center">
+          <template slot-scope="scope">{{scope.row.cardNo }}</template>
         </el-table-column>
-        <el-table-column label="创建时间" width="180" align="center">
+        <el-table-column label="创建时间" align="center">
           <template slot-scope="scope">{{scope.row.createTime }}</template>
         </el-table-column>
         <el-table-column label="报告类型"  align="center">
@@ -130,7 +130,7 @@
     },
     filters:{
       formatType(val){
-        return val=="3"?"筛查报告":"综合测评报告";
+        return val=="3"?"筛查报告":"综合报告";
       },
       formatGender(gender){
         return gender?"女":"男"
@@ -166,7 +166,7 @@
       },
        handleTimeChange(val){
         this.listQuery.condition.startTime=this.createDate[0]+" 00:00:00";
-        this.listQuery.condition.endTime=this.createDate[1]+ "23:59:59";
+        this.listQuery.condition.endTime=this.createDate[1]+ " 23:59:59";
       },
       handleSizeChange(val) {
         this.listQuery.pageNum = 1;

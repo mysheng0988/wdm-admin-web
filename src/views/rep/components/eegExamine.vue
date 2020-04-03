@@ -9,6 +9,7 @@
       <el-image class="img" :src="eegPath" ></el-image>
       <!-- <img class="img" :src="eegPath" crossorigin="anonymous"> -->
     </div>
+    <div class="pageNum">-{{pageNum}}-</div>   
   </div>
 </template>
 <script>
@@ -17,6 +18,9 @@ import{getEEG} from "@/api/HRV"
   export default {
     name: 'eegExamine',
      props:{
+       pageNum:{
+         type:Number
+       },
        medicalRecordId:{
          type:String,
        }
@@ -29,7 +33,7 @@ import{getEEG} from "@/api/HRV"
     mounted(){
       getEEG(this.medicalRecordId).then(res=>{
           if(res.code==200){
-            this.eegPath=res.dataList[0].resultImageUrl;
+            this.eegPath="data:image/png;base64,"+res.dataList[0].resultImageUrl;
           }else{
             this.$message.warning("没有查到数据")
           }

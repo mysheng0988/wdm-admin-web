@@ -134,7 +134,8 @@
         this.$router.push({
           path: '/rep/pdf',
           query: {
-            id: data.id
+            id: data.id,
+            name:data.patientVO.realName
           }
         })
       },

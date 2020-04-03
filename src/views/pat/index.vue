@@ -243,9 +243,9 @@
         this.listQuery.createTimeEnd=this.createDate[1];
       },
       readCardData(){
-       
         readCard().then(res=>{
-          //  if(res.cardno){
+
+           //  if(res.cardno){
           //   let cardMsg={}
           //   cardMsg.realName=res.name;
           //   cardMsg.gender=res.sex=="男"?false:true;

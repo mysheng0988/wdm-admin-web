@@ -25,9 +25,9 @@
           <ve-pie :data="chartData" width="300px" height="200px" :extend="extend" :settings="settings"></ve-pie>
         </div>
         <div class="chart-content">
-          <div>生物学维度 {{dataVal}} | {{dataList["生物学"]}}</div>
-          <div>心理学维度 {{dataVal2}} | {{dataList["心理学"]}}</div>
-          <div>社会学维度 {{dataVal3}} | {{dataList["社会学"]}}</div>
+          <div>生物学维度 {{dataVal}}  | {{dataList["生物学"]|decimalTwo}}</div>
+          <div>心理学维度 {{dataVal2}} | {{dataList["心理学"]|decimalTwo}}</div>
+          <div>社会学维度 {{dataVal3}} | {{dataList["社会学"]|decimalTwo}}</div>
         </div>
       </div>
       <div class="result">
@@ -37,7 +37,7 @@
         </p>
       </div>
     </div>
-    
+     <div class="pageNum">-{{pageNum}}-</div>
   </div>
 </template>
 <script>
@@ -46,6 +46,9 @@
   export default {
     name: 'assess',
     props:{
+      pageNum:{
+          type:Number,
+      },
       medicalRecordId:{
         type:String,
         value:""
@@ -70,12 +73,20 @@
         chartData: {
           columns: ['维度', 'data'],
           rows: [
-            { '维度': '生物学', 'data': 2.8 },
-            { '维度': '心理学', 'data': 1.5 },
-            { '维度': '社会学', 'data': 3.6 },
+            { '维度': '生物学', 'data': 0 },
+            { '维度': '心理学', 'data': 0 },
+            { '维度': '社会学', 'data': 0 },
           ]
         }
       };
+    },
+    filters:{
+       decimalTwo(val){
+         if(val){
+           return val.toFixed(2);
+         }
+         return "0.00"
+       } 
     },
     computed: {
       dataVal: function () {

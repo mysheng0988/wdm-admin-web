@@ -1,6 +1,6 @@
 <template> 
    <div class="index-pdf">
-     <div class="title">IPS系统心身综合报告</div>
+     <div class="title">IPS系统心身{{patientData.examinationId=="1"?"筛查":"综合"}}报告</div>
      <div class="dept">来源科室：{{patientData.fromDeptName}}</div>
      <div class="user-msg" >{{patientVo.realName}} 
         <span>{{patientVo.gender?"女":"男"}}</span> 
@@ -29,6 +29,9 @@
         }
          return "";
       },
+    },
+    mounted(){
+      console.log(this.patientData)
     }
    
   }

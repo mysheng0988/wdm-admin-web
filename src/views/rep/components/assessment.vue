@@ -22,13 +22,16 @@
       <div class="content">评语:</div>
       <div class="content indent" v-for="(item,index) in data.explanation" :key="index">{{item}}</div>
     </div>
-        
+    <div class="pageNum">-{{pageNum}}-</div> 
   </div>
 </template>
 <script>
   export default {
     name: 'assessment',
     props:{
+       pageNum:{
+         type:Number
+       },
        data:{
         type:Object,
         default:{}
@@ -82,6 +85,7 @@
           this.chartData.rows[0]["行为"]=item.score;
         }
       }
+
     }
   }
 </script>

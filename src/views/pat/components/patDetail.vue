@@ -250,7 +250,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"  prop="beHospitalizedNumber" >
-            <el-input  v-model.number="medObj.beHospitalizedNumber" clearable maxlength="15" show-word-limit></el-input>
+            <el-input  v-model.number="medObj.beHospitalizedNumber" clearable maxlength="15" show-word-limit  placeholder="请输入"></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">

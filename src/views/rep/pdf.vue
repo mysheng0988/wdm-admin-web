@@ -2,31 +2,31 @@
   <div class="app-container" >
     <div class="pdf-container" id="pdfCentent" ref="content">
         <rep-index :patient-data="patientData" :patient-vo="patientVo"></rep-index>
-        <contents></contents>
-        <patient-msg :patient-data="patientData" :patient-vo="patientVo" :main-pursue="mainPursue"></patient-msg>
+        <contents :data="contentsData"></contents>
+        <patient-msg :page-num="contentsData[0].pageNum" :patient-data="patientData" :patient-vo="patientVo" :main-pursue="mainPursue"></patient-msg>
         <div v-for="(item2,index2) in experienceData" :key="'exe-'+index2">
-          <experience :experience-data="item2"></experience>
+          <experience :experience-data="item2" :page-num="contentsData[1].pageNum-0+index2" ></experience>
         </div>
-        <assess :medical-record-id="medicalRecordId+''"></assess>
+        <assess  :page-num="contentsData[2].pageNum" :medical-record-id="medicalRecordId+''"></assess>
         <div v-for="(item,index) in page" :key="index">
-          <rep-analysis  :analysis-data="item"></rep-analysis>
+          <rep-analysis  :page-num="contentsData[3].pageNum-0+index" :analysis-data="item"></rep-analysis>
         </div>
         <div v-for="(item,index) in drugData" :key="'drug'+index">
-            <suggest-drug :data="item"></suggest-drug>
+            <suggest-drug :data="item" :page-num="contentsData[4].pageNum-0+index" ></suggest-drug>
         </div>
         <div v-for="(item,index) in suggestData" :key="'ni'+index">
-          <patient-ni :data="item"></patient-ni>
+          <patient-ni :data="item" :page-num="contentsData[5].pageNum-0+index" ></patient-ni>
         </div>
-        <nerve-examine  :medical-record-id="medicalRecordId+''"></nerve-examine>
-        <eeg-examine  :medical-record-id="medicalRecordId+''"></eeg-examine>
+        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[6].pageNum" ></nerve-examine>
+        <eeg-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[7].pageNum" ></eeg-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
-           <scale-assess :data="item"></scale-assess>
+           <scale-assess :data="item" :page-num="contentsData[8].pageNum-0+index" ></scale-assess>
         </div>
-        <assessment v-if="pressureData" :data="pressureData"></assessment>
-        <assessment2 v-if="pressureData2" :data="pressureData2"></assessment2>
+        <assessment v-if="pressureData" :data="pressureData" :page-num="contentsData[9].pageNum" ></assessment>
+        <assessment2 v-if="pressureData2" :data="pressureData2" :page-num="contentsData[9].pageNum-0+1"></assessment2>
         <rep-end></rep-end>
     </div>
-   <el-button type="danger" @click="getPdf('pdfCentent','nowTime')">导出PDF</el-button>
+   <el-button type="danger" @click="getPdf('pdfCentent',patientVo.realName)">导出PDF</el-button>
    <!-- <el-button type="danger" @click="outPut">导出PDF</el-button> -->
   </div>
 </template>
@@ -41,11 +41,9 @@ import {analysisData} from "@/api/analysis"
       import experience from './components/experience'
       import assess from './components/assess'
       import repAnalysis from './components/rep-analysis'
-      import repAnalysis2 from './components/rep-analysis2'
       import suggestDrug from './components/suggestDrug'
       import followSuggest from './components/followSuggest'
       import patientEdu from './components/patient-edu'
-      import patientEdu2 from './components/patient-edu2'
       import patientNi from './components/patientNi'
       import nerveExamine from './components/nerveExamine'
       import eegExamine from './components/eegExamine'
@@ -62,11 +60,9 @@ import {analysisData} from "@/api/analysis"
           experience,
           assess,
           repAnalysis,
-          repAnalysis2, 
           suggestDrug,
           followSuggest,
           patientEdu,
-          patientEdu2,
           patientNi,
           nerveExamine,
           eegExamine,
@@ -88,6 +84,48 @@ import {analysisData} from "@/api/analysis"
           scaleData:[],
           drugData:[],
           suggestData:[],
+          contentsData:[
+            {
+              pageName:"基本信息",
+              pageNum:0
+            },
+             {
+              pageName:"就诊经历",
+              pageNum:0
+            },
+             {
+              pageName:"三维评估",
+              pageNum:0
+            },
+             {
+              pageName:"报告分析总结",
+              pageNum:0
+            },
+             {
+              pageName:"治疗方案参考",
+              pageNum:0
+            },
+             {
+              pageName:"附录1:患者教育",
+              pageNum:0
+            },
+             {
+              pageName:"附录2:自主神经检查",
+              pageNum:0
+            },
+             {
+              pageName:"附录3:EEG检测",
+              pageNum:0
+            },
+             {
+              pageName:"附录4:量表评估",
+              pageNum:0
+            },
+             {
+              pageName:"附录5:压力量表评估",
+              pageNum:0
+            }
+          ],
           page:[],
         }
       },
@@ -102,6 +140,10 @@ import {analysisData} from "@/api/analysis"
         this.getScaleResult();
         this.getReportMsgData();
         this.getScaleNumResult();
+         this.contentsData[0].pageNum=1;//患者信息
+      },
+      mounted(){
+        
       },
       methods: {
         outPut(){
@@ -189,6 +231,11 @@ import {analysisData} from "@/api/analysis"
                     suggestData[pageNum].push(item)
                 }
                 this.suggestData=suggestData;
+                this.contentsData[6].pageNum=this.contentsData[5].pageNum+this.suggestData.length;//附录2:自主神经检查
+                this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测
+                this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;//附录4:量表评估
+                this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
+        
               }
               
                
@@ -243,6 +290,8 @@ import {analysisData} from "@/api/analysis"
                 drugData[pageNum].push(item)
             }
            this.drugData=drugData;
+            this.contentsData[5].pageNum=this.contentsData[4].pageNum+this.drugData.length;//附录1:患者教育
+         
         },
         pageThenData(data,obj,index){
           if(!obj){
@@ -378,7 +427,11 @@ import {analysisData} from "@/api/analysis"
 
               }
               this.experienceData=exeList;
+             
             }
+             this.contentsData[1].pageNum=this.experienceData.length==0?0:2;//就诊经历
+             this.contentsData[2].pageNum=2-0+this.experienceData.length;//三维评估
+             this.contentsData[3].pageNum=this.contentsData[2].pageNum+1;//报告分析总结
           }).catch(error => {
           })
         },
@@ -568,6 +621,7 @@ import {analysisData} from "@/api/analysis"
                 }
               }
               this.page=page;
+              this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.page.length;//治疗方案参考
          
         }
       },

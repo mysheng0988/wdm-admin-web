@@ -102,7 +102,7 @@
         getHRV(this.medicalRecordId).then(res=>{
           if(res.code==200){
               this.dialogVisible=true;
-              this.hrvPath=res.dataList[0].resultImageUrl;
+              this.hrvPath="data:image/png;base64,"+res.dataList[0].resultImageUrl;
           }
         })
       },
@@ -110,7 +110,7 @@
         getEEG(this.medicalRecordId).then(res=>{
           if(res.code==200){
             this.dialogVisible2=true;
-            this.eegPath=res.dataList[0].resultImageUrl;
+            this.eegPath="data:image/png;base64,"+res.dataList[0].resultImageUrl;
           }else{
             this.$message.warning("没有查到数据")
           }

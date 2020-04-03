@@ -1,72 +1,23 @@
 <template> 
 <div class="form-pdf contents">
     <div class="content-box">
-        <div class="flex-wrap">
+        <div class="flex-wrap" v-for="(item,index) in data" :key="index" v-show="item.pageNum!=0">
           <div class="round"></div>
-          <div >基本信息</div>
+          <div >{{item.pageName}}</div>
           <div class="content">------------------------------------------------------------------------------------</div>
-          <div>01</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >就诊经历</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>02</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >三维评估</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>03</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >报告分析总结</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>04</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >治疗方案参考</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>06</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >附录1. 患者教育</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>08</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >附录2. 自主神经检查</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>12</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >附录3. EEG检测</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>13</div>
-        </div>
-        <div class="flex-wrap">
-          <div class="round"></div>
-          <div >附录4. 量表评估</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>14</div>
-        </div>
-         <div class="flex-wrap">
-          <div class="round"></div>
-          <div >附录4. 量表评估</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>14</div>
-        </div>
+          <div>{{item.pageNum}}</div>
+        </div> 
     </div>
 </div>
 </template>
 <script>
   export default {
     name: 'contents',
+    props:{
+      data:{
+        type:Array,
+      }
+    }
   }
 </script>
 <style scoped>

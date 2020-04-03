@@ -10,13 +10,19 @@
         <div :class="item.type==0?'content-title':'content'"  :key="'t'+index" >{{item.content}}</div>
       </template>
     </div>
+    <div class="pageNum">-{{pageNum}}-</div>   
   </div>
 </template>
 <script>
   export default {
     name: 'rep-analysis',
     props:{
-      data:Array,
+      data:{
+        type:Array
+      },
+      pageNum:{
+        type:Number
+      }
 
     },
     data(){
