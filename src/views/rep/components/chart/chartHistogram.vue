@@ -29,10 +29,10 @@
         // },
         extend :{
           grid:{
-            top:10,
+            top:20,
             left:10,
             right:10,
-            bottom:20,
+            bottom:30,
             containLabel: true  
           },
           legend: {
@@ -47,7 +47,6 @@
             show:true,
           },
           series: {
-           
              label: { show: true, position: "top" }
           }
         },
@@ -91,8 +90,8 @@
      color: #48A3DA;
   }
    .chart{
-     width: 240px;
-     height: 180px;
+     width: 300px;
+     height: 250px;
      margin-right: 20px;
    }
 </style>

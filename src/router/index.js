@@ -153,7 +153,13 @@ export const constantRouterMap = [
         path: 'pdf',
         name: 'pdf',
         component: () => import('@/views/rep/pdf'),
-        meta: {title: '报告', icon: 'product-attr', roleId:[13,18]},
+        meta: {title: '综合报告', icon: 'product-attr', roleId:[13,18]},
+        hidden:true,
+      },{
+        path: 'siftPdf',
+        name: 'siftPdf',
+        component: () => import('@/views/rep/siftPdf'),
+        meta: {title: '筛查报告', icon: 'product-attr', roleId:[13,18]},
         hidden:true,
       }
     ],

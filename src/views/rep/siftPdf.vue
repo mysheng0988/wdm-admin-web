@@ -11,19 +11,11 @@
         <div v-for="(item,index) in page" :key="index">
           <rep-analysis  :page-num="contentsData[3].pageNum-0+index" :analysis-data="item"></rep-analysis>
         </div>
-        <div v-for="(item,index) in drugData" :key="'drug'+index">
-            <suggest-drug :data="item" :page-num="contentsData[4].pageNum-0+index" ></suggest-drug>
-        </div>
-        <div v-for="(item,index) in suggestData" :key="'ni'+index">
-          <patient-ni :data="item" :page-num="contentsData[5].pageNum-0+index" ></patient-ni>
-        </div>
-        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[6].pageNum" ></nerve-examine>
-        <eeg-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[7].pageNum" ></eeg-examine>
+        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[4].pageNum" ></nerve-examine>
+        <eeg-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[5].pageNum" ></eeg-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
-           <scale-assess :data="item" :page-num="contentsData[8].pageNum-0+index" ></scale-assess>
+           <scale-assess :data="item" :page-num="contentsData[6].pageNum-0+index" ></scale-assess>
         </div>
-        <assessment v-if="pressureData" :data="pressureData" :page-num="contentsData[9].pageNum" ></assessment>
-        <assessment2 v-if="pressureData2" :data="pressureData2" :page-num="contentsData[9].pageNum-0+1"></assessment2>
         <rep-end></rep-end>
     </div>
    <el-button type="danger" @click="getPdf('pdfCentent',patientVo.realName)">导出PDF</el-button>
@@ -52,7 +44,7 @@ import {analysisData} from "@/api/analysis"
       import assessment2 from './components/assessment2'
        import repEnd from './components/repEnd'
     export default {
-      name: "pdf",
+      name: "siftPdf",
       components: { 
           repIndex,
           contents,
@@ -96,22 +88,12 @@ import {analysisData} from "@/api/analysis"
                hidden:false,
             },
              {
-              pageName:"三维评估",
+              pageName:"问卷评估",
               pageNum:0,
                hidden:false,
             },
              {
-              pageName:"报告分析总结",
-              pageNum:0,
-               hidden:false,
-            },
-             {
-              pageName:"治疗方案参考",
-              pageNum:0,
-               hidden:false,
-            },
-             {
-              pageName:"附录1:患者教育",
+              pageName:"心身因素",
               pageNum:0,
                hidden:false,
             },
@@ -128,12 +110,7 @@ import {analysisData} from "@/api/analysis"
              {
               pageName:"附录4:量表评估",
               pageNum:0,
-               hidden:false,
-            },
-             {
-              pageName:"附录5:压力量表评估",
-              pageNum:0,
-              hidden:true,
+              hidden:false,
             }
           ],
           page:[],
@@ -145,10 +122,10 @@ import {analysisData} from "@/api/analysis"
           this.medicalRecordId=36;
         }
         
-         this.contentsData[0].pageNum=1;//患者信息
+        this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
-           this.getExperienceList();
+          this.getExperienceList();
            this.getPatientData();
            this.getPursueData();
            this.getScaleResult();
@@ -198,67 +175,11 @@ import {analysisData} from "@/api/analysis"
                   let maxRowNum=24;
                   let data=res.dataList[0];
                   this.getAnalysisData(data);//报告分析总结模块
-                  this.doctorDrugPlan(data);//医生治疗建议
-                  let patientMedicationPlan={};
-                  patientMedicationPlan.title="用药辅助建议";
-                  patientMedicationPlan.data=[];
-                   let dataPlan=data.patientMedicationPlan;
-                    if(dataPlan.length==0){
-                        data.noneMedicationPlanPrompt=data.noneMedicationPlanPrompt?data.noneMedicationPlanPrompt:"无"
-                      dataPlan.push(data.noneMedicationPlanPrompt)
-                    }
-                    let param={
-                      title:"神经递质调节药物",
-                      data:dataPlan
-                    }
-                    //躯体化药物方案
-                    let somatizationSymptomsDrugRegimen=JSON.parse(data.somatizationSymptomsDrugRegimen);
-                    patientMedicationPlan.data.push(param)
-                    if(somatizationSymptomsDrugRegimen){
-                       patientMedicationPlan.data.push(somatizationSymptomsDrugRegimen);
-                    }
-                  let exercisePrescription=JSON.parse(data.exercisePrescription);//运动处方
-                 let nutritionPrescription=JSON.parse(data.nutritionPrescription);//营养处方
-                 let functionalMedicineAdvice=JSON.parse(data.functionalMedicineAdvice);//功能医学建议
-                 let otherSuggestion=JSON.parse(data.otherSuggestion);
-                
-                 
-                 let suggestData=[];
-                 let totalData=[];
-                totalData=this.pageThenData(totalData,patientMedicationPlan,0);
-                if(exercisePrescription){
-                  totalData=this.pageThenData(totalData,exercisePrescription,0);
-                }
-                if(nutritionPrescription){
-                    totalData=this.pageThenData(totalData,nutritionPrescription,0);
-                }
-                if(functionalMedicineAdvice){
-                   totalData=this.pageThenData(totalData,functionalMedicineAdvice,0);
-                }
-                if(otherSuggestion){
-                  totalData=this.pageThenData(totalData,otherSuggestion,0);
-                }
-                 if(data.neurotransmitterRegulators&&data.neurotransmitterRegulators!=""){
-                     let neurotransmitterRegulators=JSON.parse(data.neurotransmitterRegulators)
-                    totalData=this.pageThenData(totalData,neurotransmitterRegulators,0);
-                 }
-                //totalData=this.pageThenData(totalData,followUpRecommendations,0);
-                suggestData[pageNum]=[];
-                for(let item of totalData){
-                  let num=this.computeRowNum(item.content);
-                   rowNum+=num;
-                    if(rowNum>maxRowNum){
-                      rowNum=this.computeRowNum(item.content)+1;
-                      pageNum++;
-                      suggestData[pageNum]=[];
-                    }
-                    suggestData[pageNum].push(item)
-                }
-                this.suggestData=suggestData;
-                this.contentsData[6].pageNum=this.contentsData[5].pageNum+this.suggestData.length;//附录2:自主神经检查
-                this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测
-                this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;//附录4:量表评估
-                this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
+               
+                this.contentsData[4].pageNum=this.contentsData[3].pageNum+1;//附录2:自主神经检查
+                this.contentsData[5].pageNum=this.contentsData[4].pageNum+1;//附录3:EEG检测
+                this.contentsData[6].pageNum=this.contentsData[5].pageNum+1;//附录4:量表评估
+                //this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
         
               }
               
@@ -453,7 +374,7 @@ import {analysisData} from "@/api/analysis"
               this.experienceData=exeList;
              
             }
-            let length=this.experienceData.length;
+             let length=this.experienceData.length;
              this.contentsData[1].pageNum=2;//就诊经历
              this.contentsData[1].hidden=this.experienceData.length==0?true:false;
              this.contentsData[2].pageNum=2-0+this.experienceData.length;//三维评估
@@ -491,15 +412,15 @@ import {analysisData} from "@/api/analysis"
              let maxRowNum=15;//一页最大行数
              page[pageNum]=[];
              let toatalData=[]
-             if(data.typeId=="4"){
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-problem.png"),"焦点问题",data.focusProblem)
+            //  if(data.typeId=="4"){
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-problem.png"),"焦点问题",data.focusProblem)
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-society.png"),"社会功能",data.socialFunction)
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-analysis.png"),"疾病成因分析",data.causes)
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-diagnose.png"),"辅助诊断建议",data.initialDiagnosisVO)
+            //  }else{
               toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-society.png"),"社会功能",data.socialFunction)
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-analysis.png"),"疾病成因分析",data.causes)
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-diagnose.png"),"辅助诊断建议",data.initialDiagnosisVO)
-             }else{
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
-             }
+            // }
              for(let item of toatalData){
                rowNum+=this.computeRowNum(item.content)
                if(rowNum>maxRowNum){

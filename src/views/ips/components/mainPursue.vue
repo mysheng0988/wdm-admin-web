@@ -241,7 +241,7 @@
           </el-table-column>
         </el-table>
       </el-form-item>
-      <el-form-item label="家族的特质:">
+      <el-form-item label="家族的特质:" v-if="familyObj.trait">
           {{familyObj.trait}}
       </el-form-item>
       <el-form-item label="应激源:">

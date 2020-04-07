@@ -83,9 +83,9 @@
      font-size: 20px;
      color: #48A3DA;
   }
-   .chart{
-     width: 240px;
-     height: 180px;
+  .chart{
+     width: 300px;
+     height: 250px;
      margin-right: 20px;
    }
 </style>

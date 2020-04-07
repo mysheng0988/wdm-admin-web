@@ -1,11 +1,13 @@
 <template> 
 <div class="form-pdf contents">
     <div class="content-box">
-        <div class="flex-wrap" v-for="(item,index) in data" :key="index" v-show="item.pageNum!=0">
-          <div class="round"></div>
-          <div >{{item.pageName}}</div>
-          <div class="content">------------------------------------------------------------------------------------</div>
-          <div>{{item.pageNum}}</div>
+        <div v-for="(item,index) in data" :key="index">
+          <div  class="flex-wrap" v-if="!item.hidden">
+              <div class="round"></div>
+              <div >{{item.pageName}}</div>
+              <div class="content">------------------------------------------------------------------------------------</div>
+              <div>{{item.pageNum}}</div>
+          </div>
         </div> 
     </div>
 </div>

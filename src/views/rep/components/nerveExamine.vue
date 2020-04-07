@@ -37,12 +37,12 @@ import {getHRV} from "@/api/HRV"
       };
     },
     mounted(){
-    //  getHRV(this.medicalRecordId).then(res=>{
-    //       if(res.code==200){
-    //           this.data=res.dataList[0];
-    //           this.base64="data:image/png;base64,"+this.data.resultImageUrl;
-    //       }
-    //     })
+     getHRV(this.medicalRecordId).then(res=>{
+          if(res.code==200){
+              this.data=res.dataList[0];
+              this.base64="data:image/png;base64,"+this.data.resultImageUrl;
+          }
+        })
     }
   }
 </script>

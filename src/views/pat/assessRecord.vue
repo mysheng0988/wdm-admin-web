@@ -131,8 +131,9 @@
     methods: {
       readReport(data){
         console.log(data)
+        let path=data.examinationId==1?"siftPdf":"pdf";
         this.$router.push({
-          path: '/rep/pdf',
+          path: '/rep/'+path,
           query: {
             id: data.id,
             name:data.patientVO.realName

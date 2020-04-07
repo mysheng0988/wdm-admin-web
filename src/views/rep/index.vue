@@ -143,8 +143,9 @@
     },
     methods: {
       readReport(data){
+        let path=data.typeId==4?"pdf":"siftPdf";
         this.$router.push({
-          path: '/rep/pdf',
+          path: '/rep/'+path,
           query: {
             id: data.medicalRecordId,
             name:data.patientName,
