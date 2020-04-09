@@ -207,7 +207,12 @@ a:hover {
 .el-dialog__body{
   padding: 10px 20px!important;
 }
-
+.form-pdf{
+  position: relative;
+   width: 768px;
+  height: 1100px;
+   text-align: left;
+}
 .form-pdf .pageNum{
   position:absolute;
   font-size: 14px;

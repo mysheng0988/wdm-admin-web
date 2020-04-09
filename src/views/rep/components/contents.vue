@@ -25,8 +25,8 @@
 <style scoped>
    .form-pdf.contents{
       padding: 70px;
-      background:url("../img/contents.png");
-      background-size: 768px 1091px;
+      background:url("../img/contents.png")no-repeat;
+      background-size: 100% 100%;
    }
    .box-label{
      margin: 55px 20px;

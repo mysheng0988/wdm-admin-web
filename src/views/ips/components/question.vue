@@ -126,7 +126,6 @@
           setTimeout(()=>{
               this.nextQuestion();
           },500)
-        
         },
          checkAddShow(arr){
           if(this.problemData.hidden){
@@ -173,7 +172,7 @@
             if(this.problemData.answer===""){
                this.$message.warning("请选择答案")
             }else{
-              if(this.problemData.nextNum!=0&&this.problemData.answer==0){
+              if(this.problemData.nextNum!=0){
               
                   for(let x=this.questionNum+1;x<this.problemData.nextNum;x++){
                        this.data.problem[x].answer=0;

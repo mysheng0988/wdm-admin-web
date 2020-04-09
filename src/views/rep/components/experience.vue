@@ -50,7 +50,7 @@
     .form-pdf.experience{
       padding: 70px;
       background:url("../img/experience.png");
-      background-size: 768px 1091px;
+      background-size: 768px 1100px;
    }
    .content-box{
      margin-top: 100px;

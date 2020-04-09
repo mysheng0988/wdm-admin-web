@@ -1,5 +1,6 @@
 <template>
-  <div class="app-container" >
+  <div  class="app-container">
+    <!-- <div> -->
     <div class="pdf-container" id="pdfCentent" ref="content">
         <rep-index :patient-data="patientData" :patient-vo="patientVo"></rep-index>
         <contents :data="contentsData"></contents>
@@ -26,8 +27,8 @@
         <assessment2 v-if="pressureData2" :data="pressureData2" :page-num="contentsData[9].pageNum-0+1"></assessment2>
         <rep-end></rep-end>
     </div>
-   <el-button type="danger" @click="getPdf('pdfCentent',patientVo.realName)">导出PDF</el-button>
-   <!-- <el-button type="danger" @click="outPut">导出PDF</el-button> -->
+        <el-button type="danger" @click="getPdf('pdfCentent',patientVo.realName)">导出PDF</el-button>
+        <!-- <el-button type="danger" @click="outPut">浏览器导出PDF</el-button> -->
   </div>
 </template>
 <script>
@@ -157,10 +158,10 @@ import {analysisData} from "@/api/analysis"
       },
       methods: {
         outPut(){
-          //  this.$nextTick(() => {
-          //   this.$refs.content.window.print()
+           this.$nextTick(() => {
+            window.print()
             
-          // })
+          })
         },
         getScaleNumResult(){
             scaleResultNum(this.medicalRecordId,{questionnaireNumbers:12}).then(res=>{
@@ -719,9 +720,10 @@ import {analysisData} from "@/api/analysis"
    .form-pdf{
      position: relative;
       width: 768px;
-      height: 1091px;
+      height: 1094px;
       border:1px solid #eeeeee;
    }
+   
    
   
 </style>

@@ -135,20 +135,14 @@
   }
 </script>
 <style scoped>
-  .form-pdf{
-     position: relative;
-      width: 768px;
-      height: 1091px;
-      text-align: left;
-   }
+  
    .pdf-bar{
      width: 649px;
      height: 10px;
      position:absolute;
      right: 0;
      top:12px;
-     background:url("../img/pdf-bar.png") no-repeat;
-     background-size: 100% 100%;
+     background:url("../img/pdf-bar.png") 
    }
    .pdf-bar-left{
      width: 649px;

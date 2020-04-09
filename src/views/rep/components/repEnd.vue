@@ -38,12 +38,7 @@
   }
 </script>
 <style scoped>
-   .form-pdf{
-     position: relative;
-      width: 768px;
-      height: 1091px;
-      text-align: left;
-   }
+   
    .pdf-container{
        padding: 70px;
    }

@@ -60,13 +60,7 @@
   }
 </script>
 <style scoped>
-.form-pdf{
-     position: relative;
-      width: 768px;
-      height: 1091px;
-      border:1px solid #eee;
-      text-align: left;
-   }
+
    .pdf-bar{
      width: 649px;
      height: 10px;

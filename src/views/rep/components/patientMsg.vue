@@ -121,8 +121,8 @@
 <style  scoped>
  .form-pdf.patient-msg{
       padding: 70px;
-      background:url("../img/patient-msg.png");
-      background-size: 768px 1091px;
+      background:url("../img/patient-msg.png")no-repeat;
+     background-size: 100% 100%;
    }
   .msg-box{
     margin-top: 70px;
