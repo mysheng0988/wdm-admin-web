@@ -126,7 +126,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="人群分类：" prop="crowdRole" >
-              <el-select  placeholder="请选择" v-model="patObj.crowdRole"  clearable class="input-width" >
+              <el-select  placeholder="请选择" multiple v-model="patObj.crowdRole"  clearable class="input-width" >
                 <el-option v-for="(item,index) in optionRow" :key="index" 
                      :label="item"
                      :value="item"
@@ -258,9 +258,9 @@
             <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
               <el-option
                 v-for="item in examinationList"
-                :key="item.name"
-                :label="item.name"
-                :value="item.id">
+                :key="item.examinationCode"
+                :label="item.examinationName"
+                :value="item.examinationCode">
               </el-option>
             </el-select>
           </el-form-item>

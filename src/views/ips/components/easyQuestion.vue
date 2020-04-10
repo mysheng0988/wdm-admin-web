@@ -281,6 +281,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
           if(res.code==200){
               this.questionNo=res.dataList[0].questionnaireNo;
               this.completeQuestionnaire=res.dataList[0].completeQuestionnaire;
+              console.log(this.completeQuestionnaire)
           }
         });
       },

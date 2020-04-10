@@ -8,7 +8,7 @@ export function queryPatient(data) {
 }
 export function queryExamination(hospitalId) {
   return request({
-    url:'ips/examination/list/hospitalId/'+hospitalId,
+    url:'ips/examination/hospital/list/'+hospitalId,
     method:'get',
   })
 }
@@ -91,7 +91,7 @@ export function getMedicalRecordPatient(param) {
 
 export function getRecordPatient(id) {
   return request({
-    url:'base/medicalRecord/'+id,
+    url:'ips/medicalRecord/'+id,
     method:'get',
   })
 }

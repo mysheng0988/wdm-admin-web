@@ -16,7 +16,7 @@ export function submitSacleQuestion(params) {
 }
 export function getMedicalRecord(params) {
   return request({
-    url:'base/medicalRecord/'+params,
+    url:'ips/medicalRecord/'+params,
     method:'get',
   })
 }

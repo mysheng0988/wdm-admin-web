@@ -125,7 +125,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="人群分类："  >
-              <el-select  placeholder="请选择" v-model="patObj.crowdRole" prop="crowdRole" clearable class="input-width" >
+              <el-select  placeholder="请选择" v-model="patObj.crowdRole" prop="crowdRole" multiple clearable class="input-width" >
                 <el-option v-for="(item,index) in optionRow" :key="index" 
                      :label="item"
                      :value="item"
