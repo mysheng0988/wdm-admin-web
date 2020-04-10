@@ -1,0 +1,210 @@
+{
+  "code":0,
+   "message":"",
+   "data":[{
+    "id": 101,
+    "parentId":0,
+    "label": "营养状况",
+    "children": [{
+      "id": 9,
+      "parentId":101,
+      "label": "营养不良通用筛查表",
+      "checked":false
+    },{
+      "id": 24,
+      "parentId":101,
+      "label": "营养初次问诊表",
+      "checked":false
+    }]
+  },{
+    "id":102,
+    "parentId":0,
+    "label": "应激",
+    "children": [{
+      "id": 27,
+      "parentId":102,
+      "label": "生活事件量表LES",
+      "checked":false
+    },{
+      "id": 17,
+      "parentId":102,
+      "label": "青少年生活事件量表ASLEC",
+      "checked":false
+    },{
+      "id": 6,
+      "parentId":102,
+      "label": "斯坦福急性应激反应问卷SASRQ",
+      "checked":false
+    },{
+      "id": 25,
+      "parentId":102,
+      "label": "创伤后应激障碍量表",
+      "checked":false
+    }]
+  },{
+    "id": 103,
+    "parentId":0,
+    "label": "压力状态",
+    "children": [{
+      "id": 12,
+      "parentId":103,
+      "label": "压力自评量表SSQ",
+      "checked":false
+    }]
+  },{
+    "id": 104,
+    "parentId":0,
+    "label": "心身反应模式",
+    "children": [{
+      "id": 16,
+      "parentId":104,
+      "label": "应对方式问卷",
+      "checked":false
+    },{
+      "id": 14,
+      "parentId":104,
+      "label": "防御方式问卷DSQ",
+      "checked":false
+    },{
+      "id": 23,
+      "parentId":104,
+      "label": "特质应对方式问卷TCSQ",
+      "checked":false
+    }]
+  },{
+    "id": 105,
+    "parentId":0,
+    "label": "重要客体的影响",
+    "children": [{
+      "id": 22,
+      "parentId":105,
+      "label": "家庭教养方式量表EMBU",
+      "checked":false
+    },{
+      "id": 20,
+      "parentId":105,
+      "label": "家庭亲密度和适应性量表",
+      "checked":false
+    }]
+  },{
+    "id":106,
+    "parentId":0,
+    "label": "人格特征",
+    "children": [{
+      "id": 15,
+      "parentId":106,
+      "label": "A 型行为量表",
+      "checked":false
+    }]
+  },{
+    "id": 107,
+    "parentId":0,
+    "label": "社会功能",
+    "children": [{
+      "id": 22,
+      "parentId":107,
+      "label": "社会适应能力量表 ",
+      "checked":false
+    },{
+      "id": 11,
+      "parentId":107,
+      "label": "生活满意度量表 ",
+      "checked":false
+    }]
+  },{
+    "id": 108,
+    "parentId":0,
+    "label": "社会支持",
+    "children": [{
+      "id": 21,
+      "parentId":108,
+      "label": "领悟社会支持评定量表 ",
+      "checked":false
+    }]
+  },{
+    "id": 109,
+    "parentId":0,
+    "label": "焦虑情绪",
+    "children": [{
+      "id": 1,
+      "parentId":109,
+      "label": "GAD-7筛查量表",
+      "checked":false
+    },{
+      "id": 2,
+      "parentId":109,
+      "label": "汉密尔顿焦虑量表(HAMD)",
+      "checked":false
+    },{
+      "id": 19,
+      "parentId":109,
+      "label": "焦虑性质量表",
+      "checked":false
+    }]
+  },{
+    "id": 110,
+    "parentId":0,
+    "label": "抑郁情绪",
+    "children": [{
+      "id": 5,
+      "parentId":110,
+      "label": "汉密尔顿抑郁量表(HAMD)",
+      "checked":false
+    },{
+      "id": 18,
+      "parentId":110,
+      "label": "抑郁性质量表",
+      "checked":false
+    },{
+      "id": 4,
+      "parentId":109,
+      "label": "PHQ-9筛查量表",
+      "checked":false
+    }]
+  },{
+    "id": 111,
+    "parentId":0,
+    "label": "惊恐发作 ",
+    "children": [{
+      "id": 3,
+      "parentId":111,
+      "label": "惊恐发作量表",
+      "checked":false
+    }]
+  },{
+    "id": 112,
+    "parentId":0,
+    "label": "强迫症状 ",
+    "children": [{
+      "id": 13,
+      "parentId":112,
+      "label": "YALE—BROWN强迫量表",
+      "checked":false
+    }]
+  },{
+    "id": 113,
+    "parentId":0,
+    "label": "躯体化 ",
+    "children": [{
+      "id": 26,
+      "parentId":113,
+      "label": "躯体化症状自评量表",
+      "checked":false
+    },{
+      "id": 7,
+      "parentId":113,
+      "label": "简易自评量表SCL-90",
+      "checked":false
+    }]
+  },{
+    "id": 114,
+    "parentId":0,
+    "label": "睡眠状况 ",
+    "children": [{
+      "id": 8,
+      "parentId":114,
+      "label": "阿森斯失眠量表",
+      "checked":false
+    }]
+  }]
+}

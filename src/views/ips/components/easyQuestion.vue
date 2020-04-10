@@ -341,7 +341,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
         updateMedicalRecord(param).then(res=>{
           if(res.code==200){
             this.$emit('nextStep');
-            this.dialogVisible2=false;
+             this.dialogVisible2=false;
           }
         })
        

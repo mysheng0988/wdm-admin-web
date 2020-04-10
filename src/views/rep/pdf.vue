@@ -1,6 +1,5 @@
 <template>
   <div  class="app-container">
-    <!-- <div> -->
     <div class="pdf-container" id="pdfCentent" ref="content">
         <rep-index :patient-data="patientData" :patient-vo="patientVo"></rep-index>
         <contents :data="contentsData"></contents>
@@ -35,6 +34,11 @@
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
 import {analysisData} from "@/api/analysis"
+
+import content from '@/assets/images/content.png'
+import aaa from '@/assets/images/aaa.png'
+import ccc from '@/assets/images/ccc.png'
+import exper from '@/assets/images/experience.png'
  import{scaleResult,getReportMsg,scaleResultNum} from "@/api/report"
       import repIndex from './components/rep-index'
       import contents from './components/contents'
@@ -74,6 +78,7 @@ import {analysisData} from "@/api/analysis"
       },
       data() {
         return{
+          dddd:[content,aaa,ccc,exper],
           medicalRecordId:"",
           pressureData:"",
           pressureData2:"",
@@ -722,6 +727,7 @@ import {analysisData} from "@/api/analysis"
       width: 768px;
       height: 1094px;
       border:1px solid #eeeeee;
+      overflow: hidden;
    }
    
    
