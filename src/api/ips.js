@@ -44,7 +44,7 @@ export function deleteExperience(id) {
 //获取家族史
 export function familyHistory(patientId) {
   return request({
-    url:'base//familyMedicalHistory/patientId/'+patientId,
+    url:'base/familyMedicalHistory/patientId/'+patientId,
     method:'get',
   })
 }

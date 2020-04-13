@@ -2,7 +2,7 @@
   "name": "IPS-admin-web",
   "version": "1.0.0",
   "description": "IPS后台管理前端",
-  "author": "macro",
+  "author": "mysheng",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",

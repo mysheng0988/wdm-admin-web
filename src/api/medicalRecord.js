@@ -1,21 +1,21 @@
 import request from '@/utils/request'
 export function medicalRecordList(data) {
   return request({
-    url:'base/medicalRecord/list/doctor/'+data.pageNum+"/"+data.pageSize,
+    url:'ips/medicalRecord/list/doctor/'+data.pageNum+"/"+data.pageSize,
     method:'get',
     params:data
   })
 }
 export function updateMedicalRecord(data) {
   return request({
-    url:'base/medicalRecord',
+    url:'ips/medicalRecord',
     method:'put',
     data:data,
   })
 }
 export function medicalRecordListData(data) {
   return request({
-    url:'base/medicalRecord/list/'+data.pageNum+"/"+data.pageSize,
+    url:'ips/medicalRecord/list/'+data.pageNum+"/"+data.pageSize,
     method:'post',
     data:data
   })
