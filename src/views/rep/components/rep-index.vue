@@ -1,6 +1,6 @@
 <template> 
    <div class="index-pdf">
-     <div class="title">IPS系统心身{{patientData.examinationId=="1"?"筛查":"综合"}}报告</div>
+     <div class="title">IPS系统心身{{patientData.examinationTypeCode=="20001"?"筛查":"综合"}}报告</div>
      <div class="dept">来源科室：{{patientData.fromDeptName}}</div>
      <div class="user-msg" >{{patientVo.realName}} 
         <span>{{patientVo.gender?"女":"男"}}</span> 
@@ -39,7 +39,7 @@
   .index-pdf{
      position: relative;
      width: 768px;
-    height: 1100px;
+    height: 1092px;
      text-align: left;
      border: 1px solid #eee;
      background:url("../img/rep-index.png") no-repeat;

@@ -31,7 +31,7 @@
           <div>来源科室：<span>{{patient.fromDeptName}}</span></div>
         </el-col>
         <el-col :span="6">
-          <div>测评项目：<span>{{patient.examinationId|examinationFormat}}</span></div>
+          <div>测评项目：<span>{{patient.examinationTypeCode|examinationFormat}}</span></div>
         </el-col>
       </el-row>
     </el-card>
@@ -146,9 +146,9 @@
     filters: {      
       examinationFormat (val) { 
         let str="综合测评"
-        if(val==1){
+        if(val=="20001"){
           str="筛查测评"
-        }else if(val==2){
+        }else if(val=="20002"){
           str="专科测评"
         }
         return str;

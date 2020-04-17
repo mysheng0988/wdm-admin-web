@@ -4,11 +4,10 @@
       <div class="title">Medical manual</div>
       <div class="msg-content flex-wrap">
          <div class="conent">
-            <div class="conent-title">Medical care</div>
-           <div>唐山工人医院</div>
-            <div>联系电话：15532503372 </div>
-            <div>公司地址：河北省唐山市高新区东方大厦C座601 </div>
-            <div>邮箱地址：dfxsj@.xsyxsy.com</div>
+            <div>{{info.hospitalName}}</div>
+            <div>联系电话：010-64925945 </div>
+            <div>公司名称:东方心世界（北京）科技有限公司</div>
+            <div>公司地址：北京市朝阳区北苑路108号鸿华高尔夫庄园A12栋 </div>
          </div>
          <div class="img-box">
             <el-image class="img" :src="qrcode"></el-image>
@@ -21,6 +20,7 @@
 </template>
 <script>
   import qrcode from '@/assets/images/logo-qrcode.png'
+   import {mapGetters} from 'vuex'
   export default {
     name: 'rep-analysis',
     props:{
@@ -29,11 +29,16 @@
     },
     data(){
       return {
-        qrcode:qrcode,
+        qrcode: qrcode,
       };
     },
+     computed:{
+      ...mapGetters([             //步骤二，对象扩展运算符方式
+        "info"
+      ])
+    },
     mounted(){
-    
+     console.log(this.info)
     }
   }
 </script>

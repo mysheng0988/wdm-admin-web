@@ -12,9 +12,8 @@
           <rep-analysis  :page-num="contentsData[3].pageNum-0+index" :analysis-data="item"></rep-analysis>
         </div>
         <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[4].pageNum" ></nerve-examine>
-        <eeg-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[5].pageNum" ></eeg-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
-           <scale-assess :data="item" :page-num="contentsData[6].pageNum-0+index" ></scale-assess>
+           <scale-assess :data="item" :page-num="contentsData[5].pageNum-0+index" ></scale-assess>
         </div>
         <rep-end></rep-end>
     </div>
@@ -98,17 +97,12 @@ import {analysisData} from "@/api/analysis"
                hidden:false,
             },
              {
-              pageName:"附录2:自主神经检查",
+              pageName:"附录1:自主神经检查",
               pageNum:0,
                hidden:false,
             },
              {
-              pageName:"附录3:EEG检测",
-              pageNum:0,
-               hidden:false,
-            },
-             {
-              pageName:"附录4:量表评估",
+              pageName:"附录2:量表评估",
               pageNum:0,
               hidden:false,
             }
@@ -177,8 +171,7 @@ import {analysisData} from "@/api/analysis"
                   this.getAnalysisData(data);//报告分析总结模块
                
                 this.contentsData[4].pageNum=this.contentsData[3].pageNum+1;//附录2:自主神经检查
-                this.contentsData[5].pageNum=this.contentsData[4].pageNum+1;//附录3:EEG检测
-                this.contentsData[6].pageNum=this.contentsData[5].pageNum+1;//附录4:量表评估
+                this.contentsData[5].pageNum=this.contentsData[4].pageNum+1;//附录4:量表评估
                 //this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
         
               }

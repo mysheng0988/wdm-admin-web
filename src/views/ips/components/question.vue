@@ -4,7 +4,7 @@
       <div class="title">{{data.scaleTitle}}</div>
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
-      <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
+      <div class="question">问题：{{problemData.question}}</div>
       <el-radio-group v-model="problemData.answer" >
         <div class="question" v-for="(item,index) in problemData.answers" :key="index">
           <el-radio :label="index" >{{item}}</el-radio>
@@ -16,7 +16,7 @@
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
-      <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
+      <div class="question">问题：{{problemData.question}}</div>
       <div class="question" v-for="(item,index) in problemData.data" :key="index">
         <div class="question flex" v-if="item.type==='0'">
           <span>({{index+1}})、{{item.label}}</span>
@@ -36,7 +36,7 @@
       <div class="title">{{data.scaleTitle}}</div>
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
-      <div class="question">{{questionNum+1}}、{{problemData.question}}</div>
+      <div class="question">问题:{{problemData.question}}</div>
       <div v-if="problemData.symptom" class="symptom">
         <el-checkbox-group v-model="problemData.data" >
           <el-checkbox v-for="(item,index) in problemData.symptom" :label="item" :key="index">{{item.question}}</el-checkbox>

@@ -3,7 +3,7 @@
     <el-form :model="patObj"
              :rules="rules"
              ref="patObjFrom"
-             label-width="120px">
+             label-width="140px">
       <div :class="showBase?'title':'title active'" @click="showBaseText">
         <i class="el-icon-tickets"></i>
         <span>基本信息</span>
@@ -26,7 +26,12 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="民族："   prop="nation" >
-              <el-input v-model="patObj.nation" placeholder="请输入民族,如:汉族"></el-input>
+              <!-- <el-input v-model="patObj.nation" placeholder="请输入民族,如:汉族"></el-input> -->
+              <el-select v-model="patObj.nation" placeholder="请选择">
+                  <el-option v-for="(item,index) in nation" :key="index"
+                  :value="item"
+                  :label="item">{{item}}</el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -76,7 +81,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="联系方式："  prop="contactDetails" >
-              <el-input v-model="patObj.contactDetails" placeholder="请输入内容"></el-input>
+              <el-input v-model="patObj.contactDetails" placeholder="请输入内容" clearable maxlength="11" show-word-limit></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -258,9 +263,9 @@
             <el-select  placeholder="请选择" v-model="medObj.examinationId" clearable class="input-width">
               <el-option
                 v-for="item in examinationList"
-                :key="item.examinationCode"
+                :key="item.id"
                 :label="item.examinationName"
-                :value="item.examinationCode">
+                :value="item.id">
               </el-option>
             </el-select>
           </el-form-item>
@@ -346,7 +351,7 @@
     caregiver: "父母",
     childrenNumber: 0,
     childrenSituation: "",
-    crowdRole: "无",
+    crowdRole: ["无"],
     address: "",
     dominantHand: false,
     education: "",
@@ -386,7 +391,7 @@
     },
     data() {
       const validateNumberSort= (rule, value, callback) => {
-        if (value!=""&&!validateNum(value)) {
+        if (!validateNum(value)) {
             callback(new Error('必须为数字'))
         } else {
           if(value>10){
@@ -399,7 +404,7 @@
         }
       };
        const validateNumberTen = (rule, value, callback) => {
-        if (value!=""&&!validateNum(value)) {
+        if (!validateNum(value)) {
             callback(new Error('必须小于10的数字'))
         } else {
          if(value>10){
@@ -422,6 +427,10 @@
         cardFrom:{
           cardNo:""
         },
+       nation: ["汉族", "蒙古族", "回族", "藏族", "维吾尔族", "苗族", "彝族", "壮族", "布依族", "朝鲜族", "满族", "侗族", "瑶族", "白族",
+        "土家族", "哈尼族", "哈萨克族", "傣族", "黎族", "傈僳族", "佤族", "畲族", "高山族", "拉祜族", "水族", "东乡族", "纳西族", "景颇族", "柯尔克孜族", "土族", 
+        "达斡尔族", "仫佬族", "羌族", "布朗族", "撒拉族", "毛南族", "仡佬族", "锡伯族", "阿昌族", "普米族", "塔吉克族", "怒族", "乌孜别克族", "俄罗斯族", "鄂温克族", 
+        "德昂族", "保安族", "裕固族", "京族", "塔塔尔族", "独龙族", "鄂伦春族", "赫哲族", "门巴族", "珞巴族", "基诺族"],
         options:["父母","父亲","母亲","祖父母","外祖父母"],
         dialogVisible:false,
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
@@ -438,7 +447,7 @@
             {min: 2, max: 140, message: '长度在 2 到 20 个字符', trigger: 'blur'}
           ],
            nation: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
            faith: [
             {required: true, message: '必填字段', trigger: 'blur'}
@@ -451,13 +460,12 @@
           ],
           contactDetails: [
             {required: true, message: '必填字段', trigger: 'blur'},
-            { pattern: /^1[3456789]\d{9}$/, message: '手机号格式不正确',trigger: 'blur' }
           ],
           education: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
           maritaStatus: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
           height: [
             {required: true, message: '必填字段', trigger: 'blur'},
@@ -468,16 +476,16 @@
              { type:'number', message: '必须为数字',trigger: 'blur'}
           ],
           maritaStatus: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
           caregiver: [
             {required: true, message: '必填字段', trigger: 'blur'}
           ],
           crowdRole: [
-             {required: true, message: '必填字段', trigger: 'blur'}
+             {required: true, message: '必填字段', trigger: 'change'}
           ],
           siblingsNumber:[
-             {required: false, trigger: 'blur', validator: validateNumberSort}
+             {required: true, trigger: 'blur', validator: validateNumberSort}
           ],
           childrenNumber:[ 
             {required: false, trigger: 'blur', validator: validateNumberTen}
@@ -495,7 +503,7 @@
         },
         medrules:{
           fromDeptId: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
           beHospitalizedNumber: [
             {required: true, message: '必填字段', trigger: 'blur'},
@@ -505,10 +513,10 @@
             {required: false, trigger: 'blur', validator: validateNumber}
           ],
           fromUid: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
           examinationId: [
-            {required: true, message: '必填字段', trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'change'}
           ],
         }
       }
@@ -539,12 +547,13 @@
 
 
     methods: {
-     
       genderChange(){
-        let optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]
         if(!this.patObj.gender){
-          this.optionRow=optionRow;
+          this.optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"];
+        }else{
+         this.optionRow= ["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]
         }
+         this.patObj.crowdRole=["无"]
       },
       onSelected(val){
         this.select.province=val.province.value;

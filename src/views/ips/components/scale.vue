@@ -1,13 +1,10 @@
 <template>
   <div style="margin-top: 50px">
     <el-form  ref="productInfoForm" label-width="120px" >
-       <!-- <el-form-item style="text-align: center"  >
-            <el-input style="width:400px" v-model="scaleId" placeholder="请输入1到27数字"  ></el-input>
-           <el-button type="primary">记录结果</el-button>
-            <el-button type="primary" @click="customQuestion()">开始检测</el-button>
-       </el-form-item> -->
+     
       <el-form-item style="text-align: center" v-for="(item,index) of scaleNoList" :key="index">
-        <div class="ips-input" >{{arrTitle[item-1]}}</div>
+        <div class="ips-input" v-if="item!=2201">{{arrTitle[item-1]}}</div>
+        <div class="ips-input" v-else>家庭教养方式量表EMBU</div>
         <el-button type="primary" @click="startQuestion(item)">
           {{completeScaleNoList.includes(item)?"重新测评":"开始测试"}}</el-button>
          <el-button type="primary" :class="completeScaleNoList.includes(item)?'':'disable'" @click="handleRecord(false,item)">记录结果</el-button>
@@ -23,6 +20,7 @@
      destroy-on-close
       width="700px">
       <question-scale :scale-id="scaleId"  :medical-record-id="medicalRecordId"
+        :number="siblingsNumber"
         :patient-id="patientId" @closeDialog="closeDialog" ref="scale"></question-scale>
 
     </el-dialog>
@@ -91,10 +89,11 @@
       return {
         arrTitle:["GAD-7筛查量表","汉密尔顿焦虑量表（HAMA）","惊恐障碍严重度量表（PDSS）","PHQ-9筛查量表","汉密尔顿抑郁量表(HAMD)","斯坦福急性应激反应问卷（SASRQ）","简易自评量表SCL - 90","阿森斯失眠量表（AIS）","营养不良通用筛查表（MUST）","社会适应能力量表"
          ,"生活满意度量表（SWLS）","压力自评量表（SSQ-53）","YALE-BROWN强迫量表","防御方式问卷DSQ","A型行为问卷","应付方式问卷","青少年生活事件量表（ASLEC）","抑郁性质问卷","焦虑性质问卷","家庭亲密度与适应性量表","领悟社会支持量表(PSSS)",
-         "父母教养方式评价量表（EMBU）","特质应对方式问卷（TCSQ）","营养初次问诊表","创伤后应激障碍自评量表（PCL-C）","躯体化症状自评量表","生活事件量表（ＬＥＳ）"],
+         "父母教养方式评价量表（EMBU）","特质应对方式问卷（TCSQ）","营养初次问诊表","创伤后应激障碍自评量表（PCL-C）","躯体化症状自评量表","生活事件量表（ＬＥＳ）","抑郁自评量表SDS","焦虑自评量表SAS","贝克抑郁自评量表"],
         dialogVisible:false,
         dialogVisible2:false,
         scaleId:"",
+        siblingsNumber:"",
         problemNum:0,
         problemData:[],
         unfinish:true,
@@ -114,6 +113,7 @@
               this.scaleNoList=res.dataList[0].scaleNoList;
               this.completeScaleNoList=res.dataList[0].completeScaleNoList;
               this.scaleState=res.dataList[0].scaleNoList.length===res.dataList[0].completeScaleNoList.length;
+              this.siblingsNumber=res.dataList[0].patientVO.siblingsNumber;
           }
             
         });

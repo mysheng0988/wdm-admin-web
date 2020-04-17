@@ -56,6 +56,7 @@ import exper from '@/assets/images/experience.png'
       import assessment from './components/assessment'
       import assessment2 from './components/assessment2'
        import repEnd from './components/repEnd'
+      
     export default {
       name: "pdf",
       components: { 
@@ -143,6 +144,17 @@ import exper from '@/assets/images/experience.png'
             }
           ],
           page:[],
+        }
+      },
+      watch: {
+        $route(to) {
+            this.medicalRecordId=this.$route.query.id;
+             this.getExperienceList();
+           this.getPatientData();
+           this.getPursueData();
+           this.getScaleResult();
+           this.getReportMsgData();
+           this.getScaleNumResult();
         }
       },
       created(){
@@ -381,6 +393,7 @@ import exper from '@/assets/images/experience.png'
         },
         getPatientData(){
           getRecordPatient(this.medicalRecordId).then(res=>{
+            console.log(res)
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
@@ -390,6 +403,7 @@ import exper from '@/assets/images/experience.png'
         },
         getPursueData(){
           getPursue(this.medicalRecordId).then(res=>{
+            console.log(res)
            if(res.code==200){
             this.mainPursue=res.dataList[0];
            }
@@ -725,7 +739,7 @@ import exper from '@/assets/images/experience.png'
    .form-pdf{
      position: relative;
       width: 768px;
-      height: 1094px;
+      height: 1092px;
       border:1px solid #eeeeee;
       overflow: hidden;
    }

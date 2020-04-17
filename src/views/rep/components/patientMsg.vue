@@ -33,8 +33,8 @@
               <el-form-item class="flex-item" label="职业:">
                 <p>{{patientVo.profession}}</p>
               </el-form-item>
-              <el-form-item class="flex-item" label="人群分类:">
-                <p>{{patientVo.crowdRole}}</p>
+              <el-form-item class="flex-item" label="人群分类:" v-if="patientVo.crowdRole">
+                <p>{{patientVo.crowdRole.toString()}}</p>
               </el-form-item>
           </div>
           <div class="flex-wrap">
@@ -50,7 +50,8 @@
             </div>
             <div class="flex-wrap">
               <el-form-item class="flex-width"  label="临床诊断:">
-                <span v-for="(item,index) in mainPursue.clinicalSpecialistDiagnosisList" :key="index">{{item.name}}、</span>
+                <span v-for="(item,index) in mainPursue.clinicalSpecialistDiagnosisList" :key="index">{{item.name}} </span>
+                <span v-if="mainPursue.clinicalSpecialistDiagnosisSupplementList">{{mainPursue.clinicalSpecialistDiagnosisSupplementList.toString()}}</span>
               </el-form-item>
             </div>
         </el-form>
@@ -73,14 +74,16 @@
         <img class="img" src="@/views/rep/img/icon-symptom.png">
         <div class="content">
           <div class="title">伴随症状</div>
-          <div class="lable"> <span v-for="(item,index) in mainPursue.accompanyingSymptomsList" :key="index">{{item.name}}、</span></div>                   
+          <div class="lable" v-if="mainPursue.accompanyingSymptomsList&&mainPursue.accompanyingSymptomsList.length==0">暂无伴随症状</div>
+          <div class="lable" v-else> <span v-for="(item,index) in mainPursue.accompanyingSymptomsList" :key="index">{{item.name}}、</span></div>                   
         </div>
       </div>
       <div class="symptom-content flex-center">
         <img class="img" src="@/views/rep/img/motion-symptom.png">
         <div class="content">
           <div class="title">运动症状</div>
-          <div class="lable"><span v-for="(item,index) in mainPursue.motorSymptomsList" :key="index">{{item.name}}、</span></div>              
+          <div class="lable" v-if="mainPursue.motorSymptomsList&&mainPursue.motorSymptomsList.length==0">暂无运动症状</div>
+          <div class="lable" v-else><span v-for="(item,index) in mainPursue.motorSymptomsList" :key="index">{{item.name}}、</span></div>              
         </div>
       </div>
     </div>
@@ -147,6 +150,7 @@
   .symptom-title{
     width: 205px;
     height: 53px;
+    text-align: center;
     line-height: 53px;
     font-size: 30px;
     background:url("../img/pdf-label.png") no-repeat;

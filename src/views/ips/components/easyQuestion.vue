@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import {getMedicalRecord} from '@/api/question'
-import {updateMedicalRecord} from '@/api/medicalRecord'
+import {getMedicalRecord,scaleConfirm} from '@/api/question'
+import {getScaleTypeJson} from '@/api/getJson'
   import question from './question';
   export default {
     name: "easyQuestion",
@@ -93,165 +93,8 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
       return {
         filterText:"",
         selectedData:"",
-        data: [{
-          id: 101,
-          parentId:0,
-          label: '营养状况',
-          children: [{
-            id: 9,
-            parentId:101,
-            label: '营养不良通用筛查表',
-          },{
-            id: 24,
-            parentId:101,
-            label: '营养初次问诊表',
-          }]
-        },{
-          id:102,
-          parentId:0,
-          label: '应激',
-          children: [{
-            id: 27,
-            parentId:102,
-            label: '生活事件量表LES',
-          },{
-            id: 17,
-            parentId:102,
-            label: '青少年生活事件量表ASLEC',
-          },{
-            id: 6,
-            parentId:102,
-            label: '斯坦福急性应激反应问卷SASRQ',
-          },{
-            id: 25,
-            parentId:102,
-            label: '创伤后应激障碍量表',
-          }]
-        },{
-          id: 103,
-          parentId:0,
-          label: '压力状态',
-          children: [{
-            id: 12,
-            parentId:103,
-            label: '压力自评量表SSQ',
-          }]
-        },{
-          id: 104,
-          parentId:0,
-          label: '心身反应模式',
-          children: [{
-            id: 16,
-            parentId:104,
-            label: '应对方式问卷',
-          },{
-            id: 14,
-            parentId:104,
-            label: '防御方式问卷DSQ',
-          },{
-            id: 23,
-            parentId:104,
-            label: '特质应对方式问卷TCSQ',
-          }]
-        },{
-          id: 105,
-          parentId:0,
-          label: '重要客体的影响',
-          children: [{
-            id: 22,
-            parentId:105,
-            label: '家庭教养方式量表EMBU',
-          },{
-            id: 20,
-            parentId:105,
-            label: '家庭亲密度和适应性量表',
-          }]
-        },{
-          id:106,
-          parentId:0,
-          label: '人格特征人格特征',
-          children: [{
-            id: 15,
-            parentId:106,
-            label: 'A 型行为量表',
-          }]
-        },{
-          id: 107,
-          parentId:0,
-          label: '社会功能',
-          children: [{
-            id: 22,
-            parentId:107,
-            label: '社会适应能力量表 ',
-          },{
-            id: 11,
-            parentId:107,
-            label: '生活满意度量表 ',
-          }]
-        },{
-          id: 108,
-          parentId:0,
-          label: '社会支持',
-          children: [{
-            id: 21,
-            parentId:108,
-            label: '领悟社会支持评定量表 ',
-          }]
-        },{
-          id: 109,
-          parentId:0,
-          label: '周围环境',
-          children: [{
-            id: 1,
-            parentId:109,
-            label: 'GAD-7筛查量表',
-          },{
-            id: 2,
-            parentId:109,
-            label: '汉密尔顿焦虑量表(HAMD)',
-          },{
-            id: 3,
-            parentId:109,
-            label: '惊恐发作量表',
-          },{
-            id: 19,
-            parentId:109,
-            label: '焦虑性质量表',
-          },{
-            id: 13,
-            parentId:109,
-            label: 'YALE—BROWN强迫量表',
-          },{
-            id: 4,
-            parentId:109,
-            label: 'PHQ-9筛查量表',
-          },{
-            id: 5,
-            parentId:1,
-            label: '汉密尔顿抑郁量表(HAMD)',
-          },{
-            id: 18,
-            parentId:109,
-            label: '抑郁性质量表',
-          },{
-            id: 26,
-            parentId:109,
-            label: '躯体化症状自评量表',
-          },{
-            id: 7,
-            parentId:109,
-            label: '简易自评量表SCL-90',
-          }]
-        },{
-          id: 110,
-          parentId:0,
-          label: '睡眠状况 ',
-          children: [{
-            id: 8,
-            parentId:110,
-            label: '阿森斯失眠量表 ',
-          }]
-        }],
+        data: [],
+        siblingsNumber:"",
         defaultProps: {
           children: 'children',
           label: 'label'
@@ -270,6 +113,10 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
     },
     created() {
        this.initData();
+       getScaleTypeJson().then(res=>{
+
+         this.data=res.data;
+       })
     },
     methods: {
       againMeasure(){
@@ -281,7 +128,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
           if(res.code==200){
               this.questionNo=res.dataList[0].questionnaireNo;
               this.completeQuestionnaire=res.dataList[0].completeQuestionnaire;
-              console.log(this.completeQuestionnaire)
+               this.siblingsNumber=res.dataList[0].patientVO.siblingsNumber;
           }
         });
       },
@@ -307,12 +154,32 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
         }
          
       },
-       handleNodeClick(val){
-        this.$refs.tree.setChecked(val.id,true,false)
-        this.selectedData=this.$refs.tree.getCheckedNodes(true);
+       handleNodeClick(data){
+        
+         let keys=this.$refs.tree.getCheckedKeys(true);
+         if(keys.includes(data.id)){
+            this.$refs.tree.setChecked(data.id,false,false)
+         }else{
+            for(let item of this.data){
+              if(item.id==data.parentId){
+                for(let itemData of item.children){
+                  this.$refs.tree.setChecked(itemData.id,false,false)
+                }
+              }
+            }
+            this.$refs.tree.setChecked(data.id,true,false)
+         }
+         this.selectedData=this.$refs.tree.getCheckedNodes(true);
       },
-      handleNodeChecked(){
-        this.selectedData=this.$refs.tree.getCheckedNodes(true);
+      handleNodeChecked(data){
+       let keys=this.$refs.tree.getCheckedKeys(true);
+      if(keys.includes(data.id)){
+          this.$refs.tree.setChecked(data.id,false,false)
+        }else{
+          this.$refs.tree.setChecked(data.id,true,false)
+        }
+       
+        //this.selectedData=this.$refs.tree.getCheckedNodes(true);
       },
        handleRemove(index){
           this.selectedData.splice(index,1);
@@ -330,16 +197,24 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
         this.$emit('prevStep')
       },
       handleNextItem(){
-        let param={
-          id:this.medicalRecordId,
-          patientId:this.patientId,
-          scaleNoList:this.$refs.tree.getCheckedKeys(true)
+        // let param={
+        //   medicalRecordId:this.medicalRecordId,
+        //   scaleNoList:this.$refs.tree.getCheckedKeys(true)
+        // }
+        let param=this.$refs.tree.getCheckedKeys(true);
+        if(this.siblingsNumber=="1"){
+            for(let item in param){
+              if(param[item]==22){
+                param[item]=2201;
+              }
+            }
         }
-        if(param.scaleNoList.length<1){
+        
+        if(param.length<1){
           this.$message.warning("请选择量表!")
           return
         }
-        updateMedicalRecord(param).then(res=>{
+        scaleConfirm(param,this.medicalRecordId).then(res=>{
           if(res.code==200){
             this.$emit('nextStep');
              this.dialogVisible2=false;
@@ -410,7 +285,7 @@ import {updateMedicalRecord} from '@/api/medicalRecord'
     overflow:auto;
   }
   .tree-box{
-    height: 300px;
+    height: 340px;
     overflow: auto;
   }
   .item-box{

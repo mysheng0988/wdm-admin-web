@@ -5,7 +5,7 @@
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question" v-if="problemData.label!=''">{{problemData.label}}</div>
-      <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
+      <div class="question">问题：{{problemData.question}}</div>
       <el-radio-group v-model="problemData.answer" @change="handleChange" >
         <div class="question" v-for="(item,index) in problemData.answers" :key="index">
           <el-radio :label="index" >{{item}}</el-radio>
@@ -17,7 +17,7 @@
       <div class="explain">说明:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
-      <div class="question">{{problemData.questionNum}}、{{problemData.question}}</div>
+      <div class="question">问题：{{problemData.question}}</div>
       <div class="question" v-for="(item,index) in problemData.data" :key="index">
         <div class="question flex" v-if="item.type==='0'">
           <span>({{index+1}})、{{item.label}}</span>
@@ -60,6 +60,39 @@
      </div>
 
     </div>
+     <div class="answer-box" v-else-if="data.type==4" >
+      <div class="title">{{data.scaleTitle}}</div>
+      <div class="explain">说明:{{data.explain}}</div>
+      <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
+      <div class="question" v-if="problemData.label!=''">{{problemData.label}}</div>
+       <div v-if="questionNum==0" class="roleType">
+        <el-radio-group v-model="roleType" @change="roleTypeChange">
+          <el-radio :label="0">父母</el-radio>
+          <el-radio :label="1">父亲</el-radio>
+          <el-radio :label="2">母亲</el-radio>
+        </el-radio-group>
+      </div>
+      <div class="question">问题：{{problemData.question}}</div>
+      <div class="flex-wrap">
+        <div class="flex-item">
+          <div>父亲</div>
+          <el-radio-group v-model="problemData.answer[0]">
+            <div class="question" v-for="(item,index) in problemData.answers" :key="index">
+              <el-radio :label="index" :disabled="roleType==2" >{{item}}</el-radio>
+            </div>
+          </el-radio-group>
+        </div>
+        <div  class="flex-item">
+          <div>母亲</div>
+          <el-radio-group v-model="problemData.answer[1]">
+            <div class="question" v-for="(item,index) in problemData.answers" :key="index">
+              <el-radio :label="index"  :disabled="roleType==1">{{item}}</el-radio>
+            </div>
+          </el-radio-group>
+        </div>
+      </div>
+      
+    </div>
     <div class="btn-box">
       <el-button type="primary" plain @click="prevQuestion">上一题</el-button>
       <el-button type="primary" plain @click="nextQuestion" v-if="questionLength!=questionNum+1">下一题</el-button>
@@ -83,6 +116,9 @@
           type:String,
           value:""
         },
+        number:{
+          type:Number,
+        },
         patientId:{
           type:String,
           value:"",
@@ -91,6 +127,7 @@
       data() {
         return {
           data:[],
+          roleType:0,
           minValue:0,
           problemData:[],
           loading:false,
@@ -119,8 +156,15 @@
 
       },
       methods:{
+        roleTypeChange(){
+          this.problemData.answer=[500,500]
+        },
         handleChangeJSON(){
-          getScaleJson(this.scaleId).then(res=>{
+           let scaleId=this.scaleId;
+          if(this.number==1&&scaleId==22){
+             scaleId=this.scaleId+"01";
+          }
+          getScaleJson(scaleId).then(res=>{
           this.data=res.data;
           this.problemData=this.data.problem[this.questionNum];
           this.questionLength=this.data.problem.length;
@@ -176,6 +220,22 @@
                   }
                 }
               }
+            }
+            if(this.data.type==4&&this.roleType==0){
+               if(this.problemData.answer.includes(500)){
+                  this.$message.warning("请选择答案");
+                    return
+               }
+            }else if(this.data.type==4&&this.roleType==1){
+               if(this.problemData.answer[0]==500){
+                  this.$message.warning("请选择答案");
+                    return
+               }
+            }else if(this.data.type==4&&this.roleType==2){
+               if(this.problemData.answer[1]==500){
+                  this.$message.warning("请选择答案");
+                    return
+               }
             }
             if(this.problemData.answer===""&&this.data.type==1){
                this.$message.warning("请选择答案")
@@ -239,6 +299,14 @@
                 qr.order=item.questionNum;
               }
              
+            } else if(this.data.type==4){
+              qr.optionOrderList.push(item.answer[0]);
+               qr.optionOrderList.push(item.answer[1]);
+              qr.optionValue.push(item.answers[item.answer[0]]);
+              qr.optionValue.push(item.answers[item.answer[1]]);
+              qr.returnValue.push(item.question);
+              qr.order=item.questionNum;
+             
             }else{
               for(let itemData of item.data){
                   if(itemData.type!="2"){
@@ -274,6 +342,11 @@
 </script>
 
 <style scoped>
+  .roleType{
+    width: 100%;
+     margin: 10px 0;
+    text-align: center;
+  }
   .answer-box{
     width: 100%;
   }
@@ -311,5 +384,9 @@
   }
   .el-checkbox{
     margin-right: 5px;
+  }
+  .flex-item{
+   
+    flex: 1;
   }
 </style>

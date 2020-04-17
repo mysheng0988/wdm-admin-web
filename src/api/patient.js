@@ -42,7 +42,7 @@ export function getDeptList(hospitalId) {
 //评测记录
 export function getMedicalRecord(data) {
   return request({
-    url:'base/medicalRecord/list/'+data.pageNum+"/"+data.pageSize,
+    url:'ips/medicalRecord/list/'+data.pageNum+"/"+data.pageSize,
     method:'post',
     data:data
   })
@@ -76,7 +76,7 @@ export function getDoctorList(data) {
 }
 export function saveMedicalRecord(data) {
   return request({
-    url:'base/medicalRecord',
+    url:'ips/medicalRecord',
     method:'post',
     data:data,
   })
@@ -84,7 +84,7 @@ export function saveMedicalRecord(data) {
 
 export function getMedicalRecordPatient(param) {
   return request({
-    url:'base/medicalRecord/patientId/'+param,
+    url:'ips/medicalRecord/patientId/'+param,
     method:'get'
   })
 }
