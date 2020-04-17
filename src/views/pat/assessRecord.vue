@@ -130,7 +130,7 @@
     },
     methods: {
       readReport(data){
-        let path=data.examinationId==1?"siftPdf":"pdf";
+        let path=data.examinationTypeCode=="20001"?"siftPdf":"pdf";
         this.$router.push({
           path: '/rep/'+path,
           query: {

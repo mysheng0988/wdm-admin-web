@@ -44,7 +44,7 @@
         <div class="symptom" v-for="(item,index) in problemData.data" :key="index">
          ({{index+1}})、{{item.question}}
           <el-radio-group v-model="item.answer">
-              <el-radio v-for="(itemData,indexData) in item.answers" :label="indexData" :key="indexData">{{itemData}}</el-radio>
+              <el-radio v-for="(itemData,indexData) in item.answers" :label="indexData" :disabled="indexData==0" :key="indexData">{{itemData}}</el-radio>
           </el-radio-group>
         </div>
       </div>
@@ -195,7 +195,6 @@
             this.$message.warning("请选择答案!")
             return;
           }
-          console.log(this.data.id)
           let param={
             questionnaireNo:this.data.id,
             medicalRecordId:this.medicalRecordId,

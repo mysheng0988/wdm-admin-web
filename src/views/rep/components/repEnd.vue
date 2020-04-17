@@ -4,9 +4,9 @@
       <div class="title">Medical manual</div>
       <div class="msg-content flex-wrap">
          <div class="conent">
-            <div>{{info.hospitalName}}</div>
+            <!-- <div>{{info.hospitalName}}</div> -->
+            <div>东方心世界（北京）科技有限公司</div>
             <div>联系电话：010-64925945 </div>
-            <div>公司名称:东方心世界（北京）科技有限公司</div>
             <div>公司地址：北京市朝阳区北苑路108号鸿华高尔夫庄园A12栋 </div>
          </div>
          <div class="img-box">

@@ -31,14 +31,10 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
 import {analysisData} from "@/api/analysis"
-
-import content from '@/assets/images/content.png'
-import aaa from '@/assets/images/aaa.png'
-import ccc from '@/assets/images/ccc.png'
-import exper from '@/assets/images/experience.png'
  import{scaleResult,getReportMsg,scaleResultNum} from "@/api/report"
       import repIndex from './components/rep-index'
       import contents from './components/contents'
@@ -77,9 +73,13 @@ import exper from '@/assets/images/experience.png'
           assessment2,
           repEnd
       },
+      computed: {
+        ...mapGetters([
+          'sidebar',
+        ]),
+      },
       data() {
         return{
-          dddd:[content,aaa,ccc,exper],
           medicalRecordId:"",
           pressureData:"",
           pressureData2:"",
@@ -166,6 +166,7 @@ import exper from '@/assets/images/experience.png'
          this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
+          this.$store.commit("CLOSE_TBA")
            this.getExperienceList();
            this.getPatientData();
            this.getPursueData();

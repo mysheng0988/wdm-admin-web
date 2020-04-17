@@ -79,7 +79,7 @@
      width: 297px;
      height: 30px;
      line-height: 35px;
-     font-size: 30px;
+     font-size: 24px;
       text-align: left;
       color: #fff;
       position: absolute;

@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
 import {analysisData} from "@/api/analysis"
@@ -61,6 +62,11 @@ import {analysisData} from "@/api/analysis"
           assessment,
           assessment2,
           repEnd
+      },
+      computed: {
+        ...mapGetters([
+          'sidebar',
+        ]),
       },
       data() {
         return{
@@ -119,6 +125,7 @@ import {analysisData} from "@/api/analysis"
         this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
+         this.$store.commit("CLOSE_TBA")
           this.getExperienceList();
            this.getPatientData();
            this.getPursueData();
