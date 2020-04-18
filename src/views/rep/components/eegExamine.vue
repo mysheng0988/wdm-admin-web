@@ -90,6 +90,7 @@ import{getEEG} from "@/api/HRV"
     text-indent: 2em
   }
   .content-box .img{
+     margin-top: 10px;
      width: 100%;
      height: 800px;
   }

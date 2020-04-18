@@ -31,14 +31,10 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
 import {analysisData} from "@/api/analysis"
-
-import content from '@/assets/images/content.png'
-import aaa from '@/assets/images/aaa.png'
-import ccc from '@/assets/images/ccc.png'
-import exper from '@/assets/images/experience.png'
  import{scaleResult,getReportMsg,scaleResultNum} from "@/api/report"
       import repIndex from './components/rep-index'
       import contents from './components/contents'
@@ -56,6 +52,7 @@ import exper from '@/assets/images/experience.png'
       import assessment from './components/assessment'
       import assessment2 from './components/assessment2'
        import repEnd from './components/repEnd'
+      
     export default {
       name: "pdf",
       components: { 
@@ -76,9 +73,13 @@ import exper from '@/assets/images/experience.png'
           assessment2,
           repEnd
       },
+      computed: {
+        ...mapGetters([
+          'sidebar',
+        ]),
+      },
       data() {
         return{
-          dddd:[content,aaa,ccc,exper],
           medicalRecordId:"",
           pressureData:"",
           pressureData2:"",
@@ -145,6 +146,17 @@ import exper from '@/assets/images/experience.png'
           page:[],
         }
       },
+      watch: {
+        $route(to) {
+            this.medicalRecordId=this.$route.query.id;
+             this.getExperienceList();
+           this.getPatientData();
+           this.getPursueData();
+           this.getScaleResult();
+           this.getReportMsgData();
+           this.getScaleNumResult();
+        }
+      },
       created(){
         this.medicalRecordId=this.$route.query.id;
         if(this.medicalRecordId==""||this.medicalRecordId==undefined){
@@ -154,6 +166,7 @@ import exper from '@/assets/images/experience.png'
          this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
+          this.$store.commit("CLOSE_TBA")
            this.getExperienceList();
            this.getPatientData();
            this.getPursueData();
@@ -381,6 +394,7 @@ import exper from '@/assets/images/experience.png'
         },
         getPatientData(){
           getRecordPatient(this.medicalRecordId).then(res=>{
+            console.log(res)
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
@@ -390,6 +404,7 @@ import exper from '@/assets/images/experience.png'
         },
         getPursueData(){
           getPursue(this.medicalRecordId).then(res=>{
+            console.log(res)
            if(res.code==200){
             this.mainPursue=res.dataList[0];
            }
@@ -725,7 +740,7 @@ import exper from '@/assets/images/experience.png'
    .form-pdf{
      position: relative;
       width: 768px;
-      height: 1094px;
+      height: 1092px;
       border:1px solid #eeeeee;
       overflow: hidden;
    }

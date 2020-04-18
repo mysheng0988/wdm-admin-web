@@ -16,7 +16,7 @@ export function queryExperience(patientId) {
 }
 export function queryCheckUp(data) {
   return request({
-    url:'base//medicalExaminationItem/list',
+    url:'base/medicalExaminationItem/list',
     method:'get',
     params:{queryParam:data}
   })

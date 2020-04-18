@@ -17,6 +17,9 @@ const app = {
       }
       state.sidebar.opened = !state.sidebar.opened
     },
+    CLOSE_TBA:state=>{
+      state.sidebar.opened=false;
+    },
     CLOSE_SIDEBAR: (state, withoutAnimation) => {
       Cookies.set('sidebarStatus', 1)
       state.sidebar.opened = false

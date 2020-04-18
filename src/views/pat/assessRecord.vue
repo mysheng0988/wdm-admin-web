@@ -33,7 +33,7 @@
           <template slot-scope="scope">{{scope.row.createTime}}</template>
         </el-table-column>
         <el-table-column label="测评内容" align="center">
-          <template slot-scope="scope">{{scope.row.examinationName|formatName }}</template>
+          <template slot-scope="scope">{{scope.row.examinationTypeCode|formatName }}</template>
         </el-table-column>
         <el-table-column label="测评状态"  align="center">
           <template slot-scope="scope">{{scope.row.examinationStatus|formatStatus }}</template>
@@ -120,9 +120,9 @@
       },
       formatName(val){
         let str="筛查测评"
-        if(val==2){
+        if(val==20002){
           str="专科测评"
-        }else if(val==3){
+        }else if(val==20003){
           str="综合测评"
         }
         return str
@@ -130,8 +130,7 @@
     },
     methods: {
       readReport(data){
-        console.log(data)
-        let path=data.examinationId==1?"siftPdf":"pdf";
+        let path=data.examinationTypeCode=="20001"?"siftPdf":"pdf";
         this.$router.push({
           path: '/rep/'+path,
           query: {

@@ -6,15 +6,15 @@
             :data="data.chartData"
             :show-header="false"
             style="width: 100%">
-            <el-table-column>
-              <template slot-scope="scope">{{scope.row.item0}}</template>
+            <el-table-column v-for="(item,index) in data.chartData[0]" :key="index" align="center" >
+              <template slot-scope="scope">{{scope.row[index]}}</template>
             </el-table-column>
-            <el-table-column>
+            <!-- <el-table-column>
               <template slot-scope="scope">{{scope.row.item1}}</template>
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">{{scope.row.item2}}</template>
-            </el-table-column>
+            </el-table-column> -->
           </el-table>
       </div>
   </div>
@@ -35,7 +35,7 @@
       }
     },
     mounted(){
-     
+     console.log(Object.keys(this.data.chartData[0]))
     }
   }
 </script>
@@ -43,12 +43,13 @@
    .item-box{
     padding: 10px 0;
     width: 626px;
+
   }
   .content{
     flex:1;
     color: #666;
      margin: 5px 0;
-     font-size: 15px;
+     font-size: 10px;
      text-align: justify;
     line-height: 30px;                                                                                                                         
   }
@@ -61,6 +62,7 @@
      height: 200px;
      margin-right: 20px;
    }
+   /* /deep/  */
 </style>
 
 

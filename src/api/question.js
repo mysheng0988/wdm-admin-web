@@ -46,3 +46,10 @@ export function submitAdditionalQuestions(data,medicalRecordId) {
     data:data
   })
 }
+export function scaleConfirm(data,medicalRecordId) {
+  return request({
+    url:'ips/scale/scaleConfirm/'+medicalRecordId,
+    method:'post',
+    data:data
+  })
+}

@@ -5,7 +5,13 @@ export function readCard() {
     method:'get'
   })
 }
-export function readCardMI() {
+export function readCardReset() {
+  return request({
+    url:'api/M1Reset',
+    method:'get'
+  })
+}
+export function readCardData() {
   return request({
     url:'api/M1Reset',
     method:'get'

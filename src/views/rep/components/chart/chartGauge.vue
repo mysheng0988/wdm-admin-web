@@ -3,7 +3,7 @@
       <div class="chart"> <ve-gauge :data="chartData" width="100%" height="100%" :settings="chartSettings"></ve-gauge></div>
       <div class="content">
           <div class="content-title">{{data.questionnaireName}}</div>
-          <div>总分：{{data.score}}分</div>
+          <div>得分：{{data.score}}分</div>
           <div>{{data.conclusion}}</div>
           <div>{{data.explanation}}</div>
       </div>
@@ -24,9 +24,9 @@
           labelMap: {
           'score': '得分'
           },
-          dataName: {
-          'score': '分'
-          },
+          // dataName: {
+          // 'score': '分'
+          // },
            seriesMap: {
             'score': {
               min:-40,

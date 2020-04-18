@@ -1,9 +1,10 @@
 {
-  "code":0,
+  "code":200,
    "message":"",
    "data":[{
     "id": 101,
     "parentId":0,
+    "disabled": true,
     "label": "营养状况",
     "children": [{
       "id": 9,
@@ -17,33 +18,41 @@
       "checked":false
     }]
   },{
-    "id":102,
+    "id":10201,
     "parentId":0,
-    "label": "应激",
+    "disabled": true,
+    "label": "应激事件",
     "children": [{
       "id": 27,
-      "parentId":102,
+      "parentId":10201,
       "label": "生活事件量表LES",
       "checked":false
     },{
       "id": 17,
-      "parentId":102,
+      "parentId":10201,
       "label": "青少年生活事件量表ASLEC",
       "checked":false
-    },{
+    }]
+  },{
+    "id":10202,
+    "parentId":0,
+    "disabled": true,
+    "label": "应激程度",
+    "children": [{
       "id": 6,
-      "parentId":102,
+      "parentId":10202,
       "label": "斯坦福急性应激反应问卷SASRQ",
       "checked":false
     },{
       "id": 25,
-      "parentId":102,
+      "parentId":10202,
       "label": "创伤后应激障碍量表",
       "checked":false
     }]
   },{
     "id": 103,
     "parentId":0,
+    "disabled": true,
     "label": "压力状态",
     "children": [{
       "id": 12,
@@ -54,6 +63,7 @@
   },{
     "id": 104,
     "parentId":0,
+    "disabled": true,
     "label": "心身反应模式",
     "children": [{
       "id": 16,
@@ -72,8 +82,9 @@
       "checked":false
     }]
   },{
-    "id": 105,
+    "id":105,
     "parentId":0,
+    "disabled": true,
     "label": "重要客体的影响",
     "children": [{
       "id": 22,
@@ -89,6 +100,7 @@
   },{
     "id":106,
     "parentId":0,
+    "disabled": true,
     "label": "人格特征",
     "children": [{
       "id": 15,
@@ -99,9 +111,10 @@
   },{
     "id": 107,
     "parentId":0,
+    "disabled": true,
     "label": "社会功能",
     "children": [{
-      "id": 22,
+      "id": 10,
       "parentId":107,
       "label": "社会适应能力量表 ",
       "checked":false
@@ -114,6 +127,7 @@
   },{
     "id": 108,
     "parentId":0,
+    "disabled": true,
     "label": "社会支持",
     "children": [{
       "id": 21,
@@ -124,6 +138,7 @@
   },{
     "id": 109,
     "parentId":0,
+    "disabled": true,
     "label": "焦虑情绪",
     "children": [{
       "id": 1,
@@ -136,14 +151,37 @@
       "label": "汉密尔顿焦虑量表(HAMD)",
       "checked":false
     },{
-      "id": 19,
+      "id": 29,
       "parentId":109,
+      "label": "焦虑自评量表SAS",
+      "checked":false
+    }]
+  },{
+    "id": 10901,
+    "parentId":0,
+    "disabled": true,
+    "label": "焦虑性质",
+    "children": [{
+      "id": 19,
+      "parentId":10901,
       "label": "焦虑性质量表",
+      "checked":false
+    }]
+  },{
+    "id": 11001,
+    "parentId":0,
+    "disabled": true,
+    "label": "抑郁性质",
+    "children": [{
+      "id": 18,
+      "parentId":11001,
+      "label": "抑郁性质量表",
       "checked":false
     }]
   },{
     "id": 110,
     "parentId":0,
+    "disabled": true,
     "label": "抑郁情绪",
     "children": [{
       "id": 5,
@@ -151,29 +189,36 @@
       "label": "汉密尔顿抑郁量表(HAMD)",
       "checked":false
     },{
-      "id": 18,
+      "id": 28,
       "parentId":110,
-      "label": "抑郁性质量表",
+      "label": "抑郁自评量表SDS",
       "checked":false
     },{
       "id": 4,
-      "parentId":109,
+      "parentId":110,
       "label": "PHQ-9筛查量表",
+      "checked":false
+    },{
+      "id":30,
+      "parentId":110,
+      "label": "贝克抑郁自评量表",
       "checked":false
     }]
   },{
     "id": 111,
     "parentId":0,
+    "disabled": true,
     "label": "惊恐发作 ",
     "children": [{
       "id": 3,
       "parentId":111,
-      "label": "惊恐发作量表",
+      "label": "惊恐障碍严重度量表（PDSS）",
       "checked":false
     }]
   },{
     "id": 112,
     "parentId":0,
+    "disabled": true,
     "label": "强迫症状 ",
     "children": [{
       "id": 13,
@@ -184,6 +229,7 @@
   },{
     "id": 113,
     "parentId":0,
+    "disabled": true,
     "label": "躯体化 ",
     "children": [{
       "id": 26,
@@ -199,6 +245,7 @@
   },{
     "id": 114,
     "parentId":0,
+    "disabled": true,
     "label": "睡眠状况 ",
     "children": [{
       "id": 8,

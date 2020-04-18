@@ -6,7 +6,7 @@
       </div>
       <div class="content">
           <div class="content-title">{{data.questionnaireName}}</div>
-          <div>总分：{{data.score}}分</div>
+          <div>得分：{{data.score}}分</div>
           <div>{{data.conclusion}}</div>
           <div>{{data.explanation}}</div>
       </div>

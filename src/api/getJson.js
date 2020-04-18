@@ -12,3 +12,10 @@ export function getQuestionJson(data) {
   })
 }
 
+export function getScaleTypeJson() {
+  return request({
+    url:'../static/scale/scaleType.json',
+    method:'get',
+  })
+}
+

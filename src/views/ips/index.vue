@@ -61,7 +61,7 @@
           <template slot-scope="scope">{{scope.row.patientVO.gender |formatGender}}</template>
         </el-table-column>
          <el-table-column label="测评项目"  align="center">
-          <template slot-scope="scope">{{scope.row.examinationId |formatExamination}}</template>
+          <template slot-scope="scope">{{scope.row.examinationTypeCode |formatExamination}}</template>
         </el-table-column>
         <el-table-column label="来源科室"  align="center">
           <template slot-scope="scope">{{scope.row.fromDeptName }}</template>
@@ -193,13 +193,13 @@
       },
       formatExamination(val){
         switch (val) {
-          case 1:
+          case 20001:
             return "筛查测评"
             break;
-          case 2:
+          case 20002:
             return "专科测评"
             break;
-          case 3:
+          case 20003:
             return "综合测评"
             break;
         }
@@ -212,9 +212,9 @@
       },
       addPursue(data){
         let path="IPS-C";
-        if(data.examinationId==1){
+        if(data.examinationTypeCode=="20001"){
           path="IPS-A"
-        }else if(data.examinationId==2){
+        }else if(data.examinationTypeCode=="20002"){
           path="IPS-B"
         }
         this.$router.push({

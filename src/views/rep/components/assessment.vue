@@ -143,8 +143,8 @@
     font-size: 14px;
   }
  .content-box .content-title{
-    font-size: 26px;
-    color: #222;
+    font-size: 20px;
+    color: #48A3DA;
     line-height: 45px;
     margin: 10px 0;
   }

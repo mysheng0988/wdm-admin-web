@@ -210,7 +210,7 @@
             loading.close();
             if(res.code==200){
                 this.$store.commit('delete_tabs', this.$route.path)
-                this.$router.push({path:"/rep/pdf",query:{id:this.medicalRecordId}})
+                this.$router.push({path:"/rep/siftPdf",query:{id:this.medicalRecordId}})
             }
         }).catch(err=>{
             loading.close();

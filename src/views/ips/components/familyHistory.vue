@@ -15,7 +15,7 @@
                   :data="familyObj.familyMemberDiseaseHistoryList"
                   border>
           <el-table-column label="序号" width="50" align="center">
-            <template slot-scope="scope">{{scope.$index}}</template>
+            <template slot-scope="scope">{{scope.$index+1}}</template>
           </el-table-column>
           <el-table-column label="家庭成员" width="100"  align="center">
             <template slot-scope="scope">{{scope.row.relativeTitle}}</template>

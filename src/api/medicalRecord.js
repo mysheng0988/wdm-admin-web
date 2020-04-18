@@ -23,7 +23,7 @@ export function medicalRecordListData(data) {
 
 export function medicalRecordPatientList(data) {
   return request({
-    url:'base/medicalRecord/list/patient/'+data.pageNum+"/"+data.pageSize,
+    url:'ips/medicalRecord/list/patient/'+data.pageNum+"/"+data.pageSize,
     method:'get',
     params:data
   })

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  import{readCardMsg,readCardMI} from "@/api/cardRead"
+  import{readCardMsg,readCardReset,readCardData} from "@/api/cardRead"
   import {getRecordPatient} from "@/api/patient";
   import {getEEG,getHRV,getVerificationCode} from '@/api/HRV'
   export default {
@@ -90,7 +90,7 @@
     },
     methods: {
       test(){
-        readCardMI().then(res=>{
+        readCardReset().then(res=>{
             console.log(res)
         })
       },

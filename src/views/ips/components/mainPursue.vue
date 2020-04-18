@@ -117,10 +117,10 @@
           type="text"
           clearable></el-input>
       </el-form-item>
-      <el-form-item label="器质损害或疾病严重程度:" prop="organicDiseaseSeverity" >
+      <el-form-item label="器质损害或疾病严重程度:" prop="organicDiseaseSeverity"  v-if="type=='A'">
         <el-select  placeholder="请选择" v-model="pursueObj.organicDiseaseSeverity" clearable class="input-width">
-          <el-option label="无" value="无" ></el-option>
            <el-option label="未知" value="未知" ></el-option>
+          <el-option label="无" value="无" ></el-option>
           <el-option label="轻度" value="轻度"></el-option>
           <el-option label="中度" value="中度"></el-option>
           <el-option label="重度" value="重度"></el-option>
@@ -152,7 +152,7 @@
                     :data="list"
                     border>
             <el-table-column label="ID" width="100" align="center">
-              <template slot-scope="scope">{{scope.row.id}}</template>
+              <template slot-scope="scope">{{scope.$index+1}}</template>
             </el-table-column>
             <el-table-column label="就诊日期" width="100" align="center">
               <template slot-scope="scope">{{scope.row.visitDate}}</template>
@@ -328,7 +328,7 @@
     medicalRecordId:"",//病历ID
     motorSymptoms:"",//运动症状
     onsetInterval:"",//发病频率
-    organicDiseaseSeverity:"",//器质性疾病严重程度
+    organicDiseaseSeverity:"未知",//器质性疾病严重程度
     patientId:"",//患者ID
     recentOnsetTime:"",//末次发病时间
     trait:"",//家族
@@ -344,6 +344,10 @@
     name: "mainPursue",
     components: {stress,experience,FamilyHistory},
     props: {
+       type: {
+        type: String,
+        default: "C"
+      },
       isEdit: {
         type: Boolean,
         default: false
@@ -413,10 +417,10 @@
               {required: true, message: '请填写主诉', trigger: 'blur'},
           ],
           mainSymptomsIdList: [
-            {required: true, message: '请选择主诉症状', trigger: 'blur'},
+            {required: true, message: '请选择主诉症状', trigger: 'change'},
           ],
           clinicalSpecialistDiagnosisIdList: [
-            {required: true, message: '请选择临床专科诊断', trigger: 'blur'},
+            {required: true, message: '请选择临床专科诊断', trigger: 'change'},
           ],
           firstOnsetTime: [
             {required: true, message: '请选择首次发病时间', trigger: 'blur'},
@@ -425,13 +429,13 @@
             {required: true, message: '请选择末次发病时间', trigger: 'blur'},
           ],
           illnessDegree: [
-            {required: true, message: '选择严重程度', trigger: 'blur'},
+            {required: true, message: '选择严重程度', trigger: 'change'},
           ],
           onsetInterval: [
             {required: true, message: '请输入发病频率', trigger: 'blur'},
           ],
           organicDiseaseSeverity: [
-            {required: true, message: '请选择器质性疾病严重程度', trigger: 'blur'},
+            {required: true, message: '请选择器质性疾病严重程度', trigger: 'change'},
           ],
         },
       };
