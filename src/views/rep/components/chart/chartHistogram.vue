@@ -1,7 +1,7 @@
 <template> 
-  <div class="item-box flex-center">
-      <div class="chart"> 
-        <ve-histogram :data="chartData" width="100%" height="100%" 
+  <div class="item-box">
+      <div class="chart">
+        <ve-histogram :data="chartData" width="100%" height="100%"
         :extend="extend"></ve-histogram>
       </div>
       <div class="content">
@@ -22,7 +22,7 @@
         },
     },
     data(){
-      
+
       return {
         // chartSettings:{
         //  xAxisType:"value"
@@ -33,7 +33,7 @@
             left:10,
             right:10,
             bottom:30,
-            containLabel: true  
+            containLabel: true
           },
           legend: {
             itemWidth: 16,
@@ -41,6 +41,12 @@
             bottom:"0",
             textStyle:{
               fontSize:8
+            }
+          },
+          tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'none'
             }
           },
           yAxis:{
@@ -53,7 +59,7 @@
         chartData: {
           columns: [ "项目"],
           rows: [
-          
+
           ]
         }
       }
@@ -83,14 +89,14 @@
      margin: 5px 0;
      font-size: 15px;
      text-align: justify;
-    line-height: 30px;                                                                                                                         
+    line-height: 30px;
   }
   .content .content-title{
      font-size: 20px;
      color: #48A3DA;
   }
    .chart{
-     width: 300px;
+     width: 100%;
      height: 250px;
      margin-right: 20px;
    }

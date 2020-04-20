@@ -38,12 +38,11 @@
       ])
     },
     mounted(){
-     console.log(this.info)
     }
   }
 </script>
 <style scoped>
-   
+
    .pdf-container{
        padding: 70px;
    }

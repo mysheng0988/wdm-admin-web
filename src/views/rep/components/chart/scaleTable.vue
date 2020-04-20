@@ -29,13 +29,12 @@
         },
     },
     data(){
-   
+
       return {
-        
+
       }
     },
     mounted(){
-     console.log(Object.keys(this.data.chartData[0]))
     }
   }
 </script>
@@ -51,7 +50,7 @@
      margin: 5px 0;
      font-size: 10px;
      text-align: justify;
-    line-height: 30px;                                                                                                                         
+    line-height: 30px;
   }
   .content .content-title{
      font-size: 20px;

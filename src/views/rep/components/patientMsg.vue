@@ -30,7 +30,7 @@
               </el-form-item>
           </div>
           <div class="flex-wrap">
-             
+
               <el-form-item class="flex-item" label="职业:">
                 <p>{{patientVo.profession}}</p>
               </el-form-item>
@@ -43,8 +43,7 @@
           </div>
             <div class="flex-wrap">
               <el-form-item class="flex-width"  label="临床诊断:">
-                <span v-for="(item,index) in mainPursue.clinicalSpecialistDiagnosisList" :key="index">{{item.name}} </span>
-                <span v-if="mainPursue.clinicalSpecialistDiagnosisSupplementList">{{mainPursue.clinicalSpecialistDiagnosisSupplementList.toString()}}</span>
+                <p>{{clinicalSpecialistDiagnosisName}}</p>
               </el-form-item>
             </div>
         </el-form>
@@ -56,19 +55,19 @@
         <img class="img" src="@/views/rep/img/main-symptom.png">
         <div class="content">
           <div class="title">主要症状</div>
-          <div class="lable"> <span v-for="(item,index) in mainPursue.mainSymptomsList" :key="index">{{item.name}}、</span></div>
+          <div class="lable"> {{mainSymptomsName}}</div>
           <div class="lable">发作频率：{{mainPursue.onsetInterval}}</div>
           <div class="lable">首次发作时间：{{mainPursue.firstOnsetTime}}</div>
           <div class="lable">末次发作时间：{{mainPursue.recentOnsetTime}}</div>
-          <div class="lable">严重程度：{{mainPursue.illnessDegree}}</div>                    
+          <div class="lable">严重程度：{{mainPursue.illnessDegree}}</div>
         </div>
       </div>
       <div class="symptom-content flex-center">
         <img class="img" src="@/views/rep/img/icon-symptom.png">
         <div class="content">
           <div class="title">伴随症状</div>
-          <div class="lable" v-if="mainPursue.accompanyingSymptomsList&&mainPursue.accompanyingSymptomsList.length==0">暂无伴随症状</div>
-          <div class="lable" v-else> <span v-for="(item,index) in mainPursue.accompanyingSymptomsList" :key="index">{{item.name}}、</span></div>                   
+          <div class="lable max-width" v-if="accompanyingSymptomsName==''">暂无伴随症状</div>
+          <div class="lable max-width" v-else>{{accompanyingSymptomsName}}</div>
         </div>
       </div>
       <div class="symptom-content flex-center">
@@ -76,7 +75,7 @@
         <div class="content">
           <div class="title">运动症状</div>
           <div class="lable max-width" v-if="mainPursue.motorSymptomsList&&mainPursue.motorSymptomsList.length==0">暂无运动症状</div>
-          <div class="lable max-width" v-else><span v-for="(item,index) in mainPursue.motorSymptomsList" :key="index">{{item.name}}、</span></div>              
+          <div class="lable max-width" v-else><span >{{motorSymptomsName}}</span></div>
         </div>
       </div>
     </div>
@@ -112,8 +111,43 @@
          return "";
       },
     },
-    mounted(){
-      console.log(this.mainPursue)
+    computed:{
+      accompanyingSymptomsName:function(){
+       return this.arrayMergeData(this.mainPursue.accompanyingSymptomsList,this.mainPursue.accompanyingSymptomsSupplementList)
+      },
+      mainSymptomsName:function () {
+        return this.arrayMergeData(this.mainPursue.mainSymptomsList,this.mainPursue.mainSymptomsSupplementList)
+      },
+      clinicalSpecialistDiagnosisName:function () {
+        return this.arrayMergeData(this.mainPursue.clinicalSpecialistDiagnosisList,this.mainPursue.clinicalSpecialistDiagnosisSupplementList)
+      },
+      motorSymptomsName:function () {
+        let strArr=[];
+        if(this.mainPursue.motorSymptomsList){
+          for(let item of this.mainPursue.motorSymptomsList){
+            strArr.push(item.name)
+          }
+        }
+
+        return strArr.join("、");
+      }
+    },
+    methods:{
+       arrayMergeData(arr,strArr){
+         let titleName=[];
+         if(!arr){return}
+         if(!strArr){return}
+         for (let item of arr){
+           if(item.name!="")
+           titleName.push(item.name)
+         }
+         for(let item of strArr){
+           if(item="")
+             titleName.push(item)
+         }
+         return titleName.join("、")
+
+       }
     }
   }
 </script>
@@ -129,7 +163,7 @@
   }
   .msg-box .title{
     font-size: 30px;
-    color:#2B8FB8; 
+    color:#2B8FB8;
   }
   .msg{
     margin:20px 0;
@@ -154,7 +188,7 @@
      color: #fff;
   }
   .symptom-content{
-    margin-top: 50px;
+    margin-top: 30px;
   }
   .symptom-content .img{
     margin: 0 10px ;

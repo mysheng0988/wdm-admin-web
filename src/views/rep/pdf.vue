@@ -52,10 +52,10 @@ import {analysisData} from "@/api/analysis"
       import assessment from './components/assessment'
       import assessment2 from './components/assessment2'
        import repEnd from './components/repEnd'
-      
+
     export default {
       name: "pdf",
-      components: { 
+      components: {
           repIndex,
           contents,
           patientMsg,
@@ -162,7 +162,7 @@ import {analysisData} from "@/api/analysis"
         if(this.medicalRecordId==""||this.medicalRecordId==undefined){
           this.medicalRecordId=36;
         }
-        
+
          this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
@@ -178,7 +178,7 @@ import {analysisData} from "@/api/analysis"
         outPut(){
            this.$nextTick(() => {
             window.print()
-            
+
           })
         },
         getScaleNumResult(){
@@ -195,7 +195,7 @@ import {analysisData} from "@/api/analysis"
                    rowNum+=this.computeRowNum(item);
                   if(rowNum<=maxRow){
                       index++;
-                  }  
+                  }
                 }
                 if(rowNum>maxRow){
                     rowNum=0;
@@ -240,8 +240,8 @@ import {analysisData} from "@/api/analysis"
                  let nutritionPrescription=JSON.parse(data.nutritionPrescription);//营养处方
                  let functionalMedicineAdvice=JSON.parse(data.functionalMedicineAdvice);//功能医学建议
                  let otherSuggestion=JSON.parse(data.otherSuggestion);
-                
-                 
+
+
                  let suggestData=[];
                  let totalData=[];
                 totalData=this.pageThenData(totalData,patientMedicationPlan,0);
@@ -278,10 +278,10 @@ import {analysisData} from "@/api/analysis"
                 this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测
                 this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;//附录4:量表评估
                 this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
-        
+
               }
-              
-               
+
+
             })
         },
         //医生药物治疗方案
@@ -321,7 +321,7 @@ import {analysisData} from "@/api/analysis"
                 followUpRecommendations["title"]="随访建议";
                 totalData=this.pageThenData(totalData,followUpRecommendations,0);
             }
-            
+
             drugData[pageNum]=[];
             for(let item of totalData){
                 rowNum+=this.computeRowNum(item.content);
@@ -334,7 +334,7 @@ import {analysisData} from "@/api/analysis"
             }
            this.drugData=drugData;
             this.contentsData[5].pageNum=this.contentsData[4].pageNum+this.drugData.length;//附录1:患者教育
-         
+
         },
         pageThenData(data,obj,index){
           if(!obj){
@@ -359,7 +359,7 @@ import {analysisData} from "@/api/analysis"
             let param={
               content:index+"、"+obj,
               type:1
-              } 
+              }
              data.push(param)
           }
           return data;
@@ -374,19 +374,27 @@ import {analysisData} from "@/api/analysis"
             scaleData[pageNum]=[]
             for(let item of data){
               if(item.questionnaireNumber!=12){
+                let length=item.explanation.length;
+                if(item.questionnaireName.indexOf("性质")>-1&&length>170){
+                  itemNum=1
+                  pageNum++;
+                  scaleData[pageNum]=[]
+                }
                 itemNum++;
+                if(item.chartData!=""){
+                  item.chartData=JSON.parse(item.chartData);
+                  if(item.chartData.length > 4&&item.chartData.length<=6){
+                    itemNum++;
+                  }else if(item.chartData.length > 6){
+                    itemNum+=2;
+                  }
+                }
                 if(itemNum>pageMax){
                   itemNum=1
                   pageNum++;
                   scaleData[pageNum]=[]
                 }
-                if(item.chartData!=""){
-                    item.chartData=JSON.parse(item.chartData);
-                    if(item.chartData.length>4){
-                      itemNum++;
-                    }
-                  }
-                  scaleData[pageNum].push(item)
+                scaleData[pageNum].push(item)
               }
             }
             this.scaleData=scaleData;
@@ -394,22 +402,21 @@ import {analysisData} from "@/api/analysis"
         },
         getPatientData(){
           getRecordPatient(this.medicalRecordId).then(res=>{
-            console.log(res)
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
             }
-           
+
           })
         },
         getPursueData(){
           getPursue(this.medicalRecordId).then(res=>{
-            console.log(res)
            if(res.code==200){
             this.mainPursue=res.dataList[0];
+            console.log(this.mainPursue)
            }
           })
-        }, 
+        },
         getExperienceList(){
          queryExperience(this.medicalRecordId).then(res=>{
             if(res.code==200){
@@ -434,7 +441,7 @@ import {analysisData} from "@/api/analysis"
                       diagnosisList.push(item1.name)
                   }
                 if(itemNum<=pageMaxItem){
-          
+
                   itemNum++;
                   if(exeList[pageNum][year]){
                    let param={
@@ -454,7 +461,7 @@ import {analysisData} from "@/api/analysis"
                     }
                     exeList[pageNum][year].push(param);
                   }
-                 
+
                 }else{
                   itemNum=0;
                   pageNum++;
@@ -468,11 +475,11 @@ import {analysisData} from "@/api/analysis"
                     }
                     exeList[pageNum][year].push(param);
                 }
-                
+
 
               }
               this.experienceData=exeList;
-             
+
             }
             let length=this.experienceData.length;
              this.contentsData[1].pageNum=2;//就诊经历
@@ -552,13 +559,13 @@ import {analysisData} from "@/api/analysis"
                     label:"焦点问题",
                     data:[]
                   }
-               
+
               if(focusProblem.length==0){
                 focusProblem.push("无")
               }
-              
+
               page[pageNum].push(pageItem1);
-             
+
               for(let item in focusProblem){
                 rowNum+=this.computeRowNum(focusProblem[item])
                 if(rowNum<=maxRowNum){
@@ -579,7 +586,7 @@ import {analysisData} from "@/api/analysis"
                 }
               }
               }
-              
+
                let pageItem2={ //页面的最小单元
                   imgPath:require("@/views/rep/img/icon-nutrition.png"),
                   label:"心身因素",
@@ -621,7 +628,7 @@ import {analysisData} from "@/api/analysis"
                     data:[]
                   }
               if(rowNum>maxRowNum){
-                 rowNum=2       
+                 rowNum=2
                 pageNum++;
                  page[pageNum]=[]
                  page[pageNum].push(pageItem3);
@@ -665,7 +672,7 @@ import {analysisData} from "@/api/analysis"
                   }else{
                       page[pageNum].push(pageItem4);
                   }
-              
+
                   if(causes.length==0){
                     causes.push("无")
                   }
@@ -689,7 +696,7 @@ import {analysisData} from "@/api/analysis"
                     }
                   }
               }
-                
+
               let initialDiagnosisVO=data.initialDiagnosisVO;//疾病成因
                rowNum+=2;
                 let pageItem5={ //页面的最小单元
@@ -722,10 +729,10 @@ import {analysisData} from "@/api/analysis"
               }
               this.page=page;
               this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.page.length;//治疗方案参考
-         
+
         }
       },
-     
+
     }
 </script>
 
@@ -744,7 +751,7 @@ import {analysisData} from "@/api/analysis"
       border:1px solid #eeeeee;
       overflow: hidden;
    }
-   
-   
-  
+
+
+
 </style>

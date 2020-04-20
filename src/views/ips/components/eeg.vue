@@ -6,7 +6,7 @@
           <el-button type="primary" @click="verificationCode" >获取验证码</el-button>
           <el-button type="primary" ><a href="HRV://">开始检测</a></el-button>
           <el-button type="primary" @click="handleResult">记录结果</el-button>
-        
+
         </el-form-item>
         <el-form-item style="text-align: center" >
            <div class="ips-input">脑电功能检测--》检测科室:{{info.deptName}}</div>
@@ -14,7 +14,7 @@
           <el-button type="primary" ><a href="EEG://">开始检测</a></el-button>
            <el-button type="primary" @click="getEEGData">记录结果</el-button>
         </el-form-item>
-        
+
       <el-form-item style="text-align: center">
         <!-- <el-button @click="test">读取MI卡</el-button> -->
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
@@ -85,7 +85,7 @@
       },
     },
     created() {
-     
+
 
     },
     methods: {
@@ -125,7 +125,7 @@
         })
       },
       handlePrev() {
-       
+
         this.$emit('prevStep')
       },
       handleNext() {
@@ -134,7 +134,7 @@
              if(res.dataList[0].examinationStatus>10){
                  this.$emit('nextStep');
              }else{
-               this.$message.warning("请先完成HRV和EEG检查")
+               this.$message.warning("请先完成设备检查")
              }
 
            }

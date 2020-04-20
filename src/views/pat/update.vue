@@ -131,11 +131,11 @@
           <el-col :span="8">
             <el-form-item label="人群分类："  prop="crowdRole"  >
               <el-select  placeholder="请选择" v-model="patObj.crowdRole" multiple clearable class="input-width" >
-                <el-option v-for="(item,index) in optionRow" :key="index" 
+                <el-option v-for="(item,index) in optionRow" :key="index"
                      :label="item"
                      :value="item"
                    ></el-option>
-                
+
               </el-select>
             </el-form-item>
           </el-col>
@@ -175,13 +175,13 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="父母情况："  >
-              <el-input v-model="patObj.parentSituation" 
+              <el-input v-model="patObj.parentSituation"
                   type="textarea"
                   placeholder="请输入内容"
                   :autosize="{minRows: 2, maxRows: 4}"
                   maxlength="50"
                   show-word-limit ></el-input>
-              
+
             </el-form-item>
           </el-col>
         </el-row>
@@ -308,7 +308,7 @@
         rules: {
           realName: [
             {required: true, message: '请输入分类名称', trigger: 'blur'},
-            {min: 2, max: 140, message: '长度在 2 到 20 个字符', trigger: 'blur'}
+            {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
           ],
            nation: [
             {required: true, message: '必填字段', trigger: 'change'}
@@ -324,6 +324,7 @@
           ],
           contactDetails: [
             {required: true, message: '必填字段', trigger: 'blur'},
+            {pattern :/^(\d{10}|\d{11})$/,message:'输入有效联系方式',trigger: 'blur'}
           ],
           education: [
             {required: true, message: '必填字段', trigger: 'change'}
@@ -351,7 +352,7 @@
           siblingsNumber:[
              {required: true, trigger: 'blur', validator: validateNumberSort}
           ],
-          childrenNumber:[ 
+          childrenNumber:[
             {required: false, trigger: 'blur', validator: validateNumberTen}
           ],
           cardNo: [
@@ -434,7 +435,7 @@
                   this.$router.push("/pat/list")
                    Message.success("修改成功")
                  }
-                 
+
                 })
           })
           } else {

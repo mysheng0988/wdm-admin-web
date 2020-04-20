@@ -13,7 +13,7 @@
         <el-row :gutter="10">
           <el-col :span="8">
             <el-form-item label="姓名："  prop="realName" >
-              <el-input v-model="patObj.realName" placeholder="请输入姓名" clearable maxlength="20" show-word-limit></el-input>
+              <el-input v-model="patObj.realName" placeholder="请输入姓名" clearable maxlength="10" show-word-limit></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -132,11 +132,11 @@
           <el-col :span="8">
             <el-form-item label="人群分类：" prop="crowdRole" >
               <el-select  placeholder="请选择" multiple v-model="patObj.crowdRole"  clearable class="input-width" >
-                <el-option v-for="(item,index) in optionRow" :key="index" 
+                <el-option v-for="(item,index) in optionRow" :key="index"
                      :label="item"
                      :value="item"
                    ></el-option>
-                
+
               </el-select>
             </el-form-item>
           </el-col>
@@ -176,13 +176,13 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="父母情况："  >
-              <el-input v-model="patObj.parentSituation" 
+              <el-input v-model="patObj.parentSituation"
                   type="textarea"
                   placeholder="请输入内容"
                   :autosize="{minRows: 2, maxRows: 4}"
                   maxlength="50"
                   show-word-limit ></el-input>
-              
+
             </el-form-item>
           </el-col>
         </el-row>
@@ -289,7 +289,7 @@
         </el-col>
          <!-- <el-col :span="8">
           <el-form-item label="卡号："   prop="cardId">
-            <el-input v-model.number="medObj.cardId"   placeholder="请刷卡" 
+            <el-input v-model.number="medObj.cardId"   placeholder="请刷卡"
             clearable maxlength="8" show-word-limit></el-input>
           </el-form-item>
         </el-col> -->
@@ -319,7 +319,7 @@
              :rules="cardRules"
              ref="cardFrom">
               <el-form-item label="卡号："   prop="cardNo">
-                  <el-input id="cardNo" v-model.number="cardFrom.cardNo"   placeholder="请刷卡" 
+                  <el-input id="cardNo" v-model.number="cardFrom.cardNo"   placeholder="请刷卡"
                   clearable maxlength="10" show-word-limit></el-input>
               </el-form-item>
           </el-form>
@@ -444,7 +444,7 @@
         rules: {
           realName: [
             {required: true, message: '请输入分类名称', trigger: 'blur'},
-            {min: 2, max: 140, message: '长度在 2 到 20 个字符', trigger: 'blur'}
+            {min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur'}
           ],
            nation: [
             {required: true, message: '必填字段', trigger: 'change'}
@@ -460,6 +460,7 @@
           ],
           contactDetails: [
             {required: true, message: '必填字段', trigger: 'blur'},
+            {pattern :/^(\d{10}|\d{11})$/,message:'输入有效联系方式',trigger: 'blur'}
           ],
           education: [
             {required: true, message: '必填字段', trigger: 'change'}
@@ -487,7 +488,7 @@
           siblingsNumber:[
              {required: true, trigger: 'blur', validator: validateNumberSort}
           ],
-          childrenNumber:[ 
+          childrenNumber:[
             {required: false, trigger: 'blur', validator: validateNumberTen}
           ],
           cardNo: [
@@ -607,7 +608,7 @@
                 this.patObj.gender=cardMsg.gender;
                 this.patObj.nation=cardMsg.nation;
               }
-              
+
           }
           return this.patObj.pid;
         })
@@ -634,7 +635,7 @@
               }
           })
         });
-        
+
 
       },
       onSubmit(formName) {
@@ -676,7 +677,7 @@
                 return false;
               }
           })
-        
+
       },
       saveMedical(){
           this.medObj.cardNo=this.cardFrom.cardNo;

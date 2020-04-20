@@ -107,7 +107,7 @@
         <el-row :gutter="10">
           <el-col :span="12">
             <el-form-item label="账户名称:"  prop="username"  >
-              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="10" show-word-limit :readonly="userForm.uid!=null"></el-input>
+              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="10" show-word-limit :disabled="userForm.uid!=null"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
