@@ -51,7 +51,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="末次发作时间:" prop="recentOnsetTime">
+          <el-form-item label="最近发作时间:" prop="recentOnsetTime">
             <el-date-picker
               v-model="pursueObj.recentOnsetTime"
               class="input-width"

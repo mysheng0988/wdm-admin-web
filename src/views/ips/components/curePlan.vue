@@ -73,35 +73,8 @@
         </div>
       </el-form-item>
       <el-form-item label="营养处方:">
-        <div
-          class="text-box"
-          v-if="initData.nutritionPrescription.data&&!initData.nutritionPrescription.data[0].title"
-        >
-          <div
-            class="flex-wrap"
-            v-for="(item,index) in initData.nutritionPrescription.data"
-            :key="index"
-          >
-            <el-button
-              @click="addText1('nutritionPrescription',1)"
-              class="text-boder blue"
-              icon="el-icon-edit"
-            >{{index+1}}、</el-button>
-            <el-input
-              placeholder="请输入详细内容"
-              v-model="initData.nutritionPrescription.data[index]"
-              class="text-boder"
-              type="textarea"
-              autosize
-            ></el-input>
-            <el-button
-              @click="deleteText1('nutritionPrescription',index)"
-              class="text-boder red"
-              icon="el-icon-delete"
-            ></el-button>
-          </div>
-        </div>
-        <div class="text-box" v-else>
+
+        <div class="text-box">
           <div v-for="(item1,index1) in initData.nutritionPrescription.data" :key="index1">
             <div class="box-title" v-if="item1.data.length>0">{{item1.title}}</div>
             <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2">
@@ -127,34 +100,7 @@
         </div>
       </el-form-item>
       <el-form-item label="运动处方:">
-        <div class="text-box"
-          v-if="initData.exercisePrescription.data&&!initData.exercisePrescription.data[0].title"
-        >
-          <div
-            class="flex-wrap"
-            v-for="(item,index) in initData.exercisePrescription.data"
-            :key="index"
-          >
-            <el-button
-              @click="addText1('exercisePrescription',1)"
-              class="text-boder blue"
-              icon="el-icon-edit"
-            >{{index+1}}、</el-button>
-            <el-input
-              placeholder="请输入详细内容"
-              v-model="initData.exercisePrescription.data[index]"
-              class="text-boder"
-              type="textarea"
-              autosize
-            ></el-input>
-            <el-button
-              @click="deleteText1('exercisePrescription',index)"
-              class="text-boder red"
-              icon="el-icon-delete"
-            ></el-button>
-          </div>
-        </div>
-        <div class="text-box" v-else>
+        <div class="text-box" >
           <div v-for="(item1,index1) in initData.exercisePrescription.data" :key="index1">
             <div class="box-title">{{item1.title}}</div>
             <div class="flex-wrap" v-for="(item2,index2) in item1.data" :key="index2">
@@ -180,35 +126,7 @@
         </div>
       </el-form-item>
       <el-form-item label="功能医学建议:">
-        <div
-          class="text-box"
-          v-if="initData.functionalMedicineAdvice.data&&!initData.functionalMedicineAdvice.data[0].title"
-        >
-          <div
-            class="flex-wrap"
-            v-for="(item,index) in initData.functionalMedicineAdvice.data"
-            :key="index"
-          >
-            <el-button
-              @click="addText1('functionalMedicineAdvice',1)"
-              class="text-boder blue"
-              icon="el-icon-edit"
-            >{{index+1}}、</el-button>
-            <el-input
-              placeholder="请输入详细内容"
-              v-model="initData.functionalMedicineAdvice.data[index]"
-              class="text-boder"
-              type="textarea"
-              autosize
-            ></el-input>
-            <el-button
-              @click="deleteText1('functionalMedicineAdvice',index)"
-              class="text-boder red"
-              icon="el-icon-delete"
-            ></el-button>
-          </div>
-        </div>
-        <div class="text-box" v-else>
+        <div class="text-box" >
           <div
             class="flex-wrap"
             v-for="(item,index) in initData.functionalMedicineAdvice.data"
@@ -235,10 +153,7 @@
         </div>
       </el-form-item>
       <el-form-item label="其他建议:">
-        <div
-          class="text-box"
-          v-if="initData.otherSuggestion.data&&!initData.otherSuggestion.data[0].title"
-        >
+        <div class="text-box" v-if="initData.otherSuggestion.data&&!initData.otherSuggestion.data[0].title">
           <div class="flex-wrap" v-for="(item,index) in initData.otherSuggestion.data" :key="index">
             <el-button
               @click="addText1('otherSuggestion',1)"
@@ -312,7 +227,7 @@
         </div>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
+        <!-- <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button> -->
         <el-button type="primary" size="medium" @click="submitReportData">确认签名</el-button>
       </el-form-item>
     </el-form>

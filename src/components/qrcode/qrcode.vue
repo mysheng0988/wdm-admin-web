@@ -8,7 +8,7 @@
             :logoScale="0.2"
             :size="size">
     </vue-qr>
-    <div class="btn-box">
+    <!-- <div class="btn-box">
       <el-button
         class="button"
         icon="el-icon-download"
@@ -17,7 +17,7 @@
         size="medium">
         下载二维码
       </el-button>
-    </div>
+    </div> -->
 
   </div>
 
@@ -55,7 +55,7 @@
         return this.qText;
       },
       icon:function () {
-        return require('../../assets/images/timg.jpeg');
+        return require('../../assets/images/wx-logo.png');
       },
       size:function () {
         return this.qSize;

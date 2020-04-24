@@ -107,16 +107,16 @@
       },
       data() {
         return {
-          familyMembers:["父亲","母亲", "兄弟","子女", "爷爷", "奶奶", "姥姥", "姥爷"],
+          familyMembers:["父亲","母亲", "叔伯姑","姨舅","兄弟","姐妹", "爷爷", "奶奶", "姥姥", "姥爷"],
           familyMembersList:[],
-          familyObj:this.data,
+          familyObj:{},
           disMembersList:"",
           loadingOption:false,
 
         }
       },
       mounted(){
-        
+        this.familyObj=JSON.parse(JSON.stringify(this.data))
          this.assembleData(this.familyObj.familyMemberDiseaseHistoryList)
       },
       watch: {

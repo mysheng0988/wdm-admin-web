@@ -18,7 +18,7 @@
     <div class="dep-content">
     <el-form :inline="true" :model="listQuery" size="small" >
         <el-form-item >
-          <el-input  placeholder="科室名称" v-model="listQuery.deptName"></el-input>
+          <el-input  placeholder="科室名称" v-model="listQuery.deptName" clearable></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="success" round class="search-btn" @click="queryList" >查询</el-button>

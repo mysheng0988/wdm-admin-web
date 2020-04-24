@@ -31,7 +31,7 @@ service.interceptors.response.use(
     if(res.retcode||res.code==804||res.code=="200"){
       return response.data
       
-    }else if(res.code=="601"){
+    }else if(res.code=="601"||res.code=="602"){
       sessionStorage.clear()
       Message({
         message:"登录信息已过期",

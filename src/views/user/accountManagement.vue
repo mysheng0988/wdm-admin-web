@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form :inline="true" :model="listQuery" size="small">
+    <el-form :inline="true" :model="listQuery" size="small" ref="searchForm">
         <el-form-item >
           <el-input  placeholder="账户名称"  v-model="listQuery.username" clearable></el-input>
         </el-form-item>
@@ -20,6 +20,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
+          <el-button  round class="search-btn" @click="clearData">重置</el-button>
           <el-button type="success" round class="search-btn" @click="queryData">查询</el-button>
           <el-button type="success" round class="search-btn" @click="addUser">新增</el-button>
           <el-button type="success" round class="search-btn" @click="exportExcel">导出</el-button>
@@ -286,6 +287,15 @@
     },
 
     methods: {
+      clearData(){
+        this.listQuery.createTimeStart= "";
+        this.listQuery.hospitalName= "";
+        this.listQuery.phoneNumber= "";
+        this.listQuery.username= "";
+        this.listQuery.pageNum=1;
+        this.listQuery.pageSize=10;
+        // this.$refs[formName].resetFields();
+      },
       addUser(){
          this.dialogTitle="新增账户信息"
         this.dialogVisible=true;

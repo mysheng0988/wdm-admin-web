@@ -72,11 +72,28 @@
         </div>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
+        <!-- <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button> -->
         <el-button type="primary" size="medium" @click="handleNext" v-if="nextTitle!=''">下一步，{{nextTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleFinishCommit" v-else>完成</el-button>
       </el-form-item>
     </el-form>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="40%">
+      <div class="dialog-box">
+        <p>问题:患者是否精神痛苦显著、或共病药物滥用、既往有发作史等？</p>
+        <el-radio-group v-model="checkList" >
+          <el-radio :label="false" >存在一项或多项</el-radio>
+          <el-radio :label="true" >不存在任意一项</el-radio>
+        </el-radio-group>
+      </div>
+      
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="updataDataAnalysis">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -112,6 +129,8 @@
     data() {
       return {
         data:"",
+        dialogVisible:false,
+        checkList:true,
         rules: {
           goodsName: [
             {required: true, message: '请输入商品名称', trigger: 'blur'},
@@ -124,7 +143,6 @@
       };
     },
     created() {
-      console.log(this.type)
       const loading =Loading.service({
           lock: true,
           text: 'Loading',
@@ -144,15 +162,15 @@
     
         if(!data.focusProblem||data.focusProblem.length==0){
             data.focusProblem=[],
-            data.focusProblem.push("");
+            data.focusProblem.push("无");
         }
         if(!data.psychosomaticFactors||data.psychosomaticFactors.length==0){
            data.psychosomaticFactors=[],
-          data.psychosomaticFactors.push("");
+          data.psychosomaticFactors.push("无");
         }
         if(!data.socialFunction||data.socialFunction.length==0){
             data.socialFunction=[],
-            data.socialFunction.push("");
+            data.socialFunction.push("无");
         }
         // if(!data.initialDiagnosis||data.initialDiagnosis.length==0){
         //    data.initialDiagnosis=[],
@@ -179,8 +197,8 @@
       handlePrev() {
         this.$emit('prevStep')
       },
-      handleNext() {
-        let loading= Loading.service({
+      updataDataAnalysis(){
+           let loading= Loading.service({
            lock: true,
            text: '加载中',
           spinner: 'el-icon-loading',
@@ -188,6 +206,7 @@
         });
          //this.$emit('nextStep')
         this.data["complete"]=false;
+        this.data["isRecommendedMedicationTips"]=this.checkList;
         updataData(this.data).then(res=>{
             loading.close();
             if(res.code==200){
@@ -196,7 +215,13 @@
         }).catch(err=>{
             loading.close();
         });
-       
+      },
+      handleNext() {
+        if(this.data.initialDiagnosisVO.includes("轻度焦虑症状")||this.data.initialDiagnosisVO.includes("轻度抑郁症状")){
+            this.dialogVisible=true;
+        }else{
+          this.updataDataAnalysis();
+        }
       },
       handleFinishCommit(){
         let loading= Loading.service({
@@ -248,5 +273,8 @@
   .ips-input{
     margin: 0 10px;
     width: 400px;
+  }
+  .dialog-box{
+    line-height: 40px;
   }
 </style>

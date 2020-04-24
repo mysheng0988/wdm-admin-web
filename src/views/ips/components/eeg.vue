@@ -17,6 +17,7 @@
 
       <el-form-item style="text-align: center">
         <!-- <el-button @click="test">读取MI卡</el-button> -->
+         <!-- <el-button @click="cardTest">读取MI卡数据</el-button> -->
         <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleNext">下一步，{{nextTitle}}</el-button>
       </el-form-item>
@@ -42,6 +43,7 @@
   import{readCardMsg,readCardReset,readCardData} from "@/api/cardRead"
   import {getRecordPatient} from "@/api/patient";
   import {getEEG,getHRV,getVerificationCode} from '@/api/HRV'
+  import {updateMedicalRecord} from '@/api/medicalRecord'
   export default {
     name: "ProductInfoDetail",
     props: {
@@ -89,16 +91,16 @@
 
     },
     methods: {
-      test(){
-        readCardReset().then(res=>{
-            console.log(res)
+     
+      cardTest(){
+        readCardData().then(res=>{
+          console.log(res)
         })
       },
       handleResult(){
-      this.getHRVData()
+          this.getHRVData()
       },
       getHRVData(){
-
         getHRV(this.medicalRecordId).then(res=>{
           if(res.code==200){
               this.dialogVisible=true;
@@ -125,21 +127,39 @@
         })
       },
       handlePrev() {
-
         this.$emit('prevStep')
       },
       handleNext() {
-         getRecordPatient(this.medicalRecordId).then(res=>{
-           if(res.code==200){
-             if(res.dataList[0].examinationStatus>10){
-                 this.$emit('nextStep');
-             }else{
-               this.$message.warning("请先完成设备检查")
-             }
-
-           }
+         getHRV(this.medicalRecordId).then(res=>{
+          if(res.code==200){
+            let param={
+              id:this.medicalRecordId,
+              examinationStatus:20,
+            }
+            updateMedicalRecord(param).then(res=>{
+               if(res.code==200){
+                  this.$emit('nextStep');
+               }
+            })
+            
+          }else{
+             this.$message.warning("请先完成设备检查")
+          }
         })
-      }
+        //  getRecordPatient(this.medicalRecordId).then(res=>{
+        //    if(res.code==200){
+        //      if(res.dataList[0].examinationStatus>10){
+        //          this.$emit('nextStep');
+        //      }else{
+        //        this.$message.warning("请先完成设备检查")
+        //      }
+
+        //    }
+        // })
+      },
+      handleUpdataState(){
+
+      },
     }
   }
 </script>

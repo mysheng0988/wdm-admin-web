@@ -164,10 +164,7 @@
     },
     filters:{
       formatGender(gender){
-        if(gender){
-          return gender?"女":"男"
-        }
-       return "男";
+          return gender?"男":"女"
       },
       formatAge(birthday){
         if(birthday){

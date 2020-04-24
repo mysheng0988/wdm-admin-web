@@ -14,7 +14,7 @@
           <div>年龄：<span>{{age}}</span></div>
         </el-col>
         <el-col :span="6">
-          <div>性别：<span>{{patientVO.gender?"女":"男"}}</span></div>
+          <div>性别：<span>{{patientVO.gender?"男":"女"}}</span></div>
         </el-col>
         <el-col :span="6">
           <div>身高：<span>{{patientVO.height}}cm</span></div>

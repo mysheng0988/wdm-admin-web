@@ -5,9 +5,10 @@
         <div class="ips-input">{{questionNo==1?"初筛首访问卷":"首访问卷"}}</div>
         <el-button type="primary" @click="startQuestion">{{completeQuestionnaire?'重测问卷':'开始问卷'}}</el-button>
          <el-button type="primary" :class="completeQuestionnaire?'':'disable'" @click="handleRecord(true,questionNo)">测试记录</el-button>
+         <el-button type="primary"  @click="qrcodeData">扫码答题</el-button>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
+        <!-- <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button> -->
         <el-button type="primary" size="medium" @click="handleNext">下一步，{{nextTitle}}</el-button>
       </el-form-item>
     </el-form>
@@ -57,16 +58,20 @@
         <el-button type="primary" @click="handleNextItem()">继续测试量表</el-button>
       </span>
     </el-dialog>
+     <el-dialog :visible.sync="qrcodeDialog" width="420px">
+      <qrcode :q-text="qText" :q-size="qSize" ></qrcode>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import {getMedicalRecord,scaleConfirm} from '@/api/question'
 import {getScaleTypeJson} from '@/api/getJson'
+  import qrcode from '@/components/qrcode/qrcode'
   import question from './question';
   export default {
     name: "easyQuestion",
-    components: {question},
+    components: {question,qrcode},
     props: {
       type: {
         type: String,
@@ -99,6 +104,9 @@ import {getScaleTypeJson} from '@/api/getJson'
           children: 'children',
           label: 'label'
         },
+        qText:"",
+        qSize:200,
+        qrcodeDialog:false,
         dialogVisible:false,
         dialogVisible2:false,
         completeQuestionnaire:false,
@@ -119,6 +127,12 @@ import {getScaleTypeJson} from '@/api/getJson'
        })
     },
     methods: {
+      qrcodeData(){
+        let medicalRecordId=this.medicalRecordId;
+        let patientId=this.patientId;
+        this.qText="https://ips.xsyxsy.com/patient/"+patientId+"/"+medicalRecordId;
+        this.qrcodeDialog=true;
+      },
       againMeasure(){
         this.dialogVisible2 = false
         this.startQuestion();

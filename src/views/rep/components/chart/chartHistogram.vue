@@ -8,7 +8,7 @@
           <div class="content-title">{{data.questionnaireName}}</div>
           <div>得分：{{data.score}}分</div>
           <div>{{data.conclusion}}</div>
-          <div>{{data.explanation}}</div>
+          <div v-for="(item,index) in data.explanation" :key="index" class="indent">{{item}}</div>
       </div>
   </div>
 </template>
@@ -99,6 +99,9 @@
      width: 100%;
      height: 250px;
      margin-right: 20px;
+   }
+   .indent{
+     text-indent: 2em
    }
 </style>
 

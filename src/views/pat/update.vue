@@ -18,8 +18,8 @@
           <el-col :span="8">
             <el-form-item label="性别："   >
               <el-radio-group v-model="patObj.gender" @change="genderChange">
-                <el-radio :label="false">男</el-radio>
-                <el-radio :label="true">女</el-radio>
+                <el-radio :label="true">男</el-radio>
+                <el-radio :label="false">女</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -294,7 +294,7 @@
         patObj: Object.assign({}, defaultPatient),
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
          options:["父母","父亲","母亲","祖父母","外祖父母"],
-        optionRow:["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
+        optionRow:["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
         address:"",
         doctorList:[],
         examinationList:[],
@@ -387,7 +387,7 @@
 
     methods: {
       genderChange(){
-        if(!this.patObj.gender){
+        if(this.patObj.gender){
           this.optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"];
         }else{
          this.optionRow= ["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]

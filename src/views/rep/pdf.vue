@@ -18,7 +18,7 @@
           <patient-ni :data="item" :page-num="contentsData[5].pageNum-0+index" ></patient-ni>
         </div>
         <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[6].pageNum" ></nerve-examine>
-        <eeg-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[7].pageNum" ></eeg-examine>
+        <eeg-examine v-if="eegData"  :medical-record-id="medicalRecordId+''" :page-num="contentsData[7].pageNum" ></eeg-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
            <scale-assess :data="item" :page-num="contentsData[8].pageNum-0+index" ></scale-assess>
         </div>
@@ -34,6 +34,7 @@
 import { mapGetters } from 'vuex'
 import {getRecordPatient} from "@/api/patient"
 import {getPursue,queryExperience} from "@/api/ips"
+import{getEEG} from "@/api/HRV"
 import {analysisData} from "@/api/analysis"
  import{scaleResult,getReportMsg,scaleResultNum} from "@/api/report"
       import repIndex from './components/rep-index'
@@ -51,7 +52,7 @@ import {analysisData} from "@/api/analysis"
       import scaleAssess from './components/scaleAssess'
       import assessment from './components/assessment'
       import assessment2 from './components/assessment2'
-       import repEnd from './components/repEnd'
+      import repEnd from './components/repEnd'
 
     export default {
       name: "pdf",
@@ -149,12 +150,7 @@ import {analysisData} from "@/api/analysis"
       watch: {
         $route(to) {
             this.medicalRecordId=this.$route.query.id;
-             this.getExperienceList();
-           this.getPatientData();
-           this.getPursueData();
-           this.getScaleResult();
-           this.getReportMsgData();
-           this.getScaleNumResult();
+          this.initData();
         }
       },
       created(){
@@ -167,18 +163,26 @@ import {analysisData} from "@/api/analysis"
       },
       mounted(){
           this.$store.commit("CLOSE_TBA")
-           this.getExperienceList();
-           this.getPatientData();
-           this.getPursueData();
-           this.getScaleResult();
-           this.getReportMsgData();
-           this.getScaleNumResult();
+           this.initData();
       },
+      
       methods: {
-        outPut(){
-           this.$nextTick(() => {
-            window.print()
-
+          async initData(){
+          let patient=await this.getPatientData();
+          await this.getExperienceList(patient.patientId)
+            this.getEEGData();
+            this.getPursueData();
+            this.getScaleResult();
+            this.getReportMsgData();
+            this.getScaleNumResult();
+        },
+        getEEGData(){
+           getEEG(this.medicalRecordId).then(res=>{
+              if(res.code==200){
+                this.eegData=true;
+              }else{
+                this.eegData=false;
+              }
           })
         },
         getScaleNumResult(){
@@ -189,7 +193,7 @@ import {analysisData} from "@/api/analysis"
                 let pressureData=res.dataList[0];
                 pressureData.conclusion=JSON.parse(pressureData.conclusion);
                 pressureData.chartData=JSON.parse(pressureData.chartData);
-                let explanation=JSON.parse(pressureData.explanation);
+                let explanation=pressureData.explanation;
                 let index=0;
                 for(let item of explanation){
                    rowNum+=this.computeRowNum(item);
@@ -275,8 +279,13 @@ import {analysisData} from "@/api/analysis"
                 }
                 this.suggestData=suggestData;
                 this.contentsData[6].pageNum=this.contentsData[5].pageNum+this.suggestData.length;//附录2:自主神经检查
-                this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测
-                this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;//附录4:量表评估
+                if(this.eegData){
+                  this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测--有
+                }else{
+                   this.contentsData[7].pageNum=this.contentsData[6].pageNum;//附录3:EEG检测--没有
+                   this.contentsData[7].hidden=true;
+                }
+                 this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;
                 this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
 
               }
@@ -370,43 +379,45 @@ import {analysisData} from "@/api/analysis"
             let scaleData=[];
             let pageNum=0;
             let itemNum=0;
-            let pageMax=3;
+            let pageMax=2;
             scaleData[pageNum]=[]
             for(let item of data){
               if(item.questionnaireNumber!=12){
                 let length=item.explanation.length;
-                if(item.questionnaireName.indexOf("性质")>-1&&length>170){
-                  itemNum=1
+                
+                if(item.questionnaireName.indexOf("性质")>-1){
+                  itemNum=0
                   pageNum++;
                   scaleData[pageNum]=[]
                 }
-                itemNum++;
                 if(item.chartData!=""){
                   item.chartData=JSON.parse(item.chartData);
-                  if(item.chartData.length > 4&&item.chartData.length<=6){
+                  if(item.type=="table"&&item.chartData.length <4){
                     itemNum++;
-                  }else if(item.chartData.length > 6){
-                    itemNum+=2;
+                  }
+                 if(item.type=="table"&&item.chartData.length >4){
+                    itemNum+=1
                   }
                 }
                 if(itemNum>pageMax){
-                  itemNum=1
+                  itemNum=0
                   pageNum++;
                   scaleData[pageNum]=[]
                 }
                 scaleData[pageNum].push(item)
+                 itemNum++;
               }
             }
             this.scaleData=scaleData;
           })
         },
         getPatientData(){
-          getRecordPatient(this.medicalRecordId).then(res=>{
+         return getRecordPatient(this.medicalRecordId).then(res=>{
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
             }
-
+            return  this.patientData;
           })
         },
         getPursueData(){
@@ -417,8 +428,8 @@ import {analysisData} from "@/api/analysis"
            }
           })
         },
-        getExperienceList(){
-         queryExperience(this.medicalRecordId).then(res=>{
+        getExperienceList(patientId){
+         queryExperience(patientId).then(res=>{
             if(res.code==200){
               this.experienceData=res.dataList;
               let exeList=[];
@@ -475,13 +486,9 @@ import {analysisData} from "@/api/analysis"
                     }
                     exeList[pageNum][year].push(param);
                 }
-
-
               }
               this.experienceData=exeList;
-
             }
-            let length=this.experienceData.length;
              this.contentsData[1].pageNum=2;//就诊经历
              this.contentsData[1].hidden=this.experienceData.length==0?true:false;
              this.contentsData[2].pageNum=2-0+this.experienceData.length;//三维评估

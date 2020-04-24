@@ -4,7 +4,7 @@
           <div class="content-title">{{data.questionnaireName}}</div>
           <div>得分：{{data.score}}分</div>
           <div>{{data.conclusion}}</div>
-          <div>{{data.explanation}}</div>
+           <div v-for="(item,index) in data.explanation" :key="index">{{item}}</div>
       </div>
   </div>
 </template>

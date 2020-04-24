@@ -30,6 +30,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
+          <el-button  round class="search-btn" @click="clearData">重置</el-button>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
         </el-form-item>
     </el-form>
@@ -39,7 +40,7 @@
                 :data="list"
                 v-loading="listLoading" border>
         <el-table-column label="编号" width="80" align="center">
-          <template slot-scope="scope">{{scope.row.patientId}}</template>
+          <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
         <el-table-column label="患者姓名" align="center">
           <template slot-scope="scope">{{scope.row.patientName }}</template>
@@ -142,6 +143,16 @@
       }
     },
     methods: {
+      clearData(){
+        this.listQuery.condition.cardNo="";
+        this.listQuery.condition.endTime="";
+        this.listQuery.condition.patientId="";
+        this.listQuery.condition.patientName="";
+        this.listQuery.condition.startTime="";
+        this.listQuery.condition.typeId="";
+        this.listQuery.pageNum=1;
+        this.listQuery.pageSize=10;
+      },
       readReport(data){
         let path=data.typeId==4?"pdf":"siftPdf";
         this.$router.push({

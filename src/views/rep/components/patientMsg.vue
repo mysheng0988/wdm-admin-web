@@ -5,13 +5,13 @@
       <div class="msg">
         <el-form ref="form" label-width="80px" size="mini">
             <div class="flex-wrap">
-              <el-form-item class="flex-item" label="姓 名:">
+              <el-form-item class="flex-item" label="姓名:">
                 <p>{{patientVo.realName}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="性别:">
                 <p>{{patientVo.gender?"女":"男"}}</p>
               </el-form-item>
-              <el-form-item class="flex-item" label="年 龄:">
+              <el-form-item class="flex-item" label="年龄:">
                 <p> {{patientVo.birthday | formatAge}}</p>
               </el-form-item>
           </div>
@@ -19,7 +19,7 @@
               <el-form-item class="flex-item" label="婚姻:">
                 <p>{{patientVo.maritaStatus}}</p>
               </el-form-item>
-              <el-form-item class="flex-item" label="民 族:">
+              <el-form-item class="flex-item" label="民族:">
                 <p>{{patientVo.nation}}</p>
               </el-form-item>
               <!-- <el-form-item class="flex-item" label="宗教:">
@@ -142,7 +142,7 @@
            titleName.push(item.name)
          }
          for(let item of strArr){
-           if(item="")
+           if(item!="")
              titleName.push(item)
          }
          return titleName.join("、")

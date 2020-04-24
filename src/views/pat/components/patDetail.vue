@@ -19,8 +19,8 @@
           <el-col :span="8">
             <el-form-item label="性别："   >
               <el-radio-group v-model="patObj.gender" @change="genderChange">
-                <el-radio :label="false">男</el-radio>
-                <el-radio :label="true">女</el-radio>
+                <el-radio :label="true">男</el-radio>
+                <el-radio :label="false">女</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -255,7 +255,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item :label="medObj.outpatient?'门诊号:':'住院号:'"  prop="beHospitalizedNumber" >
-            <el-input  v-model.number="medObj.beHospitalizedNumber" clearable maxlength="15" show-word-limit  placeholder="请输入"></el-input>
+            <el-input  v-model="medObj.beHospitalizedNumber" clearable maxlength="15" show-word-limit  placeholder="请输入"></el-input>
           </el-form-item>
         </el-col>
          <el-col :span="8">
@@ -284,7 +284,7 @@
         </el-col>
         <el-col :span="8">
           <el-form-item label="床号："  prop="bedNo" >
-            <el-input v-model.number="medObj.bedNo"  placeholder="请输入床号"  clearable maxlength="10" show-word-limit ></el-input>
+            <el-input v-model="medObj.bedNo"  placeholder="请输入床号"  clearable maxlength="10" show-word-limit ></el-input>
           </el-form-item>
         </el-col>
          <!-- <el-col :span="8">
@@ -315,17 +315,24 @@
         title="请您刷卡"
         :visible.sync="dialogVisible"
         width="30%">
-          <el-form  :model="cardFrom"
+          <!-- <el-form  :model="cardFrom"
              :rules="cardRules"
              ref="cardFrom">
               <el-form-item label="卡号："   prop="cardNo">
                   <el-input id="cardNo" v-model.number="cardFrom.cardNo"   placeholder="请刷卡"
                   clearable maxlength="10" show-word-limit></el-input>
               </el-form-item>
-          </el-form>
+          </el-form> -->
+          <div class="card-box">
+             <el-image class="img" :src="require('@/views/pat/imgs/cardID.png')"></el-image>
+              <p class="flag">请将磁卡置于机器上方</p>
+              <p v-if="medObj.cardNo==''&&!cardState">请你刷卡</p>
+              <p class="success" v-else-if="medObj.cardNo&&cardState"><i class="el-icon-success"></i>刷卡成功</p>
+              <p class="error" v-else><i class="el-icon-error"></i>刷卡失败</p>
+          </div>
         <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="onSubmit('cardFrom')">提交数据</el-button>
+          <el-button @click="dialogVisible=false">取消</el-button>
+          <el-button type="primary" @click="readCardMsg">确认刷卡</el-button>
         </span>
       </el-dialog>
   </el-card>
@@ -333,6 +340,7 @@
 
 <script>
    import {validateNum} from '@/utils/validate';
+   import { Loading } from 'element-ui';
   import {savePatient,
     getDeptList,
     getInfoCard,
@@ -342,6 +350,7 @@
     getDoctorList,
     updatePatient,
     getMedicalRecordPatient} from '@/api/patient';
+  import{readCardReset} from "@/api/cardRead"
   import { Message, MessageBox } from 'element-ui'
   const defaultPatient = {
     pid:null,
@@ -435,9 +444,10 @@
         dialogVisible:false,
         select: { province: '北京市', city: '北京城区', area: '海淀区' },
         address:"",
+        cardState:false,
         doctorList:[],
         examinationList:[],
-        optionRow:["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
+        optionRow:["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"],
         deptList:[],
         cureList:[],
         showBase:true,
@@ -496,19 +506,12 @@
             { pattern: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/, message: '身份证格式不正确',trigger: 'blur' }
           ]
         },
-        cardRules:{
-           cardNo: [
-            {required: true, message: '必填字段', trigger: 'blur'},
-             { type: 'number', message: '卡号必须数字',trigger: 'blur'}
-          ],
-        },
         medrules:{
           fromDeptId: [
             {required: true, message: '必填字段', trigger: 'change'}
           ],
           beHospitalizedNumber: [
-            {required: true, message: '必填字段', trigger: 'blur'},
-            { type: 'number', message: '必须为数字',trigger: 'blur'}
+            {required: true, message: '必填字段', trigger: 'blur',validator: validateNumber},
           ],
           bedNo:[
             {required: false, trigger: 'blur', validator: validateNumber}
@@ -548,8 +551,24 @@
 
 
     methods: {
+       readCardMsg(){
+        readCardReset().then(res=>{
+          console.log(res)
+          this.cardState=true;
+          this.medObj.cardNo=""
+          if(res.code==200){
+             let cardMsg=parseInt(res.data.CardSn1,16);
+            console.log(cardMsg)
+            this.medObj.cardNo=cardMsg;
+            this.$message.success("刷卡成功")
+            this.onSubmit()
+          }else{
+            this.$message.error("刷卡失败")
+          }
+        })
+      },
       genderChange(){
-        if(!this.patObj.gender){
+        if(this.patObj.gender){
           this.optionRow=["无","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"];
         }else{
          this.optionRow= ["无","哺乳","妊娠期妇女","育龄期妇女","产妇","孕妇","妊娠期妇女（前三个月）","驾驶员","机器操纵者","高空作业者","从事危险工作者","精细工作者"]
@@ -578,7 +597,6 @@
       getExaminationBtn(){
         queryExamination(this.info.hospitalId).then(res=>{
           if(res.code==200){
-            console.log(res)
             this.examinationList=res.dataList;
           }
         })
@@ -638,15 +656,13 @@
 
 
       },
-      onSubmit(formName) {
+      onSubmit() {
         this.patObj.address=this.select.province+","+this.select.city+","+this.select.area+","+this.address;
-        this.$refs[formName].validate((valid) => {
-            if (valid) {
-              this.$confirm('是否提交数据', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-              }).then(() => {
+              // this.$confirm('是否提交数据', '提示', {
+              //   confirmButtonText: '确定',
+              //   cancelButtonText: '取消',
+              //   type: 'warning'
+              // }).then(() => {
                   if(this.patObj.pid!=null){
                     //updatePatient(this.patObj).then(res=>{
                       this.medObj.patientId=this.patObj.pid;
@@ -667,28 +683,26 @@
                       }
                     })
                   }
-              })
-              } else {
-                this.$message({
-                  message: '验证失败',
-                  type: 'error',
-                  duration: 1000
-                });
-                return false;
-              }
-          })
-
+              //})
       },
       saveMedical(){
-          this.medObj.cardNo=this.cardFrom.cardNo;
+         const loading =Loading.service({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.8)'
+        });
           saveMedicalRecord(this.medObj).then(res=>{
+            loading.close();
               if(res.code==200){
                 this.$store.commit('delete_tabs', this.$route.path)
                 this.$router.push("/ips/index")
                 //this.resetRouter(this.medObj.patientId,this.medObj.examinationId)
                 Message.success("保存成功")
               }
-          })
+          }).catch(err=>{
+            loading.close();
+         });
       },
       // resetRouter(patientId,examinationId){
       //     let path="IPS-C";
@@ -734,8 +748,20 @@
     color: #409EFF;
     cursor: pointer;
   }
-  #cardNo{
-    position:absolute;
-    top:-100px;
+  .card-box{
+    width: 100%;
+    line-height: 35px;
+    text-align: center;
   }
+  .card-box .img{
+    width: 80px;
+  }
+  .card-box .success{
+      color:#67C23A;
+  }
+  .card-box i{margin: 0 10px;}
+  .card-box .error{
+    color:#F56C6C;
+  }
+  
 </style>

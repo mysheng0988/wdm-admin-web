@@ -16,6 +16,7 @@
               <template slot-scope="scope">{{scope.row.item2}}</template>
             </el-table-column> -->
           </el-table>
+           <div v-for="(item,index) in data.explanation" :key="index">{{item}}</div>
       </div>
   </div>
 </template>
@@ -48,7 +49,7 @@
     flex:1;
     color: #666;
      margin: 5px 0;
-     font-size: 10px;
+     font-size: 15px;
      text-align: justify;
     line-height: 30px;
   }

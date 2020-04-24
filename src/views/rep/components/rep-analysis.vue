@@ -1,7 +1,7 @@
 <template> 
   <div class="form-pdf">
     <div class="pdf-bar"></div>
-    <div class="label-title">报告分析总结/repprt Analysis</div>
+    <div class="label-title">报告分析总结/report Analysis</div>
     <div class="content-box flex" v-for="(item,index) in analysisData" :key="index" >
         <img class="img" :src="item.imgPath" v-if="item.imgPath!=''"/>
         <div class="img" v-else></div>

@@ -23,6 +23,7 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
+           <el-button  round class="search-btn" @click="clearData">重置</el-button>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
           <el-button type="success" round class="search-btn" @click="dialogVisible = true">患者登记</el-button>
         </el-form-item>
@@ -178,7 +179,7 @@
     },
     filters:{
       formatGender(gender){
-        return gender?"女":"男"
+        return gender?"男":"女"
       },
       formatAge(birthday){
         if(birthday&&birthday!=""){
@@ -200,6 +201,21 @@
       }
     },
     methods: {
+      clearData(){
+        let listQuery= {
+          cardNo: "",
+          createTimeStart: "",
+          createTimeEnd:"",
+          examinationId: null,
+          examinationStatus: null,
+          pid: "",
+          realName: "",
+          pageNum: 1,
+          pageSize: 10
+        };
+        this.createDate=[]
+        this.listQuery=listQuery;
+      },
       historyRecord(data){
          this.$router.push({
           path: '/pat/assessRecord',
@@ -258,7 +274,7 @@
             this.cardForm.cardID=res.data.cardno
              let cardMsg={}
               cardMsg.realName=res.data.name;
-              cardMsg.gender=res.data.sex=="男"?false:true;
+              cardMsg.gender=res.data.sex=="男"?true:false;
               cardMsg.nation=res.data.nation;
               cardMsg.cardNo=res.data.cardno;
             sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))

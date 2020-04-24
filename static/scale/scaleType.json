@@ -155,6 +155,11 @@
       "parentId":109,
       "label": "焦虑自评量表SAS",
       "checked":false
+    },{
+      "id": 31,
+      "parentId":109,
+      "label": "焦虑抑郁筛查量表（HADS）",
+      "checked":false
     }]
   },{
     "id": 10901,
