@@ -47,10 +47,13 @@
           </div>
           <div class="item-box">
             <div  class="title">已选择</div>
-            <p v-for="(item,index) in selectedData" class="label" :key="index"  >
+            <div class="selected-box">
+              <p v-for="(item,index) in selectedData" class="label" :key="index"   >
                 {{item.label}}
               <i class="close el-icon-error" @click="handleRemove(index)"></i>
-            </p>
+              </p>
+            </div>
+            
           </div>
         </div>
         <span slot="footer" class="dialog-footer">
@@ -295,18 +298,19 @@ import {getScaleTypeJson} from '@/api/getJson'
   .screen-box{
     border: 1px solid #eee;
     border-radius: 10px;
-    height: 450px;
-    overflow:auto;
   }
   .tree-box{
-    height: 340px;
+    height: 320px;
+    overflow: auto;
+  }
+  .selected-box{
+    height: 370px;
     overflow: auto;
   }
   .item-box{
      padding: 10px;
      flex:1;
      align-items: flex-start;
-     border: 1px solid #eee;
   }
   .item-box .el-input{
     margin: 10px 0;

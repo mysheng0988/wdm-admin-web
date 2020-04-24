@@ -3,7 +3,7 @@ import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 
 import router from '@/router/index';
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth';
 
 // 创建axios实例
 const service = axios.create({

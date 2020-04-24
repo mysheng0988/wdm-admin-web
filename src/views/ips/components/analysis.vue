@@ -208,12 +208,12 @@
         this.data["complete"]=false;
         this.data["isRecommendedMedicationTips"]=this.checkList;
         updataData(this.data).then(res=>{
-            loading.close();
+           loading.close();
             if(res.code==200){
                 this.$emit('nextStep');
             }
         }).catch(err=>{
-            loading.close();
+           loading.close();
         });
       },
       handleNext() {

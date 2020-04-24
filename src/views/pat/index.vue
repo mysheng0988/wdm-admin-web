@@ -277,7 +277,7 @@
               cardMsg.gender=res.data.sex=="男"?true:false;
               cardMsg.nation=res.data.nation;
               cardMsg.cardNo=res.data.cardno;
-            sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
+              sessionStorage.setItem("cardMsg",JSON.stringify(cardMsg))
           }else{
             this.$message.warning("刷卡失败")
           }

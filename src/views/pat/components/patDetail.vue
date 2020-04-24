@@ -340,7 +340,7 @@
 
 <script>
    import {validateNum} from '@/utils/validate';
-   import { Loading } from 'element-ui';
+    import { Loading } from 'element-ui';
   import {savePatient,
     getDeptList,
     getInfoCard,

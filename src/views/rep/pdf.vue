@@ -85,6 +85,7 @@ import {analysisData} from "@/api/analysis"
           pressureData:"",
           pressureData2:"",
           patientData:{},
+          eegData:false,
           patientVo:{},
           mainPursue:{},
           analysisData:{},
