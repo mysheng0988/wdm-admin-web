@@ -9,11 +9,11 @@
           <div class="flex">
             <div class="item-box">
                 <div class="total-title">新增患者</div>
-                <div class="total-value">200</div>
+                <div class="total-value">{{statisticsData.patientIncrement}}</div>
             </div>
             <div  class="item-box">
                 <div class="total-title">总患者数</div>
-                <div class="total-value">2000</div>
+                <div class="total-value">{{statisticsData.patientTotal}}</div>
             </div>
           </div>
         </div>
@@ -25,11 +25,11 @@
           <div class="flex">
             <div class="item-box">
                 <div class="total-title">总测评任务</div>
-                <div class="total-value">200</div>
+                <div class="total-value">{{statisticsData.examinationTaskTotal}}</div>
             </div>
             <div  class="item-box">
                 <div class="total-title">今日未完成</div>
-                <div class="total-value">2000</div>
+                <div class="total-value">{{statisticsData.todayUndoneExaminationTaskTotal}}</div>
             </div>
           </div>
           
@@ -42,11 +42,11 @@
            <div class="flex">
             <div class="item-box">
                 <div class="total-title">总报告数</div>
-                <div class="total-value">200</div>
+                <div class="total-value">{{statisticsData.reportTotal}}</div>
             </div>
             <div  class="item-box">
                 <div class="total-title">今日报告量</div>
-                <div class="total-value">2000</div>
+                <div class="total-value">{{statisticsData.todayReportTotal}}</div>
             </div>
           </div>
         </div>
@@ -58,11 +58,11 @@
            <div class="flex">
             <div class="item-box">
                 <div class="total-title">总治疗任务</div>
-                <div class="total-value">200</div>
+                <div class="total-value">{{statisticsData.treatmentTaskTotal}}</div>
             </div>
             <div  class="item-box">
                 <div class="total-title">未完成任务</div>
-                <div class="total-value">2000</div>
+                <div class="total-value">{{statisticsData.todayUndoneTreatmentTaskTotal}}</div>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
     </el-row>
   </div>
   <div class="chart-box">
-    <ve-line class="chart"  height="300px" :data="chartData" :settings="chartSettings" :extend="extend"></ve-line>
+    <ve-line class="chart"  height="300px" :data="chartData" :settings="chartSettings"  :chartSettings="chartSettings" :extend="extend"></ve-line>
   </div>
   <div class="chart-box">
     <ve-line class="chart"  height="300px" :data="chartData2" :settings="chartSettings" :extend="extend"></ve-line>
@@ -80,15 +80,22 @@
 
 <script>
   import { Message, MessageBox } from 'element-ui'
- 
+  import{getHomeData} from "@/api/home"
   export default {
     name: 'home',
    
     data () {
-      this.chartSettings = {
-        xAxisType: 'time'
-      }
       return {
+        statisticsData:{},
+        chartSettings : {
+            labelMap: {
+              'value1': '筛查测评A',
+              'value2': '专科测评B',
+              'value3': '综合测评C'
+            },
+             xAxisType: 'time'
+            
+          },
          extend :{
           grid:{
             top:40,
@@ -99,7 +106,7 @@
           }
         },
         chartData: {
-          columns: ['日期', '筛查测评A', '专科测评B', '综合测评C'],
+          columns: ['data', 'value1', 'value2', 'value3'],
           rows: [
            
           ]
@@ -125,15 +132,17 @@
        for(let i=0;i<7;i++){
          let num= i+i+1;
          let param={
-           "日期":'2020-01-'+num,
-           "筛查测评A":Math.random()*500,
-           "专科测评B":Math.random()*500,
-           "综合测评C":Math.random()*500,
+           "data":'2020-01-'+num,
+           "value1":Math.random()*500,
+           "value2":Math.random()*500,
+           "value3":Math.random()*500,
          }
          data.push(param)
        }
        this.chartData.rows=data;
-       console.log(this.chartData.rows)
+      getHomeData().then(res=>{
+        this.statisticsData=res.dataList[0];
+      })
     },
 
     methods:{
