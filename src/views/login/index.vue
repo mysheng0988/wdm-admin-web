@@ -103,7 +103,7 @@
             this.$store.dispatch('Login', this.loginForm).then((res) => {
               this.loading = false;
               if(res.code=="200"){
-                this.$router.push({path: '/pat'})
+                this.$router.push({path: '/home'})
               }else{
                 this.$message.error(res.msg);
               }

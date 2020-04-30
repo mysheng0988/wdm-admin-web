@@ -82,7 +82,7 @@
           this.$router.push(this.activePath)
         },
         tabRemove (targetName) {
-          if (targetName === '/pat/list') {
+          if (targetName === '/home') {
             return
           }
           this.$store.commit('delete_tabs', targetName)
@@ -104,5 +104,6 @@
 .tabs{
   height: 50px;
   margin: 0;
+  font-weight: bold
 }
 </style>

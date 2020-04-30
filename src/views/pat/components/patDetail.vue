@@ -332,7 +332,7 @@
           </div>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible=false">取消</el-button>
-          <el-button type="primary" @click="readCardMsg">确认刷卡</el-button>
+          <el-button type="primary" @click="readCardMsg" :loading="loadingbut">确认刷卡</el-button>
         </span>
       </el-dialog>
   </el-card>
@@ -431,6 +431,7 @@
         }
       };
       return {
+        loadingbut:false,
         patObj: Object.assign({}, defaultPatient),
         medObj: Object.assign({}, defaultMedical),
         cardFrom:{
@@ -552,19 +553,21 @@
 
     methods: {
        readCardMsg(){
+         this.loadingbut=true;
         readCardReset().then(res=>{
-          console.log(res)
+           this.loadingbut=false;
           this.cardState=true;
           this.medObj.cardNo=""
           if(res.code==200){
              let cardMsg=parseInt(res.data.CardSn1,16);
-            console.log(cardMsg)
             this.medObj.cardNo=cardMsg;
             this.$message.success("刷卡成功")
             this.onSubmit()
           }else{
             this.$message.error("刷卡失败")
           }
+        }).catch(res=>{
+           this.loadingbut=false;
         })
       },
       genderChange(){
@@ -626,7 +629,7 @@
                 this.patObj.gender=cardMsg.gender;
                 this.patObj.nation=cardMsg.nation;
               }
-
+            sessionStorage.setItem("cardMsg",null)
           }
           return this.patObj.pid;
         })
@@ -639,6 +642,8 @@
         })
       },
        payByCard(formName){
+          this.cardState=false;
+          this.medObj.cardNo=""
           this.$refs[formName].validate((valid) => {
           this.$refs["medObjFrom"].validate((valid2)=>{
             if (valid&&valid2) {

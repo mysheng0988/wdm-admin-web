@@ -7,17 +7,16 @@ Vue.use(Router)
 import Layout from '../views/layout/Layout'
 export const constantRouterMap = [
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
-  {path: '/pdf', component: () => import('@/views/rep/pdf'), hidden: true,meta: {title: '报告打印', icon: 'home',roleId:[1,13,18]}},
   {
     path: '',
     component: Layout,
-    redirect: '/pat/list',
-    hidden:true,
+    redirect: '/home',
+    meta: {title: '首页', icon: 'home',roleId:[1,13,18]},
     children: [{
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
-      meta: {title: '首页', icon: 'home',roleId:[1]}
+      meta: {title: '首页', icon: 'home',roleId:[1,13,18]}
     }]
   },
   {
@@ -25,13 +24,13 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/pat/list',
     name: 'pat',
-    meta: {title: '患者管理', icon: 'management',roleId:[18,13]},
+    meta: {title: '患者管理', icon: 'patient',roleId:[18,13]},
     children: [
       {
         path: 'list',
         name: 'list',
         component: () => import('@/views/pat/index'),
-        meta: {title: '患者管理', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '患者管理', icon: 'patient',roleId:[13,18]},
       },
       {
         path: 'patAdd',
@@ -82,13 +81,13 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/ips/index',
     name: 'ips',
-    meta: {title: '心身检查', icon: 'order',roleId:[13,18]},
+    meta: {title: '心身检查', icon: 'checkup',roleId:[13,18]},
     children: [
       {
         path: 'index',
         name: 'index',
         component: () => import('@/views/ips/index'),
-        meta: {title: '心身检查', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '心身检查', icon: 'checkup',roleId:[13,18]},
       },
       {
         path: 'IPS-A',
@@ -136,13 +135,13 @@ export const constantRouterMap = [
     name: 'rep',
     component: Layout,
     redirect: '/rep/list',
-    meta: {title: '报告列表', icon: 'sms-flash',roleId:[13,18]},
+    meta: {title: '报告列表', icon: 'report-icon',roleId:[13,18]},
     children: [
       {
         path: 'list',
         name: 'repList',
         component: () => import('@/views/rep/index'),
-        meta: {title: '报告列表', icon: 'product-list',roleId:[13,18]},
+        meta: {title: '报告列表', icon: 'report-icon',roleId:[13,18]},
       },{
         path: 'edit',
         name: 'edit',
@@ -206,13 +205,13 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/user/account',
     name: 'user',
-    meta: {title: '系统管理', icon: 'user-manage',roleId:[13]},
+    meta: {title: '系统管理', icon: 'sys-setting',roleId:[13]},
     children: [
       {
         path: 'account',
         name: 'account',
         component: () => import('@/views/user/accountManagement'),
-        meta: {title: '账户管理', icon: 'sms-ad',roleId:[13]}
+        meta: {title: '账户管理', icon: 'admin-icon',roleId:[13]}
       },
       {
         path: 'role',
@@ -225,13 +224,13 @@ export const constantRouterMap = [
         path: 'hos',
         name: 'hos',
         component: () => import('@/views/user/hosManagement'),
-        meta: {title: '医院管理',icon:"sms-subject",roleId:[18,13]},
+        meta: {title: '医院管理',icon:"icon-hos",roleId:[18,13]},
       },
       {
         path: 'dep',
         name: 'dep',
         component: () => import('@/views/user/depManagement'),
-        meta: {title: '科室管理', icon: 'sms-flash',roleId:[13]}
+        meta: {title: '科室管理', icon: 'icon-dep',roleId:[13]}
       },
     ]
   },

@@ -26,19 +26,10 @@
            <el-button  round class="search-btn" @click="clearData">重置</el-button>
           <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
           <el-button type="success" round class="search-btn" @click="dialogVisible = true">患者登记</el-button>
+          <!-- <el-button type="info" round class="search-btn" @click="M1WriteBlockData">写卡</el-button> -->
         </el-form-item>
       </div>
     </el-form>
-    <!--<el-card class="operate-container" shadow="never">-->
-      <!--<i class="el-icon-tickets" style="margin-top: 5px"></i>-->
-      <!--<span style="margin-top: 5px">数据列表</span>-->
-      <!--<el-button-->
-        <!--class="btn-add"-->
-        <!--@click="handleAddProductCate()"-->
-        <!--size="mini">-->
-        <!--添加-->
-      <!--</el-button>-->
-    <!--</el-card>-->
     <div class="table-container">
       <el-table ref="productCateTable"
                 style="width: 100%"
@@ -130,7 +121,7 @@
 <script>
   import {queryPatient,queryExamination} from '@/api/patient'
   import {medicalRecordListData} from '@/api/medicalRecord'
-  import {readCard} from '@/api/cardRead'
+  import {readCard,M1WriteBlock} from '@/api/cardRead'
   import {mapGetters} from 'vuex'
   import { Message, MessageBox } from 'element-ui'
   export default {
@@ -201,6 +192,11 @@
       }
     },
     methods: {
+      M1WriteBlockData(){
+        M1WriteBlock().then(res=>{
+          console.log(res)
+        })
+      },
       clearData(){
         let listQuery= {
           cardNo: "",

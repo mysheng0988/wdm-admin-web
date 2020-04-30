@@ -60,8 +60,8 @@ export default {
     color: #409EFF;
   }
   .img{
-    width: 180px;
-    height: 130px;
+    width: 140px;
+    height: 85px;
     padding: 0;
     margin: 0;
     vertical-align: center;

@@ -7,7 +7,7 @@
         <p>P<span>ATIENT EDUCATION</span></p>
       </div>
       <template v-for="(item,index) in data">
-        <div :class="item.type==0?'content-title':'content'"  :key="'t'+index" >{{item.content}}</div>
+        <div :class="item.type==0?'content-title':'content'"  :key="'t'+index" ><span v-if='item.type==10' class="span">&#9633;</span>{{item.content}}</div>
       </template>
     </div>
     <div class="pageNum">-{{pageNum}}-</div>   
@@ -64,7 +64,15 @@
   }
   .label-title span{
     font-size: 14px;
+    font-weight: bold;
   }
+  .content-box .span{
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    margin: 5px;
+  }
+
  .content-box .content-title{
     font-size: 26px;
     color: #222;

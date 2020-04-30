@@ -7,23 +7,22 @@
         <div v-for="(item2,index2) in experienceData" :key="'exe-'+index2">
           <experience :experience-data="item2" :page-num="contentsData[1].pageNum-0+index2" ></experience>
         </div>
-        <assess  :page-num="contentsData[2].pageNum" :medical-record-id="medicalRecordId+''"></assess>
         <div v-for="(item,index) in page" :key="index">
-          <rep-analysis  :page-num="contentsData[3].pageNum-0+index" :analysis-data="item"></rep-analysis>
+          <rep-analysis  :page-num="contentsData[2].pageNum-0+index" :analysis-data="item"></rep-analysis>
         </div>
         <div v-for="(item,index) in drugData" :key="'drug'+index">
-            <suggest-drug :data="item" :page-num="contentsData[4].pageNum-0+index" ></suggest-drug>
+            <suggest-drug :data="item" :page-num="contentsData[3].pageNum-0+index" ></suggest-drug>
         </div>
         <div v-for="(item,index) in suggestData" :key="'ni'+index">
-          <patient-ni :data="item" :page-num="contentsData[5].pageNum-0+index" ></patient-ni>
+          <patient-ni :data="item" :page-num="contentsData[4].pageNum-0+index" ></patient-ni>
         </div>
-        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[6].pageNum" ></nerve-examine>
-        <eeg-examine v-if="eegData"  :medical-record-id="medicalRecordId+''" :page-num="contentsData[7].pageNum" ></eeg-examine>
+        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[5].pageNum" ></nerve-examine>
+        <eeg-examine v-if="eegData"  :medical-record-id="medicalRecordId+''" :page-num="contentsData[6].pageNum" ></eeg-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
-           <scale-assess :data="item" :page-num="contentsData[8].pageNum-0+index" ></scale-assess>
+           <scale-assess :data="item" :page-num="contentsData[7].pageNum-0+index" ></scale-assess>
         </div>
-        <assessment v-if="pressureData" :data="pressureData" :page-num="contentsData[9].pageNum" ></assessment>
-        <assessment2 v-if="pressureData2" :data="pressureData2" :page-num="contentsData[9].pageNum-0+1"></assessment2>
+        <assessment v-if="pressureData" :data="pressureData" :page-num="contentsData[8].pageNum" ></assessment>
+        <assessment2 v-if="pressureData2" :data="pressureData2" :page-num="contentsData[8].pageNum-0+1"></assessment2>
         <rep-end></rep-end>
     </div>
         <el-button type="danger" @click="getPdf('pdfCentent',patientVo.realName)">导出PDF</el-button>
@@ -105,11 +104,6 @@ import {analysisData} from "@/api/analysis"
                hidden:false,
             },
              {
-              pageName:"三维评估",
-              pageNum:0,
-               hidden:false,
-            },
-             {
               pageName:"报告分析总结",
               pageNum:0,
                hidden:false,
@@ -161,21 +155,22 @@ import {analysisData} from "@/api/analysis"
         }
 
          this.contentsData[0].pageNum=1;//患者信息
+          this.initData();
       },
       mounted(){
           this.$store.commit("CLOSE_TBA")
-           this.initData();
+          
       },
       
       methods: {
           async initData(){
           let patient=await this.getPatientData();
           await this.getExperienceList(patient.patientId)
-            this.getEEGData();
-            this.getPursueData();
-            this.getScaleResult();
-            this.getReportMsgData();
-            this.getScaleNumResult();
+          await this.getPursueData();
+          await this.getEEGData();
+          await this.getReportMsgData();
+          await this.getScaleResult();
+          await this.getScaleNumResult();
         },
         getEEGData(){
            getEEG(this.medicalRecordId).then(res=>{
@@ -215,14 +210,14 @@ import {analysisData} from "@/api/analysis"
             })
         },
         getReportMsgData(){
-            getReportMsg(this.medicalRecordId).then(res=>{
+         getReportMsg(this.medicalRecordId).then(res=>{
               if(res.code==200){
                   let pageNum=0;
                   let rowNum=0;
                   let maxRowNum=24;
                   let data=res.dataList[0];
-                  this.getAnalysisData(data);//报告分析总结模块
-                  this.doctorDrugPlan(data);//医生治疗建议
+                 this.getAnalysisData(data);//报告分析总结模块
+                   this.doctorDrugPlan(data);//医生治疗建议
                   let patientMedicationPlan={};
                   patientMedicationPlan.title="用药辅助建议";
                   patientMedicationPlan.data=[];
@@ -249,7 +244,7 @@ import {analysisData} from "@/api/analysis"
 
                  let suggestData=[];
                  let totalData=[];
-                totalData=this.pageThenData(totalData,patientMedicationPlan,0);
+                totalData=this.pageThenDrugData(totalData,patientMedicationPlan,0);
                 if(exercisePrescription){
                   totalData=this.pageThenData(totalData,exercisePrescription,0);
                 }
@@ -279,15 +274,21 @@ import {analysisData} from "@/api/analysis"
                     suggestData[pageNum].push(item)
                 }
                 this.suggestData=suggestData;
-                this.contentsData[6].pageNum=this.contentsData[5].pageNum+this.suggestData.length;//附录2:自主神经检查
+                 this.contentsData[3].pageNum=this.contentsData[2].pageNum+this.page.length;//治疗方案参考
+                this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.drugData.length;
+                this.contentsData[5].pageNum=this.contentsData[4].pageNum+this.suggestData.length;//附录2:自主神经检查
                 if(this.eegData){
-                  this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;//附录3:EEG检测--有
+                  this.contentsData[6].pageNum=this.contentsData[7].pageNum+1;//附录3:EEG检测--有
+                  this.contentsData[7].pageName="附录4:量表评估"
+                   this.contentsData[8].pageName="附录5:压力量表评估"
                 }else{
-                   this.contentsData[7].pageNum=this.contentsData[6].pageNum;//附录3:EEG检测--没有
-                   this.contentsData[7].hidden=true;
+                   this.contentsData[6].pageNum=this.contentsData[5].pageNum;//附录3:EEG检测--没有
+                   this.contentsData[6].hidden=true;
+                    this.contentsData[7].pageName="附录3:量表评估"
+                     this.contentsData[8].pageName="附录4:压力量表评估"
                 }
-                 this.contentsData[8].pageNum=this.contentsData[7].pageNum+1;
-                this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
+                 this.contentsData[7].pageNum=this.contentsData[6].pageNum+1;
+                this.contentsData[8].pageNum=this.contentsData[7].pageNum+this.scaleData.length;//附录4:压力量表评估
 
               }
 
@@ -305,7 +306,8 @@ import {analysisData} from "@/api/analysis"
            doctorMedicationPlan.title="用药辅助建议";
            doctorMedicationPlan.data=[];
            let dataPlan=data.doctorMedicationPlan;
-           if(dataPlan.length==0){
+           if(!dataPlan){
+             dataPlan=[];
              data.noneMedicationPlanPrompt=data.noneMedicationPlanPrompt?data.noneMedicationPlanPrompt:"无"
              dataPlan.push(data.noneMedicationPlanPrompt)
            }
@@ -343,8 +345,31 @@ import {analysisData} from "@/api/analysis"
                 drugData[pageNum].push(item)
             }
            this.drugData=drugData;
-            this.contentsData[5].pageNum=this.contentsData[4].pageNum+this.drugData.length;//附录1:患者教育
 
+        },
+        //用药教育
+        pageThenDrugData(data,obj,index){
+            if(!obj)return;
+          let str="";
+          if(typeof obj==="object"){
+             let param={
+                content:str+obj.title,
+                type:index
+              }
+              data.push(param)
+              let index2=0;
+             for(let item of obj.data){
+               index2++;
+              this.pageThenDrugData(data,item,index2)
+             }
+          }else{
+            let param={
+              content:obj,
+              type:10
+              }
+             data.push(param)
+          }
+          return data;
         },
         pageThenData(data,obj,index){
           if(!obj){
@@ -425,12 +450,11 @@ import {analysisData} from "@/api/analysis"
           getPursue(this.medicalRecordId).then(res=>{
            if(res.code==200){
             this.mainPursue=res.dataList[0];
-            console.log(this.mainPursue)
            }
           })
         },
         getExperienceList(patientId){
-         queryExperience(patientId).then(res=>{
+         return queryExperience(patientId).then(res=>{
             if(res.code==200){
               this.experienceData=res.dataList;
               let exeList=[];
@@ -492,8 +516,8 @@ import {analysisData} from "@/api/analysis"
             }
              this.contentsData[1].pageNum=2;//就诊经历
              this.contentsData[1].hidden=this.experienceData.length==0?true:false;
-             this.contentsData[2].pageNum=2-0+this.experienceData.length;//三维评估
-             this.contentsData[3].pageNum=this.contentsData[2].pageNum+1;//报告分析总结
+             //this.contentsData[2].pageNum=2-0+this.experienceData.length;//三维评估
+             this.contentsData[2].pageNum=this.contentsData[1].pageNum+this.experienceData.length;//报告分析总结
           }).catch(error => {
           })
         },
@@ -546,199 +570,9 @@ import {analysisData} from "@/api/analysis"
                page[pageNum].push(item)
              }
             this.page=page;
-            this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.page.length;//治疗方案参考
-            console.log(this.contentsData[3].pageNum)
-            console.log(this.page.length)
-            console.log(this.contentsData[4].pageNum)
+           
+
         },
-        getAnalysisData2(data){
-               // this.analysisData=data;
-                let page=[];//数组长度为页面页数
-                let rowNum=0;//页面行数
-                let itemNum=0;//页面项目数
-                let pageNum=0;//第多少页
-                let maxRowNum=20;//一页最大行数
-                page[pageNum]=[];
-              if(data.type=="4"){
-                  let focusProblem=data.focusProblem;//焦点问题
-                 rowNum+=2;
-               let pageItem1={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-problem.png"),
-                    label:"焦点问题",
-                    data:[]
-                  }
-
-              if(focusProblem.length==0){
-                focusProblem.push("无")
-              }
-
-              page[pageNum].push(pageItem1);
-
-              for(let item in focusProblem){
-                rowNum+=this.computeRowNum(focusProblem[item])
-                if(rowNum<=maxRowNum){
-                   itemNum=page[pageNum].length-1;
-                  page[pageNum][itemNum].data.push((item-0+1)+"、"+focusProblem[item])
-                }else{
-                  rowNum=2
-                  pageNum++;
-                   let pageItem={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-problem.png"),
-                    label:"",
-                    data:[]
-                  }
-                   page[pageNum]=[];
-                  page[pageNum].push(pageItem);
-                  page[pageNum][itemNum].data.push((item-0+1)+"、"+focusProblem[item])
-
-                }
-              }
-              }
-
-               let pageItem2={ //页面的最小单元
-                  imgPath:require("@/views/rep/img/icon-nutrition.png"),
-                  label:"心身因素",
-                  data:[]
-                }
-                rowNum+=2;
-              page[pageNum].push(pageItem2);
-              let psychosomaticFactors=data.psychosomaticFactors;//心身因素
-              if(psychosomaticFactors.length==0){
-                psychosomaticFactors.push("无")
-              }
-              for(let item in psychosomaticFactors){
-                rowNum+=this.computeRowNum(psychosomaticFactors[item])
-                if(rowNum<=maxRowNum){
-                   itemNum=page[pageNum].length-1;
-                  page[pageNum][itemNum].data.push((item-0+1)+"、"+psychosomaticFactors[item])
-                }else{
-                  rowNum=2
-                  pageNum++;
-                   let pageItem={ //页面的最小单元
-                      imgPath:require("@/views/rep/img/icon-nutrition.png"),
-                      label:"",
-                      data:[]
-                    }
-                  page[pageNum]=[];
-                  page[pageNum].push(pageItem);
-                  page[pageNum][0].data.push((item-0+1)+"、"+psychosomaticFactors[item])
-
-                }
-              }
-              let socialFunction=data.socialFunction;//社会功能
-               if(socialFunction.length!=0&&socialFunction[0]==""){
-                  socialFunction[0]="无";
-               }
-               rowNum+=3;
-                let pageItem3={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-society.png"),
-                    label:"社会功能",
-                    data:[]
-                  }
-              if(rowNum>maxRowNum){
-                 rowNum=2
-                pageNum++;
-                 page[pageNum]=[]
-                 page[pageNum].push(pageItem3);
-              }else{
-                  page[pageNum].push(pageItem3);
-              }
-                if(socialFunction.length==0){
-                  socialFunction.push("无")
-                }
-               for(let item in socialFunction){
-                rowNum+=this.computeRowNum(socialFunction[item])
-                if(rowNum<=maxRowNum){
-                  itemNum=page[pageNum].length-1;
-                  page[pageNum][itemNum].data.push((item-0+1)+"、"+socialFunction[item])
-                }else{
-                  let pageItem={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-society.png"),
-                    label:"",
-                    data:[]
-                  }
-                  rowNum=2
-                  pageNum++;
-                  page[pageNum]=[]
-                  page[pageNum].push(pageItem);
-                  page[pageNum][0].data.push((item-0+1)+"、"+socialFunction[item])
-
-                }
-              }
-              let causes=data.causes;//疾病成因
-              if(causes){
-                  let pageItem4={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-analysis.png"),
-                    label:"心身疾病成因分析",
-                    data:[]
-                  }
-                  if(rowNum>maxRowNum){
-                    rowNum=2
-                    pageNum++;
-                    page[pageNum]=[]
-                    page[pageNum].push(pageItem4);
-                  }else{
-                      page[pageNum].push(pageItem4);
-                  }
-
-                  if(causes.length==0){
-                    causes.push("无")
-                  }
-                  for(let item in causes){
-                    rowNum+=this.computeRowNum(causes[item])
-                    if(rowNum<=maxRowNum){
-                      itemNum=page[pageNum].length-1;
-                      page[pageNum][itemNum].data.push((item-0+1)+"、"+causes[item])
-                    }else{
-                      let pageItem={ //页面的最小单元
-                        imgPath:require("@/views/rep/img/icon-analysis.png"),
-                        label:"",
-                        data:[]
-                      }
-                      rowNum=2
-                      pageNum++;
-                      page[pageNum]=[]
-                      page[pageNum].push(pageItem);
-                      page[pageNum][0].data.push((item-0+1)+"、"+causes[item])
-
-                    }
-                  }
-              }
-
-              let initialDiagnosisVO=data.initialDiagnosisVO;//疾病成因
-               rowNum+=2;
-                let pageItem5={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-diagnose.png"),
-                    label:"辅助诊断建议",
-                    data:[]
-                  }
-              page[pageNum].push(pageItem5);
-                if(initialDiagnosisVO.length==0){
-                  initialDiagnosisVO.push("无")
-                }
-               for(let item in initialDiagnosisVO){
-                rowNum+=this.computeRowNum(initialDiagnosisVO[item])
-                if(rowNum<=maxRowNum){
-                  itemNum=page[pageNum].length-1;
-                  page[pageNum][itemNum].data.push((item-0+1)+"、"+initialDiagnosisVO[item])
-                }else{
-                  let pageItem={ //页面的最小单元
-                    imgPath:require("@/views/rep/img/icon-analysis.png"),
-                    label:"辅助诊断建议",
-                    data:[]
-                  }
-                  rowNum=2
-                  pageNum++;
-                  page[pageNum]=[]
-                  page[pageNum].push(pageItem);
-                  page[pageNum][0].data.push((item-0+1)+"、"+initialDiagnosisVO[item])
-
-                }
-              }
-              this.page=page;
-              this.contentsData[4].pageNum=this.contentsData[3].pageNum+this.page.length;//治疗方案参考
-
-        }
       },
 
     }

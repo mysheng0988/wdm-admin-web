@@ -20,6 +20,7 @@
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
+    "screenfull": "^5.0.2",
     "v-charts": "^1.19.0",
     "v-distpicker": "^1.2.2",
     "v-viewer": "^1.4.0",

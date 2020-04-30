@@ -7,13 +7,12 @@
         <div v-for="(item2,index2) in experienceData" :key="'exe-'+index2">
           <experience :experience-data="item2" :page-num="contentsData[1].pageNum-0+index2" ></experience>
         </div>
-        <assess  :page-num="contentsData[2].pageNum" :medical-record-id="medicalRecordId+''"></assess>
         <div v-for="(item,index) in page" :key="index">
-          <rep-analysis  :page-num="contentsData[3].pageNum-0+index" :analysis-data="item"></rep-analysis>
+          <rep-analysis  :page-num="contentsData[2].pageNum-0+index" :analysis-data="item"></rep-analysis>
         </div>
-        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[4].pageNum" ></nerve-examine>
+        <nerve-examine  :medical-record-id="medicalRecordId+''" :page-num="contentsData[3].pageNum" ></nerve-examine>
         <div v-for="(item,index) in scaleData" :key="'scale'+index">
-           <scale-assess :data="item" :page-num="contentsData[5].pageNum-0+index" ></scale-assess>
+           <scale-assess :data="item" :page-num="contentsData[4].pageNum-0+index" ></scale-assess>
         </div>
         <rep-end></rep-end>
     </div>
@@ -31,17 +30,12 @@ import {analysisData} from "@/api/analysis"
       import contents from './components/contents'
       import patientMsg from './components/patientMsg'
       import experience from './components/experience'
-      import assess from './components/assess'
       import repAnalysis from './components/rep-analysis'
       import suggestDrug from './components/suggestDrug'
       import followSuggest from './components/followSuggest'
-      import patientEdu from './components/patient-edu'
       import patientNi from './components/patientNi'
       import nerveExamine from './components/nerveExamine'
-      import eegExamine from './components/eegExamine'
       import scaleAssess from './components/scaleAssess'
-      import assessment from './components/assessment'
-      import assessment2 from './components/assessment2'
        import repEnd from './components/repEnd'
     export default {
       name: "siftPdf",
@@ -50,17 +44,12 @@ import {analysisData} from "@/api/analysis"
           contents,
           patientMsg,
           experience,
-          assess,
           repAnalysis,
           suggestDrug,
           followSuggest,
-          patientEdu,
           patientNi,
           nerveExamine,
-          eegExamine,
           scaleAssess,
-          assessment,
-          assessment2,
           repEnd
       },
       computed: {
@@ -93,11 +82,6 @@ import {analysisData} from "@/api/analysis"
                hidden:false,
             },
              {
-              pageName:"问卷评估",
-              pageNum:0,
-               hidden:false,
-            },
-             {
               pageName:"心身因素",
               pageNum:0,
                hidden:false,
@@ -116,29 +100,29 @@ import {analysisData} from "@/api/analysis"
           page:[],
         }
       },
+       watch: {
+        $route(to) {
+            this.medicalRecordId=this.$route.query.id;
+          this.initData();
+        }
+      },
       created(){
         this.medicalRecordId=this.$route.query.id;
-        if(this.medicalRecordId==""||this.medicalRecordId==undefined){
-          this.medicalRecordId=36;
-        }
         
         this.contentsData[0].pageNum=1;//患者信息
       },
       mounted(){
          this.$store.commit("CLOSE_TBA")
-          this.getExperienceList();
-           this.getPatientData();
+          this.initData()
+      },
+      methods: {
+         async initData(){
+          let patient=await this.getPatientData();
+          await this.getExperienceList(patient.patientId)
            this.getPursueData();
            this.getScaleResult();
            this.getReportMsgData();
            this.getScaleNumResult();
-      },
-      methods: {
-        outPut(){
-          //  this.$nextTick(() => {
-          //   this.$refs.content.window.print()
-            
-          // })
         },
         getScaleNumResult(){
             scaleResultNum(this.medicalRecordId,{questionnaireNumbers:12}).then(res=>{
@@ -177,8 +161,8 @@ import {analysisData} from "@/api/analysis"
                   let data=res.dataList[0];
                   this.getAnalysisData(data);//报告分析总结模块
                
-                this.contentsData[4].pageNum=this.contentsData[3].pageNum+1;//附录2:自主神经检查
-                this.contentsData[5].pageNum=this.contentsData[4].pageNum+1;//附录4:量表评估
+                this.contentsData[3].pageNum=this.contentsData[2].pageNum+1;//附录2:自主神经检查
+                this.contentsData[4].pageNum=this.contentsData[3].pageNum+1;//附录4:量表评估
                 //this.contentsData[9].pageNum=this.contentsData[8].pageNum+this.scaleData.length;//附录4:压力量表评估
         
               }
@@ -295,12 +279,12 @@ import {analysisData} from "@/api/analysis"
           })
         },
         getPatientData(){
-          getRecordPatient(this.medicalRecordId).then(res=>{
+         return getRecordPatient(this.medicalRecordId).then(res=>{
             if(res.code==200){
               this.patientData=res.dataList[0];
               this.patientVo=res.dataList[0].patientVO;
             }
-           
+            return  this.patientData;
           })
         },
         getPursueData(){
@@ -311,7 +295,7 @@ import {analysisData} from "@/api/analysis"
           })
         }, 
         getExperienceList(){
-         queryExperience(this.medicalRecordId).then(res=>{
+          return queryExperience(this.medicalRecordId).then(res=>{
             if(res.code==200){
               this.experienceData=res.dataList;
               let exeList=[];

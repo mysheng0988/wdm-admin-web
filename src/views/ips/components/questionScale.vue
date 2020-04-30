@@ -161,9 +161,6 @@
         },
         handleChangeJSON(){
            let scaleId=this.scaleId;
-          if(this.number==1&&scaleId==22){
-             scaleId=this.scaleId+"01";
-          }
           getScaleJson(scaleId).then(res=>{
           this.data=res.data;
           this.problemData=this.data.problem[this.questionNum];

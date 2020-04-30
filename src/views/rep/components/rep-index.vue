@@ -3,7 +3,7 @@
      <div class="title">IPS系统心身{{patientData.examinationTypeCode=="20001"?"筛查":"综合"}}报告</div>
      <div class="dept">来源科室：{{patientData.fromDeptName}}</div>
      <div class="user-msg" >{{patientVo.realName}} 
-        <span>{{patientVo.gender?"女":"男"}}</span> 
+        <span>{{patientVo.gender?"男":"女"}}</span> 
          {{patientVo.birthday|formatAge}} </div>
      <div class="case-num">病例号:{{patientData.beHospitalizedNumber}}</div>
    </div>

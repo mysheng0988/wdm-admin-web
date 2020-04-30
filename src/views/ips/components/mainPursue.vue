@@ -323,6 +323,7 @@
     firstOnsetTime:"",//首次发病时间
     illnessDegree:"",//严重程度
     mainComplaint:"",//患者主诉
+    mainSymptoms:"",
     mainSymptomsIdList:[],//主要症状
     mainSymptomsSupplementList:[],//主要症状补充
     medicalRecordId:"",//病历ID
@@ -370,6 +371,13 @@
       },
     },
     data() {
+       const validateTwo = (rule, value, callback) => {
+         if(value==""&&this.mainSymptoms==""){
+             callback(new Error("主诉症状或主诉症状必填一项"))
+         }else{
+            callback()
+         }
+      };
       return {
         familyObj:Object.assign({},defaultFamily),
         treeData:[],
@@ -417,7 +425,12 @@
               {required: true, message: '请填写主诉', trigger: 'blur'},
           ],
           mainSymptomsIdList: [
-            {required: true, message: '请选择主诉症状', trigger: 'change'},
+             {required: false, trigger: 'change', validator: validateTwo}
+            // {required: true, message: '请选择主诉症状', trigger: 'change'},
+          ],
+           mainSymptoms: [
+             {required: false, trigger: 'blur', validator: validateTwo}
+            // {required: true, message: '请选择主诉症状', trigger: 'change'},
           ],
           clinicalSpecialistDiagnosisIdList: [
             {required: true, message: '请选择临床专科诊断', trigger: 'change'},
@@ -459,7 +472,7 @@
         getPursue(this.medicalRecordId).then(res=>{
            if(res.code==200){
             this.pursueObj=res.dataList[0];
-             this.mainSymptoms=this.pursueObj.mainSymptomsSupplementList.join(",")
+             this.mainSymptoms=res.dataList[0].mainSymptomsSupplementList.join(",");;
              this.accompanyingSymptoms=this.pursueObj.accompanyingSymptomsSupplementList.join(",")
              this.clinicalSpecialist=this.pursueObj.clinicalSpecialistDiagnosisSupplementList.join(",")
            }

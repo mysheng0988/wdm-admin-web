@@ -2,19 +2,27 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
+    <div class="screenfull"  @click="clickFullscreen">
+       <svg-icon :icon-class="isFullscreen?'unscreenfull':'screenfull'"  class-name="screenfull-icon"></svg-icon>
+    </div>
+    
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <el-image class="user-avatar" :src="avatar"/>
+        <!-- <el-image class="user-avatar" :src="avatar"/> -->
+         <svg-icon icon-class="administrator" class-name="user-avatar" v-if="info.roleId=='13'"></svg-icon>
+         <svg-icon icon-class="doctor" class-name="user-avatar" v-else></svg-icon>
         <i class="el-icon-caret-bottom"></i>
         <p>{{name}}</p>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
-        <!-- <router-link class="inlineBlock" to="/">
+        <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
             首页
           </el-dropdown-item>
-        </router-link> -->
-        <!-- <el-dropdown-item divided> -->
+        </router-link>
+        <!-- <el-dropdown-item  divided>
+            <p>修改密码</p>
+        </el-dropdown-item> -->
         <el-dropdown-item divided>
           <span @click="logout" style="display:block;">退出</span>
         </el-dropdown-item>
@@ -28,6 +36,7 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import { Loading } from 'element-ui';
+import screenfull from 'screenfull'
 export default {
   components: {
     Breadcrumb,
@@ -37,13 +46,30 @@ export default {
     ...mapGetters([
       'sidebar',
       'avatar',
-      'name'
+      'name',
+      "info"
     ])
   },
+  data(){
+      return {
+        isFullscreen: false
+      }
+    },
   created(){
-
+  
   },
   methods: {
+    clickFullscreen(){
+        if (!screenfull.isEnabled) {
+          this.$message({
+            message: 'you browser can not work',
+            type: 'warning'
+          })
+          return false
+        }
+        this.isFullscreen=!screenfull.isFullscreen;
+        screenfull.toggle()
+      },
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },
@@ -81,9 +107,14 @@ export default {
   }
   .screenfull {
     position: absolute;
-    right: 90px;
-    top: 16px;
-    color: red;
+    right: 150px;
+    top: 12px;
+    color: #999;
+    .screenfull-icon{
+        width: 30px;
+        height: 30px;
+    }
+    
   }
   .avatar-container {
     height: 50px;
@@ -98,8 +129,9 @@ export default {
       align-items: center;
       position: relative;
       .user-avatar {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
+        margin: 0 5px;
         border-radius: 10px;
       }
       .el-icon-caret-bottom {
