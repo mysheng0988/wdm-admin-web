@@ -2,7 +2,7 @@
   <div v-loading.fullscreen.lock="loading">
     <div class="answer-box" v-if="data.type==1" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question">问题：{{problemData.question}}</div>
       <el-radio-group v-model="problemData.answer" >
@@ -13,7 +13,7 @@
     </div>
     <div class="answer-box" v-else-if="data.type==2" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">问题：{{problemData.question}}</div>
@@ -34,7 +34,7 @@
     </div>
     <div class="answer-box" v-else-if="data.type==3" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question">问题:{{problemData.question}}</div>
       <div v-if="problemData.symptom" class="symptom">
@@ -95,7 +95,7 @@
       },
        watch:{
          scaleId(newName, oldName) {
-           
+
             this.handleChangeJSON();
          }
       },
@@ -120,7 +120,7 @@
             this.problemData=this.data.problem[this.questionNum];
             this.questionLength=this.data.problem.length;
           })
-          
+
         },
         handleChange(){
           setTimeout(()=>{
@@ -155,7 +155,7 @@
                this.questionNum--;
               this.problemData=this.data.problem[this.questionNum];
             }
-           
+
           }
 
         },
@@ -173,19 +173,19 @@
                this.$message.warning("请选择答案")
             }else{
               if(this.problemData.nextNum!=0&&this.problemData.answer==0){
-              
+
                   for(let x=this.questionNum+1;x<this.problemData.nextNum;x++){
                        this.data.problem[x].answer=0;
                   }
                  this.questionNum=this.problemData.nextNum;
                  this.problemData=this.data.problem[this.questionNum];
-                  
+
               }else{
                  this.questionNum++
                 this.problemData=this.data.problem[this.questionNum];
               }
             }
-           
+
           }else{
             this.$message.warning("最后一题了")
           }
@@ -214,7 +214,7 @@
               for(let itemData of item.data){
                  arr.push(itemData.question)
                  score=+itemData.answer;
-              } 
+              }
               qr.order=item.questionNum;
               qr.returnValue=arr.join(",");
               if(item.data.length>0){
@@ -234,12 +234,12 @@
             }else{
               this.$message.warning(res.message)
             }
-               
+
           }).catch(error=>{
              this.loading=false;
           })
         },
-       
+
       }
     }
 </script>
@@ -254,13 +254,16 @@
   .title{
     width: 100%;
     text-align: center;
-    font-size: 18px;
+    color: #000;
+    font-size: 20px;
     font-weight: bold;
   }
   .explain{
-    font-size: 14px;
-    color: #666;
+    font-size: 16px;
+    color: #333;
+    padding: 10px 0;
     line-height: 35px;
+    font-weight: bold;
     text-indent: 2em;
   }
   .question{

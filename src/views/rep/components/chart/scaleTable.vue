@@ -6,8 +6,8 @@
             :data="data.chartData"
             :show-header="false"
             style="width: 100%">
-            <el-table-column v-for="(item,index) in data.chartData[0]" :key="index" align="center" >
-              <template slot-scope="scope">{{scope.row[index]}}</template>
+            <el-table-column v-for="(item,index) in dataKeys.length" :key="index" align="center" >
+              <template slot-scope="scope">{{scope.row['item'+[index]]}}</template>
             </el-table-column>
             <!-- <el-table-column>
               <template slot-scope="scope">{{scope.row.item1}}</template>
@@ -32,10 +32,12 @@
     data(){
 
       return {
-
+        dataKeys:[],
       }
     },
     mounted(){
+
+    this.dataKeys= Object.keys(this.data.chartData[0]);
     }
   }
 </script>

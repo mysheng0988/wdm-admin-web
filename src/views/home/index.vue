@@ -32,7 +32,7 @@
                 <div class="total-value">{{statisticsData.todayUndoneExaminationTaskTotal}}</div>
             </div>
           </div>
-          
+
         </div>
       </el-col>
       <el-col :xs="24" :sm="12" :md="6" >
@@ -70,10 +70,10 @@
     </el-row>
   </div>
   <div class="chart-box">
-    <ve-line class="chart"  height="300px" :data="chartData" :settings="chartSettings"  :chartSettings="chartSettings" :extend="extend"></ve-line>
+    <ve-line class="chart"  height="300px" :data="chartData" :settings="chartSettings1"   :extend="extend"></ve-line>
   </div>
   <div class="chart-box">
-    <ve-line class="chart"  height="300px" :data="chartData2" :settings="chartSettings" :extend="extend"></ve-line>
+    <ve-line class="chart"  height="300px" :data="chartData2" :settings="chartSettings2" :extend="extend"></ve-line>
   </div>
   </div>
 </template>
@@ -83,19 +83,28 @@
   import{getHomeData} from "@/api/home"
   export default {
     name: 'home',
-   
+
     data () {
       return {
         statisticsData:{},
-        chartSettings : {
+        chartSettings1 : {
             labelMap: {
-              'value1': '筛查测评A',
-              'value2': '专科测评B',
-              'value3': '综合测评C'
+              'examinationA': '筛查测评A',
+              'examinationB': '专科测评B',
+              'examinationC': '综合测评C'
             },
              xAxisType: 'time'
-            
+
           },
+        chartSettings2 : {
+          labelMap: {
+            'patientIncrement': '新增患者数',
+            'examinationTaskTotal': '测评任务数',
+            'treatmentTaskTotal': '治疗任务数'
+          },
+          xAxisType: 'time'
+
+        },
          extend :{
           grid:{
             top:40,
@@ -106,26 +115,19 @@
           }
         },
         chartData: {
-          columns: ['data', 'value1', 'value2', 'value3'],
+          columns: ['collectionDate', 'examinationA', 'examinationB', 'examinationC'],
           rows: [
-           
+
           ]
         },
         chartData2: {
-          columns: ['日期', '总患者数', '测评任务数', '治疗任务数'],
-          rows: [
-            { '日期': '2018-01-01', '总患者数': 133, '测评任务数': 103, '治疗任务数': 32 },
-            { '日期': '2018-01-02', '总患者数': 350, '测评任务数': 320, '治疗任务数': 26 },
-            { '日期': '2018-01-03', '总患者数': 293, '测评任务数': 263, '治疗任务数': 76 },
-            { '日期': '2018-01-05', '总患者数': 173, '测评任务数': 123, '治疗任务数': 49 },
-            { '日期': '2018-01-10', '总患者数': 372, '测评任务数': 342, '治疗任务数': 323 },
-            { '日期': '2018-01-20', '总患者数': 493, '测评任务数': 493, '治疗任务数': 78 }
-          ]
+          columns: ['collectionDate', 'patientIncrement', 'examinationTaskTotal', 'treatmentTaskTotal'],
+          rows: []
         }
       }
     },
     filters:{
-     
+
     },
     mounted(){
        let data= this.chartData.rows;
@@ -142,11 +144,13 @@
        this.chartData.rows=data;
       getHomeData().then(res=>{
         this.statisticsData=res.dataList[0];
+        this.chartData.rows=this.statisticsData.examinationDataList;
+        this.chartData2.rows=this.statisticsData.otherDataList;
       })
     },
 
     methods:{
-     
+
 
     }
   }
@@ -178,15 +182,15 @@
   }
   .success{
     background:#67C23A;
-    color: #fff; 
+    color: #fff;
   }
   .warning{
      background:#E6A23C;
-     color: #fff; 
+     color: #fff;
   }
   .danger{
      background:#F56C6C;
-     color: #fff; 
+     color: #fff;
   }
   .info{
     background: #409EFF;

@@ -2,7 +2,7 @@
   <div v-loading.fullscreen.lock="loading">
     <div class="answer-box" v-if="data.type==1" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question" v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">问题：{{problemData.question}}</div>
@@ -14,7 +14,7 @@
     </div>
     <div class="answer-box" v-else-if="data.type==2" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div v-if="problemData.label!=''">{{problemData.label}}</div>
       <div class="question">问题：{{problemData.question}}</div>
@@ -35,7 +35,7 @@
     </div>
     <div class="answer-box" v-else-if="data.type==3" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question">{{questionNum+1}}、{{problemData.question}}</div>
       <div v-if="problemData.symptom" class="symptom">
@@ -62,7 +62,7 @@
     </div>
      <div class="answer-box" v-else-if="data.type==4" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <el-progress v-if="percentage" :percentage="percentage" :format="formatPercentage"></el-progress>
       <div class="question" v-if="problemData.label!=''">{{problemData.label}}</div>
        <div v-if="questionNum==0" class="roleType">
@@ -91,7 +91,7 @@
           </el-radio-group>
         </div>
       </div>
-      
+
     </div>
     <div class="btn-box">
       <el-button type="primary" plain @click="prevQuestion">上一题</el-button>
@@ -138,7 +138,7 @@
       watch:{
          scaleId(newName, oldName) {
            if(newName!=""&&newName>0)
-           
+
             this.handleChangeJSON();
          }
       },
@@ -166,13 +166,13 @@
           this.problemData=this.data.problem[this.questionNum];
           this.questionLength=this.data.problem.length;
         })
-          
+
         },
         handleChange(){
           setTimeout(()=>{
               this.nextQuestion();
           },500)
-          
+
         },
          checkAddShow(arr){
           if(this.problemData.hidden){
@@ -238,19 +238,19 @@
                this.$message.warning("请选择答案")
             }else{
               if(this.problemData.nextNum!=0&&this.problemData.answer==0){
-              
+
                   for(let x=this.questionNum+1;x<this.problemData.nextNum;x++){
                        this.data.problem[x].answer=0;
                   }
                  this.questionNum=this.problemData.nextNum;
                  this.problemData=this.data.problem[this.questionNum];
-                  
+
               }else{
                  this.questionNum++
                 this.problemData=this.data.problem[this.questionNum];
               }
             }
-           
+
           }else{
             this.$message.warning("最后一题了")
           }
@@ -288,14 +288,14 @@
                   qr.optionValue.push(itemData.answers[item.answer]);
                   qr.returnValue.push(itemData.question);
                   qr.order=item.questionNum;
-                }  
+                }
               }else{
                 qr.optionOrderList.push(0);
                 qr.optionValue.push("无");
                 qr.returnValue.push("");
                 qr.order=item.questionNum;
               }
-             
+
             } else if(this.data.type==4){
               qr.optionOrderList.push(item.answer[0]);
                qr.optionOrderList.push(item.answer[1]);
@@ -303,7 +303,7 @@
               qr.optionValue.push(item.answers[item.answer[1]]);
               qr.returnValue.push(item.question);
               qr.order=item.questionNum;
-             
+
             }else{
               for(let itemData of item.data){
                   if(itemData.type!="2"){
@@ -315,7 +315,7 @@
                   }
                   qr.returnValue.push(item.question);
                   qr.order=item.questionNum;
-              }  
+              }
             }
             param.questionResultList.push(qr);
           }
@@ -328,12 +328,12 @@
             }else{
               this.$message.warning(res.message)
             }
-               
+
           }).catch(error=>{
               this.loading=false;
           })
         },
-       
+
       }
     }
 </script>
@@ -353,13 +353,15 @@
   .title{
     width: 100%;
     text-align: center;
+    color: #000;
     font-size: 18px;
     font-weight: bold;
   }
   .explain{
-    font-size: 14px;
-    color: #666;
+    font-size: 16px;
+    color: #333;
     line-height: 35px;
+    font-weight: bold;
     text-indent: 2em;
   }
   .question{
@@ -383,7 +385,7 @@
     margin-right: 5px;
   }
   .flex-item{
-   
+
     flex: 1;
   }
 </style>
