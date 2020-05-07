@@ -1,5 +1,5 @@
 <template> 
-  <div class="form-pdf">
+  <div class="form-pdf end">
     <div class="pdf-container">
       <div class="title">Medical manual</div>
       <div class="msg-content flex-wrap">
@@ -42,7 +42,9 @@
   }
 </script>
 <style scoped>
-
+    .form-pdf.end{
+      height: 1085px;
+    }
    .pdf-container{
        padding: 70px;
    }

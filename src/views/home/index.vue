@@ -70,15 +70,16 @@
     </el-row>
   </div>
   <div class="chart-box">
-    <ve-line class="chart"  height="300px" :data="chartData" :settings="chartSettings1"   :extend="extend"></ve-line>
+    <ve-line class="chart" :data-empty="dataEmpty" height="300px" :data="chartData" :settings="chartSettings1"   :extend="extend"></ve-line>
   </div>
   <div class="chart-box">
-    <ve-line class="chart"  height="300px" :data="chartData2" :settings="chartSettings2" :extend="extend"></ve-line>
+    <ve-line class="chart" :data-empty="dataEmpty" height="300px" :data="chartData2" :settings="chartSettings2" :extend="extend"></ve-line>
   </div>
   </div>
 </template>
 
 <script>
+  import 'v-charts/lib/style.css'
   import { Message, MessageBox } from 'element-ui'
   import{getHomeData} from "@/api/home"
   export default {
@@ -112,8 +113,15 @@
             right:40,
             bottom:10,
             containLabel: true
+          },
+           xAxis:{
+             maxInterval:3600 * 24 * 1000   
+           },
+          yAxis:{
+            minInterval: 1 ,
           }
         },
+        dataEmpty:true,
         chartData: {
           columns: ['collectionDate', 'examinationA', 'examinationB', 'examinationC'],
           rows: [
@@ -130,19 +138,8 @@
 
     },
     mounted(){
-       let data= this.chartData.rows;
-       for(let i=0;i<7;i++){
-         let num= i+i+1;
-         let param={
-           "data":'2020-01-'+num,
-           "value1":Math.random()*500,
-           "value2":Math.random()*500,
-           "value3":Math.random()*500,
-         }
-         data.push(param)
-       }
-       this.chartData.rows=data;
       getHomeData().then(res=>{
+        this.dataEmpty=false
         this.statisticsData=res.dataList[0];
         this.chartData.rows=this.statisticsData.examinationDataList;
         this.chartData2.rows=this.statisticsData.otherDataList;
@@ -200,13 +197,15 @@
     color: #ffffff;
     width: 60px;
     height: 60px;
+    
   }
 
   .total-title {
     width: 100px;
     font-size: 18px;
     font-weight: bold;
-    text-align: center
+    text-align: center;
+    
   }
 
   .total-value {
@@ -221,14 +220,15 @@
   .chart{
     width: 80%;
     height: 200px;
+     position: relative;
   }
   .item-box{
     margin: 0 20px;
     flex: 1;
     cursor: pointer;
   }
-  /* .flex:hover{
-    background: #409EFF;
-    color: #fff;
-  } */
+  /deep/ .v-charts-data-empty{
+    background-color: rgba(255, 255, 255, .4);
+  }
+  
 </style>

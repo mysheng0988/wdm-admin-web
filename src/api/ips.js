@@ -117,6 +117,12 @@ export function getPursue(medicalRecordId) {
     method:'get',
   })
 }
+export function queryHospital(matchingString) {
+  return request({
+    url:"base/hospital/list/fuzzyMatching?matchingString="+matchingString,
+    method:'get',
+  })
+}
 
 
 

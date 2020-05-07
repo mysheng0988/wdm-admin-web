@@ -326,7 +326,7 @@
           <div class="card-box">
              <el-image class="img" :src="require('@/views/pat/imgs/cardID.png')"></el-image>
               <p class="flag">请将磁卡置于机器上方</p>
-              <p v-if="medObj.cardNo==''&&!cardState">请你刷卡</p>
+              <p v-if="medObj.cardNo==''&&!cardState">请您刷卡</p>
               <p class="success" v-else-if="medObj.cardNo&&cardState"><i class="el-icon-success"></i>刷卡成功</p>
               <p class="error" v-else><i class="el-icon-error"></i>刷卡失败</p>
           </div>
@@ -561,7 +561,6 @@
           if(res.code==200){
              let cardMsg=parseInt(res.data.CardSn1,16);
             this.medObj.cardNo=cardMsg;
-            this.$message.success("刷卡成功")
             this.onSubmit()
           }else{
             this.$message.error("刷卡失败")

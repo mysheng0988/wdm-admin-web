@@ -23,9 +23,9 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
-           <el-button  round class="search-btn" @click="clearData">重置</el-button>
-          <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
-          <el-button type="success" round class="search-btn" @click="dialogVisible = true">患者登记</el-button>
+           <el-button  round class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
+          <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryData()">查询</el-button>
+          <el-button type="success" round class="search-btn" @click="dialogVisible = true"><svg-icon icon-class="patient" class-name="search-icon"></svg-icon>患者登记</el-button>
           <!-- <el-button type="info" round class="search-btn" @click="M1WriteBlockData">写卡</el-button> -->
         </el-form-item>
       </div>
@@ -65,14 +65,17 @@
           <template slot-scope="scope" >
                <el-button
                 size="mini"
+                type="success"
                 round
-                class="active"
+                icon="el-icon-edit-outline"
                 @click="handleEdit(scope.row)">编辑
               </el-button>
               <el-button
                 size="mini"
-                class="active"
+                 icon="el-icon-time"
+                 type="primary"
                 round
+                plain
                 @click="historyRecord(scope.row)">
                 历史记录
               </el-button>
@@ -339,7 +342,7 @@
   }
 </script>
 
-<style scoped>
+<style scoped >
   .card-box{
     text-align: center;
     margin-bottom: 30px;
@@ -388,4 +391,5 @@
     background: #1197D6!important;
     color: #fff!important;
   }
+  
 </style>

@@ -13,7 +13,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" round @click="queeryList">查  询</el-button>
+          <el-button icon="el-icon-search" type="success" round @click="queeryList">查  询</el-button>
         </el-form-item>
       </div>
 
@@ -53,7 +53,8 @@
               size="mini"
               round
               class="active"
-              @click="readReport(scope.row)">查看报告
+              @click="readReport(scope.row)">
+               <svg-icon icon-class="see-icon" class-name="search-icon"></svg-icon>查看报告
             </el-button>
 
           </template>

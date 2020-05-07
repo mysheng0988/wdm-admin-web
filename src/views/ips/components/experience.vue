@@ -29,11 +29,26 @@
           </el-select>
         </el-form-item>
         <el-form-item label="医院:"  prop="hospitalId" >
-          <el-select  placeholder="请选择" v-model="expObj.hospitalId">
+          <!-- <el-select  placeholder="请选择" v-model="expObj.hospitalId">
             <el-option v-for="(item,index) in hostList"
                        :key="index"
                        :label="item.name"
                        :value="item.id"></el-option>
+          </el-select> -->
+           <el-select
+            style="width: 100%"
+            v-model="expObj.hospitalId"
+            filterable
+            remote
+            placeholder="请输入关键词检索"
+            :remote-method="queryHospitalData"
+            :loading="loadingOption">
+            <el-option
+              v-for="item in hostList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="检查:"  prop="checkup" >
@@ -120,7 +135,7 @@
     visitDate:"",
   }
   import {mapGetters} from 'vuex'
-  import {queryHospital} from "@/api/manage"
+  import {queryHospital} from "@/api/ips"
     export default {
       name: "experience",
       props: {
@@ -174,7 +189,7 @@
       ])
      },
       created(){
-        this.getHospital();
+        //this.getHospital();
         this.querySymptomsData();
         this.expObj=this.data;
         this.optionICD=this.expObj.diagnosisList;
@@ -182,12 +197,29 @@
         
       },
       methods:{
-        getHospital(){
-          queryHospital({pageNum: 1,pageSize: 500,name:""}).then(res=> {
-            if (res.code == 200) {
-              this.hostList = res.dataList;
-            }
-          })
+        queryHospitalData(queryString){
+          clearTimeout(this.timeout);
+          this.timeout = setTimeout(() => {
+            this.loadingOption=true;
+             queryHospital(queryString).then(res=> {
+               this.loadingOption=false;
+              if (res.code == 200) {
+                this.hostList = res.dataList;
+              }else{
+                 this.hostList=[];
+              }
+             })
+            // getICD11(queryString).then(res=>{
+            //   this.loadingOption=false;
+            //   if(res.code==200){
+            //     this.optionICD=res.dataList.slice(0,50)
+            //   }else{
+            //     this.optionICD=[];
+            //   }
+            // })
+
+          }, 300);
+         
         },
         handleCloseDialog(){
           this.$emit('closeDialog');

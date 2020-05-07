@@ -3,7 +3,7 @@
     <div class="container">
     <div class="answer-box" v-if="data.type==1" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
       <div class="questionBox" v-for="(item,index) in data.problem" :key="index">
         <div class="question">{{index+1}}、{{item.question}}</div>
         <el-radio-group v-model="item.answer" disabled >
@@ -16,7 +16,7 @@
 
     <div class="answer-box" v-else-if="data.type==2" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
        <div class="questionBox" v-for="(item,index) in data.problem" :key="index">
           <div class="question">{{index+1}}、{{item.question}}</div>
           <div class="question" v-for="(itemData,indexData) in item.data" :key="indexData">
@@ -37,9 +37,9 @@
     </div>
     <div class="answer-box" v-else-if="data.type==3" >
       <div class="title">{{data.scaleTitle}}</div>
-      <div class="explain">说明:{{data.explain}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
      <div class="questionBox" v-for="(item,index) in data.problem" :key="index">
-        <div class="question">{{index+1}}、{{item.question}}{{item.questionNum}}</div>
+        <div class="question">{{index+1}}、{{item.question}}</div>
         <div v-if="item.symptom" class="symptom">
           <el-checkbox-group v-model="item.data" disabled>
             <el-checkbox v-for="(itemData,indexData) in item.symptom" :label="itemData" :key="indexData">{{itemData.question}}</el-checkbox>
@@ -59,6 +59,39 @@
           </el-radio-group>
         </div>
      </div>
+    </div>
+    <div class="answer-box" v-else-if="data.type==4" >
+      <div class="title">{{data.scaleTitle}}</div>
+      <div class="explain">指导语:{{data.explain}}</div>
+      <div class="questionBox" v-for="(item,index) in data.problem" :key="index">
+      <div class="question" v-if="item.label!=''">{{item.label}}</div>
+       <!-- <div v-if="questionNum==0" class="roleType">
+        <el-radio-group  @change="roleTypeChange" disabled>
+          <el-radio :label="0" disabled>父母</el-radio>
+          <el-radio :label="1" disabled>父亲</el-radio>
+          <el-radio :label="2" disabled>母亲</el-radio>
+        </el-radio-group>
+      </div> -->
+      <div class="question">问题：{{item.question}}</div>
+      <div class="flex-wrap">
+        <div class="flex-item">
+          <div>父亲</div>
+          <el-radio-group v-model="item.answer[0]">
+            <div class="question" v-for="(item1,index1) in item.answers" :key="index1">
+              <el-radio :label="index1" disabled>{{item1}}</el-radio>
+            </div>
+          </el-radio-group>
+        </div>
+        <div  class="flex-item">
+          <div>母亲</div>
+          <el-radio-group v-model="item.answer[1]">
+            <div class="question" v-for="(item1,index1) in item.answers" :key="index1">
+              <el-radio :label="index1"  disabled>{{item1}}</el-radio>
+            </div>
+          </el-radio-group>
+        </div>
+      </div>
+      </div>
     </div>
     </div>
   </div>
@@ -113,10 +146,12 @@
     width: 100%;
     text-align: center;
     font-size: 18px;
+    color: #000;
     font-weight: bold;
   }
   .explain{
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     color: #666;
     line-height: 35px;
     text-indent: 2em;
@@ -139,5 +174,13 @@
   }
   .el-checkbox{
     margin-right: 5px;
+  }
+  .flex-item{
+    flex:1
+  }
+   .roleType{
+    width: 100%;
+     margin: 10px 0;
+    text-align: center;
   }
 </style>

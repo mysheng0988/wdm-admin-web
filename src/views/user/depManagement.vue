@@ -21,8 +21,8 @@
           <el-input  placeholder="科室名称" v-model="listQuery.deptName" clearable></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" round class="search-btn" @click="queryList" >查询</el-button>
-          <el-button type="success" round class="search-btn" @click="addDept">新增科室</el-button>
+          <el-button type="success" icon="el-icon-search" round class="search-btn" @click="queryList" >查询</el-button>
+          <el-button type="success" icon="el-icon-plus" round class="search-btn" @click="addDept">新增科室</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -58,6 +58,7 @@
             <el-button
               size="mini"
               round
+               icon="el-icon-edit-outline"
               class="active"
               @click="editDept(scope.row)">编辑
             </el-button>
@@ -333,8 +334,8 @@
     width: 100px;
   }
   .active{
-    border:1px solid #1197D6;
-    color: #1197D6;
+    border:1px solid #67C23A;
+    color: #67C23A;
   }
   .dep-nav .el-tree-node:focus > .el-tree-node__content {
     background-color: #1197D6 !important;

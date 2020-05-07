@@ -39,7 +39,7 @@
   .index-pdf{
      position: relative;
      width: 768px;
-    height: 1092px;
+     height: 1091px;
      text-align: left;
      border: 1px solid #eee;
      background:url("../img/rep-index.png") no-repeat;

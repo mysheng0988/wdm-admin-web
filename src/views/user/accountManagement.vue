@@ -20,10 +20,10 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button  round class="search-btn" @click="clearData">重置</el-button>
-          <el-button type="success" round class="search-btn" @click="queryData">查询</el-button>
-          <el-button type="success" round class="search-btn" @click="addUser">新增</el-button>
-          <el-button type="success" round class="search-btn" @click="exportExcel">导出</el-button>
+          <el-button  round class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
+          <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryData">查询</el-button>
+          <el-button icon="el-icon-plus" type="success" round class="search-btn" @click="addUser">新增</el-button>
+          <el-button icon="el-icon-upload2" type="success" round class="search-btn" @click="exportExcel">导出</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -67,17 +67,19 @@
         <el-table-column label="备注" align="center">
           <template slot-scope="scope">{{scope.row.remark }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="200"   align="center">
+        <el-table-column label="操作" width="250"   align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
               round
+              icon="el-icon-edit-outline"
               class="active"
               @click="editUser(scope.row)">编辑
             </el-button>
             <el-button
               size="mini"
               round
+              :icon="scope.row.enable?'el-icon-remove-outline':'el-icon-time'"
               :class="scope.row.enable?'disable':'enable'"
               @click="handleChangeState(scope.row)">{{scope.row.enable?"禁用":"启用"}}
             </el-button>
@@ -108,12 +110,12 @@
         <el-row :gutter="10">
           <el-col :span="12">
             <el-form-item label="账户名称:"  prop="username"  >
-              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="10" show-word-limit :disabled="userForm.uid!=null"></el-input>
+              <el-input v-model="userForm.username" placeholder="请输入账户名称" maxlength="20" show-word-limit :disabled="userForm.uid!=null"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="账户密码:"  prop="password"   v-if="!userForm.uid" >
-              <el-input v-model="userForm.password" placeholder="请输入账户密码" maxlength="10" show-word-limit></el-input>
+              <el-input v-model="userForm.password" placeholder="请输入账户密码" maxlength="20" show-word-limit></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -484,8 +486,8 @@
     width: 100px;
   }
   .active{
-    border:1px solid #1197D6;
-    color: #1197D6;
+    border:1px solid #67C23A;
+    color: #67C23A;
   }
   .input-width{
     width: 100%;
@@ -495,7 +497,7 @@
     color: #F56C6C;
   }
   .enable{
-    border:1px solid #67C23A;
-    color: #67C23A;
+    border:1px solid #1197D6;
+    color: #1197D6;
   }
 </style>

@@ -9,7 +9,7 @@
       :show-timeout="200"
       :default-active="$route.path"
       :collapse="isCollapse"
-      background-color="#304156"
+      background-color="#20324D"
       text-color="#bfcbd9"
       active-text-color="#409EFF"
     >
@@ -55,8 +55,8 @@ export default {
     font-size: 20px;
     font-weight: bold;
     letter-spacing:2px;
-    background: #304156;
-    border-bottom: 1px solid #232e3b;
+    background: #233A5C;
+    border-bottom: 1px solid #233A5C;
     color: #409EFF;
   }
   .img{

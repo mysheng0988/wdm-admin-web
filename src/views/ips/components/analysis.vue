@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 50px">
     <el-form  :rules="rules" ref="productInfoForm" label-width="150px" >
-      <el-form-item label="焦点问题:" v-if="type!='A'">
+      <el-form-item label="焦点问题:" >
         <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.focusProblem" :key="index" >
            <el-button @click="addText('focusProblem')" class="text-boder blue" icon="el-icon-edit">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="社会功能:" v-if="type!='A'">
+      <el-form-item label="社会功能:" >
         <div class="text-box" >
           <div class="flex-wrap" v-for="(item,index) in data.socialFunction" :key="index" >
            <el-button @click="addText('socialFunction')" class="text-boder blue" icon="el-icon-edit">
@@ -72,7 +72,7 @@
         </div>
       </el-form-item>
       <el-form-item style="text-align: center">
-        <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button>
+        <!-- <el-button size="medium" @click="handlePrev">上一步，{{prevTitle}}</el-button> -->
         <el-button type="primary" size="medium" @click="handleNext" v-if="nextTitle!=''">下一步，{{nextTitle}}</el-button>
         <el-button type="primary" size="medium" @click="handleFinishCommit" v-else>完成</el-button>
       </el-form-item>

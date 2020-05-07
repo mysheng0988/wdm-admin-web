@@ -5,8 +5,8 @@
         <el-input  placeholder="医院名称" v-model="listQuery.name" clearable></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" round class="search-btn" @click="queryHospital">查询</el-button>
-        <el-button type="success" round class="search-btn" @click="dialogVisible = true">新增医院</el-button>
+        <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryHospital">查询</el-button>
+        <el-button icon="el-icon-plus" type="success" round class="search-btn" @click="dialogVisible = true">新增医院</el-button>
       </el-form-item>
     </el-form>
     <div class="table-container">
@@ -35,11 +35,12 @@
         <el-table-column label="备注" align="center">
           <template slot-scope="scope">{{scope.row.remark }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="100"   align="center">
+        <el-table-column label="操作" width="150"   align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
               round
+              icon="el-icon-edit-outline"
               class="active"
               @click="editHos(scope.row)">编辑
             </el-button>
@@ -88,7 +89,15 @@
                 <el-select  placeholder="请选择" v-model="hosForm.level" clearable class="input-width">
                   <el-option label="三级甲等" value="三级甲等" ></el-option>
                   <el-option label="二级甲等" value="二级甲等" ></el-option>
-                  <el-option label="民营" value="民营"></el-option>
+                  <el-option label="一级甲等" value="一级甲等" ></el-option>
+                  <el-option label="三级乙等" value="三级乙等" ></el-option>
+                  <el-option label="二级乙等" value="二级乙等" ></el-option>
+                  <el-option label="一级乙等" value="一级乙等" ></el-option>
+                  <el-option label="三级医院" value="三级医院" ></el-option>
+                  <el-option label="二级医院" value="二级医院" ></el-option>
+                  <el-option label="一级医院" value="一级医院" ></el-option>
+                  <el-option label="民营医院" value="民营医院"></el-option>
+                  <el-option label="特级医院" value="特级医院"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item  label="医院性质:"  prop="nature" >
@@ -158,7 +167,7 @@
         dialogTitle:"新增医院",
         rules:{
           name: [
-            {required: true, message: '请输入身份证号码', trigger: 'blur'},
+            {required: true, message: '请输入医院名称', trigger: 'blur'},
           ]
         },
         listQuery: {
@@ -253,7 +262,7 @@
     width: 100%;
   }
   .active{
-    border:1px solid #1197D6;
-    color: #1197D6;
+    border:1px solid #67C23A;
+    color: #67C23A;
   }
 </style>

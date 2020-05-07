@@ -82,7 +82,7 @@ import {analysisData} from "@/api/analysis"
                hidden:false,
             },
              {
-              pageName:"心身因素",
+              pageName:"报告分析总结",
               pageNum:0,
                hidden:false,
             },
@@ -102,7 +102,7 @@ import {analysisData} from "@/api/analysis"
       },
        watch: {
         $route(to) {
-            this.medicalRecordId=this.$route.query.id;
+          this.medicalRecordId=this.$route.query.id;
           this.initData();
         }
       },
@@ -396,15 +396,15 @@ import {analysisData} from "@/api/analysis"
              let maxRowNum=15;//一页最大行数
              page[pageNum]=[];
              let toatalData=[]
-            //  if(data.typeId=="4"){
-            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-problem.png"),"焦点问题",data.focusProblem)
-            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
-            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-society.png"),"社会功能",data.socialFunction)
+            // if(data.typeId=="4"){
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-problem.png"),"焦点问题",data.focusProblem)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
+              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-society.png"),"社会功能",data.socialFunction)
             //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-analysis.png"),"疾病成因分析",data.causes)
             //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-diagnose.png"),"辅助诊断建议",data.initialDiagnosisVO)
             //  }else{
-              toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
-            // }
+            //   toatalData= this.copyAnalysis(toatalData,require("@/views/rep/img/icon-nutrition.png"),"心身因素",data.psychosomaticFactors)
+            //  }
              for(let item of toatalData){
                rowNum+=this.computeRowNum(item.content)
                if(rowNum>maxRowNum){

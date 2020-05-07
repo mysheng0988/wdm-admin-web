@@ -3,19 +3,509 @@
 	"message": "操作成功",
 	"dataList": [
 		{
-			"id": 53,
+			"id": 116,
 			"patientId": null,
-			"medicalRecordId": 91,
-			"somatizationSymptomsDrugRegimen": "null",
-			"contraindicationsList": null,
+			"medicalRecordId": 176,
+			"somatizationSymptomsDrugRegimen": "{\"title\": \"躯体化症状药物方案\", \"data\": [{\"title\": \"冠状动脉痉挛用药建议\", \"data\": [{\"title\": \"药物治疗\", \"data\": [{\"title\": \"CCB\", \"data\": [\"①地尔硫卓：适用于心率偏快且心功能良好的患者。常用剂量为30~60mg/次，每日3~4次。其缓释或控释制剂 90mg/次，每日1~2 次，清晨发作者，可以睡前口服长效制剂。 ②氨氯地平：适用于合并心功能不全、心动过缓或传导阻滞的冠状动脉痉挛综合症患者。常规剂量 2.5~10mg/次，每日1次。③贝尼地平：适用于各类冠状动脉痉挛综合症患者。剂量 4~8mg/次，每日 1-2 次。\"]}, {\"title\": \"硝酸酯类药物\", \"data\": [\"应尽可能留下6~8h的空白期以防发生耐受。\"]}, {\"title\": \"钾通道开放剂\", \"data\": [\"尼可地尔在增加冠状动脉血流的同时不影响血压、心率及心脏传导系统，无耐药性，可长期服用。禁用于心原性休克、伴有左心室衰竭、低血压和特异性体质的患者。常用剂量5-10mg/次，每日3次。\"]}, {\"title\": \"他汀类药物\", \"data\": [\"坚持长期应用。\"]}, {\"title\": \"抗血小板\", \"data\": [\"治疗长期口服阿司匹林100mg/d。\"]}, {\"title\": \"β 受体阻滞剂。\", \"data\": []}]}, {\"title\": \"用药原则\", \"data\": [\"对于合并有冠状动脉器质性狭窄或严重心肌桥，且临床主要表现为劳力性心绞痛的患者。若CCB和硝酸酯类疗效不佳时可以慎重联合使用高选择性β受体阻滞剂。对于冠状动脉无显著狭窄的CASS患者禁忌单独使用。长效 CCB 是预防冠状动脉痉挛综合症复发的主要药物，其中地尔硫卓和贝尼地平可以作为首选，若效果欠佳或不能耐受，可换用不同的CCB；若单一药物治疗控制不理想，可以联合应用CCB和硝酸酯类；若仍不理想可以换用CCB与尼可地尔联合；若CASS合并显著血管狭窄或心肌桥，在使用CCB及硝酸酯类无效的情况下，方可考虑 CCB 和（或）硝酸酯类与β受体阻滞剂的联合应用。所有CASS患者均不主张单用 β 受体阻滞剂治疗。抗血小板及调脂治疗应长期坚持应用。\"]}, {\"title\": \"文献出处\", \"data\": [\"向定成,曾定尹,霍勇等. 冠状动脉痉挛综合征诊断与治疗中国专家共识[J].中国介入心脏病学杂志.2015,23(4):181-186.\"]}]}]}",
+			"contraindicationsList": [
+				{
+					"id": 1,
+					"name": "心脏疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 2,
+							"name": "QT间期延长",
+							"parentId": 1,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 3,
+									"name": "QT间期延长",
+									"parentId": 2,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								},
+								{
+									"id": 4,
+									"name": "先天性QT综合征",
+									"parentId": 2,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 9,
+							"name": "心脏传导阻滞",
+							"parentId": 1,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 10,
+									"name": "心脏传导阻滞",
+									"parentId": 9,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 21,
+							"name": "冠状动脉缺血",
+							"parentId": 1,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 22,
+									"name": "冠状动脉缺血",
+									"parentId": 21,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 25,
+					"name": "神经系统疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 30,
+							"name": "中枢神经系统抑制",
+							"parentId": 25,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 31,
+									"name": "中枢神经系统抑制",
+									"parentId": 30,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 49,
+							"name": "昏迷状态",
+							"parentId": 25,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 50,
+									"name": "昏迷状态",
+									"parentId": 49,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 59,
+					"name": "情绪异常类疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 72,
+							"name": "过度亢奋",
+							"parentId": 59,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 73,
+									"name": "过度亢奋",
+									"parentId": 72,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 74,
+							"name": "激动",
+							"parentId": 59,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 75,
+									"name": "激动",
+									"parentId": 74,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 78,
+							"name": "双相情感障碍",
+							"parentId": 59,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 79,
+									"name": "双相情感障碍",
+									"parentId": 78,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 82,
+					"name": "肝病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 85,
+							"name": "肝功能不全",
+							"parentId": 82,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 86,
+									"name": "肝功能不全",
+									"parentId": 85,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 87,
+							"name": "肝硬化",
+							"parentId": 82,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 88,
+									"name": "肝硬化",
+									"parentId": 87,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 103,
+					"name": "肾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 104,
+							"name": "严重肾功能损害",
+							"parentId": 103,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 105,
+									"name": "严重肾功能损害",
+									"parentId": 104,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 108,
+					"name": "肾上腺嗜铬细胞瘤",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 109,
+							"name": "肾上腺嗜铬细胞瘤",
+							"parentId": 108,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 110,
+									"name": "肾上腺嗜铬细胞瘤",
+									"parentId": 109,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 111,
+					"name": "酒精中毒",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 112,
+							"name": "急性酒精中毒",
+							"parentId": 111,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 113,
+									"name": "急性酒精中毒",
+									"parentId": 112,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 114,
+					"name": "眼科疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 115,
+							"name": "青光眼",
+							"parentId": 114,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 121,
+									"name": "未经治疗的窄角型青光眼",
+									"parentId": 115,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 170,
+					"name": "糖类吸收异常",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 171,
+							"name": "乳糖不耐受",
+							"parentId": 170,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 172,
+									"name": "葡葡糖-半乳糖吸收不良",
+									"parentId": 171,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								},
+								{
+									"id": 173,
+									"name": "Lapp-乳糖酶缺乏",
+									"parentId": 171,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								},
+								{
+									"id": 174,
+									"name": "罕见遗传性半乳糖不耐受",
+									"parentId": 171,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 177,
+							"name": "果糖不耐受",
+							"parentId": 170,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 178,
+									"name": "罕见遗传性果糖不耐受",
+									"parentId": 177,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 179,
+							"name": "蔗糖酶-异麦芽糖酶缺乏",
+							"parentId": 170,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 180,
+									"name": "蔗糖酶-异麦芽糖酶缺乏",
+									"parentId": 179,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 193,
+					"name": "药物中毒",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 194,
+							"name": "阿片类中毒",
+							"parentId": 193,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 195,
+									"name": "阿片类中毒",
+									"parentId": 194,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						},
+						{
+							"id": 196,
+							"name": "巴比妥类中毒",
+							"parentId": 193,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 197,
+									"name": "巴比妥类中毒",
+									"parentId": 196,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 216,
+					"name": "血液系统疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 219,
+							"name": "血恶液质",
+							"parentId": 216,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 220,
+									"name": "血恶液质",
+									"parentId": 219,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": 221,
+					"name": "循环系统疾病",
+					"parentId": 0,
+					"level": 1,
+					"remark": "",
+					"subList": [
+						{
+							"id": 224,
+							"name": "循环衰竭",
+							"parentId": 221,
+							"level": 2,
+							"remark": "",
+							"subList": [
+								{
+									"id": 225,
+									"name": "循环衰竭",
+									"parentId": 224,
+									"level": 3,
+									"remark": "",
+									"subList": null
+								}
+							]
+						}
+					]
+				}
+			],
 			"neurotransmitterModulationDrugProgram": null,
 			"doctorMedicationPlan": null,
-			"noneMedicationPlanPrompt": "无神经递质调节类药物用药方案！",
-			"psychosomaticTherapy": "{\"title\":\"心身治疗建议\",\"data\":[{\"title\":\"理疗和训练\",\"data\":[]},{\"title\":\"心理治疗方法\",\"data\":[]}]}",
+			"noneMedicationPlanPrompt": null,
+			"psychosomaticTherapy": "{\"title\":\"心身治疗建议\",\"data\":[{\"title\":\"理疗和训练\",\"data\":[\"生物反馈:总训练次数为3-5次，训练频次每天一次，直至掌握为止。\",\"经颅磁:总治疗次数为3-5次，治疗频次为每周1-2次\"]},{\"title\":\"心理治疗方法\",\"data\":[\"您的情绪较平稳，可以通过自我调节维持良好的心理情绪状态。建议继续保持良好的心态。\"]}]}",
 			"physicalTherapy": null,
-			"exercisePrescription": "null",
-			"nutritionPrescription": "{\"title\":\"营养处方\",\"data\":[]}",
-			"functionalMedicineAdvice": "{\"title\":\"功能医学建议\",\"data\":[]}",
+			"exercisePrescription": "{\"title\":\"运动处方\",\"data\":[{\"title\":\"\",\"data\":[\"您目前的运动量适中，建议继续保持良好的运动习惯，促进身体健康。\"]}]}",
+			"nutritionPrescription": "{\"title\":\"营养处方\",\"data\":[{\"title\":\"饮水量\",\"data\":[null]}]}",
+			"functionalMedicineAdvice": "{\"title\":\"功能医学建议\",\"data\":[\"肠道功能及肠道菌群是营养免疫第一道屏障。而情绪障碍如压力、失眠导致的免疫功能低下及消化系统功能障碍都与肠道免疫，肠道神经内分泌功能相关。\",\"情绪障碍：压力，失眠，免疫功能低下，消化系统功能下降都与肠道免疫，肠道神经内分泌功能相关。\",\"改善肠道功能及菌群环境饮食营养处方：第一周：减轻肠道负担，改善肠道菌群环境。减少有害菌生长，每日8分饱，隔日断食或每日1餐（保持18小时不吃）。每日8分饱。隔日断食或每日1餐（保持18小时不吃）。第二至三周：改善食物品质，调节菌群平衡。建议地中海饮食或生酮饮食，少吃米，面，糖精加工食品 ，避免油炸，减少omega-6及脂多糖摄入。每日保持水果，蔬菜，全麦谷物，坚果，豆类摄入。每周三次食用鱼或海鲜，每周1-2次白肉禽肉，蛋，奶，禁食红肉，甜食，适量红酒。第四周：益生菌、益生元调整。建议食用辣白菜、泡菜、酸菜、奶酪、味增、菊苣 ，芦笋 ，洋葱 ，大蒜 ，圆白菜等食物。\"]}",
 			"otherSuggestion": "{\"title\":\"其他建议\",\"data\":[]}",
 			"followUpRecommendations": null,
 			"reportPdfUrl": null

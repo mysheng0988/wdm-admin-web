@@ -30,8 +30,8 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button  round class="search-btn" @click="clearData">重置</el-button>
-          <el-button type="success" round class="search-btn" @click="queryData()">查询</el-button>
+          <el-button  round class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
+          <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryData()">查询</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -72,7 +72,8 @@
                 size="mini"
                 round
                 class="active"
-                @click="readReport(scope.row)">查看报告
+                @click="readReport(scope.row)">
+                <svg-icon icon-class="see-icon" class-name="search-icon"></svg-icon>查看报告
               </el-button>
           </template>
         </el-table-column>

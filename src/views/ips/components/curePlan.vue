@@ -17,12 +17,9 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="躯体化症状药物方案:" v-if="initData.somatizationSymptomsDrugRegimen.data>0">
+      <el-form-item label="躯体化症状药物方案:" v-if="initData.somatizationSymptomsDrugRegimen.data.length>0">
         <div class="text-box">
-          <div
-            v-for="(item1,index1) in initData.somatizationSymptomsDrugRegimen.data"
-            :key="index1"
-          >
+          <div v-for="(item1,index1) in initData.somatizationSymptomsDrugRegimen.data" :key="index1">
             <div class="box-title">{{item1.title}}</div>
             <div v-for="(item2,index2) in item1.data" :key="index2" style="padding-left:20px">
               <div class="box-title">{{item2.title}}</div>
@@ -301,11 +298,11 @@ const defaultPlan = {
   complete: true,
   followUpRecommendations: {
     data: [
-      "第1周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内",
-      "第2周随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；",
-      "第1个月随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；",
-      "第2个月随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容；",
-      "第3个月随访，观察疗效、药物反应，根据随访情况可能需要调整用药方案和心理治疗内容。"
+      "第1周随访，观察疗效、药物反应，根据随访情况可能需调整用药方案和心理治疗内容。",
+      "第2周随访，观察疗效、药物反应，根据随访情况可能需调整用药方案和心理治疗内容。",
+      "第1个月随访，观察疗效、药物反应，根据随访情况可能需调整用药方案和心理治疗内容。",
+      "第2个月随访，观察疗效、药物反应，根据随访情况可能需调整用药方案和心理治疗内容。",
+      "第3个月随访，观察疗效、药物反应，根据随访情况可能需调整用药方案和心理治疗内容。"
     ]
   } //随访建议
 };
@@ -542,6 +539,7 @@ export default {
             this.initData.otherSuggestion = this.cheakedEmpty(
               data.otherSuggestion
             );
+            //let somatizationSymptomsDrugRegimen=JSON.parse(data.somatizationSymptomsDrugRegimen)
             this.initData.somatizationSymptomsDrugRegimen = this.cheakedEmpty(
               data.somatizationSymptomsDrugRegimen
             ); //躯体化治疗方案

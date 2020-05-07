@@ -9,7 +9,7 @@
                 <p>{{patientVo.realName}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="性别:">
-                <p>{{patientVo.gender?"女":"男"}}</p>
+                <p>{{patientVo.gender?"男":"女"}}</p>
               </el-form-item>
               <el-form-item class="flex-item" label="年龄:">
                 <p> {{patientVo.birthday | formatAge}}</p>

@@ -226,13 +226,10 @@ import {analysisData} from "@/api/analysis"
                         data.noneMedicationPlanPrompt=data.noneMedicationPlanPrompt?data.noneMedicationPlanPrompt:"无"
                       dataPlan.push(data.noneMedicationPlanPrompt)
                     }
-                    let param={
-                      title:"神经递质调节药物",
-                      data:dataPlan
-                    }
+                      patientMedicationPlan.data.push(dataPlan)
                     //躯体化药物方案
                     let somatizationSymptomsDrugRegimen=JSON.parse(data.somatizationSymptomsDrugRegimen);
-                    patientMedicationPlan.data.push(param)
+                  
                     if(somatizationSymptomsDrugRegimen){
                        patientMedicationPlan.data.push(somatizationSymptomsDrugRegimen);
                     }
