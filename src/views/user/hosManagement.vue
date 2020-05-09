@@ -5,8 +5,8 @@
         <el-input  placeholder="医院名称" v-model="listQuery.name" clearable></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryHospital">查询</el-button>
-        <el-button icon="el-icon-plus" type="success" round class="search-btn" @click="dialogVisible = true">新增医院</el-button>
+        <el-button icon="el-icon-search" type="success"  class="search-btn" @click="queryHospital">查询</el-button>
+        <el-button icon="el-icon-plus" type="success"  class="search-btn" @click="dialogVisible = true">新增医院</el-button>
       </el-form-item>
     </el-form>
     <div class="table-container">
@@ -39,7 +39,6 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              round
               icon="el-icon-edit-outline"
               class="active"
               @click="editHos(scope.row)">编辑

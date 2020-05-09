@@ -20,10 +20,10 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button  round class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
-          <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryData">查询</el-button>
-          <el-button icon="el-icon-plus" type="success" round class="search-btn" @click="addUser">新增</el-button>
-          <el-button icon="el-icon-upload2" type="success" round class="search-btn" @click="exportExcel">导出</el-button>
+          <el-button   class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
+          <el-button icon="el-icon-search" type="success"  class="search-btn" @click="queryData">查询</el-button>
+          <el-button icon="el-icon-plus" type="success"  class="search-btn" @click="addUser">新增</el-button>
+          <el-button icon="el-icon-upload2" type="success"  class="search-btn" @click="exportExcel">导出</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -71,14 +71,12 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              round
               icon="el-icon-edit-outline"
               class="active"
               @click="editUser(scope.row)">编辑
             </el-button>
             <el-button
               size="mini"
-              round
               :icon="scope.row.enable?'el-icon-remove-outline':'el-icon-time'"
               :class="scope.row.enable?'disable':'enable'"
               @click="handleChangeState(scope.row)">{{scope.row.enable?"禁用":"启用"}}
@@ -131,7 +129,7 @@
               </el-radio-group>
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <el-col :span="12">
           <el-form-item label="所属医院:" prop="hospitalId" >
             <el-select  placeholder="请选择" v-model="userForm.hospitalId" @change="hospitalChange" clearable class="input-width">
               <el-option
@@ -140,6 +138,24 @@
                 :label="item.name"
                 :value="item.id">
               </el-option>
+            </el-select>
+          </el-form-item>
+          </el-col>
+           <el-col :span="12">
+          <el-form-item label="职称:" prop="jobTitle" >
+            <el-select  placeholder="请选择" v-model="userForm.jobTitle"  clearable class="input-width">
+              <el-option value="NO" label="无"></el-option>
+              <el-option value="PRIMARY_NURSE" label="护士"></el-option>
+              <el-option value="NURSE_PRACTITIONER" label="护师"></el-option>
+              <el-option value="NURSE_IN_CHARGE" label="主管护师"></el-option>
+              <el-option value="ASSOCIATE_PROFESSOR_OF_NURSING" label="副主任护师"></el-option>
+              <el-option value="PROFESSOR_OF_NURSING" label="主任护师"></el-option>
+              <el-option value="ASSISTANT_DOCTOR" label="医士"></el-option>
+              <el-option value="PHYSICIAN" label="医师"></el-option>
+              <el-option value="DOCTOR_IN_CHARGE" label="主治医师"></el-option>
+              <el-option value="HOUSE_PHYSICIAN" label="住院医师"></el-option>
+              <el-option value="ASSISTANT_DIRECTOR_PHYSICIAN" label="副主任医师"></el-option>
+              <el-option value="DIRECTOR_PHYSICIAN" label="主任医师"></el-option>
             </el-select>
           </el-form-item>
           </el-col>
@@ -221,7 +237,8 @@
     remark: "",
     roleId: "",
     staffNo: "",
-    username: ""
+    username: "",
+    jobTitle:"NO"
   }
   export default {
     name: "userList",

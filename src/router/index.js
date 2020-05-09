@@ -57,14 +57,14 @@ export const constantRouterMap = [
         path: 'assessRecord',
         name: 'assessRecord',
         component: () => import('@/views/pat/assessRecord'),
-        meta: {title: '历史记录', icon: 'product-comment',roleId:[13,18]},
+        meta: {title: '历史记录', icon: 'history-icon',roleId:[13,18]},
         hidden:true
       },
       {
         path: 'cureRecord',
         name: 'cureRecord',
         component: () => import('@/views/pat/cureRecord'),
-        meta: {title: '治疗记录', icon: 'product-cate',roleId:[13,18]},
+        meta: {title: '治疗记录', icon: 'treatment',roleId:[13,18]},
         hidden:true,
       },
       {

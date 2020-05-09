@@ -1,11 +1,12 @@
 <template>
-  <el-tabs type="card" v-model="activePath" class="tabs" closable @tab-remove="tabRemove" @tab-click="tabClick()">
+  <el-tabs type="border-card" v-model="activePath" class="tabs"  closable @tab-remove="tabRemove" @tab-click="tabClick()">
     <el-tab-pane
+      class="tab-pane-box"
      v-for="item in tabs" 
       :key="item.index"
-      :label="item.name"
       :name="item.path"
     >
+    <span slot="label"><svg-icon icon-class="dividing-icon" ></svg-icon> {{item.name}}</span>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -105,5 +106,13 @@
   height: 50px;
   margin: 0;
   font-weight: bold
+}
+/deep/ .el-tabs__item{
+   padding: 0px 20px 0 5px;
+}
+.dividing-icon{
+  width: 15px;
+  height: 15px;
+  font-weight: bold;
 }
 </style>

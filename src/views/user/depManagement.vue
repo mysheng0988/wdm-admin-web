@@ -21,8 +21,8 @@
           <el-input  placeholder="科室名称" v-model="listQuery.deptName" clearable></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="success" icon="el-icon-search" round class="search-btn" @click="queryList" >查询</el-button>
-          <el-button type="success" icon="el-icon-plus" round class="search-btn" @click="addDept">新增科室</el-button>
+          <el-button type="success" icon="el-icon-search"  class="search-btn" @click="queryList" >查询</el-button>
+          <el-button type="success" icon="el-icon-plus"  class="search-btn" @click="addDept">新增科室</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -57,7 +57,6 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              round
                icon="el-icon-edit-outline"
               class="active"
               @click="editDept(scope.row)">编辑

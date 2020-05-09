@@ -12,6 +12,7 @@ const user = {
     // tabs:[]
     tabs:[{
       path:"/home",
+      icon:"home",
       name:"首页",
     }]
   },

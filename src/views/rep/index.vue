@@ -30,8 +30,8 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button  round class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
-          <el-button icon="el-icon-search" type="success" round class="search-btn" @click="queryData()">查询</el-button>
+          <el-button  class="search-btn" @click="clearData"><svg-icon icon-class="reset-icon" class-name="search-icon"></svg-icon>重置</el-button>
+          <el-button icon="el-icon-search" type="success"  class="search-btn" @click="queryData()">查询</el-button>
         </el-form-item>
     </el-form>
     <div class="table-container">
@@ -70,7 +70,6 @@
           <template slot-scope="scope" >
                <el-button
                 size="mini"
-                round
                 class="active"
                 @click="readReport(scope.row)">
                 <svg-icon icon-class="see-icon" class-name="search-icon"></svg-icon>查看报告
