@@ -96,8 +96,6 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
-  height: 50px;
-  line-height: 50px;
   border-radius: 0px !important;
   .hamburger-container {
     line-height: 58px;
@@ -137,7 +135,7 @@ export default {
       .el-icon-caret-bottom {
         position: absolute;
         right: -20px;
-        top: 25px;
+        top: 18px;
         font-size: 12px;
       }
     }
