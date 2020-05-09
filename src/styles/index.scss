@@ -1,10 +1,8 @@
 @import './variables.scss';
 @import './mixin.scss';
-@import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
 @import './iconfont.css';
-@import '../../static/dist/css/layui.css';
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -68,7 +66,7 @@ a:hover {
   height: calc(100vh - 120px)!important;
   overflow-y: auto;
   overflow-x: hidden;
-  box-shadow: 1px 5px 10px 2px rgb(125, 146, 167);
+  box-shadow: 2px 2px 12px  #7a7a7a;
 }
 
 //操作栏样式
@@ -89,7 +87,7 @@ a:hover {
   display: inline-block;
   margin-top: 20px;
 }
-
+p{margin: 0;}
 //分页栏样式
 .pagination-container {
   display: inline-block;

@@ -3,61 +3,58 @@
     <div class="total-layout">
       <el-row :gutter="10">
         <el-col :xs="24" :sm="12" :md="6">
-          <div class="frame flex warning" @click="handleTask('1')">
+          <div class="frame flex-center warning" @click="handleTask('1')">
             <svg-icon icon-class="patient" class-name="total-icon"></svg-icon>
-            <div class="flex">
-              <div class="item-box">
-                <div class="total-title">新增患者</div>
+            <div class="item-box">
+              <div>
+                <div>新增患者</div>
                 <div class="total-value">{{statisticsData.patientIncrement}}</div>
               </div>
-              <div class="item-box">
-                <div class="total-title">总患者数</div>
-                <div class="total-value">{{statisticsData.patientTotal}}</div>
+              <div class="flex total-num">
+                <div>
+                  总患者数
+                  <span>{{statisticsData.patientTotal}}</span>
+                </div>
               </div>
             </div>
           </div>
         </el-col>
         <el-col :xs="24" :sm="12" :md="6">
-          <div class="frame flex info" @click="handleTask('2')">
+          <div class="frame flex-center checkup" @click="handleTask('2')">
             <svg-icon icon-class="checkup" class-name="total-icon"></svg-icon>
-            <div class="flex">
-              <div class="item-box">
-                <div class="total-title">总测评任务</div>
-                <div class="total-value">{{statisticsData.examinationTaskTotal}}</div>
-              </div>
-              <div class="item-box">
-                <div class="total-title">今日未完成</div>
-                <div class="total-value">{{statisticsData.todayUndoneExaminationTaskTotal}}</div>
-              </div>
-            </div>
-          </div>
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6" >
-          <div class="frame flex danger" @click="handleTask('3')">
-            <svg-icon icon-class="report-icon" class-name="total-icon"></svg-icon>
-            <div class="flex">
-              <div class="item-box">
-                <div class="total-title">总报告数</div>
-                <div class="total-value">{{statisticsData.reportTotal}}</div>
-              </div>
-              <div class="item-box">
-                <div class="total-title">今日报告量</div>
-                <div class="total-value">{{statisticsData.todayReportTotal}}</div>
+            <div class="item-box">
+              <div>今日未完成</div>
+              <div class="total-value">{{statisticsData.todayUndoneExaminationTaskTotal}}</div>
+
+              <div>
+                总测评任务
+                <span>{{statisticsData.examinationTaskTotal}}</span>
               </div>
             </div>
           </div>
         </el-col>
         <el-col :xs="24" :sm="12" :md="6">
-          <div class="frame flex success" @click="handleTask('4')">
-            <svg-icon icon-class="treatment" class-name="total-icon"></svg-icon>
-            <div class="flex">
-              <div class="item-box">
-                <div class="total-title">总治疗任务</div>
-                <div class="total-value">{{statisticsData.treatmentTaskTotal}}</div>
+          <div class="frame flex-center report" @click="handleTask('3')">
+            <svg-icon icon-class="report-icon" class-name="total-icon"></svg-icon>
+            <div class="item-box">
+              <div>今日报告量</div>
+              <div class="total-value">{{statisticsData.todayReportTotal}}</div>
+              <div>
+                总报告数
+                <span>{{statisticsData.reportTotal}}</span>
               </div>
-              <div class="item-box">
-                <div class="total-title">未完成任务</div>
-                <div class="total-value">{{statisticsData.todayUndoneTreatmentTaskTotal}}</div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="12" :md="6">
+          <div class="frame flex-center treatment" @click="handleTask('4')">
+            <svg-icon icon-class="treatment" class-name="total-icon"></svg-icon>
+            <div class="item-box">
+              <div>未完成任务</div>
+              <div class="total-value">{{statisticsData.todayUndoneTreatmentTaskTotal}}</div>
+              <div>
+                总治疗任务
+                <span>{{statisticsData.treatmentTaskTotal}}</span>
               </div>
             </div>
           </div>
@@ -152,31 +149,29 @@ export default {
   filters: {},
   mounted() {
     getHomeData().then(res => {
-      if(res.code==200){
-         this.dataEmpty = false;
-          this.statisticsData = res.dataList[0];
-          this.chartData.rows = this.statisticsData.examinationDataList;
-          this.chartData2.rows = this.statisticsData.otherDataList;
+      if (res.code == 200) {
+        this.dataEmpty = false;
+        this.statisticsData = res.dataList[0];
+        this.chartData.rows = this.statisticsData.examinationDataList;
+        this.chartData2.rows = this.statisticsData.otherDataList;
       }
-     
     });
   },
 
   methods: {
     handleTask(val) {
-      console.log(val)
       switch (val) {
         case "1":
-           this.$router.push("/pat/list");
+          this.$router.push("/pat/list");
           break;
         case "2":
-           this.$router.push("/ips/index");
+          this.$router.push("/ips/index");
           break;
         case "3":
-           this.$router.push("/rep/list");
+          this.$router.push("/rep/list");
           break;
         case "4":
-          this.$message.success("敬请期待!")
+          this.$message.success("敬请期待!");
           break;
       }
     }
@@ -199,31 +194,32 @@ export default {
   margin: 10px 0;
 }
 .frame {
-  background: #f5f5f5;
-  border: 1px solid #dcdfe6;
-  border-radius: 5px;
-  box-shadow: -1px 1px 5px #d8d8d8;
-  line-height: 35px;
-  padding: 20px;
-  height: 100px;
+  line-height: 30px;
+  padding: 20px 0 20px 50px;
+  height: 160px;
   margin: 10px 0;
 }
-.success {
-  background: #67c23a;
+.treatment {
+  background: url("imgs/treatment.png") no-repeat;
+  background-size: 100% 100%;
   color: #fff;
 }
-.warning {
-  background: #e6a23c;
+.frame.warning {
+  background: url("imgs/patient.png") no-repeat;
+  background-size: 100% 100%;
   color: #fff;
 }
-.danger {
-  background: #f56c6c;
+.report {
+  background: url("imgs/report.png") no-repeat;
+  background-size: 100% 100%;
   color: #fff;
 }
-.info {
-  background: #409eff;
+.checkup {
+  background: url("imgs/checkup.png") no-repeat;
+  background-size: 100% 100%;
   color: #fff;
 }
+
 .total-icon {
   color: #ffffff;
   width: 60px;
@@ -238,10 +234,9 @@ export default {
 }
 
 .total-value {
-  width: 100px;
-  font-size: 18px;
+  font-size: 28px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
+  font-weight: bold;
 }
 .chart-box {
   margin: 18px 30px;
@@ -251,10 +246,16 @@ export default {
   position: relative;
 }
 .item-box {
-  margin: 0 20px;
+  margin: 0 40px;
   flex: 1;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
 }
+.item-box span{
+  margin-left: 30px;
+}
+
 /deep/ .v-charts-data-empty {
   background-color: rgba(255, 255, 255, 0.4);
 }
