@@ -2,57 +2,52 @@
   <div class="app-container home">
     <div class="total-layout">
       <el-row :gutter="10">
-        <el-col :xs="24" :sm="12" :md="6">
+        <el-col  :xs="24" :sm="12" :md="12" :lg="12" :xl="6">
           <div class="frame flex-center warning" @click="handleTask('1')">
             <svg-icon icon-class="patient" class-name="total-icon"></svg-icon>
             <div class="item-box">
-              <div>
                 <div>新增患者</div>
                 <div class="total-value">{{statisticsData.patientIncrement}}</div>
-              </div>
-              <div class="flex total-num">
-                <div>
+               <div class="text-right">
                   总患者数
                   <span>{{statisticsData.patientTotal}}</span>
-                </div>
               </div>
             </div>
           </div>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
+        <el-col  :xs="24" :sm="12" :md="12" :lg="12" :xl="6">
           <div class="frame flex-center checkup" @click="handleTask('2')">
             <svg-icon icon-class="checkup" class-name="total-icon"></svg-icon>
             <div class="item-box">
               <div>今日未完成</div>
               <div class="total-value">{{statisticsData.todayUndoneExaminationTaskTotal}}</div>
-
-              <div>
+               <div class="text-right">
                 总测评任务
                 <span>{{statisticsData.examinationTaskTotal}}</span>
               </div>
             </div>
           </div>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
+        <el-col  :xs="24" :sm="12" :md="12" :lg="12" :xl="6">
           <div class="frame flex-center report" @click="handleTask('3')">
             <svg-icon icon-class="report-icon" class-name="total-icon"></svg-icon>
             <div class="item-box">
               <div>今日报告量</div>
               <div class="total-value">{{statisticsData.todayReportTotal}}</div>
-              <div>
+              <div class="text-right">
                 总报告数
                 <span>{{statisticsData.reportTotal}}</span>
               </div>
             </div>
           </div>
         </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
+        <el-col  :xs="24" :sm="12" :md="12" :lg="12" :xl="6">
           <div class="frame flex-center treatment" @click="handleTask('4')">
             <svg-icon icon-class="treatment" class-name="total-icon"></svg-icon>
             <div class="item-box">
               <div>未完成任务</div>
               <div class="total-value">{{statisticsData.todayUndoneTreatmentTaskTotal}}</div>
-              <div>
+              <div class="text-right">
                 总治疗任务
                 <span>{{statisticsData.treatmentTaskTotal}}</span>
               </div>
@@ -65,7 +60,7 @@
       <ve-line
         class="chart"
         :data-empty="dataEmpty"
-        height="300px"
+        height="280px"
         :data="chartData"
         :settings="chartSettings1"
         :extend="extend"
@@ -75,7 +70,7 @@
       <ve-line
         class="chart"
         :data-empty="dataEmpty"
-        height="300px"
+        height="280px"
         :data="chartData2"
         :settings="chartSettings2"
         :extend="extend"
@@ -196,7 +191,7 @@ export default {
 .frame {
   line-height: 30px;
   padding: 20px 0 20px 50px;
-  height: 160px;
+  height: 120px;
   margin: 10px 0;
 }
 .treatment {
@@ -251,11 +246,17 @@ export default {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+   position: relative;
 }
 .item-box span{
   margin-left: 30px;
 }
-
+.text-right{
+  text-align: right;
+  position:absolute;
+  right: 10px;
+  bottom: 0px;
+}
 /deep/ .v-charts-data-empty {
   background-color: rgba(255, 255, 255, 0.4);
 }
