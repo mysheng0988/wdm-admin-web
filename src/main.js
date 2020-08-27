@@ -1,11 +1,11 @@
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css'// A modern alternative to CSS resets
-
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 import VCharts from 'v-charts'
+import markArea from "echarts/lib/component/markArea"
 
 import '@/styles/index.scss' // global css
 import htmlToPdf from "@/utils/html2pdf"
@@ -27,18 +27,19 @@ Viewer.setDefaults({
 
 Vue.use(ElementUI, { locale })
 Vue.use(VCharts)
+Vue.use(markArea)
 Vue.config.productionTip = false
 Vue.use(VueClipboard)
 Vue.use(VueAMap);
 Vue.use(Viewer);
 Vue.use(htmlToPdf);
-VueAMap.initAMapApiLoader({
-  key: '88c9bb8dea021721ce5eb52511e90a35',
-  plugin: ['AMap.Geocoder','AMap.Autocomplete','AMap.Geolocation', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
-  // 默认高德 sdk 版本为 1.4.4
-  uiVersion:'1.0.14',
-  v: '1.4.4'
-});
+// VueAMap.initAMapApiLoader({
+//   key: '88c9bb8dea021721ce5eb52511e90a35',
+//   plugin: ['AMap.Geocoder','AMap.Autocomplete','AMap.Geolocation', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+//   // 默认高德 sdk 版本为 1.4.4
+//   uiVersion:'1.0.14',
+//   v: '1.4.4'
+// });
 new Vue({
   el: '#app',
   router,

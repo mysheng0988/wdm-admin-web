@@ -1,5 +1,5 @@
 <template>
-  <el-tabs type="border-card" v-model="activePath" class="tabs"  closable @tab-remove="tabRemove" @tab-click="tabClick()">
+  <el-tabs  type="border-card" v-model="activePath" class="tabs"  closable @tab-remove="tabRemove" @tab-click="tabClick()">
     <el-tab-pane
       class="tab-pane-box"
      v-for="item in tabs" 
@@ -103,10 +103,12 @@
 
 <style scoped>
 .tabs{
-  height: 50px;
+  height: 40px;
   margin: 0;
-  font-weight: bold
+  font-weight: bold;
 }
+
+
 /deep/ .el-tabs__item{
    padding: 0px 20px 0 5px;
 }

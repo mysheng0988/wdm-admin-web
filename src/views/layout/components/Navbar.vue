@@ -2,9 +2,9 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb></breadcrumb>
-    <div class="screenfull"  @click="clickFullscreen">
+    <!-- <div class="screenfull"  @click="clickFullscreen">
        <svg-icon :icon-class="isFullscreen?'unscreenfull':'screenfull'"  class-name="screenfull-icon"></svg-icon>
-    </div>
+    </div> -->
     
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
@@ -97,6 +97,8 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
   border-radius: 0px !important;
+   background: #00D232;
+   color: #fff;
   .hamburger-container {
     line-height: 58px;
     height: 50px;
@@ -123,6 +125,7 @@ export default {
       cursor: pointer;
       margin-top:10px;
       display: flex;
+      color: #fff;
       display: -webkit-flex;
       align-items: center;
       position: relative;

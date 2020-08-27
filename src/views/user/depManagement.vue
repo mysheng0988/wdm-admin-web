@@ -180,7 +180,7 @@
         dialogTitle:"新增科室",
         data: [{
           id:0,
-          label: '东方心世界',
+          label: '豌豆苗',
           disabled: true,
           className:"el-icon-folder-opened",
           children: [],
@@ -194,8 +194,6 @@
       }
     },
     created() {
-
-      //this.getList();
       this.getHospital();
       this.getDeptCategoryData();
     },

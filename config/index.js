@@ -10,23 +10,31 @@ module.exports = {
     proxyTable: {
       '/base': {
         //target: 'http://121.36.46.3',//后端接口地址
-        target: 'http://192.168.2.131',//后端接口地址
+        target: 'http://192.168.101.10:8888',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
           '^/base': '/base',//重写,
         }
       },
       '/ips': {
-       // target: 'http://121.36.46.3',//后端接口地址
-        target: 'http://192.168.2.131',//后端接口地址
+        //target: 'http://121.36.46.3',//后端接口地址
+        target: 'http://192.168.101.10:8888',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
           '^/ips': '/ips',//重写,
         }
       },
+      '/pss': {
+        //target: 'http://121.36.46.3',//后端接口地址
+        target: 'http://192.168.101.10:8888',//后端接口地址
+        changeOrigin: true,//是否允许跨越
+        pathRewrite: {
+          '^/pss': '/pss',//重写,
+        }
+      },
       '/api': {
-        target: 'http://121.36.46.3',//后端接口地址
-        //target: 'http://localhost:8989',//后端接口地址
+        //target: 'http://121.36.46.3',//后端接口地址
+        target: 'http://localhost:8989',//后端接口地址
         changeOrigin: true,//是否允许跨越
         pathRewrite: {
           '^/api': '/api',//重写,
@@ -37,7 +45,7 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 9090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -62,7 +70,6 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
-
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',

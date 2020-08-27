@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="logo-box" v-show="!isCollapse">
-      <el-image class="img" :src="logo"></el-image>
+      <svg-icon icon-class="wdm-logo" class-name="total-icon"></svg-icon>
     </div>
    <scroll-bar>
     <el-menu
@@ -9,8 +9,8 @@
       :show-timeout="200"
       :default-active="$route.path"
       :collapse="isCollapse"
-      background-color="#20324D"
-      text-color="#bfcbd9"
+      background-color="#00D232"
+      text-color="#ffffff"
       active-text-color="#409EFF"
     >
         
@@ -25,8 +25,6 @@
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 import ScrollBar from '@/components/ScrollBar'
-import logo from '@/assets/images/logo.png'
-
 export default {
   components: { SidebarItem, ScrollBar },
   computed: {
@@ -43,7 +41,7 @@ export default {
   },
   data(){
     return{
-      logo:logo
+     
     }
   }
 }
@@ -51,13 +49,19 @@ export default {
 <style  scoped>
   .logo-box{
     width: 180px;
+    height: 90px;
+    margin:0;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     letter-spacing:2px;
-    background: #233A5C;
-    border-bottom: 1px solid #233A5C;
+    background: #00D232;
+    border-bottom: 1px solid #fff;
     color: #409EFF;
+  }
+  .logo-box .total-icon{
+    width: 180px;
+    height: 90px;
   }
   .img{
     width: 140px;

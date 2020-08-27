@@ -117,7 +117,7 @@
           type="text"
           clearable></el-input>
       </el-form-item>
-      <el-form-item label="器质损害或疾病严重程度:" prop="organicDiseaseSeverity"  v-if="type=='A'">
+      <el-form-item label="器质损害或疾病严重程度:" prop="organicDiseaseSeverity"  >
         <el-select  placeholder="请选择" v-model="pursueObj.organicDiseaseSeverity" clearable class="input-width">
            <el-option label="未知" value="未知" ></el-option>
           <el-option label="无" value="无" ></el-option>
@@ -128,11 +128,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="运动症状:">
-        <!-- <div class="flex">
-          <p class="add-btn"><i class="el-icon-plus"></i>点击添加</p>
-          <el-checkbox :checked="false">暂无运动症状</el-checkbox>
-        </div> -->
-        <el-select  placeholder="请选择伴随症状"  filterable multiple v-model="pursueObj.motorSymptomsIdList" clearable class="input-width">
+        <el-select  placeholder="请选择运动症状"  filterable multiple v-model="pursueObj.motorSymptomsIdList" clearable class="input-width">
           <el-option
             v-for="item in optionMotorSymptoms"
             :key="item.id"
@@ -159,7 +155,7 @@
             </el-table-column>
             <el-table-column label="症状" align="center">
               <template slot-scope="scope">
-                <p v-for="(item,index) in scope.row.symptomList" :key="index">{{item.name}}</p>
+                <p v-for="(item,index) in scope.row.symptomsSet" :key="index">{{item}}</p>
                 <!--{{scope.row.symptomList}}-->
               </template>
             </el-table-column>

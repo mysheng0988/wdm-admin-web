@@ -62,11 +62,11 @@ a:hover {
 .app-container {
   margin: 0 10px;
   padding: 10px 15px;
-  border-top:5px solid #409EFF;
-  height: calc(100vh - 120px)!important;
+  // border-top:5px solid #409EFF;
+  height: calc(100vh - 110px)!important;
   overflow-y: auto;
   overflow-x: hidden;
-  box-shadow: 2px 2px 12px  #7a7a7a;
+  // box-shadow: 2px 2px 12px  #7a7a7a;
 }
 
 //操作栏样式
@@ -99,7 +99,9 @@ p{margin: 0;}
 .form-box {
   margin: 20px;
 }
-
+.margin-top{
+  margin-top: 20px;
+}
 //主标题
 .font-extra-large {
   font-size: 20px;
@@ -205,21 +207,45 @@ p{margin: 0;}
   align-items: center;
   justify-content: space-between;
 }
+.flex-end{
+  display: flex;
+  display: -webkit-flex;
+  align-items:flex-end;
+  justify-content: space-between;
+}
+.flex-column{
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  align-items: center;
+}
 .el-dialog__body{
   padding: 10px 20px!important;
 }
 .form-pdf{
   position: relative;
-   width: 768px;
-  height: 1091px;
+  width: 768px;
+  height: 1092px;
+  border: 1px solid #eee;
+  page-break-after:always;
    text-align: left;
    .pageNum{
     position:absolute;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #4AB240;
+    border-radius: 50%;
     font-size: 14px;
-    right: 20px;
-    color:#666;
-    bottom: 10px;
-  }
+    right: 50px;
+    color:#fff;
+    bottom: 30px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
 }
 .search-icon{
   width: 12px;

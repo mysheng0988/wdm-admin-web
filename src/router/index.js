@@ -11,226 +11,239 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: '/home',
-    meta: {title: '首页', icon: 'home',roleId:[1,13,18]},
+    meta: {title: '首页', icon: 'home',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [{
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
-      meta: {title: '首页', icon: 'home',roleId:[1,13,18]}
+      meta: {title: '首页', icon: 'home',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]}
     }]
   },
   {
-    path: '/pat',
+    path: '/screen',
     component: Layout,
-    redirect: '/pat/list',
-    name: 'pat',
-    meta: {title: '患者管理', icon: 'patient',roleId:[18,13]},
+    redirect: '/screen/task',
+    name: 'screen',
+    meta: {title: '筛查管理', icon: 'icon-sift',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [
       {
-        path: 'list',
-        name: 'list',
-        component: () => import('@/views/pat/index'),
-        meta: {title: '患者管理', icon: 'patient',roleId:[13,18]},
+        path: 'task',
+        name: 'task',
+        component: () => import('@/views/screen/task'),
+        meta: {title: '初筛任务', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },
       {
-        path: 'patAdd',
-        name: 'patAdd',
-        component: () => import('@/views/pat/add'),
-        meta: {title: '新增患者', icon: 'product-add',roleId:[13,18]},
-        hidden:true,
+        path: 'examine',
+        name: 'examine',
+        component: () => import('@/views/screen/examine'),
+        meta: {title: '审核数据', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },
       {
-        path: 'patUpdate',
-        name: 'patUpdate',
-        component: () => import('@/views/pat/update'),
-        meta: {title: '修改患者', icon: 'product-update',roleId:[13,18]},
-        hidden:true,
-      },
-      {
-        path: 'addRecord',
-        name: 'addRecord',
-        component: () => import('@/views/pat/addRecord'),
-        meta: {title: '新增病历', icon: 'product-add',roleId:[13,18]},
-        hidden:true,
-      },
-      {
-        path: 'assessRecord',
-        name: 'assessRecord',
-        component: () => import('@/views/pat/assessRecord'),
-        meta: {title: '历史记录', icon: 'history-icon',roleId:[13,18]},
+        path: 'examineData',
+        name: 'examineData',
+        component: () => import('@/views/screen/examineData'),
+        meta: {title: '审核数据', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
         hidden:true
       },
       {
-        path: 'cureRecord',
-        name: 'cureRecord',
-        component: () => import('@/views/pat/cureRecord'),
-        meta: {title: '治疗记录', icon: 'treatment',roleId:[13,18]},
-        hidden:true,
+        path: 'report',
+        name: 'report',
+        component: () => import('@/views/screen/report'),
+        meta: {title: '报告管理', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },
       {
-        path: 'readRecord',
-        name: 'readRecord',
-        component: () => import('@/views/pat/readRecord'),
-        meta: {title: '查看记录', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
+        path: 'pdf',
+        name: 'pdf',
+        component: () => import('@/views/screen/pdf'),
+        meta: {title: '查看报告', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true
+      },
+      {
+        path: 'invite',
+        name: 'invite',
+        component: () => import('@/views/screen/invite'),
+        meta: {title: '复查邀约', icon: 'patient',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       }
     ]
   },
   {
-    path: '/ips',
+    path: '/mon',
     component: Layout,
-    redirect: '/ips/index',
-    name: 'ips',
-    meta: {title: '心身检查', icon: 'checkup',roleId:[13,18]},
+    redirect: '/mon/reTask',
+    name: 'mon',
+    meta: {title: '监测中心', icon: 'icon-monitor',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [
       {
-        path: 'index',
-        name: 'index',
-        component: () => import('@/views/ips/index'),
-        meta: {title: '心身检查', icon: 'checkup',roleId:[13,18]},
+        path: 'reTask',
+        name: 'reTask',
+        component: () => import('@/views/mon/reTask'),
+        meta: {title: '复查任务', icon: 'checkup',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },
       {
-        path: 'IPS-A',
-        name: 'IPS-A',
-        component: () => import('@/views/ips/IPS-A'),
-        meta: {title: '筛查测评', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
+        path: 'result',
+        name: 'result',
+        component: () => import('@/views/mon/reResult'),
+        meta: {title: '复查结果', icon: 'product-list',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },{
-        path: 'IPS-B',
-        name: 'IPS-B',
-        component: () => import('@/views/ips/IPS-B'),
-        meta: {title: '专科测评', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
+        path: 'act-rep',
+        name: 'act-rep',
+        component: () => import('@/views/mon/act-rep'),
+        meta: {title: '动态监测报告', icon: 'product-list',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },{
-        path: 'IPS-C',
-        name: 'IPS-C',
-        component: () => import('@/views/ips/IPS-C'),
-        meta: {title: '综合测评', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
-      },
-      {
-        path: 'resultHRV',
-        name: 'resultHRV',
-        component: () => import('@/views/ips/resultHRV'),
-        meta: {title: '记录结果-HRV', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
-      },
-      {
-        path: 're-scale',
-        name: 're-scale',
-        component: () => import('@/views/ips/resultScale'),
-        meta: {title: '记录结果-量表', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
+        path: 'report',
+        name: 'act-report',
+        component: () => import('@/views/mon/report'),
+        meta: {title: '查看报告', icon: 'product-list',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true
       },{
-        path: 'questionResult',
-        name: 'questionResult',
-        component: () => import('@/views/ips/questionResult'),
-        meta: {title: '答题结果', icon: 'product-list',roleId:[13,18]},
-        hidden:true,
+        path: 'pdf',
+        name: 're-pdf',
+        component: () => import('@/views/mon/pdf'),
+        meta: {title: '复查报告', icon: 'product-list',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true
       }
     ]
   },
   {
-    path: '/rep',
-    name: 'rep',
+    path: '/diag',
+    name: 'diag',
     component: Layout,
-    redirect: '/rep/list',
-    meta: {title: '报告列表', icon: 'report-icon',roleId:[13,18]},
+    redirect: '/diag/diagnose',
+    meta: {title: '确诊管理', icon: 'icon-diagnose',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [
       {
-        path: 'list',
-        name: 'repList',
-        component: () => import('@/views/rep/index'),
-        meta: {title: '报告列表', icon: 'report-icon',roleId:[13,18]},
+        path: 'diagnose',
+        name: 'diagnose',
+        component: () => import('@/views/diag/diagnose'),
+        meta: {title: '确诊管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },{
         path: 'edit',
         name: 'edit',
-        component: () => import('@/views/rep/edit'),
-        meta: {title: '编辑报告', icon: 'product-attr',roleId:[13,18]},
-        hidden:true,
-      },{
-        path: 'pdf',
-        name: 'pdf',
-        component: () => import('@/views/rep/pdf'),
-        meta: {title: '综合报告', icon: 'product-attr', roleId:[13,18]},
-        hidden:true,
-      },{
-        path: 'siftPdf',
-        name: 'siftPdf',
-        component: () => import('@/views/rep/siftPdf'),
-        meta: {title: '筛查报告', icon: 'product-attr', roleId:[13,18]},
+        component: () => import('@/views/plan/index'),
+        meta: {title: '编辑报告', icon: 'product-attr',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
         hidden:true,
       }
     ],
   },
   {
-    path:'/sms',
+    path:'/plan',
     component: Layout,
-    redirect: '/sms/coupon',
+    redirect: '/plan/index',
     name: 'sms',
-    meta: {title: '心身治疗', icon: 'sms',roleId:[1]},
-    hidden:true,
-  },
-  {
-    path:'/param',
-    component: Layout,
-    redirect: '/param/cureItem',
-    name: 'param',
-    meta: {title: '参数配置', icon: 'param',roleId:[1]},
-    hidden:true,
+    meta: {title: '365计划', icon: 'icon-365-plan',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [
       {
-        path: 'cureItem',
-        name: 'cureItem',
-        component: () => import('@/views/param/cureItem'),
-        meta: {title: '治疗项目', icon: 'sms-ad',roleId:[1]}
-      },
-      {
-        path: 'assess',
-        name: 'assess',
-        component: () => import('@/views/param/assessItem'),
-        meta: {title: '测评项目', icon: 'sms-flash',roleId:[1]}
-      },
-      {
-        path: 'scale',
-        name: 'scale',
-        component: () => import('@/views/param/scaleManage'),
-        meta: {title: '量表管理',icon:'sms-new',roleId:[1]},
-      },
-
+        path: 'follow',
+        name: 'follow',
+        component: () => import('@/views/plan/index'),
+        meta: {title: '随访管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true,
+      },{
+        path: 'order',
+        name: 'order',
+        component: () => import('@/views/plan/order'),
+        meta: {title: '订单管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+      },{
+        path: 'member',
+        name: 'member',
+        component: () => import('@/views/plan/member'),
+        meta: {title: '会员管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+      },{
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/plan/memDetail'),
+        meta: {title: '会员管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true,
+      },{
+        path: 'ordetail',
+        name: 'ordetail',
+        component: () => import('@/views/plan/orderDetail'),
+        meta: {title: '会员管理', icon: 'report-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+        hidden:true,
+      }
     ]
+  },
+  {
+    path:'/msg',
+    component: Layout,
+    redirect: '/msg/device',
+    name: 'msg',
+    meta: {title: '信息维护', icon: 'icon-msg',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+    children: [
+      {
+        path: 'device',
+        name: 'device',
+        component: () => import('@/views/msg/device'),
+        meta: {title: '设备管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      },
+      {
+        path: 'firm',
+        name: 'firm',
+        component: () => import('@/views/msg/firm'),
+        meta: {title: '厂商管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      },
+      {
+        path: 'monitor',
+        name: 'monitor',
+        component: () => import('@/views/msg/monitor'),
+        meta: {title: '监测中心', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      },
+      {
+        path: 'organ',
+        name: 'organ',
+        component: () => import('@/views/msg/organ'),
+        meta: {title: '机构管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      },
+      {
+        path: 'students',
+        name: 'students',
+        component: () => import('@/views/msg/students'),
+        meta: {title: '学生管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: () => import('@/views/msg/users'),
+        meta: {title: '用户管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]} 
+      }
+    ],
   },
   {
     path:'/user',
     component: Layout,
     redirect: '/user/account',
     name: 'user',
-    meta: {title: '系统管理', icon: 'sys-setting',roleId:[13]},
+    meta: {title: '系统管理', icon: 'icon-sys',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
     children: [
+      {
+        path: 'hos',
+        name: 'hos',
+        component: () => import('@/views/user/hosManagement'),
+        meta: {title: '医院管理',icon:"icon-hos",roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+      },
+      {
+        path: 'hos2',
+        name: 'hos2',
+        component: () => import('@/views/user/hosManagement'),
+        meta: {title: '医生管理',icon:"icon-hos",roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
+      },
       {
         path: 'account',
         name: 'account',
         component: () => import('@/views/user/accountManagement'),
-        meta: {title: '账户管理', icon: 'admin-icon',roleId:[13]}
+        meta: {title: '账户管理', icon: 'admin-icon',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]}
       },
       {
         path: 'role',
         name: 'role',
         component: () => import('@/views/user/roleManagement'),
-        meta: {title: '角色权限',icon:"sms-subject",roleId:[1]},
-        hidden:true,
-      },
-      {
-        path: 'hos',
-        name: 'hos',
-        component: () => import('@/views/user/hosManagement'),
-        meta: {title: '医院管理',icon:"icon-hos",roleId:[18,13]},
+        meta: {title: '角色权限',icon:"sms-subject",roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       },
       {
         path: 'dep',
         name: 'dep',
         component: () => import('@/views/user/depManagement'),
-        meta: {title: '科室管理', icon: 'icon-dep',roleId:[13]}
+        meta: {title: '部门管理', icon: 'icon-dep',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]}
       },
     ]
   },
@@ -242,11 +255,11 @@ export const constantRouterMap = [
       path:'404',
       name:"404",
       component: () => import('@/views/404'),
-      meta: {title: '404', icon: 'sms-flash',roleId:[1,13,18]},
+      meta: {title: '404', icon: 'sms-flash',roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]},
       hidden: true
     }]
   },
-  {path: '*', redirect: '/404', hidden: true,roleId:[1,13,18]}
+  {path: '*', redirect: '/404', hidden: true,roleId:[1,10,11,12,13,14,15,16,17,18,19,20,21,22,21,22,23,24,25,26,27,28.29]}
 ]
 
 export default new Router({

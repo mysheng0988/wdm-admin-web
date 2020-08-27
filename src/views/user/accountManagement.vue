@@ -41,22 +41,22 @@
           <template slot-scope="scope">{{scope.row.realName }}</template>
         </el-table-column>
         <el-table-column label="用户角色"  align="center">
-          <template slot-scope="scope">{{scope.row.roleName}}</template>
+          <template slot-scope="scope">{{scope.row.roleList[0].remark}}</template>
         </el-table-column>
         <el-table-column label="性别" align="center">
           <template slot-scope="scope">{{scope.row.gender|formatGender}}</template>
         </el-table-column>
         <el-table-column label="所属医院" align="center" :show-overflow-tooltip="true">
-          <template slot-scope="scope">{{scope.row.hospitalName }}</template>
+          <template slot-scope="scope">{{scope.row.organizationName }}</template>
         </el-table-column>
         <el-table-column label="所属科室" align="center">
-          <template slot-scope="scope">{{scope.row.deptName }}</template>
+          <template slot-scope="scope">{{scope.row.departmentName }}</template>
         </el-table-column>
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">{{scope.row.enable|formatEnable }}</template>
         </el-table-column>
         <el-table-column label="手机号码" align="center">
-          <template slot-scope="scope">{{scope.row.phoneNumber }}</template>
+          <template slot-scope="scope">{{scope.row.mobileNumber }}</template>
         </el-table-column>
         <el-table-column label="创建用户" align="center">
           <template slot-scope="scope">{{scope.row.createUserName }}</template>
@@ -225,6 +225,7 @@
     getUserinfo,
     updateUser,} from '@/api/manage'
   import {getDeptList} from '@/api/patient'
+  import {getCardData} from '@/api/card-manage'
   import { Message, MessageBox } from 'element-ui'
   const defaultUser={
     uid:null,
@@ -465,12 +466,23 @@
       //导出操作
       exportExcel(){
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['账户名','姓名', '用户角色', '性别', '所属医院','所属科室', '状态','手机号','创建用户','创建时间','备注'];//表头
-          var filterVal = ['username','realName', 'roleName', 'gender', 'hospitalName','deptName','enable','phoneNumber','createUserName','createTime','remark'];//表头对应字段名
-          var list = this.list;//数据来源
-          var data = this.formatJson(filterVal,list);//数据格式化
-          var index1='账户信息';//导出时文件名
-          excel.export_json_to_excel(tHeader,data,index1)//导出文件
+          // const tHeader = ['账户名','姓名', '用户角色', '性别', '所属医院','所属科室', '状态','手机号','创建用户','创建时间','备注'];//表头
+          // var filterVal = ['username','realName', 'roleName', 'gender', 'hospitalName','deptName','enable','phoneNumber','createUserName','createTime','remark'];//表头对应字段名
+          // var list = this.list;//数据来源
+          // var data = this.formatJson(filterVal,list);//数据格式化
+          // var index1='账户信息';//导出时文件名
+          const tHeader = ['卡面卡号','写入卡号数据'];//表头
+          var filterVal = ['displayNumber','cardNumber'];//表头对应字段
+          getCardData({cardQuantity:1000,typeEnum:"EXAMINATION"}).then(res=>{
+            if(res.code==200){
+              var list=res.dataList;
+              var data = this.formatJson(filterVal,list);//数据格式化
+              var index1='卡信息';//导出时文件名
+             excel.export_json_to_excel(tHeader,data,index1)//导出文件
+            }
+           
+          })
+         
         })
       },
       //对导出数据格式化处理

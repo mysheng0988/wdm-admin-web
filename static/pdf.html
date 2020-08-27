@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,user-scalable=yes">
+<title>打印预览</title>
+
+<style type="text/css">
+*,*:before,*:after {
+	box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+}
+html,body{
+	background: #666;
+	font-family: Microsoft Yahei;
+}
+
+.rpt-title {
+	color: #01D232;
+	font-size: 32px;
+	position: absolute;
+	left: 0px;
+	top: 5mm;
+}
+
+.rpt-time {
+	position: absolute;
+	left: 300px;
+	top: 6mm;
+	font-size: 14px;
+	color: #757575;
+}
+
+.rpt-addr {
+	position: absolute;
+	left: 300px;
+	top: 12mm;
+	font-size: 14px;
+	color: #757575;
+}
+
+.rpt-icon {
+	width: 60px;
+	height: 60px;
+	background: url('/img/logo.jpg');
+	position: absolute;
+	top: 2mm;
+	right: 0px;
+	background-size: 60px auto;
+	background-repeat: no-repeat;
+}
+
+
+.rpt {
+	width: 180mm;
+	height: 265mm;
+	background: #fff;
+	margin-top: 0;
+	margin-left: auto;
+    margin-right: auto;
+	font-size: 14px;
+	color: #424242;
+}
+
+.rpt-t {
+position: relative;
+	width: 100%;
+	height: 20mm;
+}
+
+.rpt-m {
+position: relative;
+	width: 100%;
+	height: 240mm;
+}
+
+.rpt-b {
+position: relative;
+	width: 100%;
+	height: 5mm;
+}
+
+.rpt-ml {
+position: absolute;
+	left: 0px;
+	width: 55%;
+}
+
+.rpt-mr {
+	position: absolute;
+	right: 0px;
+	width: 44%;
+}
+
+.rpt-pnl-hdr {
+position: relative;
+	background: #757575;
+	color: #fff;
+	height: 10mm;
+	border: 2px solid #757575;
+	border-bottom: 0;
+}
+
+.rpt-pnl-hdr .t1 {
+	font-size: 16px;
+	position: absolute;
+	top: 50%;
+	left: 3mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-hdr .t2 {
+	font-size: 12px;
+	position: absolute;
+	top: 50%;
+	left: 22mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-sub-hdr {
+position: relative;
+	background: #9E9E9E;
+	color: #fff;
+	height: 10mm;
+	border: 2px solid #757575;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.rpt-pnl-sub-hdr .t1 {
+	font-size: 16px;
+	position: absolute;
+	top: 50%;
+	left: 3mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-sub-hdr .t2 {
+	font-size: 12px;
+	position: absolute;
+	top: 50%;
+	left: 13mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-sub-hdr-hl {
+position: relative;
+	background: #01D232;
+	color: #fff;
+	height: 10mm;
+	border: 2px solid #757575;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.rpt-pnl-sub-hdr-hl .t1 {
+	font-size: 16px;
+	position: absolute;
+	top: 50%;
+	left: 3mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-ctx {
+	font-size: 14px;
+	padding: 0 2mm;
+	border: 2px solid #757575;
+	border-top:0;
+	border-bottom:0;
+}
+.rpt-pnl-ctx.h1 {
+	position: relative;
+}
+
+.rpt-pnl-ctx.h1 + .rpt-pnl-ctx.h1  {
+	border-top: 0;
+}
+
+.rpt-pnl-ctx.prev {
+	border:0;
+}
+
+.left-chk1 {
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.right-chk1 {
+	position: absolute;
+	top: 50%;
+	right: 30%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.left-chk1 .chk1, .right-chk1 .chk1 {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border: 2px solid #9E9E9E;
+	position: relative;
+}
+
+.left-chk1 .chk1 i, .right-chk1 .chk1 i {
+	position: absolute;
+	left: -5px;
+	top: -12px;
+	font-size: 32px;
+	color: #66BB6A;
+}
+
+.left-chk1 .txt1, .right-chk1 .txt1 {
+	position: absolute;
+	top: 50%;
+	left: 10mm;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.rpt-pnl-ctx .t3 {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	color: #9E9E9E;
+}
+
+.rpt-pnl-ctx .t4 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+
+.risk-chk1 {
+	height: 8mm;
+	position: relative;
+}
+
+.risk-chk1 .txt2 {
+	display: inline-block;
+	position: absolute;
+	top: 8px;
+	left: 8mm;
+}
+
+.risk-chk1 .chk2 {
+	position: absolute;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	top: 10px;
+	border: 2px solid #9E9E9E;
+}
+
+.risk-chk1 .chk2 i {
+	position: relative;
+	font-size: 32px;
+	left: -5px;
+	top: -12px;
+	color: #66BB6A;
+}
+
+.rpt-pnl-ctx .eval-com {
+	position: relative;
+	font-size: 12px;
+	padding-left: 8mm;
+}
+
+.print-bar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	background: #fff;
+	opacity: 1;
+	z-index: 1000;
+}
+
+.rpt-pnl-ctx .txt4 span {
+	margin-left: 1mm;
+}
+
+.qianzi {
+display: inline-block;
+padding-top: 10px;
+	font-size: 16px;
+}
+
+.qianzi .img {
+	width: 70px;
+	height: 100%;
+	background: url('../img/qmscbg.jpg');
+	position: absolute;
+	background-size: 70px auto;
+	background-position : center;
+	background-repeat: no-repeat;
+}
+
+.rpt-b-fo{
+	font-size: 12px;
+	color: #01D232; 
+	position: absolute;
+	top: 50%;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+
+.print-bar button {
+	display: inline-block;
+	vertical-align: middle;
+	*vertical-align: auto;
+	*zoom: 1;
+	*display: inline;
+	line-height: 1.5;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+	background-color: #00D232;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	text-decoration: none;
+	cursor: pointer;
+	padding: 5px 32px;
+	margin: 5px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 3px;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	transition: 0.25s;
+}
+.print-bar button:hover {
+	background-color: #03E638;
+}
+
+@media print {
+	.noprint {
+		display: none;
+	}
+	.rpt {
+		margin-top: 0;
+		page-break-after: always;
+	}
+	html,body{
+		background: transparent;
+	}
+	body {
+		-webkit-print-color-adjust:exact;
+        -moz-print-color-adjust:exact;
+        -ms-print-color-adjust:exact;
+        print-color-adjust:exact;
+	}
+}
+</style>
+
+<script type="text/javascript">
+
+var okFlg = false;
+
+	function getPageContext() {
+		
+		//把当前页面生成的html设置到父窗口
+		//window.opener.setPrintHTML($("#checkrpt").get(0).outerHTML);
+		
+		//window.close();
+		okFlg = true;
+	}
+
+	// 自动打印,客户说不方便
+	function autoPrint(){
+		//window.print();
+		document.getElementById("WebBrowser").ExecWB(6,2);
+		window.close();
+	}
+
+	function dayin() {
+		window.location.href="bgcx";
+	}
+	
+	function pagesetup_null(){                
+        var hkey_root,hkey_path,hkey_key;
+        hkey_root="HKEY_CURRENT_USER"
+        hkey_path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+        try{
+        	var RegWsh = new ActiveXObject("WScript.Shell");
+            hkey_key="header";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+            hkey_key="footer";
+            RegWsh.RegWrite(hkey_root+hkey_path+hkey_key,"");
+        }catch(e){}
+    }
+
+	function doPrint() {
+		bdhtml = window.document.body.innerHTML;
+		sprnstr = "<!--startprint-->"; //开始打印标识字符串有17个字符
+		eprnstr = "<!--endprint-->"; //结束打印标识字符串
+		prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17); //从开始打印标识之后的内容
+		prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+		window.document.body.innerHTML = prnhtml; //把需要打印的指定内容赋给body.innerHTML
+		window.print(); //调用浏览器的打印功能打印指定区域
+		window.document.body.innerHTML = bdhtml;//重新给页面内容赋值；
+	}
+	
+	function getCurrentDate() {
+		var currentDate = new Date();
+		var year = currentDate.getFullYear();
+		var month = currentDate.getMonth() + 1;
+		var day = currentDate.getDate();
+		var split = "/";
+		
+		var tmpMonth = "0" + month;
+		var tmpDay = "0" + day;
+		
+		month = tmpMonth.substring(tmpMonth.length - 2);
+		day = tmpDay.substring(tmpDay.length - 2);
+		
+		return year + split + month + split + day; 
+	}
+
+	// $(function() {
+
+	// 	var queryPara = {};
+	// 	queryPara.orderCd = '<%= request.getParameter("orderCd") %>';
+	// 	queryPara.reserveCd = '<%= request.getParameter("reserveCd") %>';
+	// 	queryPara.studentCd = '<%= request.getParameter("studentCd") %>';
+
+	// 	if(queryPara.orderCd == "null") {
+			
+	// 		$("#checkrpt").remove();
+			
+	// 		var printContext = window.opener.getPrintHTML();
+
+	// 		$(printContext).appendTo("body");
+			
+	// 	} else {
+
+	// 		$.ajax({
+	// 			url : 'checkrpt/search',
+	// 			type : 'post',
+	// 			dataType : 'json',
+	// 			data : queryPara,
+	// 			success : function(data) {
+	// 				//alert(JSON.stringify(data));
+
+	// 				setPageView(data);
+					
+	// 				if(window.name != "singlePrint") {
+	// 					//autoPrint();
+	// 					getPageContext();
+	// 				}
+	// 			}
+	// 		});
+	// 	}
+	// });
+	
+	function setPageView(data) {
+		
+		var student = data.student;
+		var reserve = data.reserve;
+		var checkResultList = reserve.checkResultList;
+		var previous = data.previousReserve;
+		
+		$("#checkDate").text(reserve.checkDate);
+		$("#placeName").text(reserve.placeName);
+		
+		$("#studentName").text(student.studentName);
+		$("#sexName").text(student.sexName);
+		$("#grade").text(student.grade);
+		$("#clazz").text(student.clazz);
+		
+		//设置生日
+		var strBrithday = student.brithday;
+		if(strBrithday=="2099/12/31") {
+			$("#brithday").text("");
+		}
+		else {
+			$("#brithday").text(student.brithday);
+		}
+		//设置年龄
+		var iage = parseFloat(student.age);
+		if(!isNaN(iage)) {
+			if(iage>0) {
+				$("#age").text(student.age + "岁");
+			} else {
+				$("#age").text("");
+			}
+		} else {
+			$("#age").text("");
+		}
+		//设置身高
+		var ihight = parseFloat(student.hight);
+		if(!isNaN(ihight)) {
+			if(ihight>0) {
+				$("#hight").text(student.hight + "cm");
+			} else {
+				$("#hight").text("");
+			}
+		} else {
+			$("#hight").text("");
+		}
+		//设置体重
+		var iweight = parseFloat(student.weight);
+		if(!isNaN(iweight)) {
+			if(iweight>0) {
+				$("#weight").text(student.weight + "kg");
+			} else {
+				$("#weight").text("");
+			}
+		} else {
+			$("#weight").text("");
+		}
+		
+		$("#checker").text(reserve.checker);
+		$("#printDate").text(getCurrentDate());
+		
+		if(previous != null) {
+			
+			var previousResultList = previous.checkResultList;
+			
+			// 设置以往结果
+			$("#previousCheckDate").text(previous.checkDate);
+			var pxz, pxzdegree, pxzdirect;
+			var pyz, pyzdegree, pyzdirect;
+			$.each(previousResultList, function(){
+				if(this.itemId == 'xz') {
+					pxz = this.itemResult;
+				} else if(this.itemId=='xzdegree') {
+					pxzdegree = this.itemResult;
+				} else if(this.itemId=='xzdirect') {
+					pxzdirect = this.itemResult;
+				} else if(this.itemId == 'yz') {
+					pyz = this.itemResult;
+				} else if(this.itemId=='yzdegree') {
+					pyzdegree = this.itemResult;
+				} else if(this.itemId=='yzdirect') {
+					pyzdirect = this.itemResult;
+				} 
+			});
+			
+	 		// 设置胸椎设置以往结果
+			if(pxz == '1') {
+				$("#previousxz").text("(胸椎)");
+				if (pxzdirect == 'L') {
+					$("#previousxzdirect").text("(左)");
+				} else {
+					$("#previousxzdirect").text("(右)");
+				}
+				$("#previousxzdegree").text("(" + pxzdegree + "度)");
+			}
+			// 设置腰椎设置以往结果
+			if(pyz=='1') {
+				$("#previousyz").text("(腰椎)");
+				if(pyzdirect == 'L') {
+					$("#previousyzdirect").text("(左)");
+				} else {
+					$("#previousyzdirect").text("(右)");
+				}
+				$("#previousyzdegree").text("(" + pyzdegree + "度)");
+			} 
+		} else {
+			$("#divPrevious").empty().append($('<br><span>无<span>'));
+		}
+		
+		// 检测项和检测值
+		var xz, xzdegree, xzdirect;
+		var yz, yzdegree, yzdirect;
+		$.each(checkResultList, function(){
+			if(this.itemId == 'xz') {
+				xz = this.itemResult;
+			} else if(this.itemId=='xzdegree') {
+				xzdegree = this.itemResult;
+			} else if(this.itemId=='xzdirect') {
+				xzdirect = this.itemResult;
+			} else if(this.itemId == 'yz') {
+				yz = this.itemResult;
+			} else if(this.itemId=='yzdegree') {
+				yzdegree = this.itemResult;
+			} else if(this.itemId=='yzdirect') {
+				yzdirect = this.itemResult;
+			} 
+		});
+		
+		var $mark = $('<i class="font-ok font-3x"></i>');
+		
+		// 设置胸椎选中
+		if(xz == '1') {
+			if (xzdirect == 'L') {
+				$('#xzl').append($mark.clone());
+			} else {
+				$('#xzr').append($mark.clone());
+			}
+			
+			$('#xzd').text(xzdegree + "°");
+		}
+		// 设置腰椎选中
+		if(yz=='1') {
+			if(yzdirect == 'L') {
+				$('#yzl').append($mark.clone());
+			} else {
+				$('#yzr').append($mark.clone());
+			}
+			$('#yzd').text(yzdegree + "°");
+		}
+		
+		// 设置风险等级选中
+		if(xz == '1' && yz == '1') {
+			//parseFloat(s) parseInt
+			var intXZ = parseFloat(xzdegree);
+			var intYZ = parseFloat(yzdegree);
+			
+			var maxValue = intXZ > intYZ ? intXZ : intYZ;
+			if (maxValue >= 0 && maxValue < 1) {
+				$('#level1').append($mark.clone());
+			} else if (maxValue >= 1 && maxValue < 5) {
+				$('#level2').append($mark.clone());
+			} else {
+				$('#level3').append($mark.clone());
+			}
+		} else {
+			if(xz == '1') {
+				var maxValue = parseFloat(xzdegree);
+				if (maxValue >= 0 && maxValue < 1) {
+					$('#level1').append($mark.clone());
+				} else if (maxValue >= 1 && maxValue < 5) {
+					$('#level2').append($mark.clone());
+				} else {
+					$('#level3').append($mark.clone());
+				}
+			}
+			if(yz=='1') {
+				var maxValue = parseFloat(yzdegree);
+				if (maxValue >= 0 && maxValue < 1) {
+					$('#level1').append($mark.clone());
+				} else if (maxValue >= 1 && maxValue < 5) {
+					$('#level2').append($mark.clone());
+				} else {
+					$('#level3').append($mark.clone());
+				}
+			}
+		}
+		
+		var xzdegree = parseFloat(xzdegree);
+		var yzdegree = parseFloat(yzdegree);
+		//setCanvas(xz, xzdirect, xzdegree, yz, yzdirect, yzdegree);
+		setSvg(xz, xzdirect, xzdegree, yz, yzdirect, yzdegree);
+	}
+	
+	function setSvg(xz, xzdirect, xzdegree, yz, yzdirect, yzdegree) {
+		// 常量
+        var titleHeight = 28;
+        var footHeight = 28;
+        var rate = 0.6; //上下比例
+        var legendWidth = 30; //图例的宽
+        var legendHeight = 15; //图例的高
+
+        var width = 360;
+        var height = 256 - titleHeight - footHeight;
+        var unitWidth = width / 30;
+
+        var tipY = titleHeight - 10;
+        var legendY = height + titleHeight + 10;
+
+        var mySvg = document.getElementById('mySvg');
+        
+        // 刻度文字
+        var text11 = makeSVG('text', { "x": 0, "y": tipY, "fill": '#333' });
+        text11.textContent = "15°";
+        mySvg.appendChild(text11);
+
+        var text12 = makeSVG('text', { "x": unitWidth * 10, "y": tipY, "fill": '#333' });
+        text12.textContent = "5°";
+        mySvg.appendChild(text12);
+
+        var text13 = makeSVG('text', { "x": unitWidth * 15, "y": tipY, "fill": '#333' });
+        text13.textContent = "0°";
+        mySvg.appendChild(text13);
+
+        var text14 = makeSVG('text', { "x": unitWidth * 20, "y": tipY, "fill": '#333' });
+        text14.textContent = "5°";
+        mySvg.appendChild(text14);
+
+        var text15 = makeSVG('text', { "x": unitWidth * 28, "y": tipY, "fill": '#333' });
+        text15.textContent = "15°";
+        mySvg.appendChild(text15);
+
+        // 背景
+        var rect11 = makeSVG('rect', { "x": 0, "y": titleHeight, "width": unitWidth * 10, "height": height, "fill": "#B5B5B5" });
+        mySvg.appendChild(rect11);
+
+        var rect12 = makeSVG('rect', { "x": unitWidth * 20, "y": titleHeight, "width": unitWidth * 10, "height": height, "fill": "#B5B5B5" });
+        mySvg.appendChild(rect12);
+
+        var rect21 = makeSVG('rect', { "x": unitWidth * 10, "y": titleHeight, "width": unitWidth * 4, "height": height, "fill": "#D9D9D9" });
+        mySvg.appendChild(rect21);
+
+        var rect22 = makeSVG('rect', { "x": unitWidth * 16, "y": titleHeight, "width": unitWidth * 4, "height": height, "fill": "#D9D9D9" });
+        mySvg.appendChild(rect22);
+
+        var rect31 = makeSVG('rect', { "x": unitWidth * 14, "y": titleHeight, "width": unitWidth * 1, "height": height, "fill": "#ECECEC" });
+        mySvg.appendChild(rect31);
+
+        var rect32 = makeSVG('rect', { "x": unitWidth * 15, "y": titleHeight, "width": unitWidth * 1, "height": height, "fill": "#ECECEC" });
+        mySvg.appendChild(rect32);
+
+        // 分割线
+        var line1 = makeSVG('line', { "x1": 0, "y1": height * rate + titleHeight, "x2": width, "y2": height * rate + titleHeight, "stroke": "#9F9F9F", "stroke-width": 2, "stroke-dasharray": [8, 3] });
+        mySvg.appendChild(line1);
+
+        var line2 = makeSVG('line', { "x1": unitWidth * 15, "y1": titleHeight, "x2": unitWidth * 15, "y2": height + titleHeight, "stroke": "#9F9F9F", "stroke-width": 2 });
+        mySvg.appendChild(line2);
+
+        // 图例
+        var rect41 = makeSVG('rect', { "x": 5, "y": legendY, "width": legendWidth, "height": legendHeight, "fill": "#ECECEC" });
+        mySvg.appendChild(rect41);
+
+        var rect42 = makeSVG('rect', { "x": width / 2 - legendWidth, "y": legendY, "width": legendWidth, "height": legendHeight, "fill": "#D9D9D9" });
+        mySvg.appendChild(rect42);
+
+        var rect43 = makeSVG('rect', { "x": width - 80, "y": legendY, "width": legendWidth, "height": legendHeight, "fill": "#B5B5B5" });
+        mySvg.appendChild(rect43);
+
+        var text21 = makeSVG('text', { "x": legendWidth + 5, "y": legendY + legendHeight / 2, "fill": '#333', "dominant-baseline": "middle" });
+        text21.textContent = "正常";
+        mySvg.appendChild(text21);
+
+        var text22 = makeSVG('text', { "x": width / 2, "y": legendY + legendHeight / 2, "fill": '#333', "dominant-baseline": "middle" });
+        text22.textContent = "低风险";
+        mySvg.appendChild(text22);
+
+        var text23 = makeSVG('text', { "x": width - 50, "y": legendY + legendHeight / 2, "fill": '#333', "dominant-baseline": "middle" });
+        text23.textContent = "高风险";
+        mySvg.appendChild(text23);
+
+        // 画线
+        //创建变量,保存两个控制点以及曲线终点信息
+        var startPointX = unitWidth * 15;
+        var startPointY = titleHeight;
+        var endPointX = 0;
+        var endPointY = 0;
+        var checkPointX = 0;
+        var checkPointY = 0;
+
+        var points = startPointX + "," + startPointY;
+
+        // 胸椎和腰椎弯向同一个方向
+        if (xz == 1 && yz == 1 && xzdirect == yzdirect) {
+
+        	endPointX = unitWidth * 15;
+            endPointY = titleHeight + height * rate;
+            
+            if (xzdirect == "L") {
+            	
+            	if(xzdegree == 0) {
+            		checkPointX = unitWidth * 15;
+                    checkPointY = titleHeight + height * rate;
+            	} else {
+            		checkPointX = (15 - xzdegree) * unitWidth;
+                    checkPointY = titleHeight + height * rate / 2;
+            	}
+            	points += " " + checkPointX + "," + checkPointY;
+                
+            	if(yzdegree == 0) {
+            		points += " " + endPointX + "," + endPointY;
+            		
+            		checkPointX = unitWidth * 15;
+                    checkPointY = height + titleHeight;
+            	} else {
+            		checkPointX = (15 - yzdegree) * unitWidth;
+                    checkPointY = titleHeight + height - height * (1 - rate) / 2;
+            	}
+            	points += " " + checkPointX + "," + checkPointY;
+            	
+            } else {
+            	
+            	if(xzdegree == 0) {
+            		checkPointX = unitWidth * 15;
+                    checkPointY = titleHeight + height * rate;
+            	} else {
+            		checkPointX = (15 + xzdegree) * unitWidth;
+                    checkPointY = titleHeight + height * rate / 2;
+            	}
+            	points += " " + checkPointX + "," + checkPointY;
+                
+            	if(yzdegree == 0) {
+            		points += " " + endPointX + "," + endPointY;
+            		
+            		checkPointX = unitWidth * 15;
+                    checkPointY = height + titleHeight;
+            	} else {
+            		checkPointX = (15 + yzdegree) * unitWidth;
+                    checkPointY = titleHeight + height - height * (1 - rate) / 2;
+            	}
+                
+                points += " " + checkPointX + "," + checkPointY;
+            }
+            
+            endPointX = unitWidth * 15;
+            endPointY = height + titleHeight;
+            points += " " + endPointX + "," + endPointY;
+        } else {
+
+            if (xz == 1) {
+                if (xzdirect == "L") {
+                    checkPointX = (15 - xzdegree) * unitWidth;
+                    checkPointY = titleHeight + height * rate / 2;
+                } else {
+                    checkPointX = (15 + xzdegree) * unitWidth;
+                    checkPointY = titleHeight + height * rate / 2;
+                }
+                points += " " + checkPointX + "," + checkPointY;
+            } 
+            
+            endPointX = unitWidth * 15;
+            endPointY = titleHeight + height * rate;
+            points += " " + endPointX + "," + endPointY;
+
+            if (yz == 1) {
+                if (yzdirect == "L") {
+                    checkPointX = (15 - yzdegree) * unitWidth;
+                    checkPointY = titleHeight + height - height * (1 - rate) / 2;
+                } else {
+                    checkPointX = (15 + yzdegree) * unitWidth; 
+                    checkPointY = titleHeight + height - height * (1 - rate) / 2;
+                }
+                points += " " + checkPointX + "," + checkPointY;
+            }
+            
+            endPointX = unitWidth * 15;
+            endPointY = titleHeight + height;
+            points += " " + endPointX + "," + endPointY;
+        }
+
+        var ploy = makeSVG("polyline", { "points": points, "stroke": "blue", "fill": "none", "stroke-width": "3" });
+        mySvg.appendChild(ploy);
+	}
+	
+	function makeSVG(tag, attrs) {
+        var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (var k in attrs)
+            el.setAttribute(k, attrs[k]);
+        return el;
+    }
+	
+	function setCanvas(xz, xzdirect, xzdegree, yz, yzdirect, yzdegree) {
+		// 假数据
+        //var xz = 1;
+        //var xzdirect = "R";
+        //var xzdegree = 7;
+        //var yz = 1;
+        //var yzdirect = "L";
+        //var yzdegree = 7;
+        
+		//获取Canvas对象(画布)
+        var canvas = document.getElementById("myCanvas");
+
+        //简单地检测当前浏览器是否支持Canvas对象，以免在一些不支持html5的浏览器中提示语法错误
+        if (canvas.getContext) {
+
+            canvas.width = 360;
+            canvas.height = 256;
+
+            var title = 28;
+            var footer = 28;
+            var rate = 0.6; // 虚线上下比例
+            var legendX = 30;
+            var legendY = 15;
+
+            var x = 0;
+            var y = title;
+            var width = canvas.width;
+            var height = canvas.height - title - footer;
+            var unitWidth = width / 30;
+            var legend = height + title + 10;
+
+            //获取对应的CanvasRenderingContext2D对象(画笔)
+            var ctx = canvas.getContext("2d");
+
+            // *******************************
+
+            //开始一个新的绘制路径  画矩形区域
+            ctx.beginPath();
+
+            // //绘制实心矩形 15°-8°和 8°-15°
+            ctx.fillStyle = "#B5B5B5";
+            ctx.fillRect(x, y, unitWidth * 8, height);
+            ctx.fillRect(unitWidth * 22, y, unitWidth * 8, height);
+            ctx.fillRect(width - 80, legend, legendX, legendY);
+
+            // //绘制实心矩形 7°-4°和 4°-7°
+            ctx.fillStyle = "#D9D9D9";
+            ctx.fillRect(unitWidth * 8, y, unitWidth * 3, height);
+            ctx.fillRect(unitWidth * 19, y, unitWidth * 3, height);
+            ctx.fillRect(width / 2 - legendX, legend, legendX, legendY);
+
+            // //绘制实心矩形
+            ctx.fillStyle = "#ECECEC";
+            ctx.fillRect(unitWidth * 11, y, unitWidth * 8, height);
+            ctx.fillRect(5, legend, legendX, legendY);
+
+            // 绘制矩形
+            ctx.stroke();
+
+            // 绘制图例
+            // *******************************
+            //创建变量,保存两个控制点以及曲线终点信息
+            var startPointX = unitWidth * 15;
+            var startPointY = y;
+            var endPointX = 0;
+            var endPointY = 0;
+            var checkPointX = 0;
+            var checkPointY = 0;
+
+            //开始一个新的绘制路径 画曲线
+            ctx.beginPath();
+            ctx.strokeStyle = "blue";
+            ctx.lineWidth = 3;
+            //把笔移动到起点位置
+            ctx.moveTo(startPointX, startPointY);
+
+            // 胸椎和腰椎弯向同一个方向
+            if (xz == 1 && yz == 1 && xzdirect == yzdirect) {
+
+                endPointX = unitWidth * 15;
+                endPointY = height + y;
+
+                if (xzdirect == "L") {
+
+                    checkPointX = (15 - xzdegree) * unitWidth;
+                    checkPointY = y + height * rate / 2;
+                    ctx.lineTo(checkPointX, checkPointY);
+
+                    checkPointX = (15 - yzdegree) * unitWidth;
+                    checkPointY = y + height - height * (1 - rate) / 2;
+                    ctx.lineTo(checkPointX, checkPointY);
+
+                } else {
+                    checkPointX = (15 + xzdegree) * unitWidth;
+                    checkPointY = y + height * rate / 2;
+                    ctx.lineTo(checkPointX, checkPointY);
+
+                    checkPointX = (15 + yzdegree) * unitWidth;
+                    checkPointY = y + height - height * (1 - rate) / 2;
+                    ctx.lineTo(checkPointX, checkPointY);
+                }
+                ctx.lineTo(endPointX, endPointY);
+            } else {
+            	
+            	endPointX = unitWidth * 15;
+                endPointY = y + height * rate;
+                
+                if (xz == 1) {
+                    if (xzdirect == "L") {
+                        checkPointX = (15 - xzdegree) * unitWidth;
+                        checkPointY = y + height * rate / 2;
+                    } else {
+                        checkPointX = (15 + xzdegree) * unitWidth;
+                        checkPointY = y + height * rate / 2;
+                    }
+                    ctx.lineTo(checkPointX, checkPointY);
+                    ctx.lineTo(endPointX, endPointY);
+                } else {
+                	ctx.lineTo(endPointX, endPointY);
+                }
+                
+                endPointX = unitWidth * 15;
+                endPointY = y + height;
+                
+                if (yz == 1) {
+                    if (yzdirect == "L") {
+                        checkPointX = (15 - yzdegree) * unitWidth;
+                        checkPointY = y + height - height * (1 - rate) / 2;
+                    } else {
+                        checkPointX = (15 + yzdegree) * unitWidth;
+                        checkPointY = y + height - height * (1 - rate) / 2;
+                    }
+                    
+                    ctx.lineTo(checkPointX, checkPointY);
+                    ctx.lineTo(endPointX, endPointY);
+                } else {
+                	ctx.lineTo(endPointX, endPointY);
+                }
+                
+            }
+
+            ctx.stroke();
+
+            // *******************************
+            // 画直线
+            ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#9F9F9F";
+            ctx.moveTo(unitWidth * 15, y);
+            ctx.lineTo(unitWidth * 15, height + y);
+            ctx.stroke();
+
+            // 画虚线(画完虚线后，不知道如何恢复，所以在最后画虚线)
+            ctx.beginPath();
+            ctx.strokeStyle = "#9F9F9F";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([8, 3]);
+            ctx.moveTo(0, height * rate + y);
+            ctx.lineTo(width, height * rate + y);
+            ctx.stroke();
+
+            // 写文本
+            ctx.beginPath();
+            ctx.fillStyle = '#333';
+            ctx.strokeStyle = '#333'; //设置笔触的颜色
+            ctx.font = "15px Microsoft Yahei"; //设置字体 Arial
+            ctx.textBaseline = "middle"; //在绘制文本时使用的当前文本基线
+
+            ctx.fillText("正常", legendX + 5, legend + legendY / 2);
+            ctx.fillText("低风险", width / 2, legend + legendY / 2);
+            ctx.fillText("高风险", width - 50, legend + legendY / 2);
+
+            ctx.fillText("15°", 0, title - 10);
+            ctx.fillText("7°- 4°", unitWidth * 8, title - 10);
+            ctx.fillText("0°", unitWidth * 15, title - 10);
+            ctx.fillText("4°- 7°", unitWidth * 19, title - 10);
+            ctx.fillText("15°", unitWidth * 28, title - 10);
+            ctx.stroke();
+        }
+	}
+</script>
+</head>
+<body>
+
+	<div class="rpt" id="checkrpt">
+		<div class="rpt-t">
+			<span class="rpt-title">脊柱侧弯检测报告</span> <span class="rpt-time">检测时间：<span id="checkDate"></span></span>
+			<span class="rpt-addr">检测地点：<span id="placeName"></span></span>
+			<div class="rpt-icon"></div>
+		</div>
+		<div class="rpt-m">
+			<div class="rpt-ml">
+				<div class="rpt-pnl">
+					<div class="rpt-pnl-hdr">
+						<span class="t1">结果分析</span><span class="t2">胸椎&nbsp;腰椎</span>
+					</div>
+					<div class="rpt-pnl-sub-hdr">
+						<span class="t1">胸椎</span><span class="t2">侧弯部位:ATI最大值部位</span>
+					</div>
+					<div class="rpt-pnl-ctx h1"  style="height: 23mm; border-bottom: 2px solid #757575; ;">
+						<div class="left-chk1">
+							<span class="chk1" id="xzl"></span><span class="txt1">左</span>
+						</div>
+						<div class="right-chk1">
+							<span class="chk1" id="xzr"></span><span class="txt1">右</span>
+						</div>
+						<span class="t3">弯曲方向</span>
+					</div>
+					<div class="rpt-pnl-ctx h1" style="height: 22mm;border-bottom:0;">
+						<span class="t4" id="xzd">3°</span> <span class="t3">弯曲角度</span>
+					</div>
+					<div class="rpt-pnl-sub-hdr" style="border-top:0;border-bottom:0;">
+						<span class="t1">腰椎</span><span class="t2">侧弯部位:ATI最大值部位</span>
+					</div>
+					<div class="rpt-pnl-ctx h1" style="height: 23mm;border-bottom: 2px solid #757575;">
+						<div class="left-chk1">
+							<span class="chk1" id="yzl"></span><span class="txt1">左</span>
+						</div>
+						<div class="right-chk1">
+							<span class="chk1" id="yzr"></span><span class="txt1">右</span>
+						</div>
+						<span class="t3">弯曲方向</span>
+					</div>
+					<div class="rpt-pnl-ctx h1" style="height: 22mm;border-bottom:0;">
+						<span class="t4" id="yzd">3°</span> <span class="t3">弯曲角度</span>
+					</div>
+					<div class="rpt-pnl-sub-hdr" style="border-top:0;border-bottom:0;">
+						<span class="t1">示意图</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="padding: 0px 0px;border-top:0;border-bottom:0; vertical-align: middle; text-align: center; height: 70mm">
+					<svg id="mySvg" width="360px" height="256px"></svg>
+					<!-- <canvas id="myCanvas" style="border: 0px solid red;">您的浏览器不支持canvas标签。</canvas> -->
+						<!-- <div class="syt-hrd">
+							<span class="h1">15°</span> <span class="h2">7°-4°</span> <span
+								class="h3">0°</span> <span class="h4">4°-7°</span> <span
+								class="h5">15°</span> <span class="h6">ATI</span>
+						</div>
+						<div class="syt">
+							<div class="ho-li"></div>
+							<div class="ve-li"></div>
+							<table cellpadding="0" cellspacing="0"
+								style="table-layout: fixed; width: 100%; border: 0; height: 100%;">
+								<tr>
+									<td style="width: 26%; background: #9E9E9E;"></td>
+									<td style="width: 11%; background: #E0E0E0;"></td>
+									<td style="width: 26%; background: #F5F5F5;"></td>
+									<td style="width: 11%; background: #E0E0E0;"></td>
+									<td style="width: 26%; background: #9E9E9E;"></td>
+								</tr>
+							</table>
+						</div>
+						<div class="syt-foot">
+							 <div class="compar">
+								<span class="compar-chart1"></span> <span class="f1">正常</span> <span
+									class="compar-chart2"></span> <span class="f1">低风险</span> <span
+									class="compar-chart3"></span> <span class="f1">高风险</span>
+							</div> 
+						</div> -->
+					</div>
+					<div class="rpt-pnl-sub-hdr" style="border-top:0;border-bottom:0;">
+						<span class="t1">风险程度</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="height: 30mm;border-bottom: 2px solid #757575;">
+						<div class="risk-chk1">
+							<span class="chk2" id="level1"></span><span
+								class="txt2">正常</span>
+						</div>
+						<div class="risk-chk1">
+							<span class="chk2" id="level2"></span><span
+								class="txt2">低风险</span>
+						</div>
+						<div class="risk-chk1">
+							<span class="chk2" id="level3"></span><span
+								class="txt2">高风险</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="rpt-mr">
+				<div class="rpt-pnl">
+					<div class="rpt-pnl-hdr">
+						<span class="t1">注释与结论</span>
+					</div>
+					<div class="rpt-pnl-sub-hdr">
+						<span class="t1">既往结果</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="height: 30mm">
+						<div class="rpt-pnl-ctx prev" id="divPrevious"><br>
+							<span class="before-res"><span id="previousCheckDate"></span></span><br> <span 
+								class="before-res">侧弯部位--<span id="previousxz"></span><span id="previousyz"></span></span><br> <span 
+								class="before-res">侧弯方向--<span id="previousxzdirect"></span><span id="previousyzdirect"></span></span><br> <span 
+								class="before-res">侧弯角度--<span id="previousxzdegree"></span><span id="previousyzdegree"></span></span>
+						</div>
+					</div>
+					<div class="rpt-pnl-sub-hdr-hl">
+						<span class="t1">评估意见</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="height: 80mm">
+						<div class="risk-chk1">
+							<span class="chk2"></span> <span class="txt2">正常</span>
+						</div>
+						<div class="eval-com">建议家长关注孩子不良姿势并及时纠正，增加适度体育活动。</div>
+						<div class="risk-chk1">
+							<span class="chk2"></span> <span class="txt2">低风险</span>
+						</div>
+						<div class="eval-com">
+							建议家长定期监测孩子的脊柱侧弯角度，持续两个月没有改善，应该积极到专业康复机构进行脊柱侧弯康复治疗和训练。</div>
+						<div class="risk-chk1">
+							<span class="chk2"></span> <span class="txt2">高风险</span>
+						</div>
+						<div class="eval-com">
+							建议及时就诊，到正规医院拍摄脊柱全长立体X光片和其他检查以确诊。同时积极到专业康复机构进行脊柱侧弯康复治疗和训练，必要时进行支具矫形或手术治疗。
+						</div>
+						
+						<div class="eval-com">
+							<span class="qianzi">签字:<span class="img"></span></span>
+						</div>
+					
+					</div>
+				</div>
+				<div class="rpt-pnl">
+					<div class="rpt-pnl-hdr">
+						<span class="t1">基本信息</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="height: 47mm">
+					    <div style="height: 1mm"></div>
+						<div class="txt4">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span id="studentName"></span></div><div style="height: 0.5mm"></div>
+						<div class="txt4">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：<span id="sexName"></span></div><div style="height: 0.5mm"></div>
+						<div class="txt4">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：<span id="grade"></span>年级</div><div style="height: 0.5mm"></div>
+						<div class="txt4">班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：<span id="clazz"></span>班</div><div style="height: 0.5mm"></div>
+						<div class="txt4">出生年月：<span id="brithday"></span></div><div style="height: 0.5mm"></div>
+						<div class="txt4">当时年龄：<span id="age"></span></div><div style="height: 0.5mm"></div>
+						<div class="txt4">身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高：<span id="hight"></span></div><div style="height: 0.5mm"></div>
+						<div class="txt4">体&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重：<span id="weight"></span></div><div style="height: 0.5mm"></div>
+					</div>
+				</div>
+				<div class="rpt-pnl">
+					<div class="rpt-pnl-hdr">
+						<span class="t1">技术支持</span>
+					</div>
+					<div class="rpt-pnl-ctx" style="height: 33mm;border-bottom: 2px solid #757575;">
+					    <div style="height: 1mm"></div>
+						<div style="font-size:13px;">北京协和医院青少年脊柱畸形诊断治疗协作中心</div>
+						<div>参考标准：《GB/T 16133-2014》</div>
+						<div>客服电话：4006-537-532</div>
+						<div>测试人员：<span id="checker"></span></div>
+						<div>打印时间：<span id="printDate"></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rpt-b">
+			<div>
+			<span class="rpt-b-fo">＊本报告仅作为筛查结果，不作为诊断依据。</span> <br>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
